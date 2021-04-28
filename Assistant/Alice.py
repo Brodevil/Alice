@@ -4,9 +4,11 @@ import datetime
 
 
 class Alice:
-    def __init__(self, name):
+    def __init__(self, username):
         super().__init__()
-        pass
+        self.name = username
+        self.city = "thane"
+        
 
     def temperature(self):
         pass
