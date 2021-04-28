@@ -1,0 +1,5 @@
+comtypes==1.1.10
+PyAudio @ file:///M:/ADMIN/Critical%20Data/VS-Code/Androme/PyAudio-0.2.11-cp38-cp38-win_amd64.whl
+pypiwin32==223
+pyttsx3==2.90
+pywin32==300
