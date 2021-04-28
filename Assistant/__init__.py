@@ -4,14 +4,14 @@ import requests
 import json
 import pprint
 
-
 engine = pyttsx3.init('sapi5')
 engine.setProperty('voice', engine.getProperty('voices')[0].id)
-engine. setProperty("rate", 150)
+engine.setProperty("rate", 150)
 
-intoduction = "Now me to introduce myself, I m Alice. A virtual desktop assitant and I'm here to assit you with a veriety of tasks \
+introduction = "Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks \
         as best as I can. 24 Hours a day seven days a week, Importing all preferences from home, interface system are now \
         fully operational, Sir!"
+
 
 def speak(audio):
     engine.say(audio)
@@ -22,17 +22,16 @@ def intro():
     hour = int(datetime.datetime.now().hour)
     if hour == 0 and hour < 12:
         speak("Good Morning Sir!")
-    
+
     elif hour == 12 and hour < 18:
         speak("Good Afternon Sir!")
 
     else:
         speak("Good Evening Sir!")
 
-    speak("Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assit you with a veriety of tasks \
+    speak("Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks \
         as best as I can. 24 Hours a day, seven days a week, Importing all preferences from home Interface, System are now \
         fully operational!")
-
 
 
 def temperature():
@@ -41,11 +40,9 @@ def temperature():
         respons = json.load(response.text)
         pprint.pprint(response)
     except ConnectionError:
-        return 
-
+        return
 
 
 if __name__ == "__main__":
     # intro()
     temperature()
-
