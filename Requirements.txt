@@ -1,5 +1,11 @@
 comtypes==1.1.10
+et-xmlfile==1.1.0
+keyboard==0.13.5
+openpyxl==3.0.7
+plyer==2.0.0
 PyAudio @ file:///M:/ADMIN/Critical%20Data/VS-Code/Androme/PyAudio-0.2.11-cp38-cp38-win_amd64.whl
+pyperclip==1.8.2
 pypiwin32==223
 pyttsx3==2.90
 pywin32==300
+SpeechRecognition==3.8.1
