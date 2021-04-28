@@ -1,0 +1,15 @@
+# python 3.8.7 Virtual Environmetn
+/env 
+
+
+# vs code files
+/.vscode
+
+# pytcharm files
+/.idea
+
+# environmetn files
+*.env
+
+# logs 
+.log
