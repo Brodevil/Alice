@@ -27,20 +27,6 @@ def tell(audio):
     engine.runAndWait()
 
 
-def takeCommand():
-    '''
-    The not having any parameter but it taking the input form the microphone of the user 
-    and return the string object that the user says
-    '''
-    r = sr.Recognizer()
-    with sr.Microphone as source:
-        print("Alice is Listening....")
-        r.pause_threshold = 1
-
-
-
-
-
 def intro():
     hour = int(datetime.datetime.now().hour)
     if hour == 0 or hour < 12:
@@ -66,6 +52,29 @@ def temperature():
         return
 
 
+def takeCommand():
+    '''
+    The not having any parameter but it taking the input form the microphone of the user 
+    and return the string object that the user says
+    '''
+    r = sr.Recognizer()
+    with sr.Microphone as source:
+        print("Alice is Listening....")
+        r.pause_threshold = 1
+        # r.energy_threshold = 300
+        audio = r.listen(source)
+    
+    try:
+        print("Alice is Recognizing....")
+        query = r.recognize_google(audio, language="en-in")
+        print(f"User : {query:>20}")
+    
+    except Exception as e:
+        print("Sorry! I didn't get")
+        return "None"
+
+
 if __name__ == "__main__":
     intro()
     # temperature()
+    takeCommand()
