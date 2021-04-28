@@ -1,13 +1,23 @@
 beautifulsoup4==4.9.3
 certifi==2020.12.5
 chardet==4.0.0
+click==7.1.2
 comtypes==1.1.10
 et-xmlfile==1.1.0
 idna==2.10
+itsdangerous==1.1.0
+Jinja2==2.11.3
 keyboard==0.13.5
+MarkupSafe==1.1.1
 openpyxl==3.0.7
 plyer==2.0.0
-PyAudio @ file:///M:/ADMIN/Critical%20Data/VS-Code/Androme/PyAudio-0.2.11-cp38-cp38-win_amd64.whl
+
+
+# Basically this is the unofficial pyaudio wheel file as many user are unable to install pyaudio in there system so just
+# type pip install PyAudio-0.2.11-cp38-cp38-win_amd64.whl in the main directory 
+PyAudio @ file:///M:/ADMIN/Critical%20Data/VS-Code/Alice/PyAudio-0.2.11-cp38-cp38-win_amd64.whl
+
+
 pyperclip==1.8.2
 pypiwin32==223
 pyttsx3==2.90
@@ -16,4 +26,5 @@ requests==2.25.1
 soupsieve==2.2.1
 SpeechRecognition==3.8.1
 urllib3==1.26.4
+Werkzeug==1.0.1
 wikipedia==1.4.0
