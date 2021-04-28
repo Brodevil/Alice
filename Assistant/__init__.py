@@ -27,6 +27,20 @@ def tell(audio):
     engine.runAndWait()
 
 
+def takeCommand():
+    '''
+    The not having any parameter but it taking the input form the microphone of the user 
+    and return the string object that the user says
+    '''
+    r = sr.Recognizer()
+    with sr.Microphone as source:
+        print("Alice is Listening....")
+        r.pause_threshold = 1
+
+
+
+
+
 def intro():
     hour = int(datetime.datetime.now().hour)
     if hour == 0 or hour < 12:
@@ -46,7 +60,7 @@ def intro():
 def temperature():
     try:
         response = requests.get("http://api.openweathermap.org/data/2.5/weather?q=thane&appid=c04f06f6ac189dc5401ecf14a257adc7")
-        respons = json.load(response.text)
+        response = json.load(response.text)
         pprint.pprint(response)
     except ConnectionError:
         return
