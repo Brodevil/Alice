@@ -15,25 +15,24 @@ class Alice:
                     as best as I can. 24 Hours a day seven days a week, Importing all preferences from home, interface system are now \
                     fully operational, Sir!"
         self.workDo = "I guess there are several things I can do as i m acting as a package and for more info about my commands and works you can just checkout the README file of this project"
-        self.askGender = "Actually As per Abhinav sir, He think that to being a male will the best option for me but as per your demand I can change my gender, Should I change my gender!"
-        self.gender = "male"
+        
+        self.voice = "David"
         self.voiceSpeed = 175
 
-
-        try:
-            response = requests.get("http://api.openweathermap.org/data/2.5/weather?q=thane&appid=c04f06f6ac189dc5401ecf14a257adc7")
-            respons = json.load(response.text)
-            pprint.pprint(response)
-        except ConnectionError:
-            return None
         
 
     def speak(self, audio):
         engine = pyttsx3.init('sapi5')
-        if self.gender == "male":
+
+        if self.voice.lower() == "david":
             engine.setProperty('voice', engine.getProperty('voices')[0].id)
-        elif self.gender == "female":
+        elif self.voice.lower() == "ravi":
             engine.setProperty('voice', engine.getProperty('voices')[1].id)
+        elif self.voice.lower() == "richard":
+            engine.setProperty('voice', engine.getProperty('voices')[2].id)
+        elif self.voice.lower() == "zira":
+            engine.setProperty('voice', engine.getProperty('voices')[3].id)
+
         engine.setProperty("rate", self.voiceSpeed)
         engine.say(audio)
         engine.runAndWait()
