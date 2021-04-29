@@ -15,6 +15,7 @@ introduction = "Now me to introduce myself, I m Alice. A virtual desktop assista
 def speak(audio):
     engine = pyttsx3.init('sapi5')
     engine.setProperty('voice', engine.getProperty('voices')[0].id)
+    print(engine.getProperty('voices'))
     engine.setProperty("rate", 175)
     engine.say(audio)
     engine.runAndWait()
@@ -22,7 +23,7 @@ def speak(audio):
 
 def tell(audio):
     engine = pyttsx3.init('sapi5')
-    engine.setProperty('voice', engine.getProperty('voices')[1].id)
+    engine.setProperty('voice', engine.getProperty('voices')[0].id)
     engine.setProperty("rate", 180)
     engine.say(audio)
     engine.runAndWait()
@@ -31,13 +32,13 @@ def tell(audio):
 def intro():
     hour = int(datetime.datetime.now().hour)
     if hour == 0 or hour < 12:
-        tell("Good Morning Sir!")
+        speak("Good Morning Sir!")
 
     elif hour == 12 or hour < 18:
-        tell("Good Afternon Sir!")
+        speak("Good Afternon Sir!")
 
     else:
-        tell("Good Evening Sir!")
+        speak("Good Evening Sir!")
 
     speak("Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks \
         as best as I can. 24 Hours a day, seven days a week, Importing all preferences from home Interface, System are now \
@@ -78,22 +79,24 @@ def takeCommand():
 
     
 if __name__ == "__main__":
-    # intro()
+    intro()
     # temperature()
-    while True:
-        queary = takeCommand().lower()
-        # LOgic for executin task based on query
+    # while True:
+    #     queary = takeCommand().lower()
+    #     # LOgic for executin task based on query
 
 
-        if 'wikipedia' in queary:
-            print("Alice : Searching Wikipedia...")
-            speak("Searching Wikipedia...")
-            queary = queary.replace("wikipedia", "")
-            results = wikipedia.summary(queary, sentences=2)
-            print(f"Alice : According to wikipedia. {results}")
-            speak(f"According to wikipedia. {results}")
+    #     if 'wikipedia' in queary:
+    #         print("Alice : Searching Wikipedia...")
+    #         speak("Searching Wikipedia...")
+    #         queary = queary.replace("wikipedia", "")
+    #         results = wikipedia.summary(queary, sentences=2)
+    #         print(f"Alice : According to wikipedia. {results}")
+    #         speak(f"According to wikipedia. {results}")
         
-        elif 'quit' in queary:
-            print("Alice : That's it, I am quiting")
-            speak("That's it, I am quiting")
-            exit()
+    #     elif 'quit' in queary:
+    #         print("Alice : That's it, I am quiting")
+    #         speak("That's it, I am quiting")
+    #         exit()
+
+        
