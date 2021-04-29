@@ -4,6 +4,7 @@ import requests
 import json
 import pprint
 import speech_recognition as sr 
+import wikipedia
 
 
 introduction = "Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks \
@@ -58,23 +59,41 @@ def takeCommand():
     and return the string object that the user says
     '''
     r = sr.Recognizer()
-    with sr.Microphone as source:
-        print("Alice is Listening....")
+    with sr.Microphone() as source:
+        print("Alice : Listening....")
         r.pause_threshold = 1
-        # r.energy_threshold = 300
+        r.energy_threshold = 100
         audio = r.listen(source)
     
     try:
-        print("Alice is Recognizing....")
+        print("Alice : Recognizing....")
         query = r.recognize_google(audio, language="en-in")
-        print(f"User : {query:>20}")
+        print(f"User : \t{query}\n")
     
     except Exception as e:
-        print("Sorry! I didn't get")
+        print("Alice : Sorry! I didn't get\n")
         return "None"
 
+    return query
 
+    
 if __name__ == "__main__":
-    intro()
+    # intro()
     # temperature()
-    takeCommand()
+    while True:
+        queary = takeCommand().lower()
+        # LOgic for executin task based on query
+
+
+        if 'wikipedia' in queary:
+            print("Alice : Searching Wikipedia...")
+            speak("Searching Wikipedia...")
+            queary = queary.replace("wikipedia", "")
+            results = wikipedia.summary(queary, sentences=2)
+            print(f"Alice : According to wikipedia. {results}")
+            speak(f"According to wikipedia. {results}")
+        
+        elif 'quit' in queary:
+            print("Alice : That's it, I am quiting")
+            speak("That's it, I am quiting")
+            exit()
