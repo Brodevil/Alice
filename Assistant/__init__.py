@@ -234,8 +234,8 @@ def logic(queary):
     elif 'remind me after' in queary:
         queary = queary.replace("remind me after")
         magnitude = int(queary.split()[0])
-        if queary.split()[1] == "minute":
-
+        if queary.split()[1] == "minutes":
+            pass
     
 if __name__ == "__main__":
     # intro()
