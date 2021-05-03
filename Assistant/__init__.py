@@ -21,6 +21,7 @@ def speakDavid(audio):
     engine.setProperty('voice', engine.getProperty('voices')[0].id)
     print(engine.getProperty('voices'))
     engine.setProperty("rate", 175)
+    print(f"Alice : {audio}")
     engine.say(audio)
     engine.runAndWait()
 
@@ -28,6 +29,7 @@ def speakDavid(audio):
 def speakRavi(audio):
     engine.setProperty('voice', engine.getProperty('voices')[1].id)
     engine.setProperty("rate", 170)
+    print(f"Alice : {audio}")
     engine.say(audio)
     engine.runAndWait()
 
@@ -35,6 +37,7 @@ def speakRavi(audio):
 def speakZira(audio):
     engine.setProperty('voice', engine.getProperty('voices')[3].id)
     engine.setProperty("rate", 170)
+    print(f"Alice : {audio}")
     engine.say(audio)
     engine.runAndWait()
     
@@ -42,20 +45,25 @@ def speakZira(audio):
 def speakRichard(audio):
     engine.setProperty('voice', engine.getProperty('voices')[2].id)
     engine.setProperty("rate", 170)
+    print(f"Alice : {audio}")
     engine.say(audio)
     engine.runAndWait()
 
 
-def intro():
-    hour = int(datetime.datetime.now().hour)
-    if hour == 0 or hour < 12:
-        speakRichard("Good Morning Sir!")
+def goodWish():
+    presentHour = int(datetime.datetime.now().hour)
+    if presentHour == 0 or presentHour < 12:
+        return "Good Morning"
 
-    elif hour == 12 or hour < 18:
-        speakRichard("Good Afternon Sir!")
+    elif presentHour == 12 or presentHour < 18:
+        return "Good Afternon"
 
     else:
-        speakRichard("Good Evening Sir!")
+        return "Good Evening"
+
+
+def intro():
+    speakRichard(f"{goodWish()} Sir!")
 
     speakRichard("Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks \
         as best as I can. 24 Hours a day, seven days a week, Importing all preferences from home Interface, System are now \
@@ -99,18 +107,15 @@ def logic(queary):
     """This is the logic of the Program as it will be matching several queary and do the programmed task """
 
     if 'wikipedia' in queary:
-            print("Alice : Searching Wikipedia...")
             speakRavi("Searching Wikipedia...")
             queary = queary.replace("wikipedia", "")
             try:
                 results = wikipedia.summary(queary, sentences=2)
-                print(f"Alice : According to wikipedia. {results}\n")
                 speakRavi(f"According to wikipedia. {results}")
             except Exception:
                 speakRichard("Sorry! I didn't got that stuff in wikipedia")
         
     elif 'quit' in queary:
-        print("Alice : That's it, I am quiting")
         speakRavi("That's it, I am quiting")
         exit()
 
@@ -131,13 +136,17 @@ def logic(queary):
         webbrowser.open("github.com/Brodevil/Alice")
     
     elif 'is i am audio able' in queary:
-        print("Alice : Yes sir you are Audio able!\n")
         speakRichard("Yes sir you are Audio able!")
     
     elif 'hello alice' in queary:
-        print("Alice : Hello sir! how may I can help you.\n")
         speakRichard("Hello sir! how may I can help you.")
 
+    elif 'good morning' in queary or 'good afternon' in queary or 'good evening' in queary:
+        wish = goodWish()
+        if wish.lower() in queary:
+            speakRichard(f"{wish} Sir!")
+        else:
+            speakRichard(f"Sir! Its {wish.split()[1]} Right now!")
 
     
 if __name__ == "__main__":
@@ -146,6 +155,6 @@ if __name__ == "__main__":
     while True:
         queary = takeCommand().lower()
         # LOgic for executin task based on query
-
+        logic(queary)
 
         
