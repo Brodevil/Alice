@@ -214,6 +214,8 @@ def logic(queary):
     elif 'switch window left' in queary:
         keyboard.press_and_release("ctrl+win+left")
 
+    elif 'open vs code' in queary:
+        pass
     
 if __name__ == "__main__":
     # intro()
