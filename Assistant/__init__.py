@@ -7,6 +7,8 @@ import speech_recognition as sr
 import wikipedia
 import webbrowser
 import os
+import keyboard
+import time
 
 
 
@@ -76,9 +78,7 @@ def edge(url):
 def intro():
     speakRichard(f"{goodWish()} Sir!")
 
-    speakRichard("Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks \
-        as best as I can. 24 Hours a day, seven days a week, Importing all preferences from home Interface, System are now \
-        fully operational!")
+    speakRichard("Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day, seven days a week, Importing all preferences from home Interface, System are now fully operational!")
 
 
 def temperature():
@@ -130,10 +130,21 @@ def logic(queary):
         speakRichard("That's it, I am quiting\n")
         exit()
 
+    elif 'search' in queary:
+        edge("https://www.google.com")
+        queary = queary.replace("search", "")
+        time.sleep(2)
+        keyboard.write(queary)
+        keyboard.press_and_release('enter')
+
+
+    elif 'open youtube studio' in queary:
+        edge("https://studio.youtube.com/")
+
+    
     elif 'open youtube' in queary:
         edge("youtube.com")
-
-
+    
     elif 'open google' in queary:
         edge("google.com")
     
@@ -161,9 +172,6 @@ def logic(queary):
     elif 'pep 8' in queary:
         edge("https://www.python.org/dev/peps/pep-0008/")   
     
-    elif 'open youtube studio' in queary:
-        edge("https://studio.youtube.com/")
-    
     elif 'is i am audio able' in queary:
         speakRichard("Yes sir you are Audio able!\n")
     
@@ -182,6 +190,29 @@ def logic(queary):
     
     elif "what's the date" in queary:
         speakRichard(f"Its {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year}")
+
+    elif 'who are you' in queary:
+        intro()
+    
+    elif 'desktop' in queary:
+        keyboard.press_and_release("win+d")
+
+    elif 'lock pc' in queary:
+        keyboard.press_and_release("win+l")
+    
+    elif 'shutdown pc' in queary:
+        os.open(r"C:\Windows\System32\SlideToShutDown.exe")
+        time.sleep(2)
+        keyboard.press_and_release("enter")
+
+    elif 'switch tab' in queary:
+        keyboard.press_and_release("alt+tab")
+    
+    elif 'switch window right' in queary:
+        keyboard.press_and_release("ctrl+win+right")
+    
+    elif 'switch window left' in queary:
+        keyboard.press_and_release("ctrl+win+left")
 
     
 if __name__ == "__main__":
