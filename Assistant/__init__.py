@@ -9,6 +9,7 @@ import webbrowser
 import os
 import keyboard
 import time
+from plyer import notification
 
 
 
@@ -67,6 +68,19 @@ def goodWish():
 
     else:
         return "Good Evening"
+
+
+def notifier(reason, str, ico):
+    notification.notify(
+                    title = reason,
+                    message = str,
+                    app_icon = ico,
+                    timeout = 12
+                )
+
+
+def reminder(time, unit):
+    pass
 
 
 def edge(url):
@@ -214,8 +228,14 @@ def logic(queary):
     elif 'switch window left' in queary:
         keyboard.press_and_release("ctrl+win+left")
 
-    elif 'open vs code' in queary:
-        pass
+    elif 'open visual studio code' in queary:
+        os.open(r"E:\Programe File (x83)\Microsoft VS Code\Code.exe")
+
+    elif 'remind me after' in queary:
+        queary = queary.replace("remind me after")
+        magnitude = int(queary.split()[0])
+        if queary.split()[1] == "minute":
+
     
 if __name__ == "__main__":
     # intro()
