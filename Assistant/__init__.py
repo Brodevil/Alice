@@ -94,16 +94,11 @@ def takeCommand():
 
     return query
 
-    
-if __name__ == "__main__":
-    # intro()
-    # temperature()
-    while True:
-        queary = takeCommand().lower()
-        # LOgic for executin task based on query
 
+def logic(queary):
+    """This is the logic of the Program as it will be matching several queary and do the programmed task """
 
-        if 'wikipedia' in queary:
+    if 'wikipedia' in queary:
             print("Alice : Searching Wikipedia...")
             speakRavi("Searching Wikipedia...")
             queary = queary.replace("wikipedia", "")
@@ -114,30 +109,43 @@ if __name__ == "__main__":
             except Exception:
                 speakRichard("Sorry! I didn't got that stuff in wikipedia")
         
-        elif 'quit' in queary:
-            print("Alice : That's it, I am quiting")
-            speakRavi("That's it, I am quiting")
-            exit()
+    elif 'quit' in queary:
+        print("Alice : That's it, I am quiting")
+        speakRavi("That's it, I am quiting")
+        exit()
 
-        elif 'open youtube' in queary:
-            webbrowser.open("youtube.com", new=2)
+    elif 'open youtube' in queary:
+        webbrowser.open("youtube.com", new=2)
 
-        elif 'open google' in queary:
-            webbrowser.open("google.com")
+
+    elif 'open google' in queary:
+        webbrowser.open("google.com")
+    
+    elif 'open stackoverflow' in queary:
+        webbrowser.open("stackoverflow.com")
+    
+    elif 'open github' in queary:
+        webbrowser.get('C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe').open("github.com/Brodevil")
+    
+    elif 'open github this repository' in queary:
+        webbrowser.open("github.com/Brodevil/Alice")
+    
+    elif 'is i am audio able' in queary:
+        print("Alice : Yes sir you are Audio able!\n")
+        speakRichard("Yes sir you are Audio able!")
+    
+    elif 'hello alice' in queary:
+        print("Alice : Hello sir! how may I can help you.\n")
+        speakRichard("Hello sir! how may I can help you.")
+
+
+    
+if __name__ == "__main__":
+    # intro()
+    # temperature()
+    while True:
+        queary = takeCommand().lower()
+        # LOgic for executin task based on query
+
+
         
-        elif 'open stackoverflow' in queary:
-            webbrowser.open("stackoverflow.com")
-        
-        elif 'open github' in queary:
-            webbrowser.get('C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe').open("github.com/Brodevil")
-        
-        elif 'open github this repository' in queary:
-            webbrowser.open("github.com/Brodevil/Alice")
-        
-        elif 'is i am audio able' in queary:
-            print("Alice : Yes sir you are Audio able!\n")
-            speakRichard("Yes sir you are Audio able!")
-        
-        elif 'hello alice' in queary:
-            print("Alice : Hello sir! how may I can help you.\n")
-            speakRichard("Hello sir! how may I can help you.")
