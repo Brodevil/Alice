@@ -90,12 +90,6 @@ def edge(url):
     webbrowser.get('edge').open(url)
 
 
-def intro():
-    speakRichard(f"{goodWish()} Sir!")
-
-    speakRichard("Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day, seven days a week, Importing all preferences from home Interface, System are now fully operational!")
-
-
 def temperature():
     try:
         response = requests.get("http://api.openweathermap.org/data/2.5/weather?q=thane&appid=c04f06f6ac189dc5401ecf14a257adc7")
@@ -103,6 +97,15 @@ def temperature():
         pprint.pprint(response)
     except ConnectionError:
         return
+
+    
+
+def intro():
+    speakRichard(f"{goodWish()} Sir!")
+
+    speakRichard("Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day, seven days a week, Importing all preferences from home Interface, System are now fully operational!")
+    speakRichard(f"Its {datetime.datetime.now().hour}:{datetime.datetime.now().minute}, and todays date is {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year} ")
+
 
 
 def takeCommand():
@@ -141,9 +144,11 @@ def logic(queary):
             except Exception:
                 speakRichard("Sorry! I didn't got that stuff in wikipedia")
         
+
     elif 'quit' in queary:
         speakRichard("That's it, I am quiting")
         exit()
+
 
     elif 'search' in queary:
         queary = queary.replace("search", "")
@@ -204,7 +209,7 @@ def logic(queary):
         edge('https://open.spotify.com/')
     
 
-    elif 'pep 8' in queary:
+    elif 'pep8' in queary:
         edge("https://www.python.org/dev/peps/pep-0008/")   
     
 
@@ -290,17 +295,15 @@ def logic(queary):
         for pid in (process.pid for process in psutil.process_iter() if process.name()==f"{queary.lower()}.exe"):
             os.kill(pid)
     
-    
+
     elif 'brown munde' in queary:
         os.startfile(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya\BROWN MUNDE - AP DHILLON GURINDER GILL SHINDA KAHLON GMINXR.mp3")
         
 
 if __name__ == "__main__":
     # intro()
-    # temperature()
-    while True:
-        queary = takeCommand().lower()
-        # LOgic for executin task based on query
-        logic(queary)
-
-        
+    temperature()
+    # while True:
+        # queary = takeCommand().lower()
+        # Lgic for executin task based on query
+        # logic(queary)
