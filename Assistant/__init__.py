@@ -247,6 +247,7 @@ def logic(queary):
 
     elif 'lock pc' in queary:   
         os.system("rundll32.exe user32.dll, LockWorkStation")
+        exit()
     
 
     elif 'shutdown pc' in queary:
@@ -302,8 +303,9 @@ def logic(queary):
 
 if __name__ == "__main__":
     # intro()
-    temperature()
-    # while True:
-        # queary = takeCommand().lower()
+    # temperature()
+    while True:
+        queary = takeCommand().lower()
         # Lgic for executin task based on query
-        # logic(queary)
+        logic(queary)
+        # speakRichard(queary)
