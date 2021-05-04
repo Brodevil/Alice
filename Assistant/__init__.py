@@ -211,13 +211,16 @@ def logic(queary):
     elif 'desktop' in queary:
         keyboard.press_and_release("win+d")
 
-    elif 'lock pc' in queary:
-        keyboard.press_and_release("win+l")
+    elif 'lock pc' in queary:   
+        os.system("rundll32.exe user32.dll, LockWorkStation")
     
     elif 'shutdown pc' in queary:
-        os.open(r"C:\Windows\System32\SlideToShutDown.exe")
+        os.startfile(r"C:\Windows\System32\SlideToShutDown.exe")
         time.sleep(2)
         keyboard.press_and_release("enter")
+
+    elif 'restart pc' in queary:
+        os.system("Shutdown.exe -r -t 00")
 
     elif 'switch tab' in queary:
         keyboard.press_and_release("alt+tab")
@@ -229,13 +232,14 @@ def logic(queary):
         keyboard.press_and_release("ctrl+win+left")
 
     elif 'open visual studio code' in queary:
-        os.open(r"E:\Programe File (x83)\Microsoft VS Code\Code.exe")
+        os.startfile(r"E:\Programe File (x83)\Microsoft VS Code\Code.exe")
 
     elif 'remind me after' in queary:
         queary = queary.replace("remind me after")
         magnitude = int(queary.split()[0])
         if queary.split()[1] == "minutes":
             pass
+
     
 if __name__ == "__main__":
     # intro()
