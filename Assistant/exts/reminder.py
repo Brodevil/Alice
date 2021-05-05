@@ -1,6 +1,6 @@
-import datetime
 from plyer import notification
 import pyttsx3
+import time
 
 
 def speakRichard(audio):
@@ -24,9 +24,9 @@ def notifier(reason, string, ico):
 
 def reminder(magnitude, unit, pourpose):
     if unit.lower() == "minutes":
-        remindTime = magnitude + int(datetime.datetime.now().minute)
+        remindTime = int(magnitude*60 + time.time())
         while(True):
-            presentTime = int(datetime.datetime.now().minute)
+            presentTime = int(time.time())
             if presentTime == remindTime:
                 speakRichard("Time Out Sir!")
                 notifier(
@@ -34,11 +34,12 @@ def reminder(magnitude, unit, pourpose):
                     string="Alice : Time Out Sir!",
                     ico=r"Assistant\media\time-out.ico"
                 )
+                break
 
     elif unit.lower() == "hours":
-        remindTime = magnitude + int(datetime.datetime.now().hours)
+        remindTime = int(magnitude*60*60 + time.time())
         while(True):
-            presentTime = int(datetime.datetime.now().hours)
+            presentTime = int(time.time())
             if presentTime == remindTime:
                 speakRichard("Time Out Sir!")
                 notifier(
@@ -46,6 +47,7 @@ def reminder(magnitude, unit, pourpose):
                     string="Alice : Time Out Sir!",
                     ico=r"Assistant\media\time-out.ico"
                 )
+                break
 
 
 if __name__ == "__main__":
