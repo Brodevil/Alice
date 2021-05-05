@@ -11,7 +11,7 @@ import keyboard
 import time
 import random
 import psutil
-# from Assistant.exts.reminder import reminder
+from exts.reminder import reminder
 
 
 
@@ -93,9 +93,8 @@ def temperature():
     
 
 def intro():
-    speakRichard(f"{goodWish()} Sir!")
-
     speakRichard("Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day, seven days a week, Importing all preferences from home Interface, System are now fully operational!")
+    speakRichard(f"{goodWish()} Sir!")
     speakRichard(f"Its {datetime.datetime.now().hour}:{datetime.datetime.now().minute}, and todays date is {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year} ")
 
 
@@ -118,7 +117,7 @@ def takeCommand():
         print(f"User : \t{query}\n")
     
     except Exception as e:
-        print("Alice : Sorry! I didn't get\n")
+        print("Alice : Sorry! I didn't get that...\n")
         return "None"
 
     return query
@@ -301,10 +300,10 @@ def logic(queary):
     
 
 if __name__ == "__main__":
-    # intro()
-    from assistant import Alice
+    intro()
     # temperature()
     # while True:
     #     queary = takeCommand().lower()
     #     logic(queary)     # Lgic for executin task based on query
-    #     # speakRichard(queary)
+        # speakRichard(queary)
+    
