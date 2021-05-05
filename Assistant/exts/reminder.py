@@ -22,7 +22,7 @@ def notifier(reason, string, ico):
                 )
             
 
-def reminder(magnitude, unit, pourpose=None):
+def reminder(magnitude, unit, pourpose):
     if unit.lower() == "minutes":
         remindTime = magnitude + int(datetime.datetime.now().minute)
         while(True):
@@ -32,7 +32,7 @@ def reminder(magnitude, unit, pourpose=None):
                 notifier(
                     reason=pourpose,
                     string="Alice : Time Out Sir!",
-                    ico=r"Assistant\media\time-out.svg"
+                    ico=r"Assistant\media\time-out.ico"
                 )
 
     elif unit.lower() == "hours":
@@ -44,7 +44,7 @@ def reminder(magnitude, unit, pourpose=None):
                 notifier(
                     reason=pourpose,
                     string="Alice : Time Out Sir!",
-                    ico=r"Assistant\media\time-out.png"
+                    ico=r"Assistant\media\time-out.ico"
                 )
 
 
