@@ -294,8 +294,17 @@ def logic(queary):
     elif 'brown munde' in queary:
         os.startfile(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya\BROWN MUNDE - AP DHILLON GURINDER GILL SHINDA KAHLON GMINXR.mp3")
     
+
     elif 'play my music' in queary:
         os.startfile(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya\AUD-20210421-WA0103 - Copy (2).mp3")
+
+
+    elif 'delete unwanted files' in queary:
+        unwantedFiles = [r"C:\Windows\Temp", r"C:\Users\ADMIN\AppData\Local\Temp", r"C:\Windows\Prefetch"]
+        for file in [os.listdir(f) for f in unwantedFiles]:
+            os.remove(os.path.join(r"C:\Windows\Temp", file))  
+             
+
 
 
 if __name__ == "__main__":
