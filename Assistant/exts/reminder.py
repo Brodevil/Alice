@@ -22,7 +22,7 @@ def reminder(magnitude, unit, pourpose=None):
                 notifier(
                     reason=pourpose,
                     string="Alice : Time Out Sir!",
-                    ico="timeout.svg"
+                    ico=r"Assistant\media\time-out.svg"
                 )
 
     elif unit.lower() == "hours":
@@ -30,8 +30,11 @@ def reminder(magnitude, unit, pourpose=None):
         while(True):
             presentTime = int(datetime.datetime.now().hours)
             if presentTime == remindTime:
+                speakRichard("Time Out Sir!")
                 notifier(
-
+                    reason=pourpose,
+                    string="Alice : Time Out Sir!",
+                    ico=r"Assistant\media\time-out.svg"
                 )
 
 
