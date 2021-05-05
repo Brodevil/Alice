@@ -271,9 +271,11 @@ def logic(queary):
 
 
     elif 'remind me after' in queary:
-        queary = queary.replace("remind me after")
+        queary = queary.replace("remind me after", "")
+        queary = queary.replace("i" , "your")
         magnitude = int(queary.split()[0])
         unit = queary.split()[1]
+        speakRichard(f"Okay Sir! I will be reminding you after {magnitude} {unit}!")
         try:
             pourpose = queary.split("for ")[1]
         except Exception:
