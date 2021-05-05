@@ -11,7 +11,7 @@ import keyboard
 import time
 import random
 import psutil
-from Assistant.exts.reminder import reminder
+# from Assistant.exts.reminder import reminder
 
 
 
@@ -66,7 +66,7 @@ def goodWish():
         return "Good Morning"
 
     elif presentHour == 12 or presentHour < 18:
-        return "Good Afternon"
+        return "Good Afternoon"
 
     else:
         return "Good Evening"
@@ -280,7 +280,7 @@ def logic(queary):
             pourpose = queary.split("for ")[1]
         except Exception:
             pourpose = "You didn't told teh pourpose for reminding, Its might be some thing secret \U0001F923"
-        reminder(magnitude, unit)
+        reminder(magnitude, unit, pourpose)
 
 
     elif 'play music' in queary or 'play another music' in queary:
@@ -297,13 +297,14 @@ def logic(queary):
 
     elif 'brown munde' in queary:
         os.startfile(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya\BROWN MUNDE - AP DHILLON GURINDER GILL SHINDA KAHLON GMINXR.mp3")
-        
+    
+    
 
 if __name__ == "__main__":
     # intro()
+    from assistant import Alice
     # temperature()
-    while True:
-        queary = takeCommand().lower()
-        # Lgic for executin task based on query
-        logic(queary)
-        # speakRichard(queary)
+    # while True:
+    #     queary = takeCommand().lower()
+    #     logic(queary)     # Lgic for executin task based on query
+    #     # speakRichard(queary)
