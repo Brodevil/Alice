@@ -99,10 +99,14 @@ def intro():
     
 
 def aliceInitialCommit(path):
+    os.chdir(path)
+    print(1)
     os.system("git add .")
+    print(2)
     os.system("git commit -m 'inital commit by Alice'")
+    print(3)
     os.system("git push -u origin main")
-
+    print(4)
 
 
 def takeCommand():
@@ -325,8 +329,8 @@ def logic(queary):
 
 
 if __name__ == "__main__":
-    intro()
-    while True:
-        queary = takeCommand().lower()
-        logic(queary)     # Logic for executin task based on query
-
+    # intro()
+    # while True:
+    #     queary = takeCommand().lower()
+    #     logic(queary)     # Logic for executin task based on query
+    aliceInitialCommit(os.getcwd())
