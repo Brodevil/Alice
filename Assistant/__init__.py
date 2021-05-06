@@ -96,6 +96,12 @@ def intro():
     temperature = weather()
     if temperature != None:
         speakRichard(f"Its seemed to be approximately {temperature} degree celsius outside the door")
+    
+
+def aliceInitialCommit(path):
+    os.system("git add .")
+    os.system("git commit -m 'inital commit by Alice'")
+    os.system("git push -u origin main")
 
 
 
