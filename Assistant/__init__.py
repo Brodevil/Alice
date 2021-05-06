@@ -98,7 +98,7 @@ def intro():
         speakRichard(f"Its seemed to be approximately {temperature} degree celsius outside the door")
     
 
-def aliceInitialCommit(path):
+def initialCommit(path):
     os.chdir(path)
     os.system("git add .")
     os.system('git commit -m "inital commit by Alice"')
@@ -323,10 +323,18 @@ def logic(queary):
     elif "to kese hai app log" in queary:
         speakRichard("Hum thik hai bhai, Tum batao!..")
 
+    elif 'push the code' in queary:
+        speakRichard("Commit and then pushing the code in github repository....")
+        initialCommit(os.getcwd())
+    
+    elif "what's the temperature" in queary:
+        temperature = weather()
+        if temperature != None:
+            speakRichard(f"Its seemed to be approximately {temperature} degree celsius outside the door")
+        
 
 if __name__ == "__main__":
-    # intro()
-    # while True:
-    #     queary = takeCommand().lower()
-    #     logic(queary)     # Logic for executin task based on query
-    aliceInitialCommit(os.getcwd())
+    intro()
+    while True:
+        queary = takeCommand().lower()
+        logic(queary)     # Logic for executin task based on query
