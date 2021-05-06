@@ -316,3 +316,4 @@ if __name__ == "__main__":
         # speakRichard(queary)
     reminder(1, "minutes", "Test 0")
     print("To kese hia app log")
+
