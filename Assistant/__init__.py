@@ -227,7 +227,7 @@ def logic(queary):
     
 
     elif "what's the time" in queary:
-        speakRichard(f"Its {datetime.datetime.now().hour}:{datetime.datetime.now().minute} Sir!")
+        speakRichard(f"Its {datetime.datetime.now().strftime('%H:%M:%S')} Sir!")
     
 
     elif "what's the date" in queary:
@@ -291,7 +291,7 @@ def logic(queary):
 
     elif 'play music' in queary or 'play another music' in queary:
         music = os.listdir(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya")
-        os.startfile(os.path.join(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya", music[random.randint(0, len(music)-1)]))
+        os.startfile(os.path.join(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya", random.choice(music)))
         speakRichard("Playing Music...")
 
 
@@ -332,6 +332,8 @@ def logic(queary):
         if temperature != None:
             speakRichard(f"Its seemed to be approximately {temperature} degree celsius outside the door")
         
+
+
 
 if __name__ == "__main__":
     intro()
