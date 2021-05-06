@@ -2,7 +2,7 @@ import pyttsx3
 import datetime
 import requests
 import json
-import pprint
+# import pprint
 import speech_recognition as sr 
 import wikipedia
 import webbrowser
@@ -79,20 +79,23 @@ def edge(url):
     webbrowser.get('edge').open(url)
 
 
-def temperature():
+def weather():
     try:
         response = requests.get("http://api.openweathermap.org/data/2.5/weather?q=thane&appid=c04f06f6ac189dc5401ecf14a257adc7")
-        response = json.load(response.text)
-        pprint.pprint(response)
+        response = json.loads(response.text)
+        return int(response['main']['feels_like'] - 273.15)
     except ConnectionError:
         return
 
-    
 
 def intro():
     speakRichard("Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day, seven days a week, Importing all preferences from home Interface, System are now fully operational!")
     speakRichard(f"{goodWish()} Sir!")
     speakRichard(f"Its {datetime.datetime.now().hour}:{datetime.datetime.now().minute}, and todays date is {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year} ")
+    
+    temperature = weather()
+    if temperature != None:
+        speakRichard(f"Its seemed to be approximately {temperature} degree celsius outside the door")
 
 
 
@@ -310,17 +313,14 @@ def logic(queary):
                 except PermissionError:
                     pass
 
-                
-
+    
+    elif "to kese hai app log" in queary:
+        speakRichard("Hum thik hai bhai, Tum batao!..")
 
 
 if __name__ == "__main__":
-    # intro()
-    # # temperature()
-    # while True:
-    #     queary = takeCommand().lower()
-    #     logic(queary)     # Lgic for executin task based on query
-        # speakRichard(queary)
-    # reminder(1, "minutes", "Test 0")
-    # print("To kese hia app log")
+    intro()
+    while True:
+        queary = takeCommand().lower()
+        logic(queary)     # Logic for executin task based on query
 
