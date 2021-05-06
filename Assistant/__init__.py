@@ -99,14 +99,10 @@ def intro():
     
 
 def aliceInitialCommit(path):
-    # os.chdir(path)
-    print(1)
+    os.chdir(path)
     os.system("git add .")
-    print(2)
     os.system('git commit -m "inital commit by Alice"')
-    print(3)
     os.system("git push -u origin main")
-    print(4)
 
 
 def takeCommand():
