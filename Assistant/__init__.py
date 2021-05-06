@@ -188,7 +188,7 @@ def logic(queary):
 
 
     elif 'open whatsapp' in queary:
-        speakRichard("Opening  Instagram.....")
+        speakRichard("Opening  Whatsapp.....")
         edge("https://web.whatsapp.com/")
 
 
@@ -270,6 +270,7 @@ def logic(queary):
         queary = queary.replace("remind me after", "")
         queary = queary.replace("i" , "your")
         magnitude = int(queary.split()[0])
+        print(magnitude)
         unit = queary.split()[1]
         speakRichard(f"Okay Sir! I will be reminding you after {magnitude} {unit}!")
         try:
@@ -300,20 +301,26 @@ def logic(queary):
 
 
     elif 'delete unwanted files' in queary:
+        speakRichard("Deleting unwanted files...")
         unwantedFiles = [r"C:\Windows\Temp", r"C:\Users\ADMIN\AppData\Local\Temp", r"C:\Windows\Prefetch"]
-        for file in [os.listdir(f) for f in unwantedFiles]:
-            os.remove(os.path.join(r"C:\Windows\Temp", file))  
-             
+        for f in unwantedFiles:
+            for file in os.listdir(f):
+                try:
+                    os.remove(os.path.join(f , file))  
+                except PermissionError:
+                    pass
+
+                
 
 
 
 if __name__ == "__main__":
     # intro()
-    # temperature()
+    # # temperature()
     # while True:
     #     queary = takeCommand().lower()
     #     logic(queary)     # Lgic for executin task based on query
         # speakRichard(queary)
-    reminder(1, "minutes", "Test 0")
-    print("To kese hia app log")
+    # reminder(1, "minutes", "Test 0")
+    # print("To kese hia app log")
 
