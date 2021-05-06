@@ -262,9 +262,9 @@ def logic(queary):
 
 
     elif 'open visual studio code' in queary:
-        os.startfile(r"E:\Programe File (x83)\Microsoft VS Code\Code.exe")
         speakRichard("Opening vs code...")
-
+        os.startfile(r"E:\Programe File (x83)\Microsoft VS Code\Code.exe")
+        
 
     elif 'remind me after' in queary:
         queary = queary.replace("remind me after", "")
@@ -274,9 +274,9 @@ def logic(queary):
         unit = queary.split()[1]
         speakRichard(f"Okay Sir! I will be reminding you after {magnitude} {unit}!")
         try:
-            pourpose = queary.split("for ")[1]
+            pourpose = queary.split("so that ")[1]
         except Exception:
-            pourpose = "You didn't told teh pourpose for reminding, Its might be some thing secret \U0001F923"
+            pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
         reminder(magnitude, unit, pourpose)
 
 
