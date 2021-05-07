@@ -314,7 +314,7 @@ def logic(queary):
                     pass
 
 
-    elif "to kese hai aap log" in queary:
+    elif "to kaise hai aap log" in queary:
         speakRichard("Hum thik hai bhai, Tum batao!..")
 
 
@@ -331,11 +331,11 @@ def logic(queary):
     elif "kill your self" in queary:
         speakRichard("That's it, I m quiting....")
         exit()
-        
+
 
 
 if __name__ == "__main__":
-    # intro()
+    intro()
     # if 1:
     while True:
         queary = takeCommand().lower()
