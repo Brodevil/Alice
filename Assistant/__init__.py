@@ -11,7 +11,7 @@ import keyboard
 import time
 import random
 import psutil
-from exts.reminder import reminder
+from exts import reminder
 
 
 engine = pyttsx3.init('sapi5')
@@ -276,16 +276,21 @@ def logic(queary):
 
     elif 'remind me after' in queary:
         queary = queary.replace("remind me after", "")
-        queary = queary.replace("i" , "your")
+        queary = queary.replace("i" , "you")
         magnitude = int(queary.split()[0])
-        print(magnitude)
         unit = queary.split()[1]
+        print(unit)
         speakRichard(f"Okay Sir! I will be reminding you after {magnitude} {unit}!")
         try:
             pourpose = queary.split("so that ")[1]
-        except Exception:
+
+        except Exception:      # the user can give the reason as a option
+
             pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
-        reminder(magnitude, unit, pourpose)
+        
+        finally :
+            reminder.reminder(magnitude, unit, pourpose)
+
 
 
     elif 'play music' in queary or 'play another music' in queary:
@@ -313,7 +318,7 @@ def logic(queary):
                     pass
 
 
-    elif "to kaise hai aap log" in queary:
+    elif "to kaise hain aap log" in queary:
         speakRichard("Hum thik hai bhai, Tum batao!..")
 
 
@@ -330,6 +335,11 @@ def logic(queary):
     elif "kill yourself" in queary:
         speakRichard("That's it, I m quiting....")
         exit()
+
+
+    elif 'say' in queary:
+        queary = queary.replace("say ", "")
+        speakRichard(queary)
 
 
 
