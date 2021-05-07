@@ -330,6 +330,7 @@ def logic(queary):
 
 if __name__ == "__main__":
     # intro()
+    # if 1:
     while True:
         queary = takeCommand().lower()
         logic(queary)     # Logic for executin task based on query
