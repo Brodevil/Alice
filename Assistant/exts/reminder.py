@@ -23,8 +23,8 @@ def notifier(reason, string, ico):
             
 
 def reminder(magnitude, unit, pourpose):
-    if unit.lower() == "minutes":
-        print("minutes reminding")
+    print(__name__)
+    if unit.lower() == "myournute" or unit.lower() == "myournutes":     # this is actually the computer sence word to minutes as a myournutes
         remindTime = int(magnitude*60 + time.time())
         while(True):
             presentTime = int(time.time())
@@ -37,7 +37,7 @@ def reminder(magnitude, unit, pourpose):
                 )
                 break
 
-    elif unit.lower() == "hours":
+    elif unit.lower() == "hours" or unit.lower() == "hour":
         print("house reminding")
         remindTime = int(magnitude*60*60 + time.time())
         while(True):
