@@ -314,13 +314,15 @@ def logic(queary):
                     pass
 
 
-    elif "to kese hai app log" in queary:
+    elif "to kese hai aap log" in queary:
         speakRichard("Hum thik hai bhai, Tum batao!..")
+
 
     elif 'push the code' in queary:
         speakRichard("Commit and then pushing the code in github repository....")
         initialCommit(os.getcwd())
     
+
     elif "what's the temperature" in queary:
         temperature = weather()
         if temperature != None:
@@ -334,4 +336,4 @@ if __name__ == "__main__":
     while True:
         queary = takeCommand().lower()
         logic(queary)     # Logic for executin task based on query
-
+        
