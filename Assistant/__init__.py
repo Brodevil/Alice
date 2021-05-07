@@ -14,7 +14,6 @@ import psutil
 from exts.reminder import reminder
 
 
-
 engine = pyttsx3.init('sapi5')
 
 
@@ -328,14 +327,14 @@ def logic(queary):
         if temperature != None:
             speakRichard(f"Its seemed to be approximately {temperature} degree celsius outside the door")
 
-    elif "kill your self" in queary:
+    elif "kill yourself" in queary:
         speakRichard("That's it, I m quiting....")
         exit()
 
 
 
 if __name__ == "__main__":
-    intro()
+    # intro()
     # if 1:
     while True:
         queary = takeCommand().lower()
