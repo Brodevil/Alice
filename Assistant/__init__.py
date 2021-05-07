@@ -245,7 +245,7 @@ def logic(queary):
     elif 'lock pc' in queary:   
         os.system("rundll32.exe user32.dll, LockWorkStation")
         exit()
-    
+
 
     elif 'shutdown pc' in queary:
         os.startfile(r"C:\Windows\System32\SlideToShutDown.exe")
@@ -260,11 +260,11 @@ def logic(queary):
 
     elif 'switch tab' in queary:
         keyboard.press_and_release("alt+tab")
-    
+
 
     elif 'switch window right' in queary:
         keyboard.press_and_release("ctrl+win+right")
-    
+
 
     elif 'switch window left' in queary:
         keyboard.press_and_release("ctrl+win+left")
@@ -273,7 +273,7 @@ def logic(queary):
     elif 'open visual studio code' in queary:
         speakRichard("Opening vs code...")
         os.startfile(r"E:\Programe File (x83)\Microsoft VS Code\Code.exe")
-        
+
 
     elif 'remind me after' in queary:
         queary = queary.replace("remind me after", "")
@@ -293,11 +293,11 @@ def logic(queary):
         music = os.listdir(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya")
         os.startfile(os.path.join(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya", random.choice(music)))
         speakRichard("Playing Music...")
-    
+
 
     elif 'brown munde' in queary:
         os.startfile(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya\BROWN MUNDE - AP DHILLON GURINDER GILL SHINDA KAHLON GMINXR.mp3")
-    
+
 
     elif 'play my music' in queary:
         os.startfile(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya\AUD-20210421-WA0103 - Copy (2).mp3")
@@ -313,7 +313,7 @@ def logic(queary):
                 except PermissionError:
                     pass
 
-    
+
     elif "to kese hai app log" in queary:
         speakRichard("Hum thik hai bhai, Tum batao!..")
 
