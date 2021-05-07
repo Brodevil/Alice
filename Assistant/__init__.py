@@ -328,6 +328,10 @@ def logic(queary):
         if temperature != None:
             speakRichard(f"Its seemed to be approximately {temperature} degree celsius outside the door")
 
+    elif "kill your self" in queary:
+        speakRichard("That's it, I m quiting....")
+        exit()
+        
 
 
 if __name__ == "__main__":
