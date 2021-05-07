@@ -293,12 +293,6 @@ def logic(queary):
         music = os.listdir(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya")
         os.startfile(os.path.join(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya", random.choice(music)))
         speakRichard("Playing Music...")
-
-
-    elif 'close' in queary:
-        queary = queary.replace("close", "")
-        for pid in (process.pid for process in psutil.process_iter() if process.name()==f"{queary.lower()}.exe"):
-            os.kill(pid)
     
 
     elif 'brown munde' in queary:
@@ -331,12 +325,11 @@ def logic(queary):
         temperature = weather()
         if temperature != None:
             speakRichard(f"Its seemed to be approximately {temperature} degree celsius outside the door")
-        
 
 
 
 if __name__ == "__main__":
-    intro()
+    # intro()
     while True:
         queary = takeCommand().lower()
         logic(queary)     # Logic for executin task based on query
