@@ -12,6 +12,7 @@ import time
 import random
 import psutil
 from exts import reminder
+from exts import apis
 
 
 engine = pyttsx3.init('sapi5')
@@ -94,13 +95,7 @@ def edge(url):
     webbrowser.get('edge').open(url)
 
 
-def weather():
-    try:
-        response = requests.get("http://api.openweathermap.org/data/2.5/weather?q=thane&appid=c04f06f6ac189dc5401ecf14a257adc7")
-        response = json.loads(response.text)
-        return int(response['main']['feels_like'] - 273.15)
-    except ConnectionError:
-        return
+
 
 
 def intro():
@@ -108,7 +103,7 @@ def intro():
     speakRichard(f"{goodWish()} Sir!")
     speakRichard(f"Its {datetime.datetime.now().hour}:{datetime.datetime.now().minute}, and todays date is {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year} ")
     
-    temperature = weather()
+    temperature = apis.weather()    # seem to give location as a argument
     if temperature != None:
         speakRichard(f"Its seemed to be approximately {temperature} degree celsius outside the door")
     
@@ -344,7 +339,7 @@ def logic(queary):
     
 
     elif "what's the temperature" in queary:
-        temperature = weather()
+        temperature = apis.weather()    # wanna back on this
         if temperature != None:
             speakRichard(f"Its seemed to be approximately {temperature} degree celsius outside the door")
 
