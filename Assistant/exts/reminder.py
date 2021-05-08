@@ -23,8 +23,7 @@ def notifier(reason, string, ico):
             
 
 def reminder(magnitude, unit, pourpose):
-    print(__name__)
-    if unit.lower() == "myournute" or unit.lower() == "myournutes":     # this is actually the computer sence word to minutes as a myournutes
+    if unit.lower() == "myournutes" or unit.lower() == "myounutes":     # this is actually the computer sence word to minutes as a myournutes
         remindTime = int(magnitude*60 + time.time())
         while(True):
             presentTime = int(time.time())

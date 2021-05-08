@@ -368,18 +368,20 @@ def logic(queary):
         keyboardActivities = keyboardRecord()
 
 
-    elif 'play the keyboard recoring' in queary:
+    elif 'play the keyboard recording' in queary:
         try:
             keyboardActivities
         except NameError:
             speakRichard("Sir! there is no keyboard Activity available till now")
         else:
-            speakRichard("Okay Sir! Playing the keyboard Activiy recording ")
+            speakRichard("Okay Sir! Playing the keyboard Activiy recording, Note that have to put the cursor where you want to play it.")
+            time.sleep(7)
+            
             recordedKeyboardType(keyboardActivities)
 
 
 if __name__ == "__main__":
-    # intro()
+    intro()
     # if 1:
     while True:
         queary = takeCommand().lower()
