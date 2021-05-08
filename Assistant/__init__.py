@@ -71,6 +71,22 @@ def goodWish():
         return "Good Evening"
 
 
+def typing(str):
+    pass
+
+
+
+def keyboardRecord():
+    """The functions records the keybaord activity and can be just written by using another recordedKeyboardType() functions"""
+    record = keyboard.record(until ='Esc')
+    return record
+
+
+def recordedKeyboardType(record):
+    """Function to type the recorded keyboard activity which is recorded by keyboardRecord() functions"""
+    keyboard.play(record, speed_factor = 5)
+    
+
 
 def edge(url):
     edgePath = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
@@ -341,6 +357,25 @@ def logic(queary):
         queary = queary.replace("say ", "")
         speakRichard(queary)
 
+    
+    elif "type that" in queary:
+        queary = queary.replace("type that", "")
+        typing(queary)
+    
+
+    elif 'record keyboard' in queary:
+        speakRichard("Sir! Note that, your keyboard activies will be recording till you prese Escap button on your keyboard")
+        keyboardActivities = keyboardRecord()
+
+
+    elif 'play the keyboard recoring' in queary:
+        try:
+            keyboardActivities
+        except NameError:
+            speakRichard("Sir! there is no keyboard Activity available till now")
+        else:
+            speakRichard("Okay Sir! Playing the keyboard Activiy recording ")
+            recordedKeyboardType(keyboardActivities)
 
 
 if __name__ == "__main__":
