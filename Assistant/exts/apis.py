@@ -1,14 +1,18 @@
 import requests
 import json
 import pprint
+import os
 
 
 
-def weather(location):
+def weather(location=os.getenv('location')):
+    """Function to return the most of the information about current location using ip address
+    From openwethermap.org apis """
     try:
-        response = requests.get("http://api.openweathermap.org/data/2.5/weather?q=thane&appid=c04f06f6ac189dc5401ecf14a257adc7")
+        response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={os.getenv('OpenWeatherMapApi')}")
         response = json.loads(response.text)
-        return int(response['main']['feels_like'] - 273.15)
+        print(response)
+        return print(int(response['main']['feels_like'] - 273.15))
     except ConnectionError:
         return
     
@@ -19,6 +23,7 @@ def localInfo():
     response = requests.get(url)
     response = json.loads(response.text)
     del response['status'], response['countryCode'], response['region']
+    os.environ['location'] = response['city']
     return [response['city'], response]
     
     
@@ -40,4 +45,6 @@ def news(url="https://newsapi.org/v2/top-headlines?sources=the-times-of-india&ap
 
 
 if __name__ == "__main__":
-    localInfo()
+    # localInfo()
+    # weather()
+    print(os.getenv('OpenWeatherMapApi'))
