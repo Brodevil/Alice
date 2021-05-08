@@ -371,8 +371,30 @@ def logic(queary):
         else:
             speakRichard("Okay Sir! Playing the keyboard Activiy recording, Note that have to put the cursor where you want to play it.")
             time.sleep(7)
-            
             recordedKeyboardType(keyboardActivities)
+
+    elif 'location' in queary:
+        pass
+
+
+    elif 'wheter report' in queary:
+        pass
+
+
+    elif 'todays news' in queary:
+        pass
+
+    
+    elif 'contact' in queary:
+        pass
+
+
+    elif 'repeat my self' in queary:
+        speakRichard("Okay Sir! Start to tell I will be follwing you")
+        while queary == "quite" or queary == "stop":
+            queary = takeCommand().lower()
+            speakRichard(queary)
+
 
 
 if __name__ == "__main__":
