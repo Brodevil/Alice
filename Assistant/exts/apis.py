@@ -12,7 +12,7 @@ def weather(location=os.getenv('location')):
         response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={os.getenv('OpenWeatherMapApi')}")
         response = json.loads(response.text)
         print(response)
-        return print(int(response['main']['feels_like'] - 273.15))
+        print(int(response['main']['feels_like'] - 273.15))
     except ConnectionError:
         return
     
