@@ -5,7 +5,7 @@ import os
 
 
 
-def weather(location=os.getenv('location')):
+def weather(location=os.getenv('location'), apikey=os.environ[""]):
     """Function to return the most of the information about current location using ip address
     From openwethermap.org apis """
     try:
@@ -47,4 +47,6 @@ def news(url="https://newsapi.org/v2/top-headlines?sources=the-times-of-india&ap
 if __name__ == "__main__":
     # localInfo()
     # weather()
-    print(os.getenv('OpenWeatherMapApi'))
+    # print(os.getenv('OpenWeatherMapApi'))
+    pprint.pprint(list(os.environ.values()))
+    
