@@ -80,6 +80,8 @@ def typing(str):
 def keyboardRecord():
     """The functions records the keybaord activity and can be just written by using another recordedKeyboardType() functions"""
     record = keyboard.record(until ='Esc')
+    time.sleep(2)
+    keyboard.play(record, speed_factor=5)
     return record
 
 
@@ -93,9 +95,6 @@ def edge(url):
     edgePath = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
     webbrowser.register('edge', None, webbrowser.BackgroundBrowser(edgePath))
     webbrowser.get('edge').open(url)
-
-
-
 
 
 def intro():
@@ -398,7 +397,7 @@ def logic(queary):
 
 
 if __name__ == "__main__":
-    intro()
+    # intro()
     # if 1:
     while True:
         queary = takeCommand().lower()
