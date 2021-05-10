@@ -14,8 +14,7 @@ def weather(location=os.getenv('location'), apikey=os.getenv("OpenWeatherMapApi"
     try:
         response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={apikey}")
         response = json.loads(response.text)
-        print(response)
-        print(int(response['main']['feels_like'] - 273.15))
+        return (int(response['main']['feels_like'] - 273.15))
     except ConnectionError:
         return
     
@@ -23,11 +22,14 @@ def weather(location=os.getenv('location'), apikey=os.getenv("OpenWeatherMapApi"
 
 def localInfo():
     url = "http://ip-api.com/json/"
-    response = requests.get(url)
-    response = json.loads(response.text)
-    del response['status'], response['countryCode'], response['region']
-    os.environ['location'] = response['city']
-    return [response['city'], response]
+    try:
+        response = requests.get(url)
+        response = json.loads(response.text)
+        del response['status'], response['countryCode'], response['region']
+        os.environ['location'] = response['city']
+        return [response['city'], response]
+    except ConnectionError:
+        return 
     
     
 
@@ -49,4 +51,4 @@ def news(url="https://newsapi.org/v2/top-headlines?sources=the-times-of-india&ap
 
 if __name__ == "__main__":
     print(localInfo())
-    # weather()
+    weather()
