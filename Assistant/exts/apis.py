@@ -2,14 +2,17 @@ import requests
 import json
 import pprint
 import os
-from dotenv import 
+from dotenv import load_dotenv
 
 
-def weather(location=os.getenv('location'), apikey=os.environ[""]):
+load_dotenv()
+
+
+def weather(location=os.getenv('location'), apikey=os.getenv("OpenWeatherMapApi")):
     """Function to return the most of the information about current location using ip address
     From openwethermap.org apis """
     try:
-        response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={os.getenv('OpenWeatherMapApi')}")
+        response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={apikey}")
         response = json.loads(response.text)
         print(response)
         print(int(response['main']['feels_like'] - 273.15))
@@ -45,8 +48,5 @@ def news(url="https://newsapi.org/v2/top-headlines?sources=the-times-of-india&ap
 
 
 if __name__ == "__main__":
-    # localInfo()
+    print(localInfo())
     # weather()
-    # print(os.getenv('OpenWeatherMapApi'))
-    pprint.pprint(list(os.environ.values()))
-    
