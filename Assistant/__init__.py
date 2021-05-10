@@ -2,7 +2,7 @@ import pyttsx3
 import datetime
 import requests
 import json
-# import pprint
+import pprint
 import speech_recognition as sr 
 import wikipedia
 import webbrowser
@@ -11,6 +11,7 @@ import keyboard
 import time
 import random
 import psutil
+import subprocess
 from exts import reminder
 from exts import apis
 
@@ -80,8 +81,7 @@ def typing(str):
 def keyboardRecord():
     """The functions records the keybaord activity and can be just written by using another recordedKeyboardType() functions"""
     record = keyboard.record(until ='Esc')
-    time.sleep(2)
-    keyboard.play(record, speed_factor=5)
+    # keyboard.play(record, speed_factor=5)
     return record
 
 
@@ -101,10 +101,10 @@ def intro():
     speakRichard("Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day, seven days a week, Importing all preferences from home Interface, System are now fully operational!")
     speakRichard(f"{goodWish()} Sir!")
     speakRichard(f"Its {datetime.datetime.now().hour}:{datetime.datetime.now().minute}, and todays date is {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year} ")
-    
+
     temperature = apis.weather()    # seem to give location as a argument
     if temperature != None:
-        speakRichard(f"Its seemed to be approximately {temperature} degree celsius outside the door")
+        speakRichard(f"Its feels like approximately {temperature} degree celsius outside the door")
     
 
 def initialCommit(path):
@@ -196,7 +196,7 @@ def logic(queary):
     
 
     elif 'open discord' in queary:
-        speakRichard("Opening Discord.....")
+        speakRichard("Opening Discord in Browser.....")
         edge("https://discord.com/channels/@me")
 
 
@@ -209,6 +209,8 @@ def logic(queary):
         speakRichard("Opening  Whatsapp.....")
         edge("https://web.whatsapp.com/")
 
+
+    # elif 'open'
 
     elif 'open spotify' in queary:
         speakRichard("Opening Spotify.....")
@@ -284,6 +286,35 @@ def logic(queary):
         os.startfile(r"E:\Programe File (x83)\Microsoft VS Code\Code.exe")
 
 
+    elif 'open sublime text' in queary:
+        speakRichard("Opening Sublime Text")
+        os.startfile(r"E:\Programe File (x83)\Sublime Text 3\sublime_text.exe")
+
+
+    elif "open discord application" in queary:
+        try:
+            os.startfile(r"E:\Programe File (x83)\Discord\app-0.0.309\Discord.exe")
+            speakRichard("Opening Discord Application")
+        except Exception:
+            speakRichard("Some thing went wrong! It might be a wrong path or you had not Installed that application")
+        
+    
+    elif "open file explorer" in queary:
+        try:
+            subprocess.Popen(r'explorer /select,"C:\path\of\folder\file"')
+            speakRichard("Opening File Explorer...")
+        except Exception:
+            speakRichard("Some thing went Wrong")
+
+    elif "open rapid typing" in queary:
+        try:
+            os.startfile(r"E:\Programe File (x83)\Typing Course\RapidTyping.exe")
+            speakRichard("Opening Rapid Typing...")
+        except Exception:
+            speakRichard("Some thing went wrong! It might be a wrong path or you had not Installed that application")
+
+
+        
     elif 'remind me after' in queary:
         queary = queary.replace("remind me after", "")
         queary = queary.replace("i" , "you")
@@ -342,7 +373,8 @@ def logic(queary):
         if temperature != None:
             speakRichard(f"Its seemed to be approximately {temperature} degree celsius outside the door")
 
-    elif "kill yourself" in queary:
+
+    elif "bye" in queary or 'kill yourself' in queary:
         speakRichard("That's it, I m quiting....")
         exit()
 
@@ -358,7 +390,7 @@ def logic(queary):
     
 
     elif 'record keyboard' in queary:
-        speakRichard("Sir! Note that, your keyboard activies will be recording till you prese Escap button on your keyboard")
+        speakRichard("Okay Sir! Note that, your keyboard activies will be recording till you prese Escap button on your keyboard")
         keyboardActivities = keyboardRecord()
 
 
@@ -371,6 +403,8 @@ def logic(queary):
             speakRichard("Okay Sir! Playing the keyboard Activiy recording, Note that have to put the cursor where you want to play it.")
             time.sleep(7)
             recordedKeyboardType(keyboardActivities)
+
+
 
     elif 'location' in queary:
         pass
@@ -396,7 +430,7 @@ def logic(queary):
 
 
 if __name__ == "__main__":
-    # intro()
+    intro()
     # if 1:
     while True:
         queary = takeCommand().lower()
