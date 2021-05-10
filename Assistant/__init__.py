@@ -388,14 +388,11 @@ def logic(queary):
         pass
 
 
-
     elif 'repeat my self' in queary:
         speakRichard("Okay Sir! Start to tell I will be follwing you")
         while queary == "quite" or queary == "stop":
             queary = takeCommand().lower()
             speakRichard(queary)
-
-
 
 
 if __name__ == "__main__":
