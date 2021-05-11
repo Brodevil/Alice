@@ -15,6 +15,7 @@ import smtplib
 import subprocess
 from exts import reminder
 from exts import apis
+from constants import Contacts
 
 
 engine = pyttsx3.init('sapi5')
@@ -449,10 +450,11 @@ def logic(queary):
         
 
 
+
 if __name__ == "__main__":
     # intro()
     # # if 1:
-    while True:
-        queary = takeCommand().lower()
-        logic(queary)     # Logic for executin task based on query
-    # sendEmail("abhinavchaudhary351@gmail.com", "Hey Test 1 this is my Alice program to send mails feature and many things")
+    # while True:
+        # queary = takeCommand().lower()
+        # logic(queary)     # Logic for executin task based on query
+    pass
