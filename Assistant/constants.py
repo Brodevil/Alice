@@ -1,10 +1,15 @@
-from exts import contactInfo
+import os
+
+from exts.readExel import contactInfo
+
+
 
 
 class Contacts:
-    contact = contactInfo()
-    emails = {name : email for name in contact.key() for email in contact.value()[0]}   
-    contactNumber = {name:number for name in contact.key() for number in contact.value()[1]}
+    contactDict = contactInfo("contactinfo.xlsx")
+       # path of my exel file containing the contact data
+    emails = {name : email for name in contactDict.keys() for email in contactDict.value()[0]}   
+    contactNumber = {name:number for name in contactDict.keys() for number in contactDict.value()[1]}
 
     emails.append({
         "archit":"archit.ghadshi@gmail.com",
@@ -18,7 +23,7 @@ class Contacts:
         "gautam":8850559026,
         "archit":9309997251,
         "banty":9069575574,
-        "kuanl":6377309679,
+        "kunal":6377309679,
         "laksh" : 9671799394,
     })
 
@@ -78,4 +83,5 @@ POSITIVE_REPLIES = [
 
 
 if __name__ == "__main__":
-    pass
+    trial = Contacts()
+    print(trial.contactDict)
