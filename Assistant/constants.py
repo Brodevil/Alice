@@ -1,24 +1,26 @@
+from exts import contactInfo
+
+
 class Contacts:
-    emails = {
-        "shivam":"shivamgopale31@gmail.com",
-        "aniket":"aniketbhagat0060@gmail.com",
-        "anii":"arunagovindbhagat@gmail.com",
-        "harsh":"harshkhapare07@gmail.com",
-        "darshan":"darshanwarghadre23@gmail.com",
-        "aditya":"adityamhaisdhune15@gmail.com",
-        "sibam":"shivamgopale31@gmail.com",
-        "rohan":"rathodrohan409@gmail.com",
+    contact = contactInfo()
+    emails = {name : email for name in contact.key() for email in contact.value()[0]}   
+    contactNumber = {name:number for name in contact.key() for number in contact.value()[1]}
+
+    emails.append({
         "archit":"archit.ghadshi@gmail.com",
-        "sharvari":"sharvarimolke@gmail.com",
-        "saniya":"patilsaniya758@gmail.com",
         "papa":"cbcsudhir@gmail.com",
         "ekta":"ektachoudhary9892@gmail.com",
-        "gaurav":"gaurav.y0884@gmail.com",
-        "vaishnavi":"kharadevaishnavi608@gmail.com",
         "gautam":"chaudharygautam9963@gmail.com",
-        "smit":"smitgondane1919@gmail.com"
-    }   
-
+    })
+    contactNumber.append({
+        "papa":9967186153,
+        "ekta":9892651308,
+        "gautam":8850559026,
+        "archit":9309997251,
+        "banty":9069575574,
+        "kuanl":6377309679,
+        "laksh" : 9671799394,
+    })
 
 
 ERROR_REPLIES = [
