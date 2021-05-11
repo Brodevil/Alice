@@ -452,6 +452,5 @@ if __name__ == "__main__":
     # # if 1:
     while True:
         queary = takeCommand().lower()
-        print(queary)
-    #     logic(queary)     # Logic for executin task based on query
+        logic(queary)     # Logic for executin task based on query
     # sendEmail("abhinavchaudhary351@gmail.com", "Hey Test 1 this is my Alice program to send mails feature and many things")
