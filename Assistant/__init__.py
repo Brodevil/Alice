@@ -101,6 +101,7 @@ def intro():
     speakRichard("Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day, seven days a week, Importing all preferences from home Interface, System are now fully operational!")
     speakRichard(f"{goodWish()} Sir!")
     speakRichard(f"Its {datetime.datetime.now().hour}:{datetime.datetime.now().minute}, and todays date is {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year} ")
+    # here I want to just add teh location part
 
     temperature = apis.weather()    # seem to give location as a argument
     if temperature != None:
@@ -334,7 +335,7 @@ def logic(queary):
 
 
 
-    elif 'play music' in queary or 'play another music' in queary:
+    elif 'play music' in queary or 'play another music' in queary or 'play song' in queary or 'play any song' in queary:
         music = os.listdir(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya")
         os.startfile(os.path.join(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya", random.choice(music)))
         speakRichard("Playing Music...")
@@ -406,7 +407,7 @@ def logic(queary):
 
 
 
-    elif 'location' in queary:
+    elif 'whats my location' in queary or 'where am i' in queary:
         pass
 
 
