@@ -11,6 +11,7 @@ import keyboard
 import time
 import random
 import psutil
+import smtplib
 import subprocess
 from exts import reminder
 from exts import apis
@@ -22,6 +23,7 @@ engine = pyttsx3.init('sapi5')
 introduction = "Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks \
         as best as I can. 24 Hours a day seven days a week, Importing all preferences from home, interface system are now \
         fully operational, Sir!"
+
 
 
 def speakDavid(audio):
@@ -137,6 +139,17 @@ def takeCommand():
         return "None"
 
     return query
+
+
+
+def sendEmail(to, content):
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.ehlo()
+    server.starttls()
+    server.login("brodevil89@gmail.com", "Ayu$#9300oo")
+    server.sendmail("brodevil89@gmail.com", to, content)
+    server.close()
+
 
 
 def logic(queary):
@@ -430,10 +443,15 @@ def logic(queary):
             speakRichard(queary)
 
 
+    elif 'send email to' in queary:
+        queary = queary.replace("send email to") 
+
+
 if __name__ == "__main__":
-    intro()
-    # if 1:
+    # intro()
+    # # if 1:
     while True:
         queary = takeCommand().lower()
-        logic(queary)     # Logic for executin task based on query
-        
+        print(queary)
+    #     logic(queary)     # Logic for executin task based on query
+    # sendEmail("abhinavchaudhary351@gmail.com", "Hey Test 1 this is my Alice program to send mails feature and many things")
