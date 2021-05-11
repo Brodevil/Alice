@@ -2,7 +2,7 @@ import openpyxl
 import pprint
 
 
-def readExel(path):
+def contactInfo(path):
     """Read the Exel file using openpyxl and return the dictionary containing email id and phone number """
 
     # workbook object is created
@@ -19,3 +19,7 @@ def readExel(path):
                 records.append(content.value)
     records = {records[i]:[records[i+1], records[i+2]] for i in range(0, len(records)-1, 3)}
     return records
+
+
+if __name__ == "__main__":
+    pprint.pprint(contactInfo(r"M:\ADMIN\Critical Data\VS-Code\Alice\contactinfo.xlsx"))
