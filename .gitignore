@@ -17,3 +17,14 @@
 
 # Python rought works
 rough.py
+
+
+# Exel data files
+*.xlsx
+
+# pdf files
+*.pdf
+
+
+# personal contact info
+contactinfo.xlsx
