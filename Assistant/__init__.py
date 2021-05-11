@@ -142,10 +142,11 @@ def takeCommand():
 
 
 
-def sendEmail(to, content):
+def sendEmail(to, subject, content):
     server = smtplib.SMTP("smtp.gmail.com", 587)
     server.ehlo()
     server.starttls()
+    content = f"Subject :{subject}\n\n{content}"
     server.login("brodevil89@gmail.com", "Ayu$#9300oo")
     server.sendmail("brodevil89@gmail.com", to, content)
     server.close()
@@ -445,6 +446,7 @@ def logic(queary):
 
     elif 'send email to' in queary:
         queary = queary.replace("send email to") 
+        
 
 
 if __name__ == "__main__":
