@@ -439,12 +439,21 @@ def logic(queary):
 
     elif 'send email' in queary:
         speakRichard("To whom you want to send the email")
-        useremail = takeCommand().lower()
+        try:
+            userEmail = takeCommand.lower()
+            for i in Contacts.emails.keys():
+                if i.split()[0].lower() == userEmail:
+                    userEmail = Contacts.emails[i]
+                    break
+            else:
+                speakRichard(f"Sir! We didn't got {userEmail} in your contact. Can you tell or just write the email address in the terminal!")
+                
+
         speakRichard("What's the subject...")
         subject = takeCommand().lower()
         speakRichard("Whats the content...")
         content = takeCommand().lower()
-        login.sendEmail(useremail, subject, content)
+        login.sendEmail(userEmail, subject, content)
 
 
 
