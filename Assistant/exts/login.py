@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 import smtplib
 import os
 import ssl
+import pywhatkit
 
 
 load_dotenv()
@@ -24,6 +25,13 @@ def sendEmail(to, subject, content):
     finally:
         server.close()
 
+
+def sendWhatsappMessage(number, message):
+    pass
+
+
+def readWhatsappMessage():
+    pass
 
 
 
