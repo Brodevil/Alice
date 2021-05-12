@@ -22,4 +22,7 @@ def contactInfo(path):
 
 
 if __name__ == "__main__":
-    pprint.pprint(contactInfo(r"M:\ADMIN\Critical Data\VS-Code\Alice\contactinfo.xlsx"))
+    class OP:
+        a = (contactInfo(r"M:\ADMIN\Critical Data\VS-Code\Alice\contactinfo.xlsx"))
+        print(type(a))
+        print(a)
