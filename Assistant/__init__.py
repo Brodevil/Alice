@@ -335,11 +335,8 @@ def logic(queary):
         speakRichard(f"Okay Sir! I will be reminding you after {magnitude} {unit}!")
         try:
             pourpose = queary.split("so that ")[1]
-
         except Exception:      # the user can give the reason as a option
-
             pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
-        
         finally :
             reminder.reminder(magnitude, unit, pourpose)
 
@@ -440,8 +437,9 @@ def logic(queary):
             speakRichard(queary)
 
 
-    elif 'send email to' in queary:
-        useremail = queary.replace("send email to") 
+    elif 'send email' in queary:
+        speakRichard("To whom you want to send the email")
+        useremail = takeCommand().lower()
         speakRichard("What's the subject...")
         subject = takeCommand().lower()
         speakRichard("Whats the content...")
