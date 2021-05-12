@@ -108,7 +108,7 @@ def edge(url):
 def intro():
     speakRichard("Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day, seven days a week, Importing all preferences from home Interface, System are now fully operational!")
     speakRichard(f"{goodWish()} Sir!")
-    speakRichard(f"Its {datetime.datetime.now().hour}:{datetime.datetime.now().minute}, and todays date is {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year} ")
+    speakRichard(f"Its {datetime.datetime.now().strftime('%H:%M:%S')}, and todays date is {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year} ")
     # here I want to just add teh location part
 
     temperature = apis.weather()    # seem to give location as a argument
@@ -264,7 +264,7 @@ def logic(queary):
         keyboard.press_and_release("win+d")
 
 
-    elif 'lock pc' in queary:   
+    elif 'lock pc' in queary or "lock the pc" in queary:   
         os.system("rundll32.exe user32.dll, LockWorkStation")
         exit()
 
@@ -430,9 +430,9 @@ def logic(queary):
         pass
 
 
-    elif 'repeat my self' in queary:
+    elif 'repeat myself' in queary:
         speakRichard("Okay Sir! Start to tell I will be follwing you")
-        while queary == "quite" or queary == "stop":
+        while queary != "quite" or queary != "stop":
             queary = takeCommand().lower()
             speakRichard(queary)
 
@@ -440,14 +440,19 @@ def logic(queary):
     elif 'send email' in queary:
         speakRichard("To whom you want to send the email")
         try:
-            userEmail = takeCommand.lower()
+            userEmail = takeCommand.lower()     # here taking the name as a input and featuring it in our contacts
             for i in Contacts.emails.keys():
                 if i.split()[0].lower() == userEmail:
                     userEmail = Contacts.emails[i]
                     break
             else:
-                speakRichard(f"Sir! We didn't got {userEmail} in your contact. Can you tell or just write the email address in the terminal!")
+                speakRichard(f"Sir! We didn't got {userEmail} in your contact. Can you tell the email address!")
+                userEmail = takeCommand.lower()
+                userEmail = userEmail.replace
                 
+        except Exception:
+            speakRichard(f"{random.choice(ERROR_REPLIES)} some thing went wrong")
+
 
         speakRichard("What's the subject...")
         subject = takeCommand().lower()
@@ -460,7 +465,8 @@ def logic(queary):
 if __name__ == "__main__":
     # intro()
     # # if 1:
-    # while True:
-        # queary = takeCommand().lower()
-        # logic(queary)     # Logic for executin task based on query
+    while True:
+        queary = takeCommand().lower()
+        print(queary)
+        logic(queary)     # Logic for executin task based on query
     pass
