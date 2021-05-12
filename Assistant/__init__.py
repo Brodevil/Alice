@@ -16,10 +16,11 @@ import subprocess
 from exts import reminder
 from exts import apis
 from constants import Contacts
+from dotenv import load_dotenv
 
 
 engine = pyttsx3.init('sapi5')
-
+load_dotenv()
 
 introduction = "Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks \
         as best as I can. 24 Hours a day seven days a week, Importing all preferences from home, interface system are now \
@@ -77,7 +78,7 @@ def goodWish():
 
 
 def typing(str):
-    pass
+    keyboard.write(str) 
 
 
 
@@ -140,17 +141,6 @@ def takeCommand():
         return "None"
 
     return query
-
-
-
-def sendEmail(to, subject, content):
-    server = smtplib.SMTP("smtp.gmail.com", 587)
-    server.ehlo()
-    server.starttls()
-    content = f"Subject :{subject}\n\n{content}"
-    server.login("brodevil89@gmail.com", "Ayu$#9300oo")
-    server.sendmail("brodevil89@gmail.com", to, content)
-    server.close()
 
 
 
