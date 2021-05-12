@@ -232,7 +232,8 @@ def logic(queary):
     
 
     elif 'is i am audio able' in queary:
-        speakRichard()
+        speakRichard(random.choice(POSITIVE_REPLIES))
+    
     
 
     elif 'hello alice' in queary:
@@ -440,8 +441,12 @@ def logic(queary):
 
 
     elif 'send email to' in queary:
-        queary = queary.replace("send email to") 
-        
+        useremail = queary.replace("send email to") 
+        speakRichard("What's the subject...")
+        subject = takeCommand().lower()
+        speakRichard("Whats the content...")
+        content = takeCommand().lower()
+        login.sendEmail(useremail, subject, content)
 
 
 
