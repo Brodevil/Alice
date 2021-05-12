@@ -389,6 +389,11 @@ def logic(queary):
         queary = queary.replace("say ", "")
         speakRichard(queary)
 
+
+    elif 'spell' in queary:
+        queary = input("Enter what I should spell")
+        speakRichard(queary)
+
     
     elif "type that" in queary:
         queary = queary.replace("type that", "")
