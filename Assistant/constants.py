@@ -40,7 +40,8 @@ class Contacts:
             "archit":"archit.ghadshi@gmail.com",
             "papa":"cbcsudhir@gmail.com",
             "ekta":"ektachoudhary9892@gmail.com",
-            "gautam":"chaudharygautam9963@gmail.com",}
+            "gautam":"chaudharygautam9963@gmail.com",
+            "Marcus Kartik":"work.marcus315@gmail.com",}
 
 
 
@@ -87,9 +88,8 @@ class Contacts:
             "archit":9309997251,
             "banty":9069575574,
             "kunal":6377309679,
-            "laksh" : 9671799394,}
-
-
+            "laksh" : 9671799394,
+            "Marcus Kartik":7088283847,}
 
 
 
