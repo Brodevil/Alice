@@ -432,32 +432,40 @@ def logic(queary):
 
     elif 'repeat myself' in queary:
         speakRichard("Okay Sir! Start to tell I will be follwing you")
-        while queary != "quite" or queary != "stop":
-            queary = takeCommand().lower()
-            speakRichard(queary)
+        while queary.lower() != "quite" or queary.lower() != "stop":
+            queary = takeCommand()
+            if queary != "none":
+                speakRichard(queary)
 
 
     elif 'send email' in queary:
         speakRichard("To whom you want to send the email")
         try:
-            userEmail = takeCommand.lower()     # here taking the name as a input and featuring it in our contacts
+            userEmail = takeCommand().lower()     # here taking the name as a input and featuring it in our contacts
             for i in Contacts.emails.keys():
-                if i.split()[0].lower() == userEmail:
+                if i.split()[0].lower() == userEmail.split()[0]:
                     userEmail = Contacts.emails[i]
+                    print(userEmail)
                     break
             else:
                 speakRichard(f"Sir! We didn't got {userEmail} in your contact. Can you tell the email address!")
-                userEmail = takeCommand.lower()
-                userEmail = userEmail.replace
+                userEmail = takeCommand()     # taking email address by speak function
+                if userEmail != "None":
+                    userEmail = userEmail.replace(" ", "")
+                else:
+                    speakRichard("Sorry sir! I didn't get that. Please type the email Adress in the terminal!")
+                    userEmail = input("Enter the Email Adress :\t")
+
                 
-        except Exception:
+        except Exception as e:
+            # print(e)
             speakRichard(f"{random.choice(ERROR_REPLIES)} some thing went wrong")
 
 
         speakRichard("What's the subject...")
-        subject = takeCommand().lower()
+        subject = takeCommand()
         speakRichard("Whats the content...")
-        content = takeCommand().lower()
+        content = takeCommand()
         login.sendEmail(userEmail, subject, content)
 
 
