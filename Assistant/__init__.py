@@ -168,11 +168,9 @@ def logic(queary):
 
     elif 'search' in queary:
         queary = queary.replace("search", "")
-        edge("https://www.google.com")
+        queary = queary.replace(" ", "%20")
+        edge(f"https://www.google.com/search?q={queary}")
         speakRichard(f"Searching {queary} in Google")
-        time.sleep(4)
-        keyboard.write(queary)
-        keyboard.press_and_release('enter')
 
 
     elif 'open youtube studio' in queary:
