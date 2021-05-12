@@ -445,28 +445,30 @@ def logic(queary):
             for i in Contacts.emails.keys():
                 if i.split()[0].lower() == userEmail.split()[0]:
                     userEmail = Contacts.emails[i]
-                    print(userEmail)
                     break
             else:
                 speakRichard(f"Sir! We didn't got {userEmail} in your contact. Can you tell the email address!")
                 userEmail = takeCommand()     # taking email address by speak function
                 if userEmail != "None":
-                    userEmail = userEmail.replace(" ", "")
+                    userEmail = userEmail.replace(" ", "").lower()
                 else:
                     speakRichard("Sorry sir! I didn't get that. Please type the email Adress in the terminal!")
-                    userEmail = input("Enter the Email Adress :\t")
-
-                
+                    userEmail = input("Enter the Email Adress :\t")  
         except Exception as e:
-            # print(e)
-            speakRichard(f"{random.choice(ERROR_REPLIES)} some thing went wrong")
+            print(e)
+            speakRichard(f"{random.choice(ERROR_REPLIES)}, Some thing went Wrong")
 
 
         speakRichard("What's the subject...")
         subject = takeCommand()
         speakRichard("Whats the content...")
         content = takeCommand()
-        login.sendEmail(userEmail, subject, content)
+        result = login.sendEmail(userEmail, subject, content)
+        if result == False:
+            speakRichard(f"{random.choice(ERROR_REPLIES)}, Some thing went Wrong")
+        else:
+            speakRichard(f"Email send succefully to {userEmail}!")
+
 
 
 
@@ -475,6 +477,5 @@ if __name__ == "__main__":
     # # if 1:
     while True:
         queary = takeCommand().lower()
-        print(queary)
         logic(queary)     # Logic for executin task based on query
-    pass
+
