@@ -15,12 +15,16 @@ import smtplib
 import subprocess
 from exts import reminder
 from exts import apis
-from constants import Contacts
+from constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES
 from dotenv import load_dotenv
+from exts import login
+
+
 
 
 engine = pyttsx3.init('sapi5')
 load_dotenv()
+
 
 introduction = "Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks \
         as best as I can. 24 Hours a day seven days a week, Importing all preferences from home, interface system are now \
@@ -228,7 +232,7 @@ def logic(queary):
     
 
     elif 'is i am audio able' in queary:
-        speakRichard("Yes sir you are Audio able!")
+        speakRichard()
     
 
     elif 'hello alice' in queary:
