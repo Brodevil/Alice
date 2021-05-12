@@ -1,31 +1,107 @@
 import os
-
 from exts.readExel import contactInfo
+from pprint import pprint
 
 
 
-
-class Contacts:
-    contactDict = contactInfo("contactinfo.xlsx")
-       # path of my exel file containing the contact data
-    emails = {name : email for name in contactDict.keys() for email in contactDict.value()[0]}   
-    contactNumber = {name:number for name in contactDict.keys() for number in contactDict.value()[1]}
-
-    emails.append({
+emails = {'Abhinav Kumar Choudhary': 'abhinavchaudhary351@gmail.com',
+        'Aditya sanjay kamble': 'adityasanjaykamble@gmail.com',
+        'Aniket Bhagat. ': 'aniketbhagat0060@gmail.com',
+        'Ankit Manoj Manjhi ': 'ankitmanojmanjhi@gmail.com',
+        'Anshika Krishnadatt Upadhyay ': 'anu.upadhyay677@gmail.com',
+        'Chandana Chandrakant Date ': 'pushadate@gamil.com',
+        'Chaturthi Ramdas Padekar': 'chaturthipadekar@gmail.com',
+        'Chetana isame': 'isamechetana@gmail.com',
+        'Gaurav Tribhuvan Yadav': 'gaurav.t.y0884@gmail.com',
+        'Gauri Sunil Chothe': 'gaurichothe23@gmail.com',
+        'Gayatri Suresh Bagul': 'gayatribagul095@gmail.com',
+        'Harsh khapare ': 'Khapareharsh@gmail.com',
+        'Janhavi Mukane': 'mukanegirish@gmail.com',
+        'Kaustubh Sonkamble ': 'santoshsonkamble1970@gmail.com',
+        'Kushal Sadashiv Madhavi': 'Kushalmadhavi473@gmail.com',
+        'Manaswi Madhukar Pingale ': 'manupingale2604@gmail.com',
+        'Mayuri vishwanath ghute': 'ghutemayuri66@gmail.com',
+        'Narendra tukaram jabar': 'narendrajabar@gmail.com',
+        'Omraje jadhav': 'appameenakshi940@gmail.com',
+        'Prachee Pradeep Dudhale': 'prachidudhale17@gmail.com',
+        'Pranjal Dattatray Gunjal': 'pranjalgunjal99@gmail.com',
+        'Pratik sandip valkar ': 'pratikvalkar08@gmail.com',
+        'Rohit Kashinath khodka': 'sunitakhodka22@gmail.com',
+        'SHREYAS BORATE': 'borateshreyas378@gmail.com',
+        'Samiksha Sunil Dhule': 'samikshadhule10@gmail.com',
+        'Sanika Rohidas Korade ': 'snkkorade@gmail.com',
+        'Sarthak Ghule': 'sarthakghule24@gmail.com',
+        'Shivam Gopale': 'shivamgopale31@gmail.com',
+        'Shubham  mahesh Patil': 'shubhammpatil000@gmail.com',
+        'Smit Mahendra gondane ': 'smitgondane1919@gmail.com',
+        'Sumit kanojiya': 'srbkkanojiya@gmail.com',
+        'Swati santosh badade': 'sandeshabadade31108@gmail.com',
+        'Tejal Sanjay Gaykar': 'sanjaygaikar99@gmail.com',
+        'Tejaswini kashinath vavre': 'vavarekashinath@gmail.com',
+        'Trupti sameer bhoye': 'suvarnabhoye58@gmail.com',
+        'Ujjwal Kantilal Patil': 'ujjwalpatil708@gmail.com',
+        'Vaishnavi Kharade': 'kharadevaishnavi608@gmail.com',
         "archit":"archit.ghadshi@gmail.com",
         "papa":"cbcsudhir@gmail.com",
         "ekta":"ektachoudhary9892@gmail.com",
-        "gautam":"chaudharygautam9963@gmail.com",
-    })
-    contactNumber.append({
+        "gautam":"chaudharygautam9963@gmail.com",}
+
+
+
+contactNumber ={'Abhinav Kumar Choudhary': 7506095094,
+        'Aditya sanjay kamble': 7045230049,
+        'Aniket Bhagat. ': 9763992780,
+        'Ankit Manoj Manjhi ': 9637396230,
+        'Anshika Krishnadatt Upadhyay ': 8830134520,
+        'Chandana Chandrakant Date ': 9158288644,
+        'Chaturthi Ramdas Padekar': 9325394161,
+        'Chetana isame': 9273721222,
+        'Gaurav Tribhuvan Yadav': 8329559875,
+        'Gauri Sunil Chothe': 7391812871,
+        'Gayatri Suresh Bagul': 7387892219,
+        'Harsh khapare ': 9226119874,
+        'Janhavi Mukane': 9420744123,
+        'Kaustubh Sonkamble ': 9527696181,
+        'Kushal Sadashiv Madhavi': 8767164188,
+        'Manaswi Madhukar Pingale ': 9209263397,
+        'Mayuri vishwanath ghute': 9356055875,
+        'Narendra tukaram jabar': 8788864820,
+        'Omraje jadhav': 9403815699,
+        'Prachee Pradeep Dudhale': 8381036497,
+        'Pranjal Dattatray Gunjal': 9594118033,
+        'Pratik sandip valkar ': 9049860840,
+        'Rohit Kashinath khodka': 9359135803,
+        'SHREYAS BORATE': 8355965254,
+        'Samiksha Sunil Dhule': 7066536749,
+        'Sanika Rohidas Korade ': 9226730906,
+        'Sarthak Ghule': 9022901053,
+        'Shivam Gopale': 8975057675,
+        'Shubham  mahesh Patil': 9833613573,
+        'Smit Mahendra gondane ': 9011150967,
+        'Sumit kanojiya': 7020599034,
+        'Swati santosh badade': 7666197459,
+        'Tejal Sanjay Gaykar': 8082580049,
+        'Tejaswini kashinath vavre': 9272569360,
+        'Trupti sameer bhoye': 8355879138,
+        'Ujjwal Kantilal Patil': 8600345095,
+        'Vaishnavi Kharade': 9373783392,
         "papa":9967186153,
         "ekta":9892651308,
         "gautam":8850559026,
         "archit":9309997251,
         "banty":9069575574,
         "kunal":6377309679,
-        "laksh" : 9671799394,
-    })
+        "laksh" : 9671799394,}
+
+
+emails.update({
+    "archit":"archit.ghadshi@gmail.com",
+    "papa":"cbcsudhir@gmail.com",
+    "ekta":"ektachoudhary9892@gmail.com",
+    "gautam":"chaudharygautam9963@gmail.com",
+})
+
+
 
 
 ERROR_REPLIES = [
@@ -83,5 +159,4 @@ POSITIVE_REPLIES = [
 
 
 if __name__ == "__main__":
-    trial = Contacts()
-    print(trial.contactDict)
+    pass
