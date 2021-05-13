@@ -45,6 +45,7 @@ class Alice:
 
     def speak(self, audio):
         """ Speak function as per the selected voice """
+        
         engine = pyttsx3.init('sapi5')
 
         if self.voice.lower() == "david":
