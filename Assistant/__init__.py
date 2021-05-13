@@ -114,13 +114,7 @@ def intro():
     temperature = apis.weather()    # seem to give location as a argument
     if temperature != None:
         speakRichard(f"Its feels like approximately {temperature} degree celsius outside the door")
-    
 
-def initialCommit(path):
-    os.chdir(path)
-    os.system("git add .")
-    os.system('git commit -m "inital commit by Alice"')
-    os.system("git push -u origin main")
 
 
 def takeCommand():
@@ -371,7 +365,7 @@ def logic(queary):
 
     elif 'push the code' in queary:
         speakRichard("Commit and then pushing the code in github repository....")
-        initialCommit(os.getcwd())
+        login.initialCommit(os.getcwd())
     
 
     elif "what's the temperature" in queary:
