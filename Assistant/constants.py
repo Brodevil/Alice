@@ -1,4 +1,23 @@
+from os import environ
+from dotenv import load_dotenv
+import pyttsx3
 
+
+load_dotenv()
+engine = pyttsx3.init()
+
+
+class Client:
+    name = environ.get("AssistantName", "Alice")
+    github_assistant_repo = "https://github.com/Brodevil/Alice"
+    intro = "Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day seven days a week, Importing all preferences from home, interface system are now fully operational, Sir!"
+    author = "Abhinav(Brodevil)"
+    contact = "brodevil89@gmail.com"
+    voices = [id.id for id in engine.getProperty("voices")]
+    voiceRate = 175
+
+    
+    
 
 class Contacts:
     emails = {'Abhinav Kumar Choudhary': 'abhinavchaudhary351@gmail.com',
@@ -149,4 +168,7 @@ POSITIVE_REPLIES = [
 
 
 if __name__ == "__main__":
-    pass
+    # print(Client.voice)
+    voice = engine.getProperty("voices")
+    print(voice[0].id)
+
