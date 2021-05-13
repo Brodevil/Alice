@@ -2,20 +2,21 @@ import requests
 import json
 import datetime
 import pyttsx3
+import os 
 import pprint
-
+from dotenv import load_dotenv
+from exts.apis import location
+load_dotenv()
 
 
 class Alice:
-    def __init__(self, username, location):
-        super().__init__()
+    def __init__(self, username):
+        super().__init__(username)
         self.name = username
-        self.city = location.lower()
-        self.intro = "Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks \
-                    as best as I can. 24 Hours a day seven days a week, Importing all preferences from home, interface system are now \
-                    fully operational, Sir!"
-        self.workDo = "I guess there are several things I can do as i m acting as a package and for more info about my commands and works you can just checkout the README file of this project"
-        
+        self.city = os.getenv("location", location())
+        self.intro = "Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day seven days a week, Importing all preferences from home, interface system are now fully operational, Sir!"
+        self.github_repo = "https://github.com/Brodevil/Alice"
+
         self.voice = "richard"
         self.voiceSpeed = 175
 
