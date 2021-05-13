@@ -33,6 +33,9 @@ class Alice:
 
     
     def severalVoices(self, voicesId):
+        """ This is the function to show the user how many voices are available in his/her system 
+        So that the user will able to choose his own liked voice"""
+
         engine = pyttsx3.init("sapi5")
         for voice in voicesId:
             engine.setProperty("voice", voice)
@@ -41,6 +44,7 @@ class Alice:
 
 
     def speak(self, audio):
+        """ Speak function as per the selected voice """
         engine = pyttsx3.init('sapi5')
 
         if self.voice.lower() == "david":
