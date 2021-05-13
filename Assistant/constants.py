@@ -170,5 +170,6 @@ POSITIVE_REPLIES = [
 if __name__ == "__main__":
     # print(Client.voice)
     voice = engine.getProperty("voices")
-    print(voice[0].id)
+    for i in voice:
+        print(i.id)
 
