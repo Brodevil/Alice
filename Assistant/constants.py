@@ -1,0 +1,174 @@
+from os import environ
+from dotenv import load_dotenv
+import pyttsx3
+
+
+load_dotenv()
+engine = pyttsx3.init()
+
+
+class Client:
+    name = environ.get("AssistantName", "Alice")
+    github_assistant_repo = "https://github.com/Brodevil/Alice"
+    intro = "Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day seven days a week, Importing all preferences from home, interface system are now fully operational, Sir!"
+    author = "Abhinav(Brodevil)"
+    contact = "brodevil89@gmail.com"
+    voices = [id.id for id in engine.getProperty("voices")]
+    voiceRate = int(environ.get("voiceRate", 175))
+
+    
+    
+
+class Contacts:
+    emails = {'Abhinav Kumar Choudhary': 'abhinavchaudhary351@gmail.com',
+            'Aditya sanjay kamble': 'adityasanjaykamble@gmail.com',
+            'Aniket Bhagat. ': 'aniketbhagat0060@gmail.com',
+            'Ankit Manoj Manjhi ': 'ankitmanojmanjhi@gmail.com',
+            'Anshika Krishnadatt Upadhyay ': 'anu.upadhyay677@gmail.com',
+            'Chandana Chandrakant Date ': 'pushadate@gamil.com',
+            'Chaturthi Ramdas Padekar': 'chaturthipadekar@gmail.com',
+            'Chetana isame': 'isamechetana@gmail.com',
+            'Gaurav Tribhuvan Yadav': 'gaurav.t.y0884@gmail.com',
+            'Gauri Sunil Chothe': 'gaurichothe23@gmail.com',
+            'Gayatri Suresh Bagul': 'gayatribagul095@gmail.com',
+            'Harsh khapare ': 'Khapareharsh@gmail.com',
+            'Janhavi Mukane': 'mukanegirish@gmail.com',
+            'Kaustubh Sonkamble ': 'santoshsonkamble1970@gmail.com',
+            'Kushal Sadashiv Madhavi': 'Kushalmadhavi473@gmail.com',
+            'Manaswi Madhukar Pingale ': 'manupingale2604@gmail.com',
+            'Mayuri vishwanath ghute': 'ghutemayuri66@gmail.com',
+            'Narendra tukaram jabar': 'narendrajabar@gmail.com',
+            'Omraje jadhav': 'appameenakshi940@gmail.com',
+            'Prachee Pradeep Dudhale': 'prachidudhale17@gmail.com',
+            'Pranjal Dattatray Gunjal': 'pranjalgunjal99@gmail.com',
+            'Pratik sandip valkar ': 'pratikvalkar08@gmail.com',
+            'Rohit Kashinath khodka': 'sunitakhodka22@gmail.com',
+            'SHREYAS BORATE': 'borateshreyas378@gmail.com',
+            'Samiksha Sunil Dhule': 'samikshadhule10@gmail.com',
+            'Sanika Rohidas Korade ': 'snkkorade@gmail.com',
+            'Sarthak Ghule': 'sarthakghule24@gmail.com',
+            'Shivam Gopale': 'shivamgopale31@gmail.com',
+            'Shubham  mahesh Patil': 'shubhammpatil000@gmail.com',
+            'Smit Mahendra gondane ': 'smitgondane1919@gmail.com',
+            'Sumit kanojiya': 'srbkkanojiya@gmail.com',
+            'Swati santosh badade': 'sandeshabadade31108@gmail.com',
+            'Tejal Sanjay Gaykar': 'sanjaygaikar99@gmail.com',
+            'Tejaswini kashinath vavre': 'vavarekashinath@gmail.com',
+            'Trupti sameer bhoye': 'suvarnabhoye58@gmail.com',
+            'Ujjwal Kantilal Patil': 'ujjwalpatil708@gmail.com',
+            'Vaishnavi Kharade': 'kharadevaishnavi608@gmail.com',
+            "archit":"archit.ghadshi@gmail.com",
+            "papa":"cbcsudhir@gmail.com",
+            "ekta":"ektachoudhary9892@gmail.com",
+            "gautam":"chaudharygautam9963@gmail.com",
+            "Marcus Kartik":"work.marcus315@gmail.com",}
+
+
+
+    contactNumber ={'Abhinav Kumar Choudhary': 7506095094,
+            'Aditya sanjay kamble': 7045230049,
+            'Aniket Bhagat. ': 9763992780,
+            'Ankit Manoj Manjhi ': 9637396230,
+            'Anshika Krishnadatt Upadhyay ': 8830134520,
+            'Chandana Chandrakant Date ': 9158288644,
+            'Chaturthi Ramdas Padekar': 9325394161,
+            'Chetana isame': 9273721222,
+            'Gaurav Tribhuvan Yadav': 8329559875,
+            'Gauri Sunil Chothe': 7391812871,
+            'Gayatri Suresh Bagul': 7387892219,
+            'Harsh khapare ': 9226119874,
+            'Janhavi Mukane': 9420744123,
+            'Kaustubh Sonkamble ': 9527696181,
+            'Kushal Sadashiv Madhavi': 8767164188,
+            'Manaswi Madhukar Pingale ': 9209263397,
+            'Mayuri vishwanath ghute': 9356055875,
+            'Narendra tukaram jabar': 8788864820,
+            'Omraje jadhav': 9403815699,
+            'Prachee Pradeep Dudhale': 8381036497,
+            'Pranjal Dattatray Gunjal': 9594118033,
+            'Pratik sandip valkar ': 9049860840,
+            'Rohit Kashinath khodka': 9359135803,
+            'SHREYAS BORATE': 8355965254,
+            'Samiksha Sunil Dhule': 7066536749,
+            'Sanika Rohidas Korade ': 9226730906,
+            'Sarthak Ghule': 9022901053,
+            'Shivam Gopale': 8975057675,
+            'Shubham  mahesh Patil': 9833613573,
+            'Smit Mahendra gondane ': 9011150967,
+            'Sumit kanojiya': 7020599034,
+            'Swati santosh badade': 7666197459,
+            'Tejal Sanjay Gaykar': 8082580049,
+            'Tejaswini kashinath vavre': 9272569360,
+            'Trupti sameer bhoye': 8355879138,
+            'Ujjwal Kantilal Patil': 8600345095,
+            'Vaishnavi Kharade': 9373783392,
+            "papa":9967186153,
+            "ekta":9892651308,
+            "gautam":8850559026,
+            "archit":9309997251,
+            "banty":9069575574,
+            "kunal":6377309679,
+            "laksh" : 9671799394,
+            "Marcus Kartik":7088283847,}
+
+
+
+ERROR_REPLIES = [
+    "Please don't do that.",
+    "You have to stop.",
+    "Do you mind?",
+    "In the future, don't do that.",
+    "That was a mistake.",
+    "You blew it.",
+    "You're bad at computers.",
+    "Are you trying to kill me?",
+    "Noooooo!!",
+    "I can't believe you've done this",
+]
+
+NEGATIVE_REPLIES = [
+    "Noooooo!!",
+    "Nope.",
+    "I'm sorry Dave, I'm afraid I can't do that.",
+    "I don't think so.",
+    "Not gonna happen.",
+    "Out of the question.",
+    "Huh? No.",
+    "Nah.",
+    "Naw.",
+    "Not likely.",
+    "No way, José.",
+    "Not in a million years.",
+    "Fat chance.",
+    "Certainly not.",
+    "NEGATORY.",
+    "Nuh-uh.",
+    "Not in my house!",
+]
+
+POSITIVE_REPLIES = [
+    "Yep.",
+    "Absolutely!",
+    "Can do!",
+    "Affirmative!",
+    "Yeah okay.",
+    "Sure.",
+    "Sure thing!",
+    "You're the boss!",
+    "Okay.",
+    "No problem.",
+    "I got you.",
+    "Alright.",
+    "You got it!",
+    "ROGER THAT",
+    "Of course!",
+    "Aye aye, cap'n!",
+    "I'll allow it.",
+]
+
+
+if __name__ == "__main__":
+    # print(Client.voice)
+    voice = engine.getProperty("voices")
+    print(voice[0].id)
+
