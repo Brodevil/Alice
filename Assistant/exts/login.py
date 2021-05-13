@@ -14,7 +14,7 @@ def sendEmail(to, subject, content):
         server = smtplib.SMTP("smtp.gmail.com", 587)
         server.ehlo()
         server.starttls()
-        content = f"Subject :{subject}\n\n{content}\n\n\n\nThank you,\nAlice, A virtual Artificial Inteligence Program of Abhinav Sir, \nFor more queary you can Email at brodevil89@gmail.com/abhinavchaudhary351@gmail.com"
+        content = f"Subject :{subject}\n\n{content}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\Thank you,\nAlice, A virtual Artificial Inteligence Program of Abhinav Sir, \nFor more queary you can Email at brodevil89@gmail.com/abhinavchaudhary351@gmail.com"
         server.login(os.getenv("emailID"),os.getenv("emailPassword"))
         server.sendmail(os.getenv("emailID"), to, content)
     except Exception as e:
