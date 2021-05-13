@@ -2,21 +2,32 @@ import requests
 import json
 import datetime
 import pyttsx3
-import os 
+from os import environ
 import pprint
 from dotenv import load_dotenv
 from exts.apis import location
+from constants import Client
+
+
 load_dotenv()
 
 
 class Alice:
-    def __init__(self, username):
-        super().__init__(username)
-        self.name = username
-        self.city = os.getenv("location", location())
-        self.intro = "Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day seven days a week, Importing all preferences from home, interface system are now fully operational, Sir!"
-        self.github_repo = "https://github.com/Brodevil/Alice"
+    """ 
+    Alice Assitant:
 
+    This class contain the Function of the Alice program and also with the Assitant Data
+    """
+
+    def __init__(self):
+        super().__init__()
+        self.name = environ.get("UserName", "Abhinav")
+        if gender == "male" or gender == "boy":
+            self.gender = "Sir"
+        elif gender == "female" or gender == "girl":
+            self.gender == "Mam"
+        self.city = environ.get("location", location())
+        
         self.voice = "richard"
         self.voiceSpeed = 175
 
@@ -42,13 +53,13 @@ class Alice:
     def intro(self):
         hour = int(datetime.datetime.now().hour)
         if hour == 0 or hour < 12:
-            speak(f"Good Morning {self.name} Sir!")
+            speak(f"Good Morning {self.name} {self.gender}")
 
         elif hour == 12 or hour < 18:
-            speak(f"Good Afternon {self.name} Sir!")
+            speak(f"Good Afternon {self.name} {self.gender}")
 
         else:
-            speak(f"Good Evening {self.name} Sir!")
+            speak(f"Good Evening {self.name} {self.gender}")
 
         speak("Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks \
             as best as I can. 24 Hours a day, seven days a week, Importing all preferences from home Interface, System are now \
