@@ -30,7 +30,7 @@ class Alice:
         
         self.voice = Client.voices
         self.voiceSpeed = Client.voiceRate
-
+        
     
     def severalVoices(self, voicesId):
         """ This is the function to show the user how many voices are available in his/her system 
