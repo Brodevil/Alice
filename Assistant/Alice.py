@@ -28,10 +28,17 @@ class Alice:
             self.gender == "Mam"
         self.city = environ.get("location", location())
         
-        self.voice = "richard"
-        self.voiceSpeed = 175
+        self.voice = Client.voices
+        self.voiceSpeed = Client.voiceRate
 
-        
+    
+    def severalVoices(self, voicesId):
+        engine = pyttsx3.init("sapi5")
+        for voice in voicesId:
+            engine.setProperty("voice", voice)
+            engine.say(f"Hey there! My voice name is {voice.split('Tokens\\')[1].replace('_', ' ')}")
+            engine.runAndWait()
+
 
     def speak(self, audio):
         engine = pyttsx3.init('sapi5')
