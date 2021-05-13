@@ -35,5 +35,12 @@ def readWhatsappMessage():
 
 
 
+def initialCommit(path):
+    os.chdir(path)
+    os.system("git add .")
+    os.system('git commit -m "inital commit by Alice"')
+    os.system("git push -u origin main")
+
+
 if __name__ == "__main__":
     sendEmail("shivamgopale31@gmail.com", "Test 0", "Test 0 By Alice Project to send Email")
