@@ -16,7 +16,7 @@ class Alice:
                     fully operational, Sir!"
         self.workDo = "I guess there are several things I can do as i m acting as a package and for more info about my commands and works you can just checkout the README file of this project"
         
-        self.voice = "David"
+        self.voice = "richard"
         self.voiceSpeed = 175
 
         
