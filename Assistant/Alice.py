@@ -82,6 +82,8 @@ class Alice:
 
     def intro(self):
         speak(Client.intro)
+        speak(f"{goodWish()} {self.name} {self.gender}!")
+        speak()
         
 
 
