@@ -5,7 +5,7 @@ import pyttsx3
 from os import environ
 import pprint
 from dotenv import load_dotenv
-from exts.apis import location
+from exts.networks import location
 from constants import Client
 
 
@@ -73,9 +73,8 @@ class Alice:
         else:
             speak(f"Good Evening {self.name} {self.gender}")
 
-        speak("Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks \
-            as best as I can. 24 Hours a day, seven days a week, Importing all preferences from home Interface, System are now \
-            fully operational!")
+        speak(Client.intro)
+
 
 
 
