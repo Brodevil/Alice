@@ -50,7 +50,7 @@ class Client:
     memory_status = psutil.virtual_memory().percent     # Used memory in percentage
     cpu_status = psutil.cpu_percent()   # cpu uses in percentage 
     battery_status = battery.percent
-    battery_remain_time = convertTime(battery.secleft)
+    battery_remain_time = convertTime(battery.secsleft)
     battery_pugged = battery.power_plugged
 
 
@@ -213,6 +213,6 @@ POSITIVE_REPLIES = [
 
 
 if __name__ == "__main__":
-    # print(Client.voice)
     pass
+
 
