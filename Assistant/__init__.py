@@ -14,7 +14,7 @@ import psutil
 import smtplib
 import subprocess
 from exts import reminder
-from exts import apis
+from exts import networks
 from constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES
 from dotenv import load_dotenv
 from exts import login
