@@ -32,11 +32,12 @@ class Alice:
         
         self.city = environ.get("location", localInfo())
         
-        self.voice = pass
+        self.voice = Client.voice
         self.voiceSpeed = Client.voiceRate
         
-    @staticmethod
-    def severalVoices(voicesId):
+
+
+    def severalVoices(self, voicesId):
         """ This is the function to show the user how many voices are available in his/her system 
         So that the user will able to choose his own liked voice """
 
@@ -46,13 +47,13 @@ class Alice:
             engine.setProperty("rate", 170)
             if index == 0:
                 engine.say(f"Hey there! My voice name is {voice.split('Tokens')[1].replace('_', ' ')}")
-                engine.say(f"Hey there! I am {index+1}st voice of your system ")
+                engine.say(f"Hey there! I am {index+1}st voice of your system {self.gender}!")
             elif index == 1:
-                engine.say(f"Hey there! I am {index+1}nd voice of your system ")
+                engine.say(f"Hey there! I am {index+1}nd voice of your system {self.gender}!")
             elif index == 2:
-                engine.say(f"Hey there! I m {index+1}rd voice of your system ")
+                engine.say(f"Hey there! I m {index+1}rd voice of your system {self.gender}!")
             else:
-                engine.say(f"Hey there! I am {index+1}th voice of your system ")
+                engine.say(f"Hey there! I am {index+1}th voice of your system {self.gender}!")
 
             engine.runAndWait()
 
