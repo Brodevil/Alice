@@ -2,11 +2,16 @@ from os import environ
 from dotenv import load_dotenv
 import pyttsx3
 from exts.networks import localInfo
+import shutil
+import psutil
+
 
 
 load_dotenv()
 engine = pyttsx3.init()
 localInformation = localInfo()
+totalStorage, usedStorage, freeStorage = map(lambda x : x//2**30, shutil.disk_usage("/"))
+
 
 class Client:
     name = environ.get("AssistantName", "Alice")
@@ -16,11 +21,15 @@ class Client:
     contact = "brodevil89@gmail.com"
     voices = [id.id for id in engine.getProperty("voices")]
     voiceRate = int(environ.get("voiceRate", 175))
+
+    storage = {"Total": totalStorage, "Used": usedStorage, "Free": freeStorage}
+    memory = psutil.virtual_memory().total
+    print(memory)
     if localInformation != None:
         city = localInformation[0]
         location = localInformation[1]['country'], localInformation[1]["regionName"], localInformation[1]["city"]
         network = localInformation[1]["isp"]
-        
+        networkSpeed = 0    # wanna bakc on this
 
     
     
@@ -175,8 +184,5 @@ POSITIVE_REPLIES = [
 
 if __name__ == "__main__":
     # print(Client.voice)
-    voice = engine.getProperty("voices")
-    for i in voice:
-        print(i.id)
-    print(localInformation)
+    pass
 
