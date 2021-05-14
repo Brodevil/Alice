@@ -1,20 +1,26 @@
 from os import environ
 from dotenv import load_dotenv
 import pyttsx3
+from exts.networks import localInfo
 
 
 load_dotenv()
 engine = pyttsx3.init()
-
+localInformation = localInfo()
 
 class Client:
     name = environ.get("AssistantName", "Alice")
     github_assistant_repo = "https://github.com/Brodevil/Alice"
-    intro = "Now me to introduce myself, I m Alice. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day seven days a week, Importing all preferences from home, interface system are now fully operational, Sir!"
+    intro = f"Now me to introduce myself, I m {name}. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day seven days a week, Importing all preferences from home, interface system are now fully operational, Sir!"
     author = "Abhinav(Brodevil)"
     contact = "brodevil89@gmail.com"
     voices = [id.id for id in engine.getProperty("voices")]
     voiceRate = int(environ.get("voiceRate", 175))
+    if localInformation != None:
+        city = localInformation[0]
+        location = localInformation[1]['country'], localInformation[1]["regionName"], localInformation[1]["city"]
+        network = localInformation[1]["isp"]
+        
 
     
     
@@ -172,4 +178,5 @@ if __name__ == "__main__":
     voice = engine.getProperty("voices")
     for i in voice:
         print(i.id)
+    print(localInformation)
 
