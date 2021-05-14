@@ -12,24 +12,54 @@ engine = pyttsx3.init()
 localInformation = localInfo()
 totalStorage, usedStorage, freeStorage = map(lambda x : x//2**30, shutil.disk_usage("/"))
 
+# battery percentage
+try:
+    battery = psutil.sensors_battery()
+except Exception:
+    battery = None
+
+
+def convertTime(seconds):
+    """ function returning time in hh:mm:ss """
+    minutes, seconds = divmod(seconds, 60)
+    hours, minutes = divmod(minutes, 60)
+    return "%d:%02d:%02d" % (hours, minutes, seconds)
+
+
 
 class Client:
     name = environ.get("AssistantName", "Alice")
-    github_assistant_repo = "https://github.com/Brodevil/Alice"
     intro = f"Now me to introduce myself, I m {name}. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day seven days a week, Importing all preferences from home, interface system are now fully operational, Sir!"
+    
+    # Author Info
     author = "Abhinav(Brodevil)"
     contact = "brodevil89@gmail.com"
-    voices = [id.id for id in engine.getProperty("voices")]
-    voiceRate = int(environ.get("voiceRate", 175))
+    github_assistant_repo = "https://github.com/Brodevil/Alice"
 
-    storage = {"Total": totalStorage, "Used": usedStorage, "Free": freeStorage}
-    memory = psutil.virtual_memory().total
-    print(memory)
+
+    # Client Choice to Alice
+    voices = [id.id for id in engine.getProperty("voices")]
+    voice = int(environ.get("VoiceNumber", 1))
+    voiceRate = int(environ.get("VoiceRate", 175))
+
+    # Hardware satatus
+    storage = {"Total": totalStorage, "Used": usedStorage, "Free": freeStorage}     # values are in GB
+    memory_status = psutil.virtual_memory().percent     # Used memory in percentage
+    cpu_status = psutil.cpu_percent()   # cpu uses in percentage 
+    battery_status = battery.percent
+    battery_remain_time = convertTime(battery.secleft)
+    battery_pugged = battery.power_plugged
+
+    
+
+
+
+    # Networks infos 
     if localInformation != None:
         city = localInformation[0]
         location = localInformation[1]['country'], localInformation[1]["regionName"], localInformation[1]["city"]
         network = localInformation[1]["isp"]
-        networkSpeed = 0    # wanna bakc on this
+        networkSpeed = 0    # wanna back on this
 
     
     
