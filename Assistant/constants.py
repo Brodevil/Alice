@@ -39,8 +39,11 @@ class Client:
 
     # Client Choice to Alice
     voices = [id.id for id in engine.getProperty("voices")]
-    voice = int(environ.get("VoiceNumber", 1))
     voiceRate = int(environ.get("VoiceRate", 175))
+    voice = int(environ.get("VoiceNumber", 1))
+    if voice >= len(voices):
+        raise Exception(f"There are just {len(voices)} available in your system and you had choiced the {voice} number of voice! please Change it in .env file")
+            
 
     # Hardware satatus
     storage = {"Total": totalStorage, "Used": usedStorage, "Free": freeStorage}     # values are in GB
@@ -49,9 +52,6 @@ class Client:
     battery_status = battery.percent
     battery_remain_time = convertTime(battery.secleft)
     battery_pugged = battery.power_plugged
-
-    
-
 
 
     # Networks infos 
