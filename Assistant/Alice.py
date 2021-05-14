@@ -5,8 +5,8 @@ import pyttsx3
 from os import environ
 import pprint
 from dotenv import load_dotenv
-from exts.networks import location
-from constants import Client
+from exts.networks import localInfo
+from constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client
 
 
 load_dotenv()
@@ -22,24 +22,38 @@ class Alice:
     def __init__(self):
         super().__init__()
         self.name = environ.get("UserName", "Abhinav")
+
+        gender = environ.get("GENDER", 'male')
         if gender == "male" or gender == "boy":
             self.gender = "Sir"
         elif gender == "female" or gender == "girl":
             self.gender == "Mam"
-        self.city = environ.get("location", location())
+
         
-        self.voice = Client.voices
+        self.city = environ.get("location", localInfo())
+        
+        self.voice = pass
         self.voiceSpeed = Client.voiceRate
         
-    
-    def severalVoices(self, voicesId):
+    @staticmethod
+    def severalVoices(voicesId):
         """ This is the function to show the user how many voices are available in his/her system 
-        So that the user will able to choose his own liked voice"""
+        So that the user will able to choose his own liked voice """
 
         engine = pyttsx3.init("sapi5")
-        for voice in voicesId:
+        for index, voice in enumerate(voicesId):
             engine.setProperty("voice", voice)
-            engine.say(f"Hey there! My voice name is {voice.split('Tokens\\')[1].replace('_', ' ')}")
+            engine.setProperty("rate", 170)
+            if index == 0:
+                engine.say(f"Hey there! My voice name is {voice.split('Tokens')[1].replace('_', ' ')}")
+                engine.say(f"Hey there! I am {index+1}st voice of your system ")
+            elif index == 1:
+                engine.say(f"Hey there! I am {index+1}nd voice of your system ")
+            elif index == 2:
+                engine.say(f"Hey there! I m {index+1}rd voice of your system ")
+            else:
+                engine.say(f"Hey there! I am {index+1}th voice of your system ")
+
             engine.runAndWait()
 
 
@@ -47,15 +61,8 @@ class Alice:
         """ Speak function as per the selected voice """
         
         engine = pyttsx3.init('sapi5')
+        try:
 
-        if self.voice.lower() == "david":
-            engine.setProperty('voice', engine.getProperty('voices')[0].id)
-        elif self.voice.lower() == "ravi":
-            engine.setProperty('voice', engine.getProperty('voices')[1].id)
-        elif self.voice.lower() == "richard":
-            engine.setProperty('voice', engine.getProperty('voices')[2].id)
-        elif self.voice.lower() == "zira":
-            engine.setProperty('voice', engine.getProperty('voices')[3].id)
 
         engine.setProperty("rate", self.voiceSpeed)
         engine.say(audio)
@@ -78,3 +85,6 @@ class Alice:
 
 
 
+if __name__ == "__main__":
+    print(Client.voices)
+    Alice.severalVoices(Client.voices)
