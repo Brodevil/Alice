@@ -81,7 +81,7 @@ class Client:
         location = localInformation[1]['country'], localInformation[1]["regionName"], localInformation[1]["city"]
         network = localInformation[1]["isp"]
         networkSpeed = 0    # wanna back on this
-
+        degreeCelius = pass
     
     
 
