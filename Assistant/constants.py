@@ -1,7 +1,7 @@
 from os import environ
 from dotenv import load_dotenv
 import pyttsx3
-from exts.networks import localInfo,                                           # noqa
+from exts.networks import localInfo, weather                                     # noqa
 import shutil
 import psutil
 import string
@@ -37,7 +37,7 @@ storageInfo = Storage()
 load_dotenv()
 engine = pyttsx3.init()
 localInformation = localInfo()
-
+weatherInfo = weather()
 try:
     battery = psutil.sensors_battery()
 except Exception:
@@ -76,12 +76,12 @@ class Client:
 
 
     # Networks infos 
-    if localInformation != None:
+    if localInformation != None and weatherInfo != None:
         city = localInformation[0]
         location = localInformation[1]['country'], localInformation[1]["regionName"], localInformation[1]["city"]
         network = localInformation[1]["isp"]
         networkSpeed = 0    # wanna back on this
-        degreeCelius = 
+        tempreture = 
     
     
 
