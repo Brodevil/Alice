@@ -1,6 +1,6 @@
 import requests
 import json
-import pprint
+from pprint import pprint
 import os
 from dotenv import load_dotenv
 
@@ -20,8 +20,7 @@ def localInfo():
         return [response['city'], response]
     except ConnectionError:
         return None
-    except IndexError:
-        return "Unknow city"
+    
 
 
 def weather(location=os.getenv('location', localInfo()[0]), apikey=os.getenv("OpenWeatherMapApi")):
@@ -30,9 +29,12 @@ def weather(location=os.getenv('location', localInfo()[0]), apikey=os.getenv("Op
     try:
         response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={apikey}")
         response = json.loads(response.text)
-        return (int(response['main']['feels_like'] - 273.15))
+        pprint(response)
+        return (int(response['main']['temp'] - 273.15), response['weather'][0]['main'], response["wind"]["speed"])
     except ConnectionError:
         return None
+    except IndexError:
+        return "Unknow city"
 
     
     
