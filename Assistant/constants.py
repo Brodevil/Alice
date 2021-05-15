@@ -8,35 +8,21 @@ import string
 
 
 
-load_dotenv()
-engine = pyttsx3.init()
-localInformation = localInfo()
-# totalStorage, usedStorage, freeStorage = map(lambda x : x//2**30, shutil.disk_usage("c:\\"))
-# print(totalStorage)
-
-
-# battery percentage
-try:
-    battery = psutil.sensors_battery()
-except Exception:
-    battery = None
-
-
 def Storage():
+    """ Function to get total harddrive storage as per the drive """
     totalStorage = 0
     usedStorage = 0
     freeStorage = 0
     for i in list(string.ascii_lowercase):
         try:
-            storeInfo, b, c = map(lambda x : x//2**30, shutil.disk_usage(f"{i}:\\"))
-            print(storeInfo)
-            # totalStorage += storeInfo[0]
-            # usedStorage += storeInfo[1]
-            # freeStorage += storeInfo[2]
-            
-        except FileNotFoundError:
+            storeInfo = list(map(lambda x : x//2**30, shutil.disk_usage(f"{i}:\\")))
+            totalStorage += storeInfo[0]
+            usedStorage += storeInfo[1]
+            freeStorage += storeInfo[2]
+        except Exception:
             pass
     
+    return totalStorage, freeStorage, usedStorage
 
 
 def convertTime(seconds):
@@ -44,6 +30,21 @@ def convertTime(seconds):
     minutes, seconds = divmod(seconds, 60)
     hours, minutes = divmod(minutes, 60)
     return "%d:%02d:%02d" % (hours, minutes, seconds)
+
+
+
+storageInfo = Storage()
+load_dotenv()
+engine = pyttsx3.init()
+localInformation = localInfo()
+
+try:
+    battery = psutil.sensors_battery()
+except Exception:
+    battery = None
+
+
+
 
 
 
@@ -66,7 +67,7 @@ class Client:
             
 
     # Hardware satatus
-    # storage = {"Total": totalStorage, "Used": usedStorage, "Free": freeStorage}     # values are in GB
+    storage = {"Total": storageInfo[0], "Used": storageInfo[1], "Free": storageInfo[2]}     # values are in GB
     memory_status = psutil.virtual_memory().percent     # Used memory in percentage
     cpu_status = psutil.cpu_percent()   # cpu uses in percentage 
     battery_status = battery.percent
@@ -233,5 +234,5 @@ POSITIVE_REPLIES = [
 
 
 if __name__ == "__main__":
-    Storage()
+    print(Client.storage)
 
