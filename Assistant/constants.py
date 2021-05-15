@@ -41,8 +41,8 @@ except Exception:
 
 
 class Client:
-    name = environ.get("AssistantName", "Alice")
-    intro = f"Now me to introduce myself, I am {name}. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day seven days a week, Importing all preferences from home interface, system is now initializing!"
+    Assistantname = environ.get("AssistantName", "Alice")
+    intro = f"Now me to introduce myself, I am {Assistantname}. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day seven days a week, Importing all preferences from home interface, system is now initializing!"
     
     # Author Info
     author = "Abhinav(Brodevil)"
