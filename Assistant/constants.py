@@ -37,7 +37,6 @@ storageInfo = Storage()
 load_dotenv()
 engine = pyttsx3.init()
 localInformation = localInfo()
-weatherInfo = weather()
 try:
     battery = psutil.sensors_battery()
 except Exception:
@@ -76,13 +75,13 @@ class Client:
 
 
     # Networks infos 
-    if localInformation != None and weatherInfo != None:
+    if localInformation != None :
         city = localInformation[0]
         location = localInformation[1]['country'], localInformation[1]["regionName"], localInformation[1]["city"]
         network = localInformation[1]["isp"]
         networkSpeed = 0    # wanna back on this
-        tempreture = 
-    
+        weatherInfo = weather()
+        print(weather)
     
 
 class Contacts:
