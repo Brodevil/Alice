@@ -25,11 +25,6 @@ def Storage():
     return totalStorage, freeStorage, usedStorage
 
 
-def convertTime(seconds):
-    """ function returning time in hh:mm:ss """
-    minutes, seconds = divmod(seconds, 60)
-    hours, minutes = divmod(minutes, 60)
-    return "%d:%02d:%02d" % (hours, minutes, seconds)
 
 
 
@@ -70,7 +65,6 @@ class Client:
     
     if battery != None:
         battery_status = battery.percent
-        battery_remain_time = convertTime(battery.secsleft)
         battery_pugged = battery.power_plugged
 
 
