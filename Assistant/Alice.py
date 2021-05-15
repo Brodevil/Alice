@@ -34,10 +34,10 @@ class Alice:
     def __init__(self):
         super().__init__()
         self.name = environ.get("UserName", "Abhinav")      # this is the user name of the person who suppose to use this program : Data From (.env)
-        self.gender = environ.get("GENDER", 'male')          # Gender of the user, Data From (.env)
-        if gender == "male" or gender == "boy":
+        self.gender = environ.get("GENDER", 'male').lower()         # Gender of the user, Data From (.env)
+        if self.gender == "male" or self.gender == "boy":
             self.gender = "Sir"
-        elif gender == "female" or gender == "girl":
+        elif self.gender == "female" or self.gender == "girl":
             self.gender == "Mam"
 
         self.city = environ.get("location", localInfo())    # Data From (.env)
@@ -74,7 +74,7 @@ class Alice:
         """ Speak function as per the selected voice """
         
         engine = pyttsx3.init('sapi5')
-        engine.setProperty("voice", Client.voices[self.voice])
+        engine.setProperty("voice", Client.voices[self.voice-1])
         engine.setProperty("rate", self.voiceSpeed)
         print(f"{Client.name} :  {audio}\n")
         engine.say(audio)
@@ -82,19 +82,20 @@ class Alice:
     
 
     def intro(self):
-        speak(Client.intro)
-        speak(f"Storage : {Client.storage['Total']}Gb, Memory used : {Client.memory_status}%,  CPU Used : {Client.cpu_status}%")
+        self.speak(Client.intro)
+        self.speak(f"Storage : {Client.storage['Total']}GB, Memory used : {Client.memory_status}%,  CPU Used : {Client.cpu_status}%")
+        try:
+            self.speak(f"Battery is {Client.battery_status}% Charged!, It will last long for {Client.battery_remain_time}")
+            self.speak(Client.weatherInfo)   # Twing to say the weather report ond the client local area'
+        except Exception:
+            pass
+        self.speak(f"{goodWish()} {self.name} {self.gender}!, System is now fully Operational")
         
-        speak(f"{goodWish()} {self.name} {self.gender}!")
-        speak(Client.weather)   # Twing to say the weather report ond the client local area
         
         
         
-
-
-
 
 if __name__ == "__main__":
     test0 = Alice()
-    print(test0.city)
-    test0.severalVoices()
+    test0.speak("Hey there!")
+    test0.intro()
