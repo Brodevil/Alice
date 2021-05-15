@@ -5,8 +5,8 @@ import pyttsx3
 from os import environ
 import pprint
 from dotenv import load_dotenv
-from exts.networks import localInfo
-from constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client
+from exts.networks import localInfo                                                                    # noqa
+from constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client             # noqa
 
 
 load_dotenv()

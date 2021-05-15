@@ -14,10 +14,10 @@ import psutil
 import smtplib
 import subprocess
 from Assistant.exts import reminder
-from exts import networks
-from constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES
+from exts import networks                                                                         # noqa
+from constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES                 # noqa
 from dotenv import load_dotenv
-from exts import login
+from exts import login                                                                            # noqa
 
 
 
@@ -111,7 +111,7 @@ def intro():
     speakRichard(f"Its {datetime.datetime.now().strftime('%H:%M:%S')}, and todays date is {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year} ")
     # here I want to just add teh location part
 
-    temperature = apis.weather()    # seem to give location as a argument
+    temperature = networks.weather()    # seem to give location as a argument
     if temperature != None:
         speakRichard(f"Its feels like approximately {temperature} degree celsius outside the door")
 
@@ -369,7 +369,7 @@ def logic(queary):
     
 
     elif "what's the temperature" in queary:
-        temperature = apis.weather()    # wanna back on this
+        temperature = networks.weather()    # wanna back on this
         if temperature != None:
             speakRichard(f"Its seemed to be approximately {temperature} degree celsius outside the door")
 
