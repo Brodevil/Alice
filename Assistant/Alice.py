@@ -83,17 +83,17 @@ class Alice:
 
     def intro(self):
         self.speak(Client.intro)
-        self.speak(f"Storage : {Client.storage['Total']}GB, Memory used : {Client.memory_status}%,  CPU Used : {Client.cpu_status}%")
+        self.speak(f"Storage : {Client.storage['Total']}GB, Memory Used : {Client.memory_status}%,  CPU Used : {Client.cpu_status}%")
         try:
-            self.speak(f"Battery is {Client.battery_status}% Charged!, It will last long for {Client.battery_remain_time}")
+            self.speak(f"Battery is {Client.battery_status}% Charged!, You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {self.gender}!")
             self.speak(Client.weatherInfo)   # Twing to say the weather report ond the client local area'
         except Exception:
             pass
-        self.speak(f"{goodWish()} {self.name} {self.gender}!, System is now fully Operational")
+        self.speak(f"{goodWish()} {self.name} {self.gender}!, System is now fully Operational.")
         
         
         
-        
+
 
 if __name__ == "__main__":
     test0 = Alice()
