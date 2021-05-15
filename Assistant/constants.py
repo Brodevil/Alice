@@ -81,7 +81,8 @@ class Client:
         network = localInformation[1]["isp"]
         networkSpeed = 0    # wanna back on this
         weatherInfo = weather()
-        print(weather)
+
+        
     
 
 class Contacts:
@@ -233,5 +234,5 @@ POSITIVE_REPLIES = [
 
 
 if __name__ == "__main__":
-    print(Client.storage)
-
+    # print(Client.storage)
+    pass
