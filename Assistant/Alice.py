@@ -5,7 +5,7 @@ import pyttsx3
 from os import environ
 import pprint
 from dotenv import load_dotenv
-from exts.networks import localInfo                                                                    # noqa
+from exts.networks import localInfo                                                                   # noqa
 from constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client             # noqa
 
 
@@ -67,6 +67,7 @@ class Alice:
                 engine.say(f"Hey there! I am {index+1}th voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file")
                 print(f"{Client.name} : Hey there! I am {index+1}th voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file\n")
             engine.runAndWait()
+
 
 
     def speak(self, audio):
