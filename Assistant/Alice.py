@@ -83,8 +83,12 @@ class Alice:
 
     def intro(self):
         speak(Client.intro)
+        speak(f"Storage : {Client.storage['Total']}Gb, Memory used : {Client.memory_status}%,  CPU Used : {Client.cpu_status}%")
+        
         speak(f"{goodWish()} {self.name} {self.gender}!")
-        speak()
+        speak(Client.weather)   # Twing to say the weather report ond the client local area
+        
+        
         
 
 
