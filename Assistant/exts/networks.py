@@ -30,7 +30,7 @@ def weather(location=os.getenv('location', localInfo()[0]), apikey=os.getenv("Op
         response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={apikey}")
         response = json.loads(response.text)
         pprint(response)
-        return (int(response['main']['temp'] - 273.15), response['weather'][0]['main'], response["wind"]["speed"])
+        return f"It seemed to be approximately {int(response['main']['temp'] - 273.15)} degree Celcius! I guess its like {response['weather'][0]['main']} climate, and the wind speed is feels like {response['wind']['speed']} kilometer per hour"
     except ConnectionError:
         return None
     except IndexError:
@@ -40,19 +40,15 @@ def weather(location=os.getenv('location', localInfo()[0]), apikey=os.getenv("Op
     
 
 
-def news(url="https://newsapi.org/v2/top-headlines?sources=the-times-of-india&apikey=96926ea85ee242508e5527e0891be103", apikey="96926ea85ee242508e5527e0891be103"):
-    try:
-        if url == "https://newsapi.org/v2/top-headlines?sources=the-times-of-india&apikey=96926ea85ee242508e5527e0891be103":
-            response = requests.get("https://newsapi.org/v2/top-headlines?"
-                                    "sources=the-times-of-india&"
-                                    f"apiKey={apikey}")
-        else:
-            response = requests.get(url)
 
+def news(apikey=os.getenv("NewsApiKey")):
+    try:
+        response = requests.get(f"https://newsapi.org/v2/top-headlines?sources=the-times-of-india&apikey={apikey}")
         json_data = json.loads(response.text)
         return json_data
     except ConnectionError:
         return None
+
 
 
 
