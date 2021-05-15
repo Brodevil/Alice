@@ -4,19 +4,39 @@ import pyttsx3
 from exts.networks import localInfo                                             # noqa
 import shutil
 import psutil
+import string
 
 
 
 load_dotenv()
 engine = pyttsx3.init()
 localInformation = localInfo()
-totalStorage, usedStorage, freeStorage = map(lambda x : x//2**30, shutil.disk_usage("/"))
+# totalStorage, usedStorage, freeStorage = map(lambda x : x//2**30, shutil.disk_usage("c:\\"))
+# print(totalStorage)
+
 
 # battery percentage
 try:
     battery = psutil.sensors_battery()
 except Exception:
     battery = None
+
+
+def Storage():
+    totalStorage = 0
+    usedStorage = 0
+    freeStorage = 0
+    for i in list(string.ascii_lowercase):
+        try:
+            storeInfo, b, c = map(lambda x : x//2**30, shutil.disk_usage(f"{i}:\\"))
+            print(storeInfo)
+            # totalStorage += storeInfo[0]
+            # usedStorage += storeInfo[1]
+            # freeStorage += storeInfo[2]
+            
+        except FileNotFoundError:
+            pass
+    
 
 
 def convertTime(seconds):
@@ -46,7 +66,7 @@ class Client:
             
 
     # Hardware satatus
-    storage = {"Total": totalStorage, "Used": usedStorage, "Free": freeStorage}     # values are in GB
+    # storage = {"Total": totalStorage, "Used": usedStorage, "Free": freeStorage}     # values are in GB
     memory_status = psutil.virtual_memory().percent     # Used memory in percentage
     cpu_status = psutil.cpu_percent()   # cpu uses in percentage 
     battery_status = battery.percent
@@ -213,6 +233,5 @@ POSITIVE_REPLIES = [
 
 
 if __name__ == "__main__":
-    pass
-
+    Storage()
 
