@@ -1,7 +1,7 @@
 from os import environ
 from dotenv import load_dotenv
 import pyttsx3
-from exts.networks import localInfo                                             # noqa
+from exts.networks import localInfo,                                           # noqa
 import shutil
 import psutil
 import string
@@ -81,7 +81,7 @@ class Client:
         location = localInformation[1]['country'], localInformation[1]["regionName"], localInformation[1]["city"]
         network = localInformation[1]["isp"]
         networkSpeed = 0    # wanna back on this
-        degreeCelius = pass
+        degreeCelius = 
     
     
 
