@@ -40,18 +40,18 @@ def weather(location=None, apikey=(environ.get("OpenWeatherMapApi"))):
     From openwethermap.org apis """
     if location is None:
         local_info = localInfo()
-        if local_info 
-        location = localInfo()[0] 
-    try:
-        if localInfo != None:
-            response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={apikey}")
-            response = json.loads(response.text)
-            return f"It seemed to be approximately {int(response['main']['temp'] - 273.15)} degree Celcius! I guess its like {response['weather'][0]['main']} climate, and the wind speed is feels like {response['wind']['speed']} kilometer per hour"
-    except ConnectionError:
-        return None
-    except IndexError:
-        return "Unknow city"
-
+        if local_info != None:
+            location = localInfo()[0] 
+            try:
+                response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={apikey}")
+                response = json.loads(response.text)
+                return f"It seemed to be approximately {int(response['main']['temp'] - 273.15)} degree Celcius! I guess its like {response['weather'][0]['main']} climate, and the wind speed is feels like {response['wind']['speed']} kilometer per hour"
+            except ConnectionError:
+                return None
+            except IndexError:
+                return "Sorry! Weather report not avilable for {location}"
+        else:
+            return None
 
 
 def news(apikey=environ.get("NewsApiKey")):
