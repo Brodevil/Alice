@@ -8,6 +8,12 @@ import string
 
 
 
+
+__all__ = ("Client", "Contact", "ERROR_REPLIES", "NEGATIVE_REPLIES", "POSITIVE_REPLIES",
+    "       Storage", "storageInfo", "engine", "localInformation", "battery")
+
+
+
 def Storage():
     """ Function to get total harddrive storage as per the drive """
     totalStorage = 0
@@ -21,15 +27,13 @@ def Storage():
             freeStorage += storeInfo[2]
         except Exception:
             pass
-    
     return totalStorage, freeStorage, usedStorage
 
 
 
 
-
-storageInfo = Storage()
 load_dotenv()
+storageInfo = Storage()
 engine = pyttsx3.init()
 localInformation = localInfo()
 try:
