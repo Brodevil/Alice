@@ -16,7 +16,7 @@ def internetConnection(hostname="one.one.one.one"):
     try:
         urllib.request.urlopen('http://google.com') #Python 3.x
         return True
-    except requests.exceptions.ConnectionError:
+    except TimeoutError:
         return False
 
 
@@ -69,3 +69,4 @@ if __name__ == "__main__":
     # print(localInfo())
     # print(weather())
     print(internetConnection())
+
