@@ -42,7 +42,7 @@ except Exception:
 
 class Client:
     Assistantname = environ.get("AssistantName", "Alice")
-    intro = f"Now me to introduce myself, I am {Assistantname}. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day seven days a week, Importing all preferences from home interface, system is now initializing!"
+    intro = f"Hey There! Now me to introduce myself, I am {Assistantname}. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day, seven days a week, Importing all preferences from home interface, system is now initializing!"
     
     # Author Info
     author = "Abhinav(Brodevil)"
@@ -58,11 +58,13 @@ class Client:
         raise Exception(f"There are just {len(voices)} available in your system and you had choiced the {voice} number of voice! please Change it in .env file")
             
 
-    # Hardware satatus
+    # Few Computer status
     storage = {"Total": storageInfo[0], "Used": storageInfo[1], "Free": storageInfo[2]}     # values are in GB
     memory_status = psutil.virtual_memory().percent     # Used memory in percentage
     cpu_status = psutil.cpu_percent()   # cpu uses in percentage 
-    
+    internet = internetConnection()
+
+
     if battery != None:
         battery_status = battery.percent
         battery_pugged = battery.power_plugged
@@ -75,7 +77,8 @@ class Client:
         network = localInformation[1]["isp"]
         networkSpeed = 0    # wanna back on this
         weatherInfo = weather()
-        internet = internetConnection()
+
+    
 
         
     
