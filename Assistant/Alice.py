@@ -46,27 +46,27 @@ class Alice:
            
     
     
-       def severalVoices(self, voicesId=Client.voices):
-           """ This is the function to show the user how many voices are available in his/her system 
-           So that the user will able to choose his own liked voice """
-    
-           engine = pyttsx3.init("sapi5")
-           for index, voice in enumerate(voicesId):
-               engine.setProperty("voice", voice)
-               engine.setProperty("rate", 170)
-               if index == 0:
-                   engine.say(f"Hey there! I am {index+1}st voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file")
-                   print(f"{Client.name} : Hey there! I am {index+1}st voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file\n")
-               elif index == 1:
-                   engine.say(f"Hey there! I am {index+1}nd voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file")
-                   print(f"{Client.name} : Hey there! I am {index+1}nd voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file\n")
-               elif index == 2:
-                   engine.say(f"Hey there! I m {index+1}rd voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file")
-                   print(f"{Client.name} : Hey there! I am {index+1}rd voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file\n")
-               else:
-                   engine.say(f"Hey there! I am {index+1}th voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file")
-                print(f"{Client.name} : Hey there! I am {index+1}th voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file\n")
-            engine.runAndWait()
+    def severalVoices(self, voicesId=Client.voices):
+        """ This is the function to show the user how many voices are available in his/her system 
+        So that the user will able to choose his own liked voice """
+
+        engine = pyttsx3.init("sapi5")
+        for index, voice in enumerate(voicesId):
+            engine.setProperty("voice", voice)
+            engine.setProperty("rate", 170)
+            if index == 0:
+                engine.say(f"Hey there! I am {index+1}st voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file")
+                print(f"{Client.name} : Hey there! I am {index+1}st voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file\n")
+            elif index == 1:
+                engine.say(f"Hey there! I am {index+1}nd voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file")
+                print(f"{Client.name} : Hey there! I am {index+1}nd voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file\n")
+            elif index == 2:
+                engine.say(f"Hey there! I m {index+1}rd voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file")
+                print(f"{Client.name} : Hey there! I am {index+1}rd voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file\n")
+            else:
+                engine.say(f"Hey there! I am {index+1}th voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file")
+            print(f"{Client.name} : Hey there! I am {index+1}th voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file\n")
+        engine.runAndWait()
 
 
 
