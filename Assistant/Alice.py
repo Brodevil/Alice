@@ -105,10 +105,18 @@ class Alice:
             exit()
         
 
+
+
+
+
+
+
+
+
 alice = Alice()     # Object for the Alice class  
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":      # Testing part, just for testing pourposes
     test0 = Alice()
     test0.intro()
     # print(environ.get("GENDER"))
