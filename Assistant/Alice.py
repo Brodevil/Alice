@@ -55,7 +55,7 @@ class Alice:
             engine.setProperty("voice", voice)
             engine.setProperty("rate", 170)
             if index == 0:
-                engine.say(f"Hey there! I am {index+1}st voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file")
+                engine.say(f"Hey there! I am {index+1}"+"st"+ " voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file")
                 print(f"{Client.name} : Hey there! I am {index+1}st voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file\n")
             elif index == 1:
                 engine.say(f"Hey there! I am {index+1}nd voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file")
