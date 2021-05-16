@@ -14,10 +14,13 @@ load_dotenv()
 def internetConnection(hostname="one.one.one.one"):
     """ Function to check the internet is connected or not """
     try:
-        urllib.request.urlopen('http://google.com') #Python 3.x
+        status = requests.get("http://ip-api.com/json/?fields=49152")
+        print(status.text)
         return True
-    except TimeoutError:
-        return False
+    except ConnectionError:
+        pass
+    return False
+    
 
 
 
@@ -68,5 +71,12 @@ def news(apikey=os.getenv("NewsApiKey")):
 if __name__ == "__main__":
     # print(localInfo())
     # print(weather())
-    print(internetConnection())
+    # try:
+    #     status = requests.get("http://ip-api.com/json/?fields=49152")
+    #     print(status.text)
+    #     print(True)
+    # except ConnectionError:
+    #     print(False)    
+    weather()
+    
 
