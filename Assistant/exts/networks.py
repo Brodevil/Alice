@@ -3,9 +3,23 @@ import json
 from pprint import pprint
 import os
 from dotenv import load_dotenv
+import socket
 
 
 load_dotenv()
+
+
+
+def internetConnection(hostname="one.one.one.one"):
+    """ Function to check the internet is connected or not """
+    try:
+        host = socket.gethostbyname(hostname)
+        s = socket.create_connection((host, 80), 2)
+        s.close()
+        return True
+    except:
+        return False
+
 
 
 def localInfo():
@@ -54,4 +68,5 @@ def news(apikey=os.getenv("NewsApiKey")):
 
 if __name__ == "__main__":
     # print(localInfo())
-    print(weather())
+    # print(weather())
+    print(internetConnection())
