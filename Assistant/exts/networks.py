@@ -38,14 +38,15 @@ def localInfo():
 def weather(location=str(environ.get('location', localInfo()[0])), apikey=str(environ.get("OpenWeatherMapApi"))):
     """ Function to return the most of the information about current location using ip address
     From openwethermap.org apis """
-    try:
-        response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={apikey}")
-        response = json.loads(response.text)
-        return f"It seemed to be approximately {int(response['main']['temp'] - 273.15)} degree Celcius! I guess its like {response['weather'][0]['main']} climate, and the wind speed is feels like {response['wind']['speed']} kilometer per hour"
-    except ConnectionError:
-        return None
-    except IndexError:
-        return "Unknow city"
+    # try:
+    #     response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={apikey}")
+    #     response = json.loads(response.text)
+    #     return f"It seemed to be approximately {int(response['main']['temp'] - 273.15)} degree Celcius! I guess its like {response['weather'][0]['main']} climate, and the wind speed is feels like {response['wind']['speed']} kilometer per hour"
+    # except ConnectionError:
+    #     return None
+    # except IndexError:
+    #     return "Unknow city"
+    pass
 
     
 
