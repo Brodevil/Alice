@@ -86,17 +86,19 @@ class Alice:
         self.speak(f"Storage : {Client.storage['Total']} GB, Memory Used : {Client.memory_status}%,  CPU Used : {Client.cpu_status}%")
         try:
             self.speak(f"Battery is {Client.battery_status}% Charged!, You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {self.gender}!")
-            self.speak(Client.weatherInfo)   # Twing to say the weather report ond the client local area'
+            self.speak(Client.weatherInfo)   # Tring to say the weather report ond the client local area'
         except Exception:
             pass
         self.speak(f"{goodWish()} {self.name} {self.gender}!, System is now fully Operational. How Can I help you {self.gender}")
-        
+        if Client.internet == False:
+            self.speak(f"{self.gender}! Internet is not connected. I going to work with Internet, Please get connect with internet.")
+            exit()
         
         
 
 
 if __name__ == "__main__":
-    # test0 = Alice()
-    # test0.speak("Hey there!")
-    # test0.intro()
-    print(environ.get("GENDER"))
+    test0 = Alice()
+    test0.speak("Hey there!")
+    test0.intro()
+    # print(environ.get("GENDER"))
