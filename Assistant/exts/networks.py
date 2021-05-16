@@ -1,10 +1,10 @@
 import requests
 import json
 from pprint import pprint
-import os
+from os import environ
 from dotenv import load_dotenv
-# import socket
-import urllib.request
+from requests.exceptions import ConnectionError
+
 
 
 load_dotenv()
@@ -14,13 +14,10 @@ load_dotenv()
 def internetConnection(hostname="one.one.one.one"):
     """ Function to check the internet is connected or not """
     try:
-        status = requests.get("http://ip-api.com/json/?fields=49152")
-        print(status.text)
+        status = requests.get("http://ip-api.com/json/?fields=49152", timeout=2)
         return True
-    except ConnectionError:
-        pass
-    return False
-    
+    except ConnectionError :
+        return False
 
 
 
@@ -32,14 +29,13 @@ def localInfo():
         response = requests.get(url)
         response = json.loads(response.text)
         del response['status'], response['countryCode'], response['region']
-        os.environ['location'] = response['city']
         return [response['city'], response]
     except ConnectionError:
         return None
     
 
 
-def weather(location=os.getenv('location', localInfo()[0]), apikey=os.getenv("OpenWeatherMapApi")):
+def weather(location=environ.get('location', localInfo()[0]), apikey=environ.get("OpenWeatherMapApi")):
     """ Function to return the most of the information about current location using ip address
     From openwethermap.org apis """
     try:
@@ -56,7 +52,7 @@ def weather(location=os.getenv('location', localInfo()[0]), apikey=os.getenv("Op
 
 
 
-def news(apikey=os.getenv("NewsApiKey")):
+def news(apikey=environ.get("NewsApiKey")):
     try:
         response = requests.get(f"https://newsapi.org/v2/top-headlines?sources=the-times-of-india&apikey={apikey}")
         json_data = json.loads(response.text)
@@ -77,6 +73,7 @@ if __name__ == "__main__":
     #     print(True)
     # except ConnectionError:
     #     print(False)    
-    weather()
+    # weather()
+    print(internetConnection())
     
 
