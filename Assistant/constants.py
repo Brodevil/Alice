@@ -1,7 +1,7 @@
 from os import environ
 from dotenv import load_dotenv
 import pyttsx3
-from exts.networks import localInfo, weather                                     # noqa
+from exts.networks import localInfo, weather, internetConnection                                 # noqa
 import shutil
 import psutil
 import string
@@ -69,12 +69,13 @@ class Client:
 
 
     # Networks infos 
-    if localInformation != None :
+    if localInformation != None and weather() is not None:
         city = localInformation[0]
         location = localInformation[1]['country'], localInformation[1]["regionName"], localInformation[1]["city"]
         network = localInformation[1]["isp"]
         networkSpeed = 0    # wanna back on this
         weatherInfo = weather()
+        internet = internetConnection()
 
         
     
