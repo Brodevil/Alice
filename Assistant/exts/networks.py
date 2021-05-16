@@ -3,7 +3,8 @@ import json
 from pprint import pprint
 import os
 from dotenv import load_dotenv
-import socket
+# import socket
+import urllib.request
 
 
 load_dotenv()
@@ -13,11 +14,9 @@ load_dotenv()
 def internetConnection(hostname="one.one.one.one"):
     """ Function to check the internet is connected or not """
     try:
-        host = socket.gethostbyname(hostname)
-        s = socket.create_connection((host, 80), 2)
-        s.close()
+        urllib.request.urlopen('http://google.com') #Python 3.x
         return True
-    except:
+    except requests.exceptions.ConnectionError:
         return False
 
 
