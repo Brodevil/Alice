@@ -35,7 +35,7 @@ def localInfo():
     
 
 
-def weather(location=environ.get('location', localInfo()[0]), apikey=environ.get("OpenWeatherMapApi")):
+def weather(location=str(environ.get('location', localInfo()[0])), apikey=str(environ.get("OpenWeatherMapApi"))):
     """ Function to return the most of the information about current location using ip address
     From openwethermap.org apis """
     try:
@@ -48,9 +48,6 @@ def weather(location=environ.get('location', localInfo()[0]), apikey=environ.get
         return "Unknow city"
 
     
-    
-
-
 
 def news(apikey=environ.get("NewsApiKey")):
     try:
