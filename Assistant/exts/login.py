@@ -42,5 +42,7 @@ def initialCommit(path):
     os.system("git push -u origin main")
 
 
+
+
 if __name__ == "__main__":
     sendEmail("shivamgopale31@gmail.com", "Test 0", "Test 0 By Alice Project to send Email")
