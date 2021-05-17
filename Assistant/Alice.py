@@ -28,9 +28,14 @@ class Alice:
         super().__init__()
         gender=str(environ.get("GENDER", 'male'))
         self.name = environ.get("UserName", "Abhinav")      # this is the user name of the person who suppose to use this program : Data From (.env)
-        self.gender = ("Sir" if gender == "male" else "Mam")
+        if gender == "male" or "boy":
+            self.gender = "Sir"
+        elif gender == "female" or "girl":
+            self.gender = "Mam"
+        else:
+            raise ValueError("IN .env file GENDER= always should  be 'male or female!'")
 
-
+        print(self.gender)
         self.city = environ.get("location", localInfo())    # Data From (.env)
         self.voice = Client.voice
         self.voiceSpeed = Client.voiceRate
@@ -61,7 +66,6 @@ class Alice:
             else:
                 print(f"{Client.name} : Hey there! I am {index+1}th voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file\n")
                 engine.say(f"Hey there! I am {index+1}th voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file")
-            
         engine.runAndWait()
 
     
@@ -75,7 +79,7 @@ class Alice:
         print(f"{Client.Assistantname} :  {audio}\n")
         engine.say(audio)
         engine.runAndWait()
-    
+
 
     @property
     @staticmethod
@@ -99,7 +103,7 @@ class Alice:
             self.speak(Client.weatherInfo)   # Tring to say the weather report ond the client local area'
         except Exception:
             pass
-        self.speak(f"{self.goodWish} {self.name} {self.gender}!, System is now fully Operational. How Can I help you {self.gender}")
+        self.speak(f"{Alice.goodWish} {self.name} {self.gender}!, System is now fully Operational. How Can I help you {self.gender}")
         if Client.internet == False:
             self.speak(f"{self.gender}! Internet is not connected. I going to work with Internet, Please get connect with internet.")
             exit()
@@ -113,5 +117,5 @@ alice = Alice()     # Object for the Alice class
 
 if __name__ == "__main__":      # Testing part, just for testing pourposes
     test0 = Alice()
-    test0.intro()
+    # test0.intro()
     # print(environ.get("GENDER"))
