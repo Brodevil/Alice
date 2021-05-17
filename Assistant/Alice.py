@@ -108,11 +108,6 @@ class Alice:
 
 
 
-
-
-
-
-
 alice = Alice()     # Object for the Alice class  
 
 
