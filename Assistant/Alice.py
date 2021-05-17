@@ -6,7 +6,8 @@ from os import environ
 import pprint
 from dotenv import load_dotenv
 import speech_recognition as sr 
-from exts.networks import localInfo                                                                   # noqa
+from exts.networks import localInfo                                                 # noqa
+import webbrowser                                                                 
 from constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client             # noqa
 
 
@@ -32,7 +33,7 @@ class Alice:
         super().__init__()
         gender=str(environ.get("GENDER", 'male'))
         self.name = environ.get("UserName", "Abhinav")      # this is the user name of the person who suppose to use this program : Data From (.env)
-        self.Assistantname = Client.name
+        self.Assistantname = Client.Assistantname
         if gender == "male":
             self.gender = "Sir"
         elif gender == "female":
@@ -140,6 +141,12 @@ class Alice:
             exit()
         
 
+    @staticmethod
+    def edge(url):
+        edgePath = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+        webbrowser.register('edge', None, webbrowser.BackgroundBrowser(edgePath))
+        webbrowser.get('edge').open(url)
+
 
 
 alice = Alice()     # Object for the Alice class  
@@ -149,6 +156,7 @@ if __name__ == "__main__":      # Testing part, just for testing pourposes
     test0 = Alice()
     test0.intro()
     # print(environ.get("GENDER"))
-    queary = test0.takeCommand()
-    test0.speak(queary)
+    # queary = test0.takeCommand()
+    # test0.speak(queary)
+    # test0.edge("https://github.com/Brodevil")
     pass
