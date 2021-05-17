@@ -4,6 +4,8 @@ from pprint import pprint
 from os import environ
 from dotenv import load_dotenv
 from requests.exceptions import ConnectionError
+import wikipedia
+
 
 
 
@@ -54,6 +56,7 @@ def weather(location=None, apikey=(environ.get("OpenWeatherMapApi"))):
             return None
 
 
+
 def news(apikey=environ.get("NewsApiKey")):
     try:
         response = requests.get(f"https://newsapi.org/v2/top-headlines?sources=the-times-of-india&apikey={apikey}")
@@ -61,6 +64,14 @@ def news(apikey=environ.get("NewsApiKey")):
         return json_data
     except ConnectionError:
         return None
+
+
+def wiki(queary):
+    try:
+        results = wikipedia.summary(queary, sentences=2)
+        return f"According to wikipedia. {results}"
+    except Exception:
+        return "Sorry! I didn't got that stuff in wikipedia"
 
 
 if __name__ == "__main__":
