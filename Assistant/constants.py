@@ -9,8 +9,7 @@ import string
 
 
 
-__all__ = ("Client", "Contact", "ERROR_REPLIES", "NEGATIVE_REPLIES", "POSITIVE_REPLIES",
-    "       Storage", "storageInfo", "engine", "localInformation", "battery")
+__all__ = ("Client", "Contact", "ERROR_REPLIES", "NEGATIVE_REPLIES", "POSITIVE_REPLIES", "Storage")
 
 
 
@@ -79,7 +78,6 @@ class Client:
         city = localInformation[0]
         location = localInformation[1]['country'], localInformation[1]["regionName"], localInformation[1]["city"]
         network = localInformation[1]["isp"]
-        networkSpeed = 0    # wanna back on this
         weatherInfo = weather()
 
     
