@@ -5,14 +5,18 @@ import pyttsx3
 from os import environ
 import pprint
 from dotenv import load_dotenv
+import speech_recognition as sr 
 from exts.networks import localInfo                                                                   # noqa
 from constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client             # noqa
+
+
 
 
 __all__ = ("Alice", "alice")
 
 
 load_dotenv()
+
 
 
 
@@ -28,7 +32,7 @@ class Alice:
         super().__init__()
         gender=str(environ.get("GENDER", 'male'))
         self.name = environ.get("UserName", "Abhinav")      # this is the user name of the person who suppose to use this program : Data From (.env)
-        
+        self.assitant
         if gender == "male":
             self.gender = "Sir"
         elif gender == "female":
@@ -80,6 +84,32 @@ class Alice:
         print(f"{Client.Assistantname} :  {audio}\n")
         engine.say(audio)
         engine.runAndWait()
+    
+
+
+    def takeCommand(self):
+        '''
+        The not having any parameter but it taking the input form the microphone of the user 
+        and return the string object that the user says
+        '''
+        r = sr.Recognizer()
+        with sr.Microphone() as source:
+            print(f"{Client.Assistantname}: Listening....")
+            r.pause_threshold = 1
+            r.energy_threshold = 100
+            audio = r.listen(source)
+
+        try:
+            print(f"{Client.Assistantname} : Recognizing....")
+            query = r.recognize_google(audio, language="en-in")
+            print(f"{self.name} : \t{query}\n")
+
+        except Exception as e:
+            print("Alice : Sorry! I didn't get that...\n")
+            return "None"
+
+        return query
+
 
 
     @property
@@ -95,17 +125,18 @@ class Alice:
             return "Good Evening"
 
 
+
     def intro(self):
-        # self.speak(Client.intro)
-        # self.speak(f"Storage : {Client.storage['Total']} GB, Memory Used : {Client.memory_status}%,  CPU Used : {Client.cpu_status}%")
-        # try:
-        #     self.speak(f"Battery is {Client.battery_status}% Charged!, You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {self.gender}!")
-        #     self.speak(Client.weatherInfo)   # Tring to say the weather report ond the client local area'
-        # except Exception:
-        #     pass
+        self.speak(Client.intro)
+        self.speak(f"Storage : {Client.storage['Total']} GB, Memory Used : {Client.memory_status}%,  CPU Used : {Client.cpu_status}%")
+        try:
+            self.speak(f"Battery is {Client.battery_status}% Charged!, You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {self.gender}!")
+            self.speak(Client.weatherInfo)   # Tring to say the weather report ond the client local area'
+        except Exception:
+            pass
         self.speak(f"{self.goodWish} {self.name} {self.gender}!, System is now fully Operational. How Can I help you {self.gender}")
         if Client.internet == False:
-            self.speak(f"{self.gender()}! Internet is not connected. I going to work with Internet, Please get connect with internet.")
+            self.speak(f"{self.gender}! Internet is not connected. I going to work with Internet, Please get connect with internet.")
             exit()
         
 
@@ -117,6 +148,6 @@ alice = Alice()     # Object for the Alice class
 
 if __name__ == "__main__":      # Testing part, just for testing pourposes
     test0 = Alice()
-    test0.intro()
+    # test0.intro()
     # print(environ.get("GENDER"))
     pass
