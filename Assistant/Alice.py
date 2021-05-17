@@ -32,7 +32,7 @@ class Alice:
         super().__init__()
         gender=str(environ.get("GENDER", 'male'))
         self.name = environ.get("UserName", "Abhinav")      # this is the user name of the person who suppose to use this program : Data From (.env)
-        self.assitant
+        self.Assistantname = Client.name
         if gender == "male":
             self.gender = "Sir"
         elif gender == "female":
@@ -81,7 +81,7 @@ class Alice:
         engine = pyttsx3.init('sapi5')
         engine.setProperty("voice", Client.voices[self.voice-1])
         engine.setProperty("rate", self.voiceSpeed)
-        print(f"{Client.Assistantname} :  {audio}\n")
+        print(f"{self.Assistantname} :  {audio}\n")
         engine.say(audio)
         engine.runAndWait()
     
@@ -94,13 +94,13 @@ class Alice:
         '''
         r = sr.Recognizer()
         with sr.Microphone() as source:
-            print(f"{Client.Assistantname}: Listening....")
+            print(f"{self.Assistantname}: Listening....")
             r.pause_threshold = 1
             r.energy_threshold = 100
             audio = r.listen(source)
 
         try:
-            print(f"{Client.Assistantname} : Recognizing....")
+            print(f"{self.Assistantname} : Recognizing....")
             query = r.recognize_google(audio, language="en-in")
             print(f"{self.name} : \t{query}\n")
 
@@ -142,12 +142,13 @@ class Alice:
 
 
 
-
 alice = Alice()     # Object for the Alice class  
 
 
 if __name__ == "__main__":      # Testing part, just for testing pourposes
     test0 = Alice()
-    # test0.intro()
+    test0.intro()
     # print(environ.get("GENDER"))
+    queary = test0.takeCommand()
+    test0.speak(queary)
     pass
