@@ -28,14 +28,15 @@ class Alice:
         super().__init__()
         gender=str(environ.get("GENDER", 'male'))
         self.name = environ.get("UserName", "Abhinav")      # this is the user name of the person who suppose to use this program : Data From (.env)
-        if gender == "male" or "boy":
+        
+        if gender == "male":
             self.gender = "Sir"
-        elif gender == "female" or "girl":
+        elif gender == "female":
             self.gender = "Mam"
         else:
-            raise ValueError("IN .env file GENDER= always should  be 'male or female!'")
+            raise ValueError("In .env file GENDER= always should  be 'male or female!' which will your gender")
 
-        print(self.gender)
+
         self.city = environ.get("location", localInfo())    # Data From (.env)
         self.voice = Client.voice
         self.voiceSpeed = Client.voiceRate
@@ -117,5 +118,6 @@ alice = Alice()     # Object for the Alice class
 
 if __name__ == "__main__":      # Testing part, just for testing pourposes
     test0 = Alice()
-    # test0.intro()
+    test0.intro()
     # print(environ.get("GENDER"))
+    pass
