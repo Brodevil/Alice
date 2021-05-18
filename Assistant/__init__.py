@@ -1,0 +1,361 @@
+import datetime
+import wikipedia
+import webbrowser
+import os
+import time
+import keyboard
+import random
+import psutil
+import smtplib
+import subprocess
+from exts import reminder                                                                         # noqa
+from exts import networks                                                                         # noqa
+from constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES                 # noqa
+# from dotenv import load_dotenv
+from exts import login                                                                            # noqa
+from Alice import alice                                                                           # noqa
+from exts import keyactivities                                                                    # noqa
+
+
+
+
+
+# load_dotenv()
+
+
+def logic(queary):
+    """This is the logic of the Program as it will be matching several queary and do the programmed task """
+
+    if 'wikipedia' in queary:
+            alice.speak("Searching Wikipedia...")
+            queary = queary.replace("wikipedia", "")
+            alice.speak(networks.wiki())
+
+        
+
+    elif 'quit' in queary:
+        alice.speak("That's it, I am quiting")
+        exit()
+
+
+    elif 'search' in queary:
+        queary = queary.replace("search", "")
+        queary = queary.replace(" ", "%20")
+        alice.edge(f"https://www.google.com/search?q={queary}")
+        alice.speak(f"Searching {queary} in Google")
+
+
+    elif 'open youtube studio' in queary:
+        alice.speak("Opening youtube studio...")
+        alice.edge("https://studio.youtube.com/")
+
+    
+    elif 'open youtube' in queary:
+        alice.speak("Opening youtube...")
+        alice.edge("youtube.com")
+    
+    
+    elif 'open google' in queary:
+        alice.speak("Opening google...")
+        alice.edge("google.com")
+    
+    
+    elif 'open stack overflow' in queary:
+        alice.speak("Opening stackoverflow...")
+        alice.edge("stackoverflow.com")
+    
+    
+    elif 'reveal your code' in queary:
+        alice.speak("Opening Github repositor.....")
+        alice.edge("github.com/Brodevil/Alice")
+
+
+    elif 'open github' in queary:
+        alice.speak("Opening Github.....")
+        alice.edge("https://github.com/Brodevil")
+    
+
+    elif 'open discord' in queary:
+        alice.speak("Opening Discord in Browser.....")
+        alice.edge("https://discord.com/channels/@me")
+
+
+    elif 'open instagram' in queary:
+        alice.speak("Opening Instagram.....")
+        alice.edge("https://www.instagram.com")
+
+
+    elif 'open whatsapp' in queary:
+        alice.speak("Opening  Whatsapp.....")
+        alice.edge("https://web.whatsapp.com/")
+
+
+
+    elif 'open spotify' in queary:
+        alice.speak("Opening Spotify.....")
+        alice.edge('https://open.spotify.com/')
+    
+
+    elif 'pep8' in queary:
+        alice.edge("https://www.python.org/dev/peps/pep-0008/")   
+    
+
+    elif 'is i am audio able' in queary:
+        alice.speak(random.choice(POSITIVE_REPLIES))
+    
+    elif 'testing' in queary:
+        alice.speak("Sir! Your voice is just quite fine")
+
+    elif 'hello alice' in queary:
+        alice.speak("Hello sir! how may I can help you.")
+
+
+    elif 'good morning' in queary or 'good afternoon' in queary or 'good evening' in queary:
+        wish = alice.goodWish
+        if wish.lower() in queary:
+            alice.speak(f"{wish} Sir!")
+        else:
+            alice.speak(f"Sir! Its {wish.split()[1]} Right now!")
+    
+
+    elif "what's the time" in queary:
+        alice.speak(f"Its {datetime.datetime.now().strftime('%H:%M:%S')} Sir!")
+    
+
+    elif "what's the date" in queary:
+        alice.speak(f"Its {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year}")
+
+
+    elif 'who are you' in queary:
+        alice.intro()
+    
+
+    elif 'desktop' in queary:
+        keyboard.press_and_release("win+d")
+
+
+    elif 'lock pc' in queary or "lock the pc" in queary:   
+        os.system("rundll32.exe user32.dll, LockWorkStation")
+        exit()
+
+
+    elif 'shutdown pc' in queary:
+        os.startfile(r"C:\Windows\System32\SlideToShutDown.exe")
+        alice.speak("Shuting down pc....")
+        time.sleep(2)
+        keyboard.press_and_release("enter")
+
+
+    elif 'restart pc' in queary:
+        os.system("Shutdown.exe -r -t 00")
+
+
+    elif 'switch tab' in queary:
+        keyboard.press_and_release("alt+tab")
+
+
+    elif 'switch window right' in queary:
+        keyboard.press_and_release("ctrl+win+right")
+
+
+    elif 'switch window left' in queary:
+        keyboard.press_and_release("ctrl+win+left")
+
+
+    elif 'open visual studio code' in queary:
+        alice.speak("Opening vs code...")
+        os.startfile(r"E:\Programe File (x83)\Microsoft VS Code\Code.exe")
+
+
+    elif 'open sublime text' in queary:
+        alice.speak("Opening Sublime Text")
+        os.startfile(r"E:\Programe File (x83)\Sublime Text 3\sublime_text.exe")
+
+
+    elif "open discord application" in queary:
+        try:
+            os.startfile(r"E:\Programe File (x83)\Discord\app-0.0.309\Discord.exe")
+            alice.speak("Opening Discord Application")
+        except Exception:
+            alice.speak("Some thing went wrong! It might be a wrong path or you had not Installed that application")
+        
+    
+    elif "open file explorer" in queary:
+        try:
+            subprocess.Popen(r'explorer /select,"C:\path\of\folder\file"')
+            alice.speak("Opening File Explorer...")
+        except Exception:
+            alice.speak("Some thing went Wrong")
+
+    elif "open rapid typing" in queary:
+        try:
+            os.startfile(r"E:\Programe File (x83)\Typing Course\RapidTyping.exe")
+            alice.speak("Opening Rapid Typing...")
+        except Exception:
+            alice.speak("Some thing went wrong! It might be a wrong path or you had not Installed that application")
+
+
+        
+    elif 'remind me after' in queary:
+        queary = queary.replace("remind me after", "")
+        queary = queary.replace("i" , "you")
+        magnitude = int(queary.split()[0])
+        unit = queary.split()[1]
+        alice.speak(f"Okay Sir! I will be reminding you after {magnitude} {unit}!")
+        try:
+            pourpose = queary.split("so that ")[1]
+        except Exception:      # the user can give the reason as a option
+            pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
+        finally :
+            reminder.reminder(magnitude, unit, pourpose)
+
+
+
+    elif 'play music' in queary or 'play another music' in queary or 'play song' in queary or 'play any song' in queary:
+        music = os.listdir(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya")
+        os.startfile(os.path.join(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya", random.choice(music)))
+        alice.speak("Playing Music...")
+
+
+    elif 'brown munde' in queary:
+        os.startfile(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya\BROWN MUNDE - AP DHILLON GURINDER GILL SHINDA KAHLON GMINXR.mp3")
+
+
+    elif 'play my music' in queary:
+        os.startfile(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya\AUD-20210421-WA0103 - Copy (2).mp3")
+
+
+    elif 'delete unwanted files' in queary:
+        alice.speak("Deleting unwanted files...")
+        unwantedFiles = [r"C:\Windows\Temp", r"C:\Users\ADMIN\AppData\Local\Temp", r"C:\Windows\Prefetch"]
+        for f in unwantedFiles:
+            for file in os.listdir(f):
+                try:
+                    os.remove(os.path.join(f , file))  
+                except PermissionError:
+                    pass
+
+
+    elif "to kaise hain aap log" in queary:
+        alice.speak("Hum thik hai bhai, Tum batao!..")
+
+
+    elif 'push the code' in queary:
+        alice.speak("Commit and then pushing the code in github repository....")
+        login.initialCommit(os.getcwd())
+    
+
+    elif 'git status' in queary:
+        os.system("git status")
+
+
+    elif "what's the temperature" in queary:
+        temperature = networks.weather()    # wanna back on this
+        if temperature != None:
+            alice.speak(f"Its seemed to be approximately {temperature} degree celsius outside the door")
+
+
+    elif "bye" in queary or 'kill yourself' in queary:
+        alice.speak("That's it, I m quiting....")
+        exit()
+
+
+    elif 'say' in queary:
+        queary = queary.replace("say ", "")
+        alice.speak(queary)
+
+
+    elif 'spell' in queary:
+        queary = input("Enter what I should spell")
+        alice.speak(queary)
+
+    
+    elif "type that" in queary:
+        queary = queary.replace("type that", "")
+        keyactivities.typeWrite(queary)
+    
+
+    elif 'record keyboard' in queary:
+        alice.speak("Okay Sir! Note that, your keyboard activies will be recording till you prese Escap button on your keyboard")
+        keyboardActivities = keyactivities.keyboardRecord()
+
+
+    elif 'play the keyboard recording' in queary:
+        try:
+            keyboardActivities
+        except NameError:
+            alice.speak("Sir! there is no keyboard Activity available till now")
+        else:
+            alice.speak("Okay Sir! Playing the keyboard Activiy recording, Note that have to put the cursor where you want to play it.")
+            time.sleep(7)
+            keyactivities.recordedKeyboardType(keyboardActivities)
+
+
+
+    elif 'whats my location' in queary or 'where am i' in queary:
+        pass
+
+
+    elif 'wheter report' in queary:
+        pass
+
+
+    elif 'todays news' in queary:
+        pass
+
+    
+    elif 'contact' in queary:
+        pass
+
+
+    elif 'repeat myself' in queary:
+        alice.speak("Okay Sir! Start to tell I will be follwing you")
+        while queary.lower() != "quite" or queary.lower() != "stop":
+            queary = alice.takeCommand()
+            if queary != "none":
+                alice.speak(queary)
+
+
+    elif 'send email' in queary:
+        alice.speak("To whom you want to send the email")
+        try:
+            userEmail = alice.takeCommand().lower()     # here taking the name as a input and featuring it in our contacts
+            for i in Contacts.emails.keys():
+                if i.split()[0].lower() == userEmail.split()[0]:
+                    userEmail = Contacts.emails[i]
+                    break
+            else:
+                alice.speak(f"Sir! We didn't got {userEmail} in your contact. Can you tell the email address!")
+                userEmail = alice.takeCommand()     # taking email address by speak function
+                if userEmail != "None":
+                    userEmail = userEmail.replace(" ", "").lower()
+                else:
+                    alice.speak("Sorry sir! I didn't get that. Please type the email Adress in the terminal!")
+                    userEmail = input("Enter the Email Adress :\t")  
+        except Exception as e:
+            print(e)
+            alice.speak(f"{random.choice(ERROR_REPLIES)}, Some thing went Wrong")
+
+
+        alice.speak("What's the subject...")
+        subject = alice.takeCommand()
+        alice.speak("Whats the content...")
+        content = alice.takeCommand()
+        result = login.sendEmail(userEmail, subject, content)
+        if result == False:
+            alice.speak(f"{random.choice(ERROR_REPLIES)}, Some thing went Wrong")
+        else:
+            alice.speak(f"Email send succefully to {userEmail}!")
+
+
+
+
+if __name__ == "__main__":
+    alice.intro()
+    # # if 1:
+    while True:
+        queary = alice.takeCommand().lower()
+        logic(queary)     # Logic for executin task based on query
+
+
+
