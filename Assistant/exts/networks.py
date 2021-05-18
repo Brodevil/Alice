@@ -87,8 +87,7 @@ if __name__ == "__main__":
     #     print(True)
     # except ConnectionError:
     #     print(False)    
-    print(weather())
+    # print(weather())
     # print(internetConnection())
-    pass
+    pprint(news())
     
-
