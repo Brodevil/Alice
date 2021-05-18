@@ -72,7 +72,7 @@ class Client:
 
     # Few user Info :
     musicDirectory = environ.get("MUSIC", r"C:\Users\ADMIN\Music")              # Music directory should be without space
-    
+    favorateMusic = environ.get("FavMusic", None)
 
 
     if battery != None:
