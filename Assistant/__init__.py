@@ -81,7 +81,7 @@ def logic(queary):
 
     elif 'open github' in queary:
         alice.speak("Opening Github.....")
-        alice.edge("https://github.com/Brodevil")
+        alice.edge(f"https://github.com/{Client.userGithub}")
     
 
     elif 'open discord' in queary:
@@ -336,6 +336,7 @@ def logic(queary):
         except:
             alice.speak(random.choice(ERROR_REPLIES))
     
+
 
     # work with loging file : i.e.work with E commerce websites accounts 
     elif 'send email' in queary:
