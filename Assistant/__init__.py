@@ -357,7 +357,7 @@ if __name__ == "__main__":
     alice.intro()
     # # if 1:
     while True:
-        queary = alice.alice.takeCommand().lower()
+        queary = alice.takeCommand().lower()
         logic(queary)     # Logic for executin task based on query
 
 
