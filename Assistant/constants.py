@@ -127,7 +127,10 @@ class Contacts:
             "papa":"cbcsudhir@gmail.com",
             "ekta":"ektachoudhary9892@gmail.com",
             "gautam":"chaudharygautam9963@gmail.com",
-            "Marcus Kartik":"work.marcus315@gmail.com",}
+            "Marcus Kartik":"work.marcus315@gmail.com",
+            "ganga":"dhanlakxmichoudhary38@gmail.com",
+            "narmata":"bhaglakxmichoudhary@gmail.com",
+            }
 
 
 
