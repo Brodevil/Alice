@@ -15,6 +15,7 @@ from constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIE
 from exts import login                                                                            # noqa
 from Alice import alice                                                                           # noqa
 from exts import keyactivities                                                                    # noqa
+from exts import workWithFiles                                                                    # noqa
 
 
 
@@ -103,8 +104,10 @@ def logic(queary):
     elif 'is i am audio able' in queary:
         alice.speak(random.choice(POSITIVE_REPLIES))
     
+
     elif 'testing' in queary:
         alice.speak("Sir! Your voice is just quite fine")
+
 
     elif 'hello alice' in queary:
         alice.speak("Hello sir! how may I can help you.")
@@ -163,13 +166,19 @@ def logic(queary):
 
 
     elif 'open visual studio code' in queary:
-        alice.speak("Opening vs code...")
-        os.startfile(r"E:\Programe File (x83)\Microsoft VS Code\Code.exe")
+        try:
+            alice.speak("Opening vs code...")
+            os.startfile(r"E:\Programe File (x83)\Microsoft VS Code\Code.exe")
+        except Exception:
+            alice.speak("Some thing went wrong! It might be a wrong path or you had not Installed that application")
 
 
-    elif 'open sublime text' in queary:
-        alice.speak("Opening Sublime Text")
-        os.startfile(r"E:\Programe File (x83)\Sublime Text 3\sublime_text.exe")
+    elif 'open sublime text' in queary:     # this command is also just for Abhinav, as He have sublime text
+        try:
+            alice.speak("Opening Sublime Text")
+            os.startfile(r"E:\Programe File (x83)\Sublime Text 3\sublime_text.exe")
+        except Exception:
+            alice.speak("Some thing went wrong! It might be a wrong path or you had not Installed that application")
 
 
     elif "open discord application" in queary:
@@ -186,6 +195,7 @@ def logic(queary):
             alice.speak("Opening File Explorer...")
         except Exception:
             alice.speak("Some thing went Wrong")
+
 
     elif "open rapid typing" in queary:
         try:
@@ -212,31 +222,25 @@ def logic(queary):
 
 
     elif 'play music' in queary or 'play another music' in queary or 'play song' in queary or 'play any song' in queary:
-        music = os.listdir(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya")
+        music = os.listdir(r"E:\ADMIN\Music\BRODEVIL\Hollywood_song\sunna_hai_kya")
         os.startfile(os.path.join(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya", random.choice(music)))
         alice.speak("Playing Music...")
 
 
-    elif 'brown munde' in queary:
-        os.startfile(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya\BROWN MUNDE - AP DHILLON GURINDER GILL SHINDA KAHLON GMINXR.mp3")
+    elif 'brown munde' in queary:       # this function is just for my self i.e. For Abhinav personal songs
+        os.startfile(r"E:\ADMIN\Music\BRODEVIL\Hollywood_song\sunna_hai_kya\BROWN MUNDE - AP DHILLON GURINDER GILL SHINDA KAHLON GMINXR.mp3")
 
 
-    elif 'play my music' in queary:
+    elif 'play my music' in queary: 
         os.startfile(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya\AUD-20210421-WA0103 - Copy (2).mp3")
 
 
     elif 'delete unwanted files' in queary:
         alice.speak("Deleting unwanted files...")
-        unwantedFiles = [r"C:\Windows\Temp", r"C:\Users\ADMIN\AppData\Local\Temp", r"C:\Windows\Prefetch"]
-        for f in unwantedFiles:
-            for file in os.listdir(f):
-                try:
-                    os.remove(os.path.join(f , file))  
-                except PermissionError:
-                    pass
+        workWithFiles.deleteUnwantedFiles()        
 
 
-    elif "to kaise hain aap log" in queary:
+    elif "to kaise hain aap log" in queary:     # just for ha
         alice.speak("Hum thik hai bhai, Tum batao!..")
 
 
