@@ -226,7 +226,8 @@ def logic(queary):
     elif 'is i am audio able' in queary:
         speakRichard(random.choice(POSITIVE_REPLIES))
     
-    
+    elif 'testing' in queary:
+        speakRichard("Sir! Your voice is just quite fine")
 
     elif 'hello alice' in queary:
         speakRichard("Hello sir! how may I can help you.")
@@ -367,6 +368,10 @@ def logic(queary):
         speakRichard("Commit and then pushing the code in github repository....")
         login.initialCommit(os.getcwd())
     
+
+    elif 'git status' in queary:
+        os.system("git status")
+
 
     elif "what's the temperature" in queary:
         temperature = networks.weather()    # wanna back on this
