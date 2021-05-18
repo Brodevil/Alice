@@ -37,7 +37,6 @@ def reminder(magnitude, unit, pourpose):
                 break
 
     elif unit.lower() == "hours" or unit.lower() == "hour":
-        print("house reminding")
         remindTime = int(magnitude*60*60 + time.time())
         while(True):
             presentTime = int(time.time())
