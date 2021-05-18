@@ -204,7 +204,6 @@ def logic(queary):
         queary = queary.replace("i" , "you")
         magnitude = int(queary.split()[0])
         unit = queary.split()[1]
-        print(unit)
         alice.speak(f"Okay Sir! I will be reminding you after {magnitude} {unit}!")
         try:
             pourpose = queary.split("so that ")[1]
