@@ -13,7 +13,7 @@ import random
 import psutil
 import smtplib
 import subprocess
-from exts import reminder
+from exts import reminder                                                                         # noqa
 from exts import networks                                                                         # noqa
 from constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES                 # noqa
 from dotenv import load_dotenv
@@ -212,7 +212,6 @@ def logic(queary):
         edge("https://web.whatsapp.com/")
 
 
-    # elif 'open'
 
     elif 'open spotify' in queary:
         speakRichard("Opening Spotify.....")
