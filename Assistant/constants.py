@@ -68,6 +68,11 @@ class Client:
     internet = internetConnection()
 
 
+    # Few user Info :
+    musicDirectory = environ.get("MUSIC", r"C:\Users\ADMIN\Music")              # Music directory should be without space
+    
+
+
     if battery != None:
         battery_status = battery.percent
         battery_pugged = battery.power_plugged
