@@ -8,8 +8,10 @@ import wikipedia
 
 
 
+__all__ = ("intenetConnection", "localInfo", "weather", "news", "wiki")
 
 load_dotenv()
+
 
 
 
@@ -47,7 +49,7 @@ def weather(location=None, apikey=(environ.get("OpenWeatherMapApi"))):
             try:
                 response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={apikey}")
                 response = json.loads(response.text)
-                return f"It seemed to be approximately {int(response['main']['temp'] - 273.15)} degree Celcius! I guess its like {response['weather'][0]['main']} climate, and the wind speed is feels like {int(response['wind']['speed']*3.6)} kilometer per hour"
+                return f"It seemed to be approximately {int(response['main']['temp'] - 273.15)} degree Celcius! I guess its like {response['weather'][0]['main']}y outside the door, and the wind speed is feels like {int(response['wind']['speed']*3.6)} kilometer per hour"
             except ConnectionError:
                 return None
             except IndexError:
@@ -66,12 +68,14 @@ def news(apikey=environ.get("NewsApiKey")):
         return None
 
 
+
 def wiki(queary):
     try:
         results = wikipedia.summary(queary, sentences=2)
         return f"According to wikipedia. {results}"
     except Exception:
         return "Sorry! I didn't got that stuff in wikipedia"
+
 
 
 if __name__ == "__main__":
