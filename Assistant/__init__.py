@@ -5,13 +5,17 @@ import os
 import time
 import keyboard
 import random
+
 import psutil
 import smtplib
 import subprocess
+# from dotenv import load_dotenv
+
+
 from exts import reminder                                                                         # noqa
 from exts import networks                                                                         # noqa
 from constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client         # noqa
-# from dotenv import load_dotenv
+
 from exts import login                                                                            # noqa
 from Alice import alice                                                                           # noqa
 from exts import keyactivities                                                                    # noqa
@@ -253,12 +257,6 @@ def logic(queary):
         os.system("git status")
 
 
-    elif "what's the temperature" in queary:
-        temperature = networks.weather()    # wanna back on this
-        if temperature != None:
-            alice.speak(f"Its seemed to be approximately {temperature} degree celsius outside the door")
-
-
     elif "bye" in queary or 'kill yourself' in queary:
         alice.speak("That's it, I m quiting....")
         exit()
@@ -301,12 +299,20 @@ def logic(queary):
 
 
     elif 'wheter report' in queary:
-        alice.speak(Client.)
+        alice.speak(Client.weatherInfo)
 
 
     elif 'todays news' in queary:
         pass
+    
+    
 
+    elif "temperature" in queary or "weather report" in queary:
+        try:
+            alice.speak(Client.weatherInfo)
+        except:
+            alice.speak(random.choice(ERROR_REPLIES))
+        
     
 
     elif 'repeat myself' in queary:
@@ -357,6 +363,3 @@ if __name__ == "__main__":
     while True:
         queary = alice.takeCommand().lower()
         logic(queary)     # Logic for executin task based on query
-
-
-
