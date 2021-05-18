@@ -1,5 +1,7 @@
 import openpyxl
 import pprint
+import os
+
 
 
 def contactInfo(path):
@@ -19,6 +21,18 @@ def contactInfo(path):
                 records.append(content.value)
     records = {records[i]:[records[i+1], records[i+2]] for i in range(0, len(records)-1, 3)}
     return records
+
+
+
+def deleteUnwantedFiles():
+    unwantedFiles = [r"C:\Windows\Temp", r"C:\Users\ADMIN\AppData\Local\Temp", r"C:\Windows\Prefetch"]
+    for f in unwantedFiles:
+        for file in os.listdir(f):
+            try:
+                os.remove(os.path.join(f , file))  
+            except PermissionError:
+                pass
+
 
 
 if __name__ == "__main__":
