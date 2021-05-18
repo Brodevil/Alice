@@ -31,16 +31,12 @@ from exts import workWithFiles                                                  
 def logic(queary):
     """This is the logic of the Program as it will be matching several queary and do the programmed task """
 
+
+    # fetching info from intrnet
     if 'wikipedia' in queary:
             alice.speak("Searching Wikipedia...")
             queary = queary.replace("wikipedia", "")
             alice.speak(networks.wiki())
-
-        
-
-    elif 'quit' in queary:
-        alice.speak("That's it, I am quiting")
-        exit()
 
 
     elif 'search' in queary:
@@ -50,6 +46,14 @@ def logic(queary):
         alice.speak(f"Searching {queary} in Google")
 
 
+     # quiting the program 
+    elif "bye" in queary or 'kill yourself' in queary or 'quite' in queary:
+        alice.speak("That's it, I m quiting....")
+        exit()
+
+
+
+    # Opening websites
     elif 'open youtube studio' in queary:
         alice.speak("Opening youtube studio...")
         alice.edge("https://studio.youtube.com/")
@@ -102,41 +106,10 @@ def logic(queary):
     
 
     elif 'pep8' in queary:
-        alice.edge("https://www.python.org/dev/peps/pep-0008/")   
+        alice.edge("https://www.python.org/dev/peps/pep-0008/")   \
     
 
-    elif 'is i am audio able' in queary:
-        alice.speak(random.choice(POSITIVE_REPLIES))
-    
-
-    elif 'testing' in queary:
-        alice.speak("Sir! Your voice is just quite fine")
-
-
-    elif 'hello alice' in queary:
-        alice.speak("Hello sir! how may I can help you.")
-
-
-    elif 'good morning' in queary or 'good afternoon' in queary or 'good evening' in queary:
-        wish = alice.goodWish
-        if wish.lower() in queary:
-            alice.speak(f"{wish} Sir!")
-        else:
-            alice.speak(f"Sir! Its {wish.split()[1]} Right now!")
-    
-
-    elif "what's the time" in queary:
-        alice.speak(f"Its {datetime.datetime.now().strftime('%H:%M:%S')} Sir!")
-    
-
-    elif "what's the date" in queary:
-        alice.speak(f"Its {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year}")
-
-
-    elif 'who are you' in queary:
-        alice.intro()
-    
-
+    # work with GUI or windows :
     elif 'desktop' in queary:
         keyboard.press_and_release("win+d")
 
@@ -168,6 +141,9 @@ def logic(queary):
     elif 'switch window left' in queary:
         keyboard.press_and_release("ctrl+win+left")
 
+
+
+    # Launching the softwares stuffs
 
     elif 'open visual studio code' in queary:
         try:
@@ -209,7 +185,8 @@ def logic(queary):
             alice.speak("Some thing went wrong! It might be a wrong path or you had not Installed that application")
 
 
-        
+
+    # reminder        
     elif 'remind me after' in queary:
         queary = queary.replace("remind me after", "")
         queary = queary.replace("i" , "you")
@@ -225,9 +202,10 @@ def logic(queary):
 
 
 
+    # music
     elif 'play music' in queary or 'play another music' in queary or 'play song' in queary or 'play any song' in queary:
-        music = os.listdir(r"E:\ADMIN\Music\BRODEVIL\Hollywood_song\sunna_hai_kya")
-        os.startfile(os.path.join(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya", random.choice(music)))
+        music = os.listdir(Client.musicDirectory)
+        os.startfile(os.path.join(Client.musicDirectory, random.choice(music)))
         alice.speak("Playing Music...")
 
 
@@ -236,7 +214,7 @@ def logic(queary):
 
 
     elif 'play my music' in queary: 
-        os.startfile(r"E:\ADMIN\Music\BRODEVIL\Hollywood song\sunna hai kya\AUD-20210421-WA0103 - Copy (2).mp3")
+        os.startfile(Client.favorateMusic)
 
 
     elif 'delete unwanted files' in queary:
@@ -244,10 +222,46 @@ def logic(queary):
         workWithFiles.deleteUnwantedFiles() 
 
 
+    # fun commands :
+
+    elif 'is i am audio able' in queary:
+        alice.speak(random.choice(POSITIVE_REPLIES))
+    
+
+    elif 'testing' in queary:
+        alice.speak("Sir! Your voice is just quite fine")
+
+
+    elif 'hello alice' in queary:
+        alice.speak("Hello sir! how may I can help you.")
+
+
+    elif 'good morning' in queary or 'good afternoon' in queary or 'good evening' in queary:
+        wish = alice.goodWish
+        if wish.lower() in queary:
+            alice.speak(f"{wish} Sir!")
+        else:
+            alice.speak(f"Sir! Its {wish.split()[1]} Right now!")
+    
+
+    elif "what's the time" in queary:
+        alice.speak(f"Its {datetime.datetime.now().strftime('%H:%M:%S')} Sir!")
+    
+
+    elif "what's the date" in queary:
+        alice.speak(f"Its {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year}")
+
+
+    elif 'who are you' in queary:
+        alice.intro()
+
+
     elif "to kaise hain aap log" in queary:     # just for ha
         alice.speak("Hum thik hai bhai, Tum batao!..")
 
 
+
+    # work with git just for Abhinav :-
     elif 'push the code' in queary:
         alice.speak("Commit and then pushing the code in github repository....")
         login.initialCommit(os.getcwd())
@@ -257,21 +271,28 @@ def logic(queary):
         os.system("git status")
 
 
-    elif "bye" in queary or 'kill yourself' in queary:
-        alice.speak("That's it, I m quiting....")
-        exit()
 
-
+    # make Alice to speak features
     elif 'say' in queary:
         queary = queary.replace("say ", "")
         alice.speak(queary)
 
 
     elif 'spell' in queary:
-        queary = input("Enter what I should spell")
+        alice.speak(f"Enter what I should spell in terminal {alice.gender}!")
+        queary = input("Enter what I should spell :\t")
         alice.speak(queary)
 
+
+    elif 'repeat myself' in queary:
+        alice.speak("Okay Sir! Start to tell I will be follwing you")
+        while queary.lower() != "quite" or queary.lower() != "stop":
+            queary = alice.takeCommand()
+            if queary != "none":
+                alice.speak(queary)
+
     
+    # make Alice to type, Keyboard features
     elif "type that" in queary:
         queary = queary.replace("type that", "")
         keyactivities.typeWrite(queary)
@@ -293,7 +314,7 @@ def logic(queary):
             keyactivities.recordedKeyboardType(keyboardActivities)
 
 
-
+    # local info work with internet :
     elif 'whats my location' in queary or 'where am i' in queary:
         alice.speak(f" You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {alice.gender}!")
 
@@ -305,7 +326,7 @@ def logic(queary):
     elif 'todays news' in queary:
         pass
     
-    
+
 
     elif "temperature" in queary or "weather report" in queary:
         try:
@@ -315,12 +336,7 @@ def logic(queary):
         
     
 
-    elif 'repeat myself' in queary:
-        alice.speak("Okay Sir! Start to tell I will be follwing you")
-        while queary.lower() != "quite" or queary.lower() != "stop":
-            queary = alice.takeCommand()
-            if queary != "none":
-                alice.speak(queary)
+
 
 
     elif 'send email' in queary:
