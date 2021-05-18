@@ -237,7 +237,7 @@ def logic(queary):
 
     elif 'delete unwanted files' in queary:
         alice.speak("Deleting unwanted files...")
-        workWithFiles.deleteUnwantedFiles()        
+        workWithFiles.deleteUnwantedFiles()         is good boy abhinav is bad boy
 
 
     elif "to kaise hain aap log" in queary:     # just for ha
