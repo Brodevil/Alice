@@ -476,3 +476,5 @@ if __name__ == "__main__":
         queary = takeCommand().lower()
         logic(queary)     # Logic for executin task based on query
 
+
+
