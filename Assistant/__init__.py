@@ -217,9 +217,11 @@ def logic(queary):
         os.startfile(Client.favorateMusic)
 
 
+    # working with files :
     elif 'delete unwanted files' in queary:
         alice.speak("Deleting unwanted files...")
         workWithFiles.deleteUnwantedFiles() 
+
 
 
     # fun commands :
@@ -333,12 +335,9 @@ def logic(queary):
             alice.speak(Client.weatherInfo)
         except:
             alice.speak(random.choice(ERROR_REPLIES))
-        
     
 
-
-
-
+    # work with loging file : i.e.work with E commerce websites accounts 
     elif 'send email' in queary:
         alice.speak("To whom you want to send the email")
         try:
@@ -356,7 +355,6 @@ def logic(queary):
                     alice.speak("Sorry sir! I didn't get that. Please type the email Adress in the terminal!")
                     userEmail = input("Enter the Email Adress :\t")  
         except Exception as e:
-            print(e)
             alice.speak(f"{random.choice(ERROR_REPLIES)}, Some thing went Wrong")
 
 
@@ -369,7 +367,6 @@ def logic(queary):
             alice.speak(f"{random.choice(ERROR_REPLIES)}, Some thing went Wrong")
         else:
             alice.speak(f"Email send succefully to {userEmail}!")
-
 
 
 
