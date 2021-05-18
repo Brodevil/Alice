@@ -13,7 +13,7 @@ import random
 import psutil
 import smtplib
 import subprocess
-from Assistant.exts import reminder
+from exts import reminder
 from exts import networks                                                                         # noqa
 from constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES                 # noqa
 from dotenv import load_dotenv
