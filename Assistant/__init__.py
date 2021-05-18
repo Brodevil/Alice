@@ -10,7 +10,7 @@ import smtplib
 import subprocess
 from exts import reminder                                                                         # noqa
 from exts import networks                                                                         # noqa
-from constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES                 # noqa
+from constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client         # noqa
 # from dotenv import load_dotenv
 from exts import login                                                                            # noqa
 from Alice import alice                                                                           # noqa
@@ -297,20 +297,17 @@ def logic(queary):
 
 
     elif 'whats my location' in queary or 'where am i' in queary:
-        pass
+        alice.speak(f" You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {alice.gender}!")
 
 
     elif 'wheter report' in queary:
-        pass
+        alice.speak(Client.)
 
 
     elif 'todays news' in queary:
         pass
 
     
-    elif 'contact' in queary:
-        pass
-
 
     elif 'repeat myself' in queary:
         alice.speak("Okay Sir! Start to tell I will be follwing you")
