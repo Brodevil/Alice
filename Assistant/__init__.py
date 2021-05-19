@@ -255,6 +255,10 @@ def logic(queary):
     elif 'who are you' in queary:
         alice.intro()
 
+    
+    elif "what's my name" in queary or "what is my name" in queary or "who i am" in queary:
+        alice.speak(f"You are {alice.name} {alice.gender}!")
+
 
     elif "to kaise hain aap log" in queary:     # just for ha
         alice.speak("Hum thik hai bhai, Tum batao!..")
@@ -346,7 +350,7 @@ def logic(queary):
 
 
     # local info work with internet :
-    elif 'whats my location' in queary or 'where am i' in queary:
+    elif 'whats my location' in queary or 'where am i' in queary or 'where i am' in queary:
         alice.speak(f" You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {alice.gender}!")
 
 
