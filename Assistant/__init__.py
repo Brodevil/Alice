@@ -282,7 +282,13 @@ def logic(queary):
 
     elif 'internet' in queary:
         if Client.internet:
-            alice.speak("Yes sir! Internet is connected")
+            alice.speak("Yes sir! Internet is connected")\
+
+
+    elif 'system' in queary or 'computer info' in queary:
+        alice.speak(f"Its a {Client.computerInfo['System']} {Client.computerInfo['Release']}, A {Client.computerInfo['Machine'][-2:-1]}bit Machine, Version {Client.computerInfo['Version']}, Node user name is {Client.computerInfo['Node name']}. {Client.computerInfo['Processor']} Processor.")
+
+
 
 
     # work with git just for Abhinav :-
