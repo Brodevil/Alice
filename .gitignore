@@ -34,7 +34,10 @@ contactinfo.xlsx
 
 # Cached files & Folders
 *.pyc 
-Assistant/__pycache__
-Assistant/pywhatkit_dbs.txt
-*.pyc 
+
+
+/Assistant/__pycache__/
+/Assistant/pywhatkit_dbs.txt
+/Assistant/exts/__pycache__/
+
 
