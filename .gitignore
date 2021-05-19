@@ -33,11 +33,11 @@ rough.py
 contactinfo.xlsx
 
 # Cached files & Folders
-*.pyc 
+**.pyc 
 
 
-/Assistant/__pycache__/
-/Assistant/pywhatkit_dbs.txt
-/Assistant/exts/__pycache__/
+**/Assistant/__pycache__/
+**/Assistant/pywhatkit_dbs.txt
+**/Assistant/exts/__pycache__/
 
 
