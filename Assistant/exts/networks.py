@@ -63,7 +63,7 @@ def news(apikey=environ.get("NewsApiKey")):
     try:
         response = requests.get(f"https://newsapi.org/v2/top-headlines?sources=the-times-of-india&apikey={apikey}")
         json_data = json.loads(response.text)
-        return json_data
+        return json_data['articles']
     except ConnectionError:
         return None
 
