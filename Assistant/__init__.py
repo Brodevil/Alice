@@ -1,6 +1,4 @@
 import datetime
-import wikipedia
-import webbrowser
 import os
 import time
 import keyboard
@@ -295,9 +293,10 @@ def logic(queary):
 
     
     # make Alice to type, Keyboard features
-    elif "type that" in queary:
-        queary = queary.replace("type that", "")
+    elif "type that" in queary or "send that" in queary:
+        queary = queary.split("that")[1]
         keyactivities.typeWrite(queary)
+        keyboard.press("enter")
     
 
     elif 'record keyboard' in queary:
@@ -379,7 +378,7 @@ def logic(queary):
 
 if __name__ == "__main__":
     alice.intro()
-    # # if 1:
     while True:
         queary = alice.takeCommand().lower()
-        logic(queary)     # Logic for executin task based on query
+        if queary != "none":
+            logic(queary)     # Logic for executin task based on query
