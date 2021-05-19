@@ -290,7 +290,7 @@ def logic(queary):
 
 
     elif 'system' in queary or 'computer info' in queary:
-        alice.speak(f"Its a {Client.computerInfo['System']} {Client.computerInfo['Release']}, A {Client.computerInfo['Machine'][-2:-1]}bit Machine, Version {Client.computerInfo['Version']}, Node user name is {Client.computerInfo['Node name']}. {Client.computerInfo['Processor']} Processor.")
+        alice.speak(f"Its a {Client.computerInfo['System']} {Client.computerInfo['Release']}, A {Client.computerInfo['Machine'][-3:-1]} bit Machine, Version {Client.computerInfo['Version']}, Admin user is {Client.computerInfo['Node name']}. {Client.computerInfo['Processor']} Processor.")
 
 
 
@@ -354,11 +354,7 @@ def logic(queary):
         alice.speak(f" You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {alice.gender}!")
 
 
-    elif 'wheter report' in queary:
-        alice.speak(Client.weatherInfo)
-
-
-    elif 'todays news' in queary:
+    elif 'news' in queary:
         topTen = networks.news()
         if topTen is not None:
             for articles in topTen:
@@ -368,6 +364,10 @@ def logic(queary):
             alice.speak("Thank you for listening")
     
 
+    elif 'weather report of' in queary:
+        place = queary.split("of")[1]
+        alice.speak(networks.weather(place))
+    
 
     elif "temperature" in queary or "weather report" in queary:
         try:
@@ -410,9 +410,14 @@ def logic(queary):
 
 
 
-    elif 'weather report of' in queary:
-        place = queary.split("of")[1]
-        alice.speak(networks.weather(queary))
+
+
+
+
+
+
+
+
 
 
 
