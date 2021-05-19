@@ -326,7 +326,13 @@ def logic(queary):
 
 
     elif 'todays news' in queary:
-        pass
+        topTen = networks.news()
+        if topTen is not None:
+            for articles in topTen:
+                print(f"For more info... Go to ==>>> {articles['url']}\n")
+                alice.speak(f"Title; {articles['title']}. \nDiscription; {articles['description']}. Actually; {articles['content']}\n")
+                alice.speak("Moving On next news!")
+            alice.speak("Thank you for listening")
     
 
 
