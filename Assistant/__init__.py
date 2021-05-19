@@ -10,14 +10,14 @@ import subprocess
 # from dotenv import load_dotenv
 
 
-from exts import reminder                                                                         # noqa
-from exts import networks                                                                         # noqa
-from constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client         # noqa
+from Assistant.exts import reminder                                                                         # noqa
+from Assistant.exts import networks                                                                         # noqa
+from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client         # noqa
 
-from exts import login                                                                            # noqa
-from Alice import alice                                                                           # noqa
-from exts import keyactivities                                                                    # noqa
-from exts import workWithFiles                                                                    # noqa
+from Assistant.exts import login                                                                            # noqa
+from Assistant.Alice import alice                                                                           # noqa
+from Assistant.exts import keyactivities                                                                    # noqa
+from Assistant.exts import workWithFiles                                                                    # noqa
 
 
 
@@ -260,6 +260,19 @@ def logic(queary):
         alice.speak("Hum thik hai bhai, Tum batao!..")
 
 
+    # Hardware Features:
+    elif 'cpu' in queary or "cpu status" in queary or 'processor' in queary or 'processing' in queary:
+        alice.speak(f"CPU used : {Client.cpu_status}%")
+
+    elif 'battery' in queary:
+        alice.speak(f"Battery is {Client.battery_status}% Charged! " + ("And its still in charging." if Client.battery_pugged else ""))
+
+    elif 'memory' in queary or 'ram' in queary:
+        alice.speak(f"Memory Used : {Client.memory_status}%")
+
+    elif 'storage' in queary or 'hard drive' in queary:
+        alice.speak(i for i in Client.storage.items())
+
 
     # work with git just for Abhinav :-
     elif 'push the code' in queary:
@@ -376,9 +389,10 @@ def logic(queary):
 
 
 
-if __name__ == "__main__":
-    alice.intro()
-    while True:
-        queary = alice.takeCommand().lower()
-        if queary != "none":
-            logic(queary)     # Logic for executin task based on query
+
+# Running part of the Alice Program
+alice.intro()
+while True:
+    queary = alice.takeCommand().lower()
+    if queary != "none":
+        logic(queary)     # Logic for executin task based on query
