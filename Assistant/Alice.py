@@ -7,9 +7,9 @@ from os import environ
 import pprint
 from dotenv import load_dotenv
 import speech_recognition as sr 
-from exts.networks import localInfo                                                 # noqa
+from Assistant.exts.networks import localInfo                                                 # noqa
 import webbrowser                                                                 
-from constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client             # noqa
+from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client             # noqa
 
 
 
