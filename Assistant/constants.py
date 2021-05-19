@@ -1,7 +1,7 @@
 from os import environ
 from dotenv import load_dotenv
 import pyttsx3
-from exts.networks import localInfo, weather, internetConnection                                 # noqa
+from Assistant.exts.networks import localInfo, weather, internetConnection                                 # noqa
 import shutil
 import psutil
 import string
