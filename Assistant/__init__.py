@@ -246,11 +246,11 @@ def logic(queary):
             alice.speak(f"Sir! Its {wish.split()[1]} Right now!")
     
 
-    elif "what's the time" in queary:
+    elif "time" in queary:
         alice.speak(f"Its {datetime.datetime.now().strftime('%H:%M:%S')} Sir!")
     
 
-    elif "what's the date" in queary:
+    elif "date" in queary:
         alice.speak(f"Its {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year}")
 
 
