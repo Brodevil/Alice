@@ -229,10 +229,10 @@ def logic(queary):
     
 
     elif 'testing' in queary:
-        alice.speak("Sir! Your voice is just quite fine")
+        alice.speak(f"Hello sir! {random.choice(POSITIVE_REPLIES)}")
 
 
-    elif 'hello alice' in queary:
+    elif 'hello' in queary:
         alice.speak("Hello sir! how may I can help you.")
 
 
@@ -260,28 +260,45 @@ def logic(queary):
         alice.speak("Hum thik hai bhai, Tum batao!..")
 
 
+
     # Hardware Features:
     elif 'cpu' in queary or "cpu status" in queary or 'processor' in queary or 'processing' in queary:
         alice.speak(f"CPU used : {Client.cpu_status}%")
 
+
     elif 'battery' in queary:
-        alice.speak(f"Battery is {Client.battery_status}% Charged! " + ("And its still in charging." if Client.battery_pugged else ""))
+        try:
+            alice.speak(f"Battery is {Client.battery_status}% Charged! " + ("And its still in charging." if Client.battery_pugged else ""))
+        except Exception:
+            alice.speak(f"Something went wrong {random.choice(ERROR_REPLIES)}. I think you are in desktop")
 
     elif 'memory' in queary or 'ram' in queary:
         alice.speak(f"Memory Used : {Client.memory_status}%")
 
+
     elif 'storage' in queary or 'hard drive' in queary:
-        alice.speak(i for i in Client.storage.items())
+        alice.speak(f"Total available Storage {Client.storage['Total']} GB, Used : {Client.storage['Used']} GB, Free : {Client.storage['Free']}")
+
+
+    elif 'internet' in queary:
+        if Client.internet:
+            alice.speak("Yes sir! Internet is connected")
 
 
     # work with git just for Abhinav :-
     elif 'push the code' in queary:
-        alice.speak("Commit and then pushing the code in github repository....")
-        login.initialCommit(os.getcwd())
+        try:
+            alice.speak("Commit and then pushing the code in github repository....")
+            login.initialCommit(os.getcwd())
+        except Exception:
+            alice.speak(f"Something went wrong! {random.choice(ERROR_REPLIES)}")
     
 
     elif 'git status' in queary:
-        os.system("git status")
+        try:
+            os.system("git status")
+        except Exception:
+            alice.speak(f"Something went wrong! {random.choice(ERROR_REPLIES)}")
 
 
 
@@ -296,13 +313,6 @@ def logic(queary):
         queary = input("Enter what I should spell :\t")
         alice.speak(queary)
 
-
-    elif 'repeat myself' in queary:
-        alice.speak("Okay Sir! Start to tell I will be follwing you")
-        while queary.lower() != "quite" or queary.lower() != "stop":
-            queary = alice.takeCommand()
-            if queary != "none":
-                alice.speak(queary)
 
     
     # make Alice to type, Keyboard features
@@ -326,6 +336,7 @@ def logic(queary):
             alice.speak("Okay Sir! Playing the keyboard Activiy recording, Note that have to put the cursor where you want to play it.")
             time.sleep(7)
             keyactivities.recordedKeyboardType(keyboardActivities)
+
 
 
     # local info work with internet :
@@ -386,6 +397,14 @@ def logic(queary):
             alice.speak(f"{random.choice(ERROR_REPLIES)}, Some thing went Wrong")
         else:
             alice.speak(f"Email send succefully to {userEmail}!")
+
+
+
+    elif 'weather report of' in queary:
+        place = queary.split("of")[1]
+        alice.speak(networks.weather(queary))
+
+
 
 
 
