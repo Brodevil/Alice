@@ -1,6 +1,7 @@
 from os import environ
 from dotenv import load_dotenv
 import pyttsx3
+import platform
 from Assistant.exts.networks import localInfo, weather, internetConnection                                 # noqa
 import shutil
 import psutil
@@ -35,6 +36,7 @@ load_dotenv()
 storageInfo = Storage()
 engine = pyttsx3.init()
 localInformation = localInfo()
+userSystem = platform.uname()
 try:
     battery = psutil.sensors_battery()
 except Exception:
@@ -68,7 +70,8 @@ class Client:
     memory_status = psutil.virtual_memory().percent     # Used memory in percentage
     cpu_status = psutil.cpu_percent()   # cpu uses in percentage 
     internet = internetConnection()
-
+    computerInfo = {"System" : userSystem.system, "Node name" : userSystem.node, "Release" : userSystem.release, "Version" : userSystem.version, "Machine" : userSystem.machine, "Processor" : userSystem.processor}
+    
 
     # Few user Info :
     musicDirectory = environ.get("MUSIC", r"C:\Users\ADMIN\Music")              # Music directory should be without space
