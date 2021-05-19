@@ -5,11 +5,13 @@
 # vs code files
 /.vscode
 
-# pytcharm files
+
+# pycharm files
 /.idea
 
 # environmetn files
 *.env
+
 
 # logs 
 .log
@@ -22,9 +24,16 @@ rough.py
 # Exel data files
 *.xlsx
 
+
 # pdf files
 *.pdf
 
 
 # personal contact info
 contactinfo.xlsx
+
+# Cached files & Folders
+*.pyc 
+Assistant/__pycache__
+
+Assistant/pywhatkit_dbs.txt
