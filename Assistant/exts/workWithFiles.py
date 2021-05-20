@@ -43,7 +43,9 @@ def openApplication(ApplicationName, installedApplicationPath):
             if name.lower() in app[:-4].lower().split():
                 print(f"Condition statisfied {name} and {app}")
                 os.startfile(os.path.join(installedApplicationPath, app))
-                break
+                return os.path.join(installedApplicationPath, app)
+    else:
+        return None
         
 
 
