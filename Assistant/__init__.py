@@ -47,9 +47,9 @@ def logic(queary):
 
 
      # quiting the program 
-    elif "bye" in queary or 'kill yourself' in queary or 'quite' in queary:
+    elif "bye" in queary or 'kill yourself' in queary or 'quit' in queary:
         alice.speak("That's it, I m quiting....")
-        sys.exit()
+        sys.exit(0)
 
 
 
@@ -116,7 +116,7 @@ def logic(queary):
 
     elif 'lock pc' in queary or "lock the pc" in queary:   
         os.system("rundll32.exe user32.dll, LockWorkStation")
-        sys.exit()
+        sys.exit(0)
 
 
     elif 'shutdown pc' in queary:
