@@ -143,49 +143,6 @@ def logic(queary):
 
 
 
-    # Launching the softwares stuffs
-
-    elif 'open visual studio code' in queary:
-        try:
-            alice.speak("Opening vs code...")
-            os.startfile(r"E:\Programe File (x83)\Microsoft VS Code\Code.exe")
-        except Exception:
-            alice.speak("Some thing went wrong! It might be a wrong path or you had not Installed that application")
-
-
-    elif 'open sublime text' in queary:     # this command is also just for Abhinav, as He have sublime text
-        try:
-            alice.speak("Opening Sublime Text")
-            os.startfile(r"E:\Programe File (x83)\Sublime Text 3\sublime_text.exe")
-        except Exception:
-            alice.speak("Some thing went wrong! It might be a wrong path or you had not Installed that application")
-
-
-    elif "open discord application" in queary:
-        try:
-            os.startfile(r"E:\Programe File (x83)\Discord\app-0.0.309\Discord.exe")
-            alice.speak("Opening Discord Application")
-        except Exception:
-            alice.speak("Some thing went wrong! It might be a wrong path or you had not Installed that application")
-        
-    
-    elif "open file explorer" in queary:
-        try:
-            subprocess.Popen(r'explorer /select,"C:\path\of\folder\file"')
-            alice.speak("Opening File Explorer...")
-        except Exception:
-            alice.speak("Some thing went Wrong")
-
-
-    elif "open rapid typing" in queary:
-        try:
-            os.startfile(r"E:\Programe File (x83)\Typing Course\RapidTyping.exe")
-            alice.speak("Opening Rapid Typing...")
-        except Exception:
-            alice.speak("Some thing went wrong! It might be a wrong path or you had not Installed that application")
-
-
-
     # reminder        
     elif 'remind me after' in queary:
         queary = queary.replace("remind me after", "")
@@ -412,6 +369,70 @@ def logic(queary):
             alice.speak(f"Email send succefully to {userEmail}!")
 
 
+    
+    elif "read book" in queary or "audio book" in queary or "speak pdf" in queary or "read pdf" in queary:
+        pass
+
+
+
+     # Launching the softwares stuffs
+
+    elif 'open' in queary or 'launch' in queary:
+        if "open" in queary:
+            applicationName = queary.split("open ")
+        elif 'launch' in queary:
+            applicationName = queary.split("launch ")
+
+
+         # the second argument is the releated path of the folder where all the used or usale software shortcuts are avaialbe by the user
+        app = workWithFiles.openApplication(applicationName, "Application") 
+        if app != None:
+            alice.speak(f"Launching {app} Application...")     
+        else:
+            alice.speak(f"Sorry! {applicationName} shortcut didn't got in the Application folder. Please put the shortcuts of all the application do \
+            you use in day to day life in Application folder, Which is in this project folder.")
+
+
+
+    elif 'open visual studio code' in queary:
+        try:
+            alice.speak("Opening vs code...")
+            os.startfile(r"E:\Programe File (x83)\Microsoft VS Code\Code.exe")
+        except Exception:
+            alice.speak("Some thing went wrong! It might be a wrong path or you had not Installed that application")
+
+
+    elif 'open sublime text' in queary:     # this command is also just for Abhinav, as He have sublime text
+        try:
+            alice.speak("Opening Sublime Text")
+            os.startfile(r"E:\Programe File (x83)\Sublime Text 3\sublime_text.exe")
+        except Exception:
+            alice.speak("Some thing went wrong! It might be a wrong path or you had not Installed that application")
+
+
+    elif "open discord application" in queary:
+        try:
+            os.startfile(r"E:\Programe File (x83)\Discord\app-0.0.309\Discord.exe")
+            alice.speak("Opening Discord Application")
+        except Exception:
+            alice.speak("Some thing went wrong! It might be a wrong path or you had not Installed that application")
+        
+    
+    
+    elif "open file explorer" in queary or "this pc" in queary:
+        try:
+            subprocess.Popen(r'explorer /select,"C:\path\of\folder\file"')
+            alice.speak("Opening File Explorer...")
+        except Exception:
+            alice.speak("Some thing went Wrong")
+
+
+    elif "open rapid typing" in queary:
+        try:
+            os.startfile(r"E:\Programe File (x83)\Typing Course\RapidTyping.exe")
+            alice.speak("Opening Rapid Typing...")
+        except Exception:
+            alice.speak("Some thing went wrong! It might be a wrong path or you had not Installed that application")
 
 
 
