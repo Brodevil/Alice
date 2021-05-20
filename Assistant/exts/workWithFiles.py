@@ -4,6 +4,7 @@ import os
 
 
 
+
 def contactInfo(path):
     """Read the Exel file using openpyxl and return the dictionary containing email id and phone number """
 
@@ -36,17 +37,16 @@ def deleteUnwantedFiles():
 
 
 def openApplication(ApplicationName, installedApplicationPath):
+    """ To match to queary with the available application in the Application folder i.e. the .lnk files
+    And opening or launching the most matching queary name of applications """
+
     installed_application_shortcut_path = os.listdir(installedApplicationPath)
     
     for app in installed_application_shortcut_path:
         for name in ApplicationName.split():
             if name.lower() in app[:-4].lower().split():
-                print(f"Condition statisfied {name} and {app}")
                 os.startfile(os.path.join(installedApplicationPath, app))
-                return os.path.join(installedApplicationPath, app)
-    else:
-        return None
-        
+                return
 
 
 
