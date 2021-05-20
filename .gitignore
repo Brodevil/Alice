@@ -33,13 +33,15 @@ rough.py
 # personal contact info
 contactinfo.xlsx
 
-# Cached files & Folders
+# Cached python files extensions
 **.pyc 
 
 
 # The shortcut files for the Application folder : 
 *.ink 
 
+
+# Cached folders
 **/Assistant/__pycache__/
 **/Assistant/pywhatkit_dbs.txt
 **/Assistant/exts/__pycache__/
