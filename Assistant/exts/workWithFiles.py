@@ -35,5 +35,20 @@ def deleteUnwantedFiles():
 
 
 
+def openApplication(ApplicationName, installedApplicationPath):
+    installed_application_shortcut_path = os.listdir(installedApplicationPath)
+    
+    for app in installed_application_shortcut_path:
+        for name in ApplicationName.split():
+            if name.lower() in app[:-4].lower().split():
+                print(f"Condition statisfied {name} and {app}")
+                os.startfile(os.path.join(installedApplicationPath, app))
+                break
+        
+
+
+
 if __name__ == "__main__":
+    # openApplication("code", "Applications")
     pass
+    
