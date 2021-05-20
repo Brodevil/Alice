@@ -9,6 +9,7 @@
 # pycharm files
 /.idea
 
+
 # environmetn files
 *.env
 
@@ -35,6 +36,9 @@ contactinfo.xlsx
 # Cached files & Folders
 **.pyc 
 
+
+# The shortcut files for the Application folder : 
+*.ink 
 
 **/Assistant/__pycache__/
 **/Assistant/pywhatkit_dbs.txt
