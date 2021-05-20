@@ -3,11 +3,12 @@ import os
 import time
 import keyboard
 import random
+import sys 
 
 import psutil
 import smtplib
 import subprocess
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 
 
 from Assistant.exts import reminder                                                                         # noqa
@@ -21,7 +22,7 @@ from Assistant.exts import workWithFiles                                        
 
 
 
-
+__all__ = ("logic")
 
 # load_dotenv()
 
@@ -39,15 +40,16 @@ def logic(queary):
 
     elif 'search' in queary:
         queary = queary.replace("search", "")
+        alice.speak(f"Searching {queary} in Google")
         queary = queary.replace(" ", "%20")
         alice.edge(f"https://www.google.com/search?q={queary}")
-        alice.speak(f"Searching {queary} in Google")
+        
 
 
      # quiting the program 
     elif "bye" in queary or 'kill yourself' in queary or 'quite' in queary:
         alice.speak("That's it, I m quiting....")
-        exit()
+        sys.exit()
 
 
 
@@ -114,7 +116,7 @@ def logic(queary):
 
     elif 'lock pc' in queary or "lock the pc" in queary:   
         os.system("rundll32.exe user32.dll, LockWorkStation")
-        exit()
+        sys.exit()
 
 
     elif 'shutdown pc' in queary:
@@ -257,7 +259,7 @@ def logic(queary):
 
     
     elif "what's my name" in queary or "what is my name" in queary or "who i am" in queary:
-        alice.speak(f"You are {alice.name} {alice.gender}!")
+        alice.speak(f"You are {alice.name} {alice.gender}!, But why did you are asking this?")
 
 
     elif "to kaise hain aap log" in queary:     # just for ha
@@ -276,12 +278,13 @@ def logic(queary):
         except Exception:
             alice.speak(f"Something went wrong {random.choice(ERROR_REPLIES)}. I think you are in desktop")
 
+
     elif 'memory' in queary or 'ram' in queary:
         alice.speak(f"Memory Used : {Client.memory_status}%")
 
 
     elif 'storage' in queary or 'hard drive' in queary:
-        alice.speak(f"Total available Storage {Client.storage['Total']} GB, Used : {Client.storage['Used']} GB, Free : {Client.storage['Free']}")
+        alice.speak(f"Total available Storage : {Client.storage['Total']} GB, Used : {Client.storage['Used']} GB, Free : {Client.storage['Free']} GB")
 
 
     elif 'internet' in queary:
@@ -424,9 +427,4 @@ def logic(queary):
 
 
 
-# Running part of the Alice Program
-alice.intro()
-while True:
-    queary = alice.takeCommand().lower()
-    if queary != "none":
-        logic(queary)     # Logic for executin task based on query
+
