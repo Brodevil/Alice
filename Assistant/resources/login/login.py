@@ -5,7 +5,7 @@ import ssl
 import pywhatkit
 
 
-__all__ = ("sendEmail", "sendWhatsappMessage", "readWhatsappMessage", "initialCommit")
+__all__ = ("sendEmail", "initialCommit")
 load_dotenv()
 
 
