@@ -39,6 +39,7 @@ contactinfo.xlsx
 
 # The shortcut files for the Application folder : 
 *.lnk
+*.ini
 
 
 # Cached folders
