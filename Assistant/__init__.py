@@ -43,8 +43,12 @@ def logic(queary):
         alice.speak(f"Searching {queary} in Google")
         queary = queary.replace(" ", "%20")
         alice.edge(f"https://www.google.com/search?q={queary}")
-        
 
+
+    elif "youtube" in queary and "search" in queary:
+        search = queary.split("youtube")[-1]
+        alice.edge(f"https://www.youtube.com/results?search_query={search.replace(' ', '+')}")
+        
 
      # quiting the program 
     elif "bye" in queary or 'kill yourself' in queary or 'quit' in queary:
@@ -160,7 +164,7 @@ def logic(queary):
 
 
     # music
-    elif 'play music' in queary or 'play another music' in queary or 'play song' in queary or 'play any song' in queary:
+    elif 'play' in queary and 'song' in queary or 'music' in queary:
         music = os.listdir(Client.musicDirectory)
         os.startfile(os.path.join(Client.musicDirectory, random.choice(music)))
         alice.speak("Playing Music...")
@@ -170,7 +174,7 @@ def logic(queary):
         os.startfile(r"E:\ADMIN\Music\BRODEVIL\Hollywood_song\sunna_hai_kya\BROWN MUNDE - AP DHILLON GURINDER GILL SHINDA KAHLON GMINXR.mp3")
 
 
-    elif 'play my music' in queary: 
+    elif 'play' in queary and "my" in queary and "music" in queary or "song": 
         os.startfile(Client.favorateMusic)
 
 
@@ -222,6 +226,14 @@ def logic(queary):
     elif "to kaise hain aap log" in queary:     # just for ha
         alice.speak("Hum thik hai bhai, Tum batao!..")
 
+    
+    elif "yalghar" in queary:
+        alice.edge("https://www.youtube.com/watch?v=zzwRbKI2pn4")
+
+
+    elif 'radhe' in queary:
+        alice.edge("")
+
 
 
     # Hardware Features:
@@ -236,7 +248,7 @@ def logic(queary):
             alice.speak(f"Something went wrong {random.choice(ERROR_REPLIES)}. I think you are in desktop")
 
 
-    elif 'memory' in queary or 'ram' in queary:
+    elif 'memory' in queary or 'ram' in queary.split():
         alice.speak(f"Memory Used : {Client.memory_status}%")
 
 
