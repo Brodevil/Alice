@@ -176,9 +176,9 @@ class Alice:
                     content = next_page.extractText()
                     full_Text+=content
                     
-                    
-                
+
                 audiofile = pdfPath.replace(".pdf", ".mp3")
+                
                 #  To save the voice in a mp3 file, but the problem is that, the large books are not able to be save to file 
                 # audio_reader.save_to_file(content, audiofile)
 
