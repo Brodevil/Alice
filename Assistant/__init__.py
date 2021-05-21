@@ -378,10 +378,12 @@ def logic(queary):
         try:
             alice.speak(f"{alice.gender}! The audio file had created in that same path with same name.")
             os.startfile(audioFile)
+        except Exception:
+            pass
 
 
 
-     # Launching the softwares stuffs
+    # Launching the softwares stuffs
 
     elif 'open' in queary or 'launch' in queary:
         if "open" in queary:
@@ -390,7 +392,7 @@ def logic(queary):
             applicationName = queary.split("launch ")
 
 
-         # the second argument is the releated path of the folder where all the used or usale software shortcuts are avaialbe by the user
+            # the second argument is the releated path of the folder where all the used or usale software shortcuts are avaialbe by the user
         app = workWithFiles.openApplication(applicationName, "Application") 
         if app != None:
             alice.speak(f"Launching {app} Application...")     
