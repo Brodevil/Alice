@@ -26,8 +26,9 @@ def audioBook(pdfPath, fromPageNo=0):
         # audio_reader.save_to_file(content, audiofile)
         # audio_reader.runAndWait()
         # return audiofile
-
-    print(full_Text)
+    # print(full_Text)
+    with open("op.txt", "wt") as file:
+        file.write(str(full_Text))
 
 if __name__ == "__main__":
     audioBook(r"M:\ADMIN\Critical Data\VS-Code\Alice\Assistant\media\Machine Learning.pdf", 23)
