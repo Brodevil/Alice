@@ -15,9 +15,11 @@
 
 
 # unwanted file formats
-.log
+*.log
 *.pdf
 *.xlsx
+*.mp3
+*.mp4
 
 
 # Python rought works
