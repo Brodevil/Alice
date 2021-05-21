@@ -4,6 +4,7 @@ import datetime
 import time
 import pyttsx3
 from os import environ
+import PyPDF2                                                                   # noqa
 import pprint
 from dotenv import load_dotenv
 import speech_recognition as sr 
@@ -151,14 +152,33 @@ class Alice:
 
 
 
+    def audioBook(self, pdfPath):
+        """ Funtion to read the pdf and save the audio in a mp3 file at the same directory where the pdf locatied """
+
+        with open(pdfPath, "rb") as book:
+            reader = PyPDF2.PdfFileReader(book)
+            audio_reader = pyttsx3.init('sapi5')
+            audio_reader.setProperty("rate", Client.voiceRate)
+            audio_reader.setProperty("voice", Client.voices[Client.voice-1])
+            
+            for page in range(reader.numPages):
+                next_page = reader.getPage(page)
+                content = next_page.extractText()
+
+                audio_reader.say(content)
+                audio_reader.runAndWait()
+
+
+
 alice = Alice()     # Object for the Alice class  
 
 
 if __name__ == "__main__":      # Testing part, just for testing pourposes
     test0 = Alice()
-    test0.intro()
+    # test0.intro()
     # print(environ.get("GENDER"))
     # queary = test0.takeCommand()
     # test0.speak(queary)
     # test0.edge("https://github.com/Brodevil")
+    test0.audioBook(r"Assistant\media\Machine Learning.pdf")
     pass
