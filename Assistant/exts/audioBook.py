@@ -27,7 +27,8 @@ def audioBook(pdfPath=askopenfilename(), fromPageNo=0):
                 
                 
             audiofile = pdfPath.replace(".pdf", ".mp3")
-            audio_reader.save_to_file(content, audiofile)
+            # audio_reader.save_to_file(content, audiofile)
+            audio_reader.say(content)
             audio_reader.runAndWait()
         except Exception:
             return None
