@@ -169,7 +169,7 @@ class Alice:
                 reader = PyPDF2.PdfFileReader(book)
                 audio_reader = pyttsx3.init('sapi5')
                 audio_reader.setProperty("rate", 170)
-                # audio_reader.setProperty("voice", Client.voices[Client.voice-1])
+                audio_reader.setProperty("voice", Client.voices[Client.voice-1])
                 
                 for page in range(fromPageNo, reader.numPages):
                     next_page = reader.getPage(page)
@@ -177,8 +177,12 @@ class Alice:
                     full_Text+=content
                     
                     
+                
                 audiofile = pdfPath.replace(".pdf", ".mp3")
+                #  To save the voice in a mp3 file, but the problem is that, the large books are not able to be save to file 
                 # audio_reader.save_to_file(content, audiofile)
+
+                # this will say to voice at the current time. While the program will be paused and just book will be readed
                 audio_reader.say(content)
                 audio_reader.runAndWait()
             except Exception:
