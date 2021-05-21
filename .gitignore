@@ -14,27 +14,23 @@
 *.env
 
 
-# logs 
+# unwanted file formats
 .log
+*.pdf
+*.xlsx
 
 
 # Python rought works
 rough.py
 
 
-# Exel data files
-*.xlsx
-
-
-# pdf files
-*.pdf
-
 
 # personal contact info
 contactinfo.xlsx
 
 # Cached python files extensions
-**.pyc 
+*.pyc 
+*.pyi 
 
 
 # The shortcut files for the Application folder : 
