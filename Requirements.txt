@@ -21,7 +21,6 @@ PyAudio @ file:///M:/ADMIN/Critical%20Data/VS-Code/Alice/PyAudio-0.2.11-cp38-cp3
 PyAutoGUI==0.9.52
 PyGetWindow==0.0.9
 PyMsgBox==1.0.9
-pyPdf==1.13
 PyPDF2==1.26.0
 pyperclip==1.8.2
 pypiwin32==223
