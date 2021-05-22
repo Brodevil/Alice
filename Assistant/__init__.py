@@ -25,6 +25,10 @@ from Assistant.exts import workWithFiles                                        
 __all__ = ("logic")
 
 # load_dotenv()
+try:
+    battery = psutil.sensors_battery()
+except Exception:
+    battery = None
 
 
 def logic(queary):
@@ -153,7 +157,7 @@ def logic(queary):
         queary = queary.replace("i" , "you")
         magnitude = int(queary.split()[0])
         unit = queary.split()[1]
-        alice.speak(f"Okay Sir! I will be reminding you after {magnitude} {unit}!")
+        alice.speak(f"Okay {alice.gender}! I will be reminding you after {magnitude} {unit}!")
         try:
             pourpose = queary.split("so that ")[1]
         except Exception:      # the user can give the reason as a option
@@ -174,7 +178,8 @@ def logic(queary):
         os.startfile(r"E:\ADMIN\Music\BRODEVIL\Hollywood_song\sunna_hai_kya\BROWN MUNDE - AP DHILLON GURINDER GILL SHINDA KAHLON GMINXR.mp3")
 
 
-    elif 'play' in queary and "my" in queary and "music" in queary or "song": 
+    elif "play my music" in queary or "play my song" in queary: 
+        print("contition satifiding here!")
         os.startfile(Client.favorateMusic)
 
 
@@ -192,30 +197,30 @@ def logic(queary):
     
 
     elif 'testing' in queary:
-        alice.speak(f"Hello sir! {random.choice(POSITIVE_REPLIES)}")
+        alice.speak(f"Hello {alice.gender}! {random.choice(POSITIVE_REPLIES)}")
 
 
     elif 'hello' in queary:
-        alice.speak("Hello sir! how may I can help you.")
+        alice.speak(f"Hello {alice.gender}! how may I can help you.")
 
 
     elif 'good morning' in queary or 'good afternoon' in queary or 'good evening' in queary:
         wish = alice.goodWish
         if wish.lower() in queary:
-            alice.speak(f"{wish} Sir!")
+            alice.speak(f"{wish} {alice.gender}!")
         else:
-            alice.speak(f"Sir! Its {wish.split()[1]} Right now!")
+            alice.speak(f"{alice.gender}! Its {wish.split()[1]} Right now!")
     
 
     elif "time" in queary:
-        alice.speak(f"Its {datetime.datetime.now().strftime('%H:%M:%S')} Sir!")
+        alice.speak(f"Its {datetime.datetime.now().strftime('%I:%M %p')} {alice.gender}!")
     
 
     elif "date" in queary:
         alice.speak(f"Its {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year}")
 
 
-    elif 'who are you' in queary:
+    elif 'who are you' in queary or "introduction" in queary:
         alice.intro()
 
     
@@ -230,26 +235,28 @@ def logic(queary):
     elif "yalghar" in queary:
         alice.edge("https://www.youtube.com/watch?v=zzwRbKI2pn4")
 
-
-    elif 'radhe' in queary:
-        alice.edge("")
+    
+    elif 'voices' in queary or "changed your voice" in queary:
+        alice.severalVoices(voicesId=Client.voices)
+        
 
 
 
     # Hardware Features:
     elif 'cpu' in queary or "cpu status" in queary or 'processor' in queary or 'processing' in queary:
-        alice.speak(f"CPU used : {Client.cpu_status}%")
+        alice.speak(f"CPU used : {psutil.cpu_percent()}%")
 
 
     elif 'battery' in queary:
-        try:
-            alice.speak(f"Battery is {Client.battery_status}% Charged! " + ("And its still in charging." if Client.battery_pugged else ""))
-        except Exception:
-            alice.speak(f"Something went wrong {random.choice(ERROR_REPLIES)}. I think you are in desktop")
+        if battery != None:
+            try:
+                alice.speak(f"Battery is {battery.percent}% Charged! " + ("And its still in charging." if battery.power_plugged else ""))
+            except Exception:
+                alice.speak(f"Something went wrong {random.choice(ERROR_REPLIES)}. I think you are in desktop")
 
 
     elif 'memory' in queary or 'ram' in queary.split():
-        alice.speak(f"Memory Used : {Client.memory_status}%")
+        alice.speak(f"Memory Used : {psutil.virtual_memory().percent}%")
 
 
     elif 'storage' in queary or 'hard drive' in queary:
@@ -258,8 +265,11 @@ def logic(queary):
 
     elif 'internet' in queary:
         if Client.internet:
-            alice.speak("Yes sir! Internet is connected")\
+            alice.speak(f"Yes {alice.gender}! Internet is connected")
+        else:
+            alice.speak(f"No {alice.gender}! Internet is not connected, But I don't know How I am working without internet, lol")
 
+            
 
     elif 'system' in queary or 'computer info' in queary:
         alice.speak(f"Its a {Client.computerInfo['System']} {Client.computerInfo['Release']}, A {Client.computerInfo['Machine'][-3:-1]} bit Machine, Version {Client.computerInfo['Version']}, Admin user is {Client.computerInfo['Node name']}. {Client.computerInfo['Processor']} Processor.")
@@ -305,7 +315,7 @@ def logic(queary):
     
 
     elif 'record keyboard' in queary:
-        alice.speak("Okay Sir! Note that, your keyboard activies will be recording till you prese Escap button on your keyboard")
+        alice.speak(f"Okay {alice.gender}! Note that, your keyboard activies will be recording till you prese Escap button on your keyboard")
         keyboardActivities = keyactivities.keyboardRecord()
 
 
@@ -313,9 +323,9 @@ def logic(queary):
         try:
             keyboardActivities
         except NameError:
-            alice.speak("Sir! there is no keyboard Activity available till now")
+            alice.speak(f"{alice.gender}! there is no keyboard Activity available till now")
         else:
-            alice.speak("Okay Sir! Playing the keyboard Activiy recording, Note that have to put the cursor where you want to play it.")
+            alice.speak(f"Okay {alice.gender}! Playing the keyboard Activiy recording, Note that have to put the cursor where you want to play it.")
             time.sleep(7)
             keyactivities.recordedKeyboardType(keyboardActivities)
 
@@ -359,12 +369,12 @@ def logic(queary):
                     userEmail = Contacts.emails[i]
                     break
             else:
-                alice.speak(f"Sir! We didn't got {userEmail} in your contact. Can you tell the email address!")
+                alice.speak(f"{alice.gender}! We didn't got {userEmail} in your contact. Can you tell the email address!")
                 userEmail = alice.takeCommand()     # taking email address by speak function
                 if userEmail != "None":
                     userEmail = userEmail.replace(" ", "").lower()
                 else:
-                    alice.speak("Sorry sir! I didn't get that. Please type the email Adress in the terminal!")
+                    alice.speak(f"Sorry {alice.gender}! I didn't get that. Please type the email Adress in the terminal!")
                     userEmail = input("Enter the Email Adress :\t")  
         except Exception as e:
             alice.speak(f"{random.choice(ERROR_REPLIES)}, Some thing went Wrong")
@@ -383,7 +393,7 @@ def logic(queary):
 
     
     elif "read book" in queary or "audio book" in queary or "speak pdf" in queary or "read pdf" in queary:
-        alice.speak(f"Sir select the pdf file which you want to make read!")
+        alice.speak(f"{alice.gender} select the pdf file which you want to make read!")
         audioFile = alice.audioBook()
         if audioFile is None:
             alice.speak("Some thing went wrong!, It might be not a pdf file or the pdf file content will be in images form.")
@@ -422,3 +432,6 @@ def logic(queary):
             alice.speak("Some thing went Wrong")
 
 
+if __name__ == "__main__":
+    command = input("Enter the command for Alice :\t")
+    logic(command)
