@@ -114,7 +114,11 @@ def logic(queary):
     
 
     elif 'pep8' in queary:
-        alice.edge("https://www.python.org/dev/peps/pep-0008/")   \
+        alice.edge("https://www.python.org/dev/peps/pep-0008/")   
+
+    elif 'gmail' in queary:
+        alice.speak("Opening Gmail...")
+        alice.edge("https://gmail.com")
     
 
     # work with GUI or windows :
@@ -168,7 +172,7 @@ def logic(queary):
 
 
     # music
-    elif 'play music' in queary or "play another music" in queary or "play another song" in queary or "play song":
+    elif 'play music' in queary or "play another music" in queary or "play another song" in queary or "play song" in queary:
         music = os.listdir(Client.musicDirectory)
         os.startfile(os.path.join(Client.musicDirectory, random.choice(music)))
         alice.speak("Playing Music...")
