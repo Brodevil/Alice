@@ -168,7 +168,7 @@ def logic(queary):
 
 
     # music
-    elif 'play' in queary and 'song' in queary or 'music' in queary:
+    elif 'play music' in queary or "play another music" in queary or "play another song" in queary or "play song":
         music = os.listdir(Client.musicDirectory)
         os.startfile(os.path.join(Client.musicDirectory, random.choice(music)))
         alice.speak("Playing Music...")
@@ -257,6 +257,8 @@ def logic(queary):
 
         alice.speak(f"Okay {alice.gender}! I will be wake up after {period} minutes.")
         time.sleep(60*period)
+
+        alice.speak(f"{alice.goodWish} {alice.gender}!, I wake up after {period} minutes, Lets back to work.")
         del period
 
 
