@@ -6,14 +6,16 @@ import time
 from os import environ
 import PyPDF2                                                                   # noqa
 import pprint
+import webbrowser 
+
 
 from dotenv import load_dotenv
 import speech_recognition as sr 
 import pyttsx3
 from tkinter.filedialog import *
 
-from Assistant.exts.networks import localInfo                                                 # noqa
-import webbrowser                                                                 
+
+from Assistant.exts.networks import localInfo                                                 # noqa                                                                
 from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client             # noqa
 
 
@@ -88,7 +90,7 @@ class Alice:
         engine = pyttsx3.init('sapi5')
         engine.setProperty("voice", Client.voices[self.voice-1])
         engine.setProperty("rate", self.voiceSpeed)
-        print(f"{self.Assistantname}  {audio}\n")
+        print(f"{self.Assistantname} : {audio}")
         engine.say(audio)
         engine.runAndWait()
     
@@ -109,7 +111,7 @@ class Alice:
         try:
             print(f"{self.Assistantname} : Recognizing....")
             query = r.recognize_google(audio, language="en-in")
-            print(f"{self.name} : \t{query}\n")
+            print(f"{self.name} : {query}\n")
 
         except Exception as e:
             print("Alice : Sorry! I didn't get that...\n")
@@ -135,7 +137,7 @@ class Alice:
 
     def intro(self):
         self.speak(Client.intro)
-        self.speak(f"Its {datetime.datetime.now().strftime('%H:%M:%S')}, and todays date is {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year} ")
+        self.speak(f"Its {datetime.datetime.now().strftime('%I:%M %p')}, and todays date is {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year} ")
         self.speak(f"Storage : {Client.storage['Total']} GB, Memory Used : {Client.memory_status}%,  CPU Used : {Client.cpu_status}%")
         try:
             self.speak(f"Battery is {Client.battery_status}% Charged!, You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {self.gender}!")
@@ -203,5 +205,6 @@ if __name__ == "__main__":      # Testing part, just for testing pourposes
     # queary = test0.takeCommand()
     # test0.speak(queary)
     # test0.edge("https://github.com/Brodevil")
-    test0.audioBook(r"Assistant\media\Machine Learning.pdf")
+    # test0.audioBook(r"Assistant\media\Machine Learning.pdf")
+    test0.intro()
     pass
