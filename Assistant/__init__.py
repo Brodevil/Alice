@@ -175,7 +175,10 @@ def logic(queary):
 
 
     elif 'brown munde' in queary:       # this function is just for my self i.e. For Abhinav personal songs
-        os.startfile(r"E:\ADMIN\Music\BRODEVIL\Hollywood_song\sunna_hai_kya\BROWN MUNDE - AP DHILLON GURINDER GILL SHINDA KAHLON GMINXR.mp3")
+        try:
+            os.startfile(r"E:\ADMIN\Music\BRODEVIL\Hollywood_song\sunna_hai_kya\BROWN MUNDE - AP DHILLON GURINDER GILL SHINDA KAHLON GMINXR.mp3")
+        except Exception:
+            pass
 
 
     elif "play my music" in queary or "play my song" in queary: 
@@ -454,6 +457,7 @@ def logic(queary):
             alice.speak("Opening File Explorer...")
         except Exception:
             alice.speak("Some thing went Wrong")
+
 
 
 if __name__ == "__main__":
