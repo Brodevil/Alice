@@ -238,7 +238,25 @@ def logic(queary):
     
     elif 'voices' in queary or "changed your voice" in queary:
         alice.severalVoices(voicesId=Client.voices)
-        
+
+    
+    elif 'pause' in queary or "stop for":
+        try:
+            period = int(queary.split("for")[-1])
+        except Exception:
+            alice.speak(f"{alice.gender} For how many minutes I should stop or sleep")
+            try:
+                period = int(alice.takeCommand())
+            except TypeError:
+                try:
+                    alice.speak(f"Sorry {alice.gender}! I didn't get that, Can you type the number of minutes in terminal ")
+                    period = int(input("Enter the number of minutes I should sleep :\t"))
+                except TypeError:
+                    pass
+
+        alice.speak(f"Okay {alice.gender}! I will be wake up after {period} minutes.")
+        time.sleep(60*period)
+        del period
 
 
 
