@@ -156,10 +156,10 @@ class Alice:
 
 
 
-    def audioBook(self, pdfPath=askopenfilename(), fromPageNo=0):
+    def audioBook(self, fromPageNo=0):
         """ Funtion to read the pdf and save the audio in a mp3 file at the same directory where the pdf locatied """
-
-        """ Funtion to read the pdf and save the audio in a mp3 file at the same directory where the pdf locatied """
+        pdfPath=askopenfilename()
+        print(pdfPath)
         full_Text = str()
         if ".pdf" not in pdfPath:       
             return None
