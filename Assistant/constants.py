@@ -80,7 +80,9 @@ class Client:
     userGithub = environ.get("GITHUB", "Brodevil")
 
 
-
+    if battery != None:
+        battery_status = battery.percent
+        battery_pugged = battery.power_plugged
 
 
     # Networks infos 
