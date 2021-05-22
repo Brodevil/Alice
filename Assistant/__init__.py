@@ -190,8 +190,9 @@ def logic(queary):
 
 
 
-    # fun commands :
-
+    
+    # Natural Talks/ Fun dommands :
+    
     elif 'is i am audio able' in queary:
         alice.speak(random.choice(POSITIVE_REPLIES))
     
@@ -236,28 +237,31 @@ def logic(queary):
         alice.edge("https://www.youtube.com/watch?v=zzwRbKI2pn4")
 
     
-    elif 'voices' in queary or "changed your voice" in queary:
+    elif 'voices' in queary or "change your voice" in queary:
         alice.severalVoices(voicesId=Client.voices)
 
     
-    elif 'pause' in queary or "stop for":
+    elif 'pause' in queary or "stop for" in queary:
         try:
             period = int(queary.split("for")[-1])
         except Exception:
             alice.speak(f"{alice.gender} For how many minutes I should stop or sleep")
             try:
                 period = int(alice.takeCommand())
-            except TypeError:
+            except ValueError:
                 try:
                     alice.speak(f"Sorry {alice.gender}! I didn't get that, Can you type the number of minutes in terminal ")
                     period = int(input("Enter the number of minutes I should sleep :\t"))
-                except TypeError:
+                except ValueError:
                     pass
 
         alice.speak(f"Okay {alice.gender}! I will be wake up after {period} minutes.")
         time.sleep(60*period)
         del period
 
+
+    elif 'thank you' in queary or 'thanks' in queary:
+        alice.speak(f"Your most welcome {alice.gender}!")
 
 
     # Hardware Features:
