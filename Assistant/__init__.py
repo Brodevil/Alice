@@ -155,6 +155,7 @@ def logic(queary):
 
 
 
+
     # reminder        
     elif 'remind me after' in queary:
         queary = queary.replace("remind me after", "")
@@ -168,6 +169,8 @@ def logic(queary):
             pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
         finally :
             reminder.reminder(magnitude, unit, pourpose)
+
+
 
 
 
@@ -188,6 +191,8 @@ def logic(queary):
     elif "play my music" in queary or "play my song" in queary: 
         print("contition satifiding here!")
         os.startfile(Client.favorateMusic)
+
+
 
 
     # working with files :
@@ -273,6 +278,9 @@ def logic(queary):
         alice.speak(f"Your most welcome {alice.gender}!")
 
 
+
+
+
     # Hardware Features:
     elif 'cpu' in queary or "cpu status" in queary or 'processor' in queary or 'processing' in queary:
         alice.speak(f"CPU used : {psutil.cpu_percent()}%")
@@ -304,6 +312,7 @@ def logic(queary):
 
     elif 'system' in queary or 'computer info' in queary:
         alice.speak(f"Its a {Client.computerInfo['System']} {Client.computerInfo['Release']}, A {Client.computerInfo['Machine'][-3:-1]} bit Machine, Version {Client.computerInfo['Version']}, Admin user is {Client.computerInfo['Node name']}. {Client.computerInfo['Processor']} Processor.")
+
 
 
 
