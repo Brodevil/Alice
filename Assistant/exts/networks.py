@@ -89,5 +89,5 @@ if __name__ == "__main__":
     #     print(False)    
     # print(weather())
     # print(internetConnection())
-    pprint(news())
+    pprint(localInfo())
     
