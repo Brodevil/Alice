@@ -134,7 +134,7 @@ def logic(queary):
     elif 'shutdown pc' in queary:
         os.startfile(r"C:\Windows\System32\SlideToShutDown.exe")
         alice.speak("Shuting down pc....")
-        time.sleep(1)               # noqa
+        time.sleep(1)               
         keyboard.press_and_release("enter")
 
 
@@ -268,7 +268,7 @@ def logic(queary):
                     pass
 
         alice.speak(f"Okay {alice.gender}! I will be wake up after {period} minutes.")
-        time.sleep(60*period)       # noqa
+        time.sleep(60*period)       
 
         alice.speak(f"{alice.goodWish} {alice.gender}!, I wake up after {period} minutes, Lets back to work.")
         del period
@@ -319,17 +319,17 @@ def logic(queary):
 
     elif "active" in queary and "pc" in queary or "active" in queary and "computer" in queary:
         try:
-            time, unit = queary.split("for ")[-1].split()
+            minutes, unit = queary.split("for ")[-1].split()
             if unit == "hours" or unit == "hour": 
-                time = time*60
+                minutes = minutes*60
 
         except Exception:
             alice.speak(f"{alice.gender}! Please Enter how many minutes in numbers, I should keep active your windows machine.")
-            time = int(input("Enter the number of Minutes :\t"))
+            minutes = int(input("Enter the number of Minutes :\t"))
         finally:
-            alice.speak(f"Okay {alice.gender}, I will be keep your windows machine active for next {time} Minutes!, Till that time you can grap a cup of coffee.")
-            alice.activePC(time)
-            del time, unit
+            alice.speak(f"Okay {alice.gender}, I will be keep your windows machine active for next {minutes} Minutes!, Till that time you can grap a cup of coffee.")
+            alice.activePC(minutes)
+            del minutes, unit
 
 
     # work with git just for Abhinav :-
@@ -471,13 +471,13 @@ def logic(queary):
 
     elif 'open' in queary or 'launch' in queary:
         if "open" in queary:
-            applicationName = queary.split("open ")
+            applicationName = queary.split("open ")[-1]
         elif 'launch' in queary:
-            applicationName = queary.split("launch ")
+            applicationName = queary.split("launch ")[-1]
 
 
             # the second argument is the releated path of the folder where all the used or usale software shortcuts are avaialbe by the user
-        app = workWithFiles.openApplication(applicationName, "Application") 
+        app = workWithFiles.openApplication(applicationName, "M:\ADMIN\Critical Data\VS-Code\Alice\Applications") 
         if app != None:
             alice.speak(f"Launching {app} Application...")     
         else:
