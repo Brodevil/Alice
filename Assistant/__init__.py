@@ -175,7 +175,7 @@ def logic(queary):
 
 
     # music
-    elif 'play music' in queary or "play another music" in queary or "play another song" in queary or "play song" in queary:
+    elif 'play music' in queary or "play another music" in queary or "play another song" in queary or "play song" in queary or "play" and "random":
         music = os.listdir(Client.musicDirectory)
         os.startfile(os.path.join(Client.musicDirectory, random.choice(music)))
         alice.speak("Playing Music...")
@@ -255,7 +255,7 @@ def logic(queary):
     
     elif 'pause' in queary or "stop for" in queary:
         try:
-            period = int(queary.split("for")[-1])
+            period = int(queary.split("for")[-1].split()[0])
         except Exception:
             alice.speak(f"{alice.gender} For how many minutes I should stop or sleep")
             try:
@@ -278,6 +278,8 @@ def logic(queary):
         alice.speak(f"Your most welcome {alice.gender}!")
 
 
+    elif 'how are you' in queary:
+        alice.speak("I am quite fine sir, What about you ?")
 
 
 
