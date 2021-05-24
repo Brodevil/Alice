@@ -134,7 +134,7 @@ def logic(queary):
     elif 'shutdown pc' in queary:
         os.startfile(r"C:\Windows\System32\SlideToShutDown.exe")
         alice.speak("Shuting down pc....")
-        time.sleep(2)
+        time.sleep(1)               # noqa
         keyboard.press_and_release("enter")
 
 
@@ -213,7 +213,7 @@ def logic(queary):
         alice.speak(f"Hello {alice.gender}! {random.choice(POSITIVE_REPLIES)}")
 
 
-    elif 'hello' in queary:
+    elif 'hello' in queary or "hello alice" in queary:
         alice.speak(f"Hello {alice.gender}! how may I can help you.")
 
 
@@ -268,10 +268,11 @@ def logic(queary):
                     pass
 
         alice.speak(f"Okay {alice.gender}! I will be wake up after {period} minutes.")
-        time.sleep(60*period)
+        time.sleep(60*period)       # noqa
 
         alice.speak(f"{alice.goodWish} {alice.gender}!, I wake up after {period} minutes, Lets back to work.")
         del period
+
 
 
     elif 'thank you' in queary or 'thanks' in queary:
@@ -328,6 +329,7 @@ def logic(queary):
         finally:
             alice.speak(f"Okay {alice.gender}, I will be keep your windows machine active for next {time} Minutes!, Till that time you can grap a cup of coffee.")
             alice.activePC(time)
+            del time, unit
 
 
     # work with git just for Abhinav :-
@@ -353,7 +355,7 @@ def logic(queary):
         alice.speak(queary)
 
 
-    elif 'spell' in queary:
+    elif 'spell' in queary :
         alice.speak(f"Enter what I should spell in terminal {alice.gender}!")
         queary = input("Enter what I should spell :\t")
         alice.speak(queary)
@@ -362,10 +364,17 @@ def logic(queary):
     
     # make Alice to type, Keyboard features
     elif "type that" in queary or "send that" in queary:
-        queary = queary.split("that")[1]
+        queary = queary.split("that")[-1]
         keyactivities.typeWrite(queary)
         keyboard.press("enter")
     
+    
+    elif 'start typing' in queary:
+        alice.speak(f"{alice.gender}! You start to speak I will type that And then to quit plz say quite or close.")
+        while "stop" not in queary or "quit" not in queary:
+            queary = alice.takeCommand()
+            keyactivities.typeWrite(queary)
+
 
     elif 'record keyboard' in queary:
         alice.speak(f"Okay {alice.gender}! Note that, your keyboard activies will be recording till you prese Escap button on your keyboard")
@@ -489,3 +498,4 @@ def logic(queary):
 if __name__ == "__main__":
     command = input("Enter the command for Alice :\t")
     logic(command)
+
