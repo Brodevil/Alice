@@ -16,8 +16,8 @@ import pyttsx3
 from tkinter.filedialog import *
 
 
-from exts.networks import localInfo                                                 # noqa                                                                
-from constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client             # noqa
+from Assistant.exts.networks import localInfo                                                 # noqa                                                                
+from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client             # noqa
 
 
 
