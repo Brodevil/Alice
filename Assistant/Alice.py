@@ -106,7 +106,7 @@ class Alice:
         with sr.Microphone() as source:
             print(f"{self.Assistantname}: Listening....")
             r.pause_threshold = 1
-            r.energy_threshold = 100
+            r.energy_threshold = 200
             audio = r.listen(source)
 
         try:
@@ -116,9 +116,10 @@ class Alice:
 
         except Exception as e:
             print("Alice : Sorry! I didn't get that...\n")
+            r = sr.Recognizer()
             return "None"
-
-        return query
+        else:
+            return query
 
 
 
