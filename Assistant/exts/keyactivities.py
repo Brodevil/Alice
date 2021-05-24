@@ -4,8 +4,14 @@ import keyboard
 __all__ = ("", "")
 
 
-def typeWrite(str):
-    keyboard.write(str) 
+def typeWrite(string):
+    for i in string.split():
+        if i.lower() == "enter" or i.lower() == "send":
+            keyboard.press("enter")
+        elif i.lower() == "next line" or i.lower() == "new line":
+            keyboard.press_and_release("shift+enter")
+        else:
+            keyboard.write(i) 
     
 
 def keyboardRecord():
