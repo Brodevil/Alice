@@ -8,19 +8,18 @@ import wikipedia
 
 
 
-__all__ = ("intenetConnection", "localInfo", "weather", "news", "wiki")
+__all__ = ["internetConnection", "localInfo", "weather", "news", "wiki"]
 
 load_dotenv()
 
 
 
-
-def internetConnection(hostname="one.one.one.one"):
+def internetConnection():
     """ Function to check the internet is connected or not """
     try:
-        status = requests.get("http://ip-api.com/json/?fields=49152", timeout=3)
+        requests.get("http://ip-api.com/json/?fields=49152", timeout=3)
         return True
-    except ConnectionError :
+    except ConnectionError:
         return False
 
 
@@ -44,7 +43,7 @@ def weather(location=None, apikey=(environ.get("OpenWeatherMapApi"))):
     From openwethermap.org apis """
     if location is None:
         local_info = localInfo()
-        if local_info != None:
+        if local_info is not None:
             location = localInfo()[0] 
             try:
                 response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={apikey}")
@@ -79,15 +78,6 @@ def wiki(queary):
 
 
 if __name__ == "__main__":
-    # print(localInfo())
-    # print(weather())
-    # try:
-    #     status = requests.get("http://ip-api.com/json/?fields=49152")
-    #     print(status.text)
-    #     print(True)
-    # except ConnectionError:
-    #     print(False)    
-    # print(weather())
-    # print(internetConnection())
-    pprint(localInfo())
-    
+    pprint(wiki("Python"))
+    pass
+
