@@ -7,6 +7,7 @@ from os import environ
 import PyPDF2                                                                   # noqa
 import pprint
 import webbrowser 
+import pyautogui
 
 
 from dotenv import load_dotenv
@@ -15,8 +16,8 @@ import pyttsx3
 from tkinter.filedialog import *
 
 
-from Assistant.exts.networks import localInfo                                                 # noqa                                                                
-from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client             # noqa
+from exts.networks import localInfo                                                 # noqa                                                                
+from constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client             # noqa
 
 
 
@@ -193,6 +194,19 @@ class Alice:
 
 
 
+    @staticmethod
+    def activePC(minutes):
+        pyautogui.FAILSAFE = False
+        presentTime = int(time.time())
+        while presentTime+minutes*60 >= int(time.time()):
+            time.sleep(3*60)
+            for i in range(50, 100):
+                pyautogui.moveTo(500, i*5)
+            for i in range(0, 5):
+                pyautogui.press("shift")
+        
+
+
 
 
 alice = Alice()     # Object for the Alice class  
@@ -206,5 +220,5 @@ if __name__ == "__main__":      # Testing part, just for testing pourposes
     # test0.speak(queary)
     # test0.edge("https://github.com/Brodevil")
     # test0.audioBook(r"Assistant\media\Machine Learning.pdf")
-    test0.intro()
+    test0.activePC(1)
     pass
