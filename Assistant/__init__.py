@@ -3,26 +3,23 @@ import os
 import time
 import keyboard
 import random
-import sys 
+import sys
 
 import psutil
 import smtplib
 import subprocess
-from dotenv import load_dotenv
 
 
-from Assistant.exts import reminder                                                                         # noqa
-from Assistant.exts import networks                                                                         # noqa
-from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client         # noqa
+from Assistant.exts import reminder  # noqa
+from Assistant.exts import networks  # noqa
+from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client  # noqa
 
-from Assistant.resources.login import login                                                                            # noqa
-from Assistant.Alice import alice                                                                           # noqa
-from Assistant.exts import keyactivities                                                                    # noqa
-from Assistant.exts import workWithFiles                                                                    # noqa
+from Assistant.resources.login import login  # noqa
+from Assistant.Alice import alice  # noqa
+from Assistant.exts import keyactivities  # noqa
+from Assistant.exts import workWithFiles  # noqa
 
-
-
-__all__ = ("logic")
+__all__ = ["logic"]
 
 # load_dotenv()
 try:
@@ -32,14 +29,14 @@ except Exception:
 
 
 def logic(queary):
-    """This is the logic of the Program as it will be matching several queary and do the programmed task """
+    """This is the logic of the Program as it will be matching several query and do the programmed task """
 
-
-    # fetching info from intrnet
+    # fetching info from internet
+    global applicationName, userEmail, keyboardActivities
     if 'wikipedia' in queary:
-            alice.speak("Searching Wikipedia...")
-            queary = queary.replace("wikipedia", "")
-            alice.speak(networks.wiki())
+        alice.speak("Searching Wikipedia...")
+        queary = queary.replace("wikipedia", "")
+        alice.speak(networks.wiki(queary))
 
 
     elif 'search' in queary:
@@ -52,9 +49,9 @@ def logic(queary):
     elif "youtube" in queary and "search" in queary:
         search = queary.split("youtube")[-1]
         alice.edge(f"https://www.youtube.com/results?search_query={search.replace(' ', '+')}")
-        
 
-     # quiting the program 
+
+    # quiting the program
     elif "bye" in queary or 'kill yourself' in queary or 'quit' in queary:
         alice.speak("That's it, I m quiting....")
         sys.exit(0)
@@ -66,31 +63,31 @@ def logic(queary):
         alice.speak("Opening youtube studio...")
         alice.edge("https://studio.youtube.com/")
 
-    
+
     elif 'open youtube' in queary:
         alice.speak("Opening youtube...")
         alice.edge("youtube.com")
-    
-    
+
+
     elif 'open google' in queary:
         alice.speak("Opening google...")
         alice.edge("google.com")
-    
-    
+
+
     elif 'open stack overflow' in queary:
         alice.speak("Opening stackoverflow...")
         alice.edge("stackoverflow.com")
-    
-    
-    elif 'reveal your code' in queary:
-        alice.speak("Opening Github repositor.....")
+
+
+    elif 'reveal your code' in queary or 'your code' in queary:
+        alice.speak("Opening Github repository.....")
         alice.edge("github.com/Brodevil/Alice")
 
 
     elif 'open github' in queary:
         alice.speak("Opening Github.....")
         alice.edge(f"https://github.com/{Client.userGithub}")
-    
+
 
     elif 'open discord' in queary:
         alice.speak("Opening Discord in Browser.....")
@@ -111,22 +108,23 @@ def logic(queary):
     elif 'open spotify' in queary:
         alice.speak("Opening Spotify.....")
         alice.edge('https://open.spotify.com/')
-    
+
 
     elif 'pep8' in queary:
-        alice.edge("https://www.python.org/dev/peps/pep-0008/")   
+        alice.edge("https://www.python.org/dev/peps/pep-0008/")
+
 
     elif 'gmail' in queary:
         alice.speak("Opening Gmail...")
         alice.edge("https://gmail.com")
-    
+
 
     # work with GUI or windows :
     elif 'desktop' in queary:
         keyboard.press_and_release("win+d")
 
 
-    elif 'lock pc' in queary or "lock the pc" in queary:   
+    elif 'lock pc' in queary or "lock the pc" in queary:
         os.system("rundll32.exe user32.dll, LockWorkStation")
         sys.exit(0)
 
@@ -134,7 +132,7 @@ def logic(queary):
     elif 'shutdown pc' in queary:
         os.startfile(r"C:\Windows\System32\SlideToShutDown.exe")
         alice.speak("Shuting down pc....")
-        time.sleep(1)               
+        time.sleep(1)
         keyboard.press_and_release("enter")
 
 
@@ -159,15 +157,15 @@ def logic(queary):
     # reminder        
     elif 'remind me after' in queary:
         queary = queary.replace("remind me after", "")
-        queary = queary.replace("i" , "you")
+        queary = queary.replace("i", "you")
         magnitude = int(queary.split()[0])
         unit = queary.split()[1]
         alice.speak(f"Okay {alice.gender}! I will be reminding you after {magnitude} {unit}!")
         try:
             pourpose = queary.split("so that ")[1]
-        except Exception:      # the user can give the reason as a option
+        except Exception:  # the user can give the reason as a option
             pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
-        finally :
+        finally:
             reminder.reminder(magnitude, unit, pourpose)
 
 
@@ -181,15 +179,15 @@ def logic(queary):
         alice.speak("Playing Music...")
 
 
-    elif 'brown munde' in queary:       # this function is just for my self i.e. For Abhinav personal songs
+    elif 'brown munde' in queary:  # this function is just for my self i.e. For Abhinav personal songs
         try:
-            os.startfile(r"E:\ADMIN\Music\BRODEVIL\Hollywood_song\sunna_hai_kya\BROWN MUNDE - AP DHILLON GURINDER GILL SHINDA KAHLON GMINXR.mp3")
+            os.startfile(
+                r"E:\ADMIN\Music\BRODEVIL\Hollywood_song\sunna_hai_kya\BROWN MUNDE - AP DHILLON GURINDER GILL SHINDA KAHLON GMINXR.mp3")
         except Exception:
             pass
 
 
-    elif "play my music" in queary or "play my song" in queary: 
-        print("contition satifiding here!")
+    elif "play my music" in queary or "play my song" in queary:
         os.startfile(Client.favorateMusic)
 
 
@@ -198,16 +196,13 @@ def logic(queary):
     # working with files :
     elif 'delete unwanted files' in queary:
         alice.speak("Deleting unwanted files...")
-        workWithFiles.deleteUnwantedFiles() 
+        workWithFiles.deleteUnwantedFiles()
 
+        # Natural Talks/ Fun commands :
 
-
-    
-    # Natural Talks/ Fun dommands :
-    
     elif 'is i am audio able' in queary:
         alice.speak(random.choice(POSITIVE_REPLIES))
-    
+
 
     elif 'testing' in queary:
         alice.speak(f"Hello {alice.gender}! {random.choice(POSITIVE_REPLIES)}")
@@ -223,36 +218,37 @@ def logic(queary):
             alice.speak(f"{wish} {alice.gender}!")
         else:
             alice.speak(f"{alice.gender}! Its {wish.split()[1]} Right now!")
-    
+
 
     elif "time" in queary:
         alice.speak(f"Its {datetime.datetime.now().strftime('%I:%M %p')} {alice.gender}!")
-    
+
 
     elif "date" in queary:
-        alice.speak(f"Its {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year}")
+        alice.speak(
+            f"Its {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year}")
 
 
     elif 'who are you' in queary or "introduction" in queary:
         alice.intro()
 
-    
+
     elif "what's my name" in queary or "what is my name" in queary or "who i am" in queary:
         alice.speak(f"You are {alice.name} {alice.gender}!, But why did you are asking this?")
 
 
-    elif "to kaise hain aap log" in queary:     # just for ha
+    elif "to kaise hain aap log" in queary:  # just for ha
         alice.speak("Hum thik hai bhai, Tum batao!..")
 
-    
+
     elif "yalghar" in queary:
         alice.edge("https://www.youtube.com/watch?v=zzwRbKI2pn4")
 
-    
+
     elif 'voices' in queary or "change your voice" in queary:
         alice.severalVoices(voicesId=Client.voices)
 
-    
+
     elif 'pause' in queary or "stop for" in queary:
         try:
             period = int(queary.split("for")[-1].split()[0])
@@ -262,13 +258,14 @@ def logic(queary):
                 period = int(alice.takeCommand())
             except ValueError:
                 try:
-                    alice.speak(f"Sorry {alice.gender}! I didn't get that, Can you type the number of minutes in terminal ")
+                    alice.speak(
+                        f"Sorry {alice.gender}! I didn't get that, Can you type the number of minutes in terminal ")
                     period = int(input("Enter the number of minutes I should sleep :\t"))
                 except ValueError:
                     pass
 
         alice.speak(f"Okay {alice.gender}! I will be wake up after {period} minutes.")
-        time.sleep(60*period)       
+        time.sleep(60 * period)
 
         alice.speak(f"{alice.goodWish} {alice.gender}!, I wake up after {period} minutes, Lets back to work.")
         del period
@@ -290,9 +287,11 @@ def logic(queary):
 
 
     elif 'battery' in queary:
-        if battery != None:
+
+        if battery is not None:
             try:
-                alice.speak(f"Battery is {battery.percent}% Charged! " + ("And its still in charging." if battery.power_plugged else ""))
+                alice.speak(f"Battery is {battery.percent}% Charged! " + (
+                    "And its still in charging." if battery.power_plugged else ""))
             except Exception:
                 alice.speak(f"Something went wrong {random.choice(ERROR_REPLIES)}. I think you are in desktop")
 
@@ -302,32 +301,37 @@ def logic(queary):
 
 
     elif 'storage' in queary or 'hard drive' in queary:
-        alice.speak(f"Total available Storage : {Client.storage['Total']} GB, Used : {Client.storage['Used']} GB, Free : {Client.storage['Free']} GB")
+        alice.speak(
+            f"Total available Storage : {Client.storage['Total']} GB, Used : {Client.storage['Used']} GB, Free : {Client.storage['Free']} GB")
 
 
     elif 'internet' in queary:
         if Client.internet:
             alice.speak(f"Yes {alice.gender}! Internet is connected")
         else:
-            alice.speak(f"No {alice.gender}! Internet is not connected, But I don't know How I am working without internet, lol")
+            alice.speak(
+                f"No {alice.gender}! Internet is not connected, But I don't know How I am working without internet, lol")
 
-            
+
 
     elif 'system' in queary or 'computer info' in queary:
-        alice.speak(f"Its a {Client.computerInfo['System']} {Client.computerInfo['Release']}, A {Client.computerInfo['Machine'][-3:-1]} bit Machine, Version {Client.computerInfo['Version']}, Admin user is {Client.computerInfo['Node name']}. {Client.computerInfo['Processor']} Processor.")
+        alice.speak(
+            f"Its a {Client.computerInfo['System']} {Client.computerInfo['Release']}, A {Client.computerInfo['Machine'][-3:-1]} bit Machine, Version {Client.computerInfo['Version']}, Admin user is {Client.computerInfo['Node name']}. {Client.computerInfo['Processor']} Processor.")
 
 
     elif "active" in queary and "pc" in queary or "active" in queary and "computer" in queary:
         try:
             minutes, unit = queary.split("for ")[-1].split()
-            if unit == "hours" or unit == "hour": 
-                minutes = minutes*60
+            if unit == "hours" or unit == "hour":
+                minutes = minutes * 60
 
         except Exception:
-            alice.speak(f"{alice.gender}! Please Enter how many minutes in numbers, I should keep active your windows machine.")
+            alice.speak(
+                f"{alice.gender}! Please Enter how many minutes in numbers, I should keep active your windows machine.")
             minutes = int(input("Enter the number of Minutes :\t"))
         finally:
-            alice.speak(f"Okay {alice.gender}, I will be keep your windows machine active for next {minutes} Minutes!, Till that time you can grap a cup of coffee.")
+            alice.speak(
+                f"Okay {alice.gender}, I will be keep your windows machine active for next {minutes} Minutes!, Till that time you can grap a cup of coffee.")
             alice.activePC(minutes)
             del minutes, unit
 
@@ -339,7 +343,7 @@ def logic(queary):
             login.initialCommit(os.getcwd())
         except Exception:
             alice.speak(f"Something went wrong! {random.choice(ERROR_REPLIES)}")
-    
+
 
     elif 'git status' in queary:
         try:
@@ -355,20 +359,20 @@ def logic(queary):
         alice.speak(queary)
 
 
-    elif 'spell' in queary :
+    elif 'spell' in queary:
         alice.speak(f"Enter what I should spell in terminal {alice.gender}!")
         queary = input("Enter what I should spell :\t")
         alice.speak(queary)
 
 
-    
+
     # make Alice to type, Keyboard features
     elif "type that" in queary or "send that" in queary:
         queary = queary.split("that")[-1]
         keyactivities.typeWrite(queary)
         keyboard.press("enter")
-    
-    
+
+
     elif 'start typing' in queary:
         alice.speak(f"{alice.gender}! You start to speak I will type that And then to quit plz say quite or close.")
         while "stop" not in queary or "quit" not in queary:
@@ -377,7 +381,8 @@ def logic(queary):
 
 
     elif 'record keyboard' in queary:
-        alice.speak(f"Okay {alice.gender}! Note that, your keyboard activies will be recording till you prese Escap button on your keyboard")
+        alice.speak(
+            f"Okay {alice.gender}! Note that, your keyboard activies will be recording till you prese Escap button on your keyboard")
         keyboardActivities = keyactivities.keyboardRecord()
 
 
@@ -387,7 +392,8 @@ def logic(queary):
         except NameError:
             alice.speak(f"{alice.gender}! there is no keyboard Activity available till now")
         else:
-            alice.speak(f"Okay {alice.gender}! Playing the keyboard Activiy recording, Note that have to put the cursor where you want to play it.")
+            alice.speak(
+                f"Okay {alice.gender}! Playing the keyboard Activiy recording, Note that have to put the cursor where you want to play it.")
             time.sleep(7)
             keyactivities.recordedKeyboardType(keyboardActivities)
 
@@ -395,7 +401,8 @@ def logic(queary):
 
     # local info work with internet :
     elif 'whats my location' in queary or 'where am i' in queary or 'where i am' in queary:
-        alice.speak(f" You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {alice.gender}!")
+        alice.speak(
+            f" You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {alice.gender}!")
 
 
     elif 'news' in queary:
@@ -403,62 +410,66 @@ def logic(queary):
         if topTen is not None:
             for articles in topTen:
                 print(f"For more info... Go to ==>>> {articles['url']}\n")
-                alice.speak(f"Title; {articles['title']}. \nDiscription; {articles['description']}. Actually; {articles['content']}\n")
+                alice.speak(
+                    f"Title; {articles['title']}. \nDescription; {articles['description']}. Actually; {articles['content']}\n")
                 alice.speak("Moving On next news!")
             alice.speak("Thank you for listening")
-    
+
 
     elif 'weather report of' in queary:
         place = queary.split("of")[1]
         alice.speak(networks.weather(place))
-    
+
 
     elif "temperature" in queary or "weather report" in queary:
         try:
             alice.speak(Client.weatherInfo)
         except:
             alice.speak(random.choice(ERROR_REPLIES))
-    
 
 
-    # work with loging file : i.e.work with E commerce websites accounts 
+
+    # work with lodging file : i.e.work with E commerce websites accounts
     elif 'send email' in queary:
         alice.speak("To whom you want to send the email")
         try:
-            userEmail = alice.takeCommand().lower()     # here taking the name as a input and featuring it in our contacts
+            userEmail = alice.takeCommand().lower()  # here taking the name as a input and featuring it in our contacts
             for i in Contacts.emails.keys():
                 if i.split()[0].lower() == userEmail.split()[0]:
                     userEmail = Contacts.emails[i]
                     break
             else:
-                alice.speak(f"{alice.gender}! We didn't got {userEmail} in your contact. Can you tell the email address!")
-                userEmail = alice.takeCommand()     # taking email address by speak function
+                alice.speak(
+                    f"{alice.gender}! We didn't got {userEmail} in your contact. Can you tell the email address!")
+                userEmail = alice.takeCommand()  # taking email address by speak function
                 if userEmail != "None":
                     userEmail = userEmail.replace(" ", "").lower()
                 else:
-                    alice.speak(f"Sorry {alice.gender}! I didn't get that. Please type the email Adress in the terminal!")
-                    userEmail = input("Enter the Email Adress :\t")  
+                    alice.speak(
+                        f"Sorry {alice.gender}! I didn't get that. Please type the email Address in the terminal!")
+                    userEmail = input("Enter the Email Address :\t")
         except Exception as e:
             alice.speak(f"{random.choice(ERROR_REPLIES)}, Some thing went Wrong")
-
 
         alice.speak("What's the subject...")
         subject = alice.takeCommand()
         alice.speak("Whats the content...")
         content = alice.takeCommand()
         result = login.sendEmail(userEmail, subject, content)
-        if result == False:
+
+        if result is False:
             alice.speak(f"{random.choice(ERROR_REPLIES)}, Some thing went Wrong")
         else:
             alice.speak(f"Email send succefully to {userEmail}!")
 
 
-    
+
     elif "read book" in queary or "audio book" in queary or "speak pdf" in queary or "read pdf" in queary:
         alice.speak(f"{alice.gender} select the pdf file which you want to make read!")
         audioFile = alice.audioBook()
         if audioFile is None:
-            alice.speak("Some thing went wrong!, It might be not a pdf file or the pdf file content will be in images form.")
+            alice.speak(
+                "Some thing went wrong!, It might be not a pdf file or the pdf file content will be in images form.")
         try:
             alice.speak(f"{alice.gender}! The audio file had created in that same path with same name.")
             os.startfile(audioFile)
@@ -467,7 +478,7 @@ def logic(queary):
 
 
 
-    # Launching the softwares stuffs
+    # Launching the software stuffs
 
     elif 'open' in queary or 'launch' in queary:
         if "open" in queary:
@@ -475,11 +486,11 @@ def logic(queary):
         elif 'launch' in queary:
             applicationName = queary.split("launch ")[-1]
 
-
             # the second argument is the releated path of the folder where all the used or usale software shortcuts are avaialbe by the user
-        app = workWithFiles.openApplication(applicationName, "M:\ADMIN\Critical Data\VS-Code\Alice\Applications") 
-        if app != None:
-            alice.speak(f"Launching {app} Application...")     
+        app = workWithFiles.openApplication(applicationName, "M:\ADMIN\Critical Data\VS-Code\Alice\Applications")
+
+        if app is not None:
+            alice.speak(f"Launching {app} Application...")
         else:
             alice.speak(f"Sorry! {applicationName} shortcut didn't got in the Application folder. Please put the shortcuts of all the application do \
             you use in day to day life in Application folder, Which is in this project folder.")
@@ -494,8 +505,6 @@ def logic(queary):
             alice.speak("Some thing went Wrong")
 
 
-
 if __name__ == "__main__":
     command = input("Enter the command for Alice :\t")
     logic(command)
-
