@@ -46,7 +46,7 @@ def openApplication(ApplicationName, installedApplicationPath):
         for name in ApplicationName.split():
             if name.lower() in app[:-4].lower().split():
                 os.startfile(os.path.join(installedApplicationPath, app))
-                return app
+                return app.split(".")[0]
     return None
 
 
