@@ -175,7 +175,7 @@ def logic(queary):
 
 
     # music
-    elif 'play music' in queary or "play another music" in queary or "play another song" in queary or "play song" in queary or "play" and "random":
+    elif 'play music' in queary or "play another music" in queary or "play another song" in queary or "play song" in queary or "play" in queary and "random" in queary:
         music = os.listdir(Client.musicDirectory)
         os.startfile(os.path.join(Client.musicDirectory, random.choice(music)))
         alice.speak("Playing Music...")
@@ -283,8 +283,8 @@ def logic(queary):
 
 
 
-    # Hardware Features:
-    elif 'cpu' in queary or "cpu status" in queary or 'processor' in queary or 'processing' in queary:
+    # System features :
+    elif 'cpu' in queary or 'processor' in queary or 'processing' in queary:
         alice.speak(f"CPU used : {psutil.cpu_percent()}%")
 
 
@@ -316,7 +316,18 @@ def logic(queary):
         alice.speak(f"Its a {Client.computerInfo['System']} {Client.computerInfo['Release']}, A {Client.computerInfo['Machine'][-3:-1]} bit Machine, Version {Client.computerInfo['Version']}, Admin user is {Client.computerInfo['Node name']}. {Client.computerInfo['Processor']} Processor.")
 
 
+    elif "active" in queary and "pc" in queary or "active" in queary and "computer" in queary:
+        try:
+            time, unit = queary.split("for ")[-1].split()
+            if unit == "hours" or unit == "hour": 
+                time = time*60
 
+        except Exception:
+            alice.speak(f"{alice.gender}! Please Enter how many minutes in numbers, I should keep active your windows machine.")
+            time = int(input("Enter the number of Minutes :\t"))
+        finally:
+            alice.speak(f"Okay {alice.gender}, I will be keep your windows machine active for next {time} Minutes!, Till that time you can grap a cup of coffee.")
+            alice.activePC(time)
 
 
     # work with git just for Abhinav :-
