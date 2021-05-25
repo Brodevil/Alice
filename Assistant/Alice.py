@@ -122,7 +122,6 @@ class Alice:
             return query
 
 
-
     @property
     def goodWish(self):
         presentHour = int(datetime.datetime.now().hour)
