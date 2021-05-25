@@ -292,6 +292,7 @@ def logic(queary):
         print(f"Alice : Mr. Abhinav's  Email:{Client.contact}. Github link :{Client.github_assistant_repo}. Discord Id : {Client.DiscordId}")
         
 
+
     # System features :
     elif 'cpu' in queary or 'processor' in queary or 'processing' in queary:
         alice.speak(f"CPU used : {psutil.cpu_percent()}%")
@@ -397,21 +398,21 @@ def logic(queary):
                 print(string)
 
     elif 'record keyboard' in queary:
-        alice.speak(
-            f"Okay {alice.gender}! Note that, your keyboard activies will be recording till you prese Escap button on your keyboard")
-        keyboardActivities = keyactivities.keyboardRecord()
+        alice.speak(f"Okay {alice.gender}! Note that, your keyboard activies will be recording till you prese Escap button on your keyboard")
+        
+        globals()['keyRecorded'] = keyactivities.keyboardRecord()
 
 
     elif 'play the keyboard recording' in queary:
         try:
-            keyboardActivities
+            globals()["keyRecorded"]
         except NameError:
             alice.speak(f"{alice.gender}! there is no keyboard Activity available till now")
         else:
             alice.speak(
                 f"Okay {alice.gender}! Playing the keyboard Activiy recording, Note that have to put the cursor where you want to play it.")
             time.sleep(7)
-            keyactivities.recordedKeyboardType(keyboardActivities)
+            keyactivities.recordedKeyboardType(globals()["keyRecorded"])
 
 
 
