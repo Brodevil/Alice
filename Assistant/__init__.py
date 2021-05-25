@@ -19,6 +19,7 @@ from Assistant.Alice import alice  # noqa
 from Assistant.exts import keyactivities  # noqa
 from Assistant.exts import workWithFiles  # noqa
 
+
 __all__ = ["logic"]
 
 # load_dotenv()
