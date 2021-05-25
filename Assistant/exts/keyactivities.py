@@ -8,10 +8,10 @@ def typeWrite(string):
     for i in string.split():
         if i.lower() == "enter" or i.lower() == "send":
             keyboard.press("enter")
-        elif i.lower() == "next line" or i.lower() == "new line":
+        elif i.lower() == "next" or i.lower() == "new":
             keyboard.press_and_release("shift+enter")
         else:
-            keyboard.write(i) 
+            keyboard.write(f"{i} ") 
     
 
 def keyboardRecord():
