@@ -397,6 +397,7 @@ def logic(queary):
                 keyactivities.typeWrite(string)
                 print(string)
 
+
     elif 'record keyboard' in queary:
         alice.speak(f"Okay {alice.gender}! Note that, your keyboard activies will be recording till you prese Escap button on your keyboard")
         
@@ -417,7 +418,7 @@ def logic(queary):
 
 
     # local info work with internet :
-    elif "whatss my location" in queary or 'where am i' in queary or 'where i am' in queary:
+    elif "what's my location" in queary or 'where am i' in queary or 'where i am' in queary:
         alice.speak(
             f" You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {alice.gender}!")
 
