@@ -56,6 +56,7 @@ class Client:
     author = "Abhinav(Brodevil)"
     contact = "brodevil89@gmail.com"
     github_assistant_repo = "https://github.com/Brodevil/Alice"
+    DiscordId = "Brodevil#5822"
 
 
     # Client Choice to Alice
