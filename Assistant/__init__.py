@@ -204,8 +204,9 @@ def logic(queary):
         alice.speak("Deleting unwanted files...")
         workWithFiles.deleteUnwantedFiles()
 
-        # Natural Talks/ Fun commands :
 
+
+        # Natural Talks/ Fun commands :
     elif 'is i am audio able' in queary:
         alice.speak(random.choice(POSITIVE_REPLIES))
 
@@ -286,6 +287,10 @@ def logic(queary):
         alice.speak("I am quite fine sir, What about you ?")
 
 
+    elif 'alice' in queary and 'info' in queary or "your" in queary and "info" in queary:
+        alice.speak(f"I am written in Python by {Client.author}Sir!. To contact him you can email at ({Client.contact}), Check out his GitHub Profile You will know more about my sir")
+        print(f"Alice : Mr. Abhinav's  Email:{Client.contact}. Github link :{Client.github_assistant_repo}. Discord Id : {Client.DiscordId}")
+        
 
     # System features :
     elif 'cpu' in queary or 'processor' in queary or 'processing' in queary:
