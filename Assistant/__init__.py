@@ -33,7 +33,7 @@ def logic(queary):
     """This is the logic of the Program as it will be matching several query and do the programmed task """
 
     # fetching info from internet
-    global applicationName, userEmail, keyboardActivities
+    
     if 'wikipedia' in queary:
         alice.speak("Searching Wikipedia...")
         queary = queary.replace("wikipedia", "")
@@ -191,6 +191,11 @@ def logic(queary):
     elif "play my music" in queary or "play my song" in queary:
         os.startfile(Client.favorateMusic)
 
+    
+    elif 'play' in queary:
+        queary = queary.split("play ")[-1]
+        alice.speak(f"Showing related results to {queary}")
+        alice.edge(f"https://music.youtube.com/search?q={queary}")
 
 
 
@@ -337,6 +342,7 @@ def logic(queary):
             del minutes, unit
 
 
+
     # work with git just for Abhinav :-
     elif 'push the code' in queary:
         try:
@@ -354,6 +360,7 @@ def logic(queary):
 
 
 
+
     # make Alice to speak features
     elif 'say' in queary:
         queary = queary.replace("say ", "")
@@ -364,6 +371,7 @@ def logic(queary):
         alice.speak(f"Enter what I should spell in terminal {alice.gender}!")
         queary = input("Enter what I should spell :\t")
         alice.speak(queary)
+
 
 
 
@@ -504,6 +512,7 @@ def logic(queary):
             alice.speak("Opening File Explorer...")
         except Exception:
             alice.speak("Some thing went Wrong")
+
 
 
 if __name__ == "__main__":
