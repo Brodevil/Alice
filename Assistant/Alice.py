@@ -2,6 +2,7 @@ import requests
 import json
 import datetime
 import time
+import keyboard
 
 from os import environ
 import PyPDF2                                                                   # noqa
