@@ -382,12 +382,13 @@ def logic(queary):
         keyboard.press("enter")
 
 
-    elif 'start typing' in queary:
+    elif 'start' in queary and 'typ' in queary:
         alice.speak(f"{alice.gender}! You start to speak I will type that And then to quit plz say quite or close.")
-        while "stop" not in queary or "quit" not in queary:
+        while "stop" not in queary.lower():
             queary = alice.takeCommand()
-            keyactivities.typeWrite(queary)
-
+            if queary is not None:
+                keyactivities.typeWrite(queary)
+            return 
 
     elif 'record keyboard' in queary:
         alice.speak(
@@ -409,7 +410,7 @@ def logic(queary):
 
 
     # local info work with internet :
-    elif 'whats my location' in queary or 'where am i' in queary or 'where i am' in queary:
+    elif "whatss my location" in queary or 'where am i' in queary or 'where i am' in queary:
         alice.speak(
             f" You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {alice.gender}!")
 
@@ -462,7 +463,7 @@ def logic(queary):
 
         alice.speak("What's the subject...")
         subject = alice.takeCommand()
-        alice.speak("Whats the content...")
+        alice.speak("What's the content...")
         content = alice.takeCommand()
         result = login.sendEmail(userEmail, subject, content)
 
