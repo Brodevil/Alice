@@ -10,14 +10,14 @@ import smtplib
 import subprocess
 
 
-from Assistant.exts import reminder  # noqa
-from Assistant.exts import networks  # noqa
-from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client  # noqa
+from Assistant.exts import reminder                                                                             # noqa
+from Assistant.exts import networks                                                                             # noqa
+from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client             # noqa
 
-from Assistant.resources.login import login  # noqa
-from Assistant.Alice import alice  # noqa
-from Assistant.exts import keyactivities  # noqa
-from Assistant.exts import workWithFiles  # noqa
+from Assistant.resources.login import login                                                                     # noqa
+from Assistant.Alice import alice                                                                               # noqa
+from Assistant.exts import keyactivities                                                                        # noqa
+from Assistant.exts import workWithFiles                                                                        # noqa
 
 
 __all__ = ["logic"]
