@@ -384,11 +384,12 @@ def logic(queary):
 
     elif 'start' in queary and 'typ' in queary:
         alice.speak(f"{alice.gender}! You start to speak I will type that And then to quit plz say quite or close.")
-        while "stop" not in queary.lower():
-            queary = alice.takeCommand()
-            if queary is not None:
-                keyactivities.typeWrite(queary)
-            return 
+        string = str()
+        while "stop" not in string.lower():
+            string = alice.takeCommand()
+            if string is not None:
+                keyactivities.typeWrite(string)
+                print(string)
 
     elif 'record keyboard' in queary:
         alice.speak(
