@@ -42,9 +42,9 @@ def audioBook(fromPageNo=0):
             audiofile = pdfPath.replace(".pdf", ".mp3")
 
             #  To save the voice in a mp3 file, but the problem is that, the large books are not able to be save to file
-            # audio_reader.save_to_file(content, audiofile)
+            # audio_reader.save_to_file(content, audible)
 
-            # this will say to voice at the current time. While the program will be paused and just book will be readed
+            # this will say to voice at the current time. While the program will be paused and just book will be read
             audio_reader.say(content)
             audio_reader.runAndWait()
         except Exception:
@@ -54,9 +54,9 @@ def audioBook(fromPageNo=0):
 
 class Alice:
     """ 
-    Alice Assitant:
+    Alice Assistant:
 
-    This class contain the Function of the Alice program and also with the Assitant Data
+    This class contain the Function of the Alice program and also with the Assistant Data
     """
 
     def __init__(self):
@@ -64,7 +64,7 @@ class Alice:
         gender = str(environ.get("GENDER", 'male'))
         self.name = environ.get("UserName",
                                 "Abhinav")  # this is the user name of the person who suppose to use this program : Data From (.env)
-        self.Assistantname = Client.AssistantName
+        self.AssistantName = Client.AssistantName
         if gender == "male":
             self.gender = "Sir"
         elif gender == "female":
@@ -120,7 +120,7 @@ class Alice:
         engine = pyttsx3.init('sapi5')
         engine.setProperty("voice", Client.voices[self.voice - 1])
         engine.setProperty("rate", self.voiceSpeed)
-        print(f"{self.Assistantname} : {audio}\n")
+        print(f"{self.AssistantName} : {audio}\n")
         engine.say(audio)
         engine.runAndWait()
 
@@ -133,13 +133,13 @@ class Alice:
         """
         r = sr.Recognizer()
         with sr.Microphone() as source:
-            print(f"{self.Assistantname}: Listening....")
+            print(f"{self.AssistantName}: Listening....")
             r.pause_threshold = 1
             r.energy_threshold = 200
             audio = r.listen(source)
 
         try:
-            print(f"{self.Assistantname} : Recognizing....")
+            print(f"{self.AssistantName} : Recognizing....")
             query = r.recognize_google(audio, language="en-in")
             print(f"{self.name} : {query}\n")
 

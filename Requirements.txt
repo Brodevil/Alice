@@ -27,12 +27,14 @@ pypiwin32==223
 PyRect==0.1.4
 PyScreeze==0.1.27
 pyspeedtest==1.2.7
+pyTelegramBotAPI==3.7.9
 python-dotenv==0.17.1
 pyttsx3==2.90
 PyTweening==1.0.3
 pywhatkit==4.7
 pywin32==300
 requests==2.25.1
+selenium==3.141.0
 soupsieve==2.2.1
 SpeechRecognition==3.8.1
 speedtest==0.0.1
