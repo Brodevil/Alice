@@ -3,17 +3,17 @@ from Assistant import alice
 
 
 
-__all__ = ("intro", "queary", "Assistant.logic")
-__authors__ = ("Abhinav", "Brodevil")       # Both are the same personm lol
+__all__ = ["queary", ]
+__authors__ = ("Abhinav", "Brodevil")       # Both are the same person lol
 
 
 
 if __name__ == "__main__":
     # Running part of the Alice Program
-    alice.intro()       # Introdunction
-
-    while True:     # The program will be going to run on Infinate loop
+    alice.intro()       # Introduction
+    while True:     # The program will be going to run on Infinite loop
         queary = alice.takeCommand().lower()
         if queary != "none":
-            Assistant.logic(queary)     # Logic for executin task based on query
+            if 'skip this' not in queary:
+                Assistant.logic(queary)     # Logic for execution task based on query
 
