@@ -9,16 +9,14 @@ import psutil
 # import smtplib
 import subprocess
 
+from Assistant.exts import reminder  # noqa
+from Assistant.exts import networks  # noqa
+from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client  # noqa
 
-from Assistant.exts import reminder                                                                             # noqa
-from Assistant.exts import networks                                                                             # noqa
-from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client             # noqa
-
-from Assistant.resources.login import login                                                                     # noqa
-from Assistant.Alice import alice                                                                               # noqa
-from Assistant.exts import keyactivities                                                                        # noqa
-from Assistant.exts import workWithFiles                                                                        # noqa
-
+from Assistant.resources.login import login  # noqa
+from Assistant.Alice import alice  # noqa
+from Assistant.exts import keyactivities  # noqa
+from Assistant.exts import workWithFiles  # noqa
 
 __all__ = ["logic"]
 
@@ -33,7 +31,7 @@ def logic(queary):
     """This is the logic of the Program as it will be matching several query and do the programmed task """
 
     # fetching info from internet
-    
+
     if 'wikipedia' in queary:
         alice.speak("Searching Wikipedia...")
         queary = queary.replace("wikipedia", "")
@@ -191,7 +189,7 @@ def logic(queary):
     elif "play my music" in queary or "play my song" in queary:
         os.startfile(Client.favouriteMusic)
 
-    
+
     elif 'play' in queary:
         queary = queary.split("play ")[-1]
         alice.speak(f"Showing related results to {queary}")
@@ -203,8 +201,6 @@ def logic(queary):
     elif 'delete unwanted files' in queary:
         alice.speak("Deleting unwanted files...")
         workWithFiles.deleteUnwantedFiles()
-
-
 
         # Natural Talks/ Fun commands :
     elif 'is i am audio able' in queary:
@@ -271,7 +267,7 @@ def logic(queary):
                 except ValueError:
                     pass
 
-        alice.speak(f"Okay {alice.gender}! I will be wake up after {period} minutes.")
+        alice.speak(f"Okay {alice.gender}! I will be wake up after {period} minutes.")  # noqa
         time.sleep(60 * period)
 
         alice.speak(f"{alice.goodWish} {alice.gender}!, I wake up after {period} minutes, Lets back to work.")
@@ -288,9 +284,11 @@ def logic(queary):
 
 
     elif 'alice' in queary and 'info' in queary or "your" in queary and "info" in queary:
-        alice.speak(f"I am written in Python by {Client.author}Sir!. To contact him you can email at ({Client.contact}), Check out his GitHub Profile You will know more about my sir")
-        print(f"Alice : Mr. Abhinav's  Email:{Client.contact}. Github link :{Client.github_assistant_repo}. Discord Id : {Client.DiscordId}")
-        
+        alice.speak(
+            f"I am written in Python by {Client.author}Sir!. To contact him you can email at ({Client.contact}), Check out his GitHub Profile You will know more about my sir")
+        print(
+            f"Alice : Mr. Abhinav's  Email:{Client.contact}. Github link :{Client.github_assistant_repo}. Discord Id : {Client.DiscordId}")
+
 
 
     # System features :
@@ -301,11 +299,10 @@ def logic(queary):
     elif 'battery' in queary:
 
         if battery is not None:
-            try:
-                alice.speak(f"Battery is {battery.percent}% Charged! " + (
-                    "And its still in charging." if battery.power_plugged else ""))
-            except Exception:
-                alice.speak(f"Something went wrong {random.choice(ERROR_REPLIES)}. I think you are in desktop")
+            alice.speak(
+                        f"Battery is {battery.percent}% Charged! " + "And its still in charging." if battery.power_plugged else "")
+        else:
+            alice.speak(f"Something went wrong {random.choice(ERROR_REPLIES)}. I think you are in desktop")
 
 
     elif 'memory' in queary or 'ram' in queary.split():
@@ -343,7 +340,9 @@ def logic(queary):
             minutes = int(input("Enter the number of Minutes :\t"))
         finally:
             alice.speak(
-                f"Okay {alice.gender}, I will be keep your windows machine active for next {minutes} Minutes!, Till that time you can grap a cup of coffee.")
+                f"Okay {alice.gender}, I will be keep your windows machine active for next {minutes} Minutes!, "    # noqa
+                f"Till that time you can grape a cup of coffee.")
+            #
             alice.activePC(minutes)
             del minutes, unit
 
@@ -399,8 +398,8 @@ def logic(queary):
 
 
     elif 'record keyboard' in queary:
-        alice.speak(f"Okay {alice.gender}! Note that, your keyboard activies will be recording till you prese Escap button on your keyboard")
-        
+        alice.speak(
+            f"Okay {alice.gender}! Note that, your keyboard activies will be recording till you prese Escap button on your keyboard")
         globals()['keyRecorded'] = keyactivities.keyboardRecord()
 
 
@@ -411,7 +410,7 @@ def logic(queary):
             alice.speak(f"{alice.gender}! there is no keyboard Activity available till now")
         else:
             alice.speak(
-                f"Okay {alice.gender}! Playing the keyboard Activiy recording, Note that have to put the cursor where you want to play it.")
+                f"Okay {alice.gender}! Playing the keyboard Activity recording, Note that have to put the cursor where you want to play it.")
             time.sleep(7)
             keyactivities.recordedKeyboardType(globals()["keyRecorded"])
 
@@ -426,11 +425,12 @@ def logic(queary):
     elif 'news' in queary:
         topTen = networks.news()
         if topTen is not None:
-            for articles in topTen:
-                print(f"For more info... Go to ==>>> {articles['url']}\n")
+            for index, articles in enumerate(topTen):
+                alice.speak("Moving On " + "a" if index is 0 else "another" + " fresh news!")
                 alice.speak(
-                    f"Title; {articles['title']}. \nDescription; {articles['description']}. Actually; {articles['content']}\n")
-                alice.speak("Moving On next news!")
+                    f" {articles['title']}. \n{articles['description']}. " + f" {articles['content']}\n" if articles['content'] is not None else "")
+                print(f"For more info... Go to ==>>> {articles['url']}\n\n")
+
             alice.speak("Thank you for listening")
 
 
@@ -473,7 +473,7 @@ def logic(queary):
         subject = alice.takeCommand()
         alice.speak("What's the content...")
         content = alice.takeCommand()
-        result = login.sendEmail(userEmail, subject, content)                                                     # noqa
+        result = login.sendEmail(userEmail, subject, content)  # noqa
 
         if result is False:
             alice.speak(f"{random.choice(ERROR_REPLIES)}, Some thing went Wrong")
@@ -501,7 +501,6 @@ def logic(queary):
     elif 'open' in queary or 'launch' in queary:
         applicationName = queary.split("open" if "open" in queary else "launch")[-1].split()[0]
 
-
         # the second argument is the related path of the folder where all the used or usable software shortcuts are available by the user
         app = workWithFiles.openApplication(applicationName, Client.ApplicationShortcutPath)
 
@@ -519,7 +518,6 @@ def logic(queary):
             alice.speak("Opening File Explorer...")
         except Exception:
             alice.speak("Some thing went Wrong")
-
 
 
 if __name__ == "__main__":
