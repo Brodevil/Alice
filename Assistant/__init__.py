@@ -6,7 +6,7 @@ import random
 import sys
 
 import psutil
-import smtplib
+# import smtplib
 import subprocess
 
 
@@ -166,8 +166,8 @@ def logic(queary):
             pourpose = queary.split("so that ")[1]
         except Exception:  # the user can give the reason as a option
             pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
-        finally:
-            reminder.reminder(magnitude, unit, pourpose)
+
+        reminder.reminder(magnitude, unit, pourpose)
 
 
 
@@ -189,7 +189,7 @@ def logic(queary):
 
 
     elif "play my music" in queary or "play my song" in queary:
-        os.startfile(Client.favorateMusic)
+        os.startfile(Client.favouriteMusic)
 
     
     elif 'play' in queary:
@@ -473,12 +473,12 @@ def logic(queary):
         subject = alice.takeCommand()
         alice.speak("What's the content...")
         content = alice.takeCommand()
-        result = login.sendEmail(userEmail, subject, content)
+        result = login.sendEmail(userEmail, subject, content)                                                     # noqa
 
         if result is False:
             alice.speak(f"{random.choice(ERROR_REPLIES)}, Some thing went Wrong")
         else:
-            alice.speak(f"Email send succefully to {userEmail}!")
+            alice.speak(f"Email send successfully to {userEmail}!")
 
 
 
@@ -499,13 +499,11 @@ def logic(queary):
     # Launching the software stuffs
 
     elif 'open' in queary or 'launch' in queary:
-        if "open" in queary:
-            applicationName = queary.split("open ")[-1]
-        elif 'launch' in queary:
-            applicationName = queary.split("launch ")[-1]
+        applicationName = queary.split("open" if "open" in queary else "launch")[-1].split()[0]
 
-            # the second argument is the releated path of the folder where all the used or usale software shortcuts are avaialbe by the user
-        app = workWithFiles.openApplication(applicationName, "M:\ADMIN\Critical Data\VS-Code\Alice\Applications")
+
+        # the second argument is the related path of the folder where all the used or usable software shortcuts are available by the user
+        app = workWithFiles.openApplication(applicationName, Client.ApplicationShortcutPath)
 
         if app is not None:
             alice.speak(f"Launching {app} Application...")
