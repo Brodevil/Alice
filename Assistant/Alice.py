@@ -43,7 +43,7 @@ class Alice:
         super().__init__()
         gender=str(environ.get("GENDER", 'male'))
         self.name = environ.get("UserName", "Abhinav")      # this is the user name of the person who suppose to use this program : Data From (.env)
-        self.Assistantname = Client.Assistantname
+        self.Assistantname = Client.AssistantName
         if gender == "male":
             self.gender = "Sir"
         elif gender == "female":
@@ -67,20 +67,20 @@ class Alice:
             engine.setProperty("rate", 170)
 
             if index == 0:
-                print(f"{Client.Assistantname} : Hey there! I am {index+1}st voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file\n")
+                print(f"{Client.AssistantName} : Hey there! I am {index + 1}st voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file\n")
                 engine.say(f"Hey there! I am {index+1}st voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file")
                 
            
             elif index == 1:
-                print(f"{Client.Assistantname} : Hey there! I am {index+1}nd voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file\n")
+                print(f"{Client.AssistantName} : Hey there! I am {index + 1}nd voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file\n")
                 engine.say(f"Hey there! I am {index+1}nd voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file")
 
             elif index == 2:
-                print(f"{Client.Assistantname} : Hey there! I am {index+1}rd voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file\n")
+                print(f"{Client.AssistantName} : Hey there! I am {index + 1}rd voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file\n")
                 engine.say(f"Hey there! I m {index+1}rd voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file")
             
             else:
-                print(f"{Client.Assistantname} : Hey there! I am {index+1}th voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file\n")
+                print(f"{Client.AssistantName} : Hey there! I am {index + 1}th voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file\n")
                 engine.say(f"Hey there! I am {index+1}th voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index+1} in .env file")
         engine.runAndWait()
 
