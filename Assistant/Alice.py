@@ -19,6 +19,39 @@ __all__ = ("Alice", "alice")
 load_dotenv()
 
 
+def audioBook(fromPageNo=0):
+    """ Function to read the pdf and save the audio in a mp3 file at the same directory where the pdf located """
+    pdfPath = askopenfilename()
+    print(pdfPath)
+    full_Text = str()
+    if ".pdf" not in pdfPath:
+        return None
+
+    with open(pdfPath, "rb") as book:
+        try:
+            reader = PyPDF2.PdfFileReader(book)
+            audio_reader = pyttsx3.init('sapi5')
+            audio_reader.setProperty("rate", 170)
+            audio_reader.setProperty("voice", Client.voices[Client.voice - 1])
+
+            for page in range(fromPageNo, reader.numPages):
+                next_page = reader.getPage(page)
+                content = next_page.extractText()
+                full_Text += content
+
+            audiofile = pdfPath.replace(".pdf", ".mp3")
+
+            #  To save the voice in a mp3 file, but the problem is that, the large books are not able to be save to file
+            # audio_reader.save_to_file(content, audiofile)
+
+            # this will say to voice at the current time. While the program will be paused and just book will be readed
+            audio_reader.say(content)
+            audio_reader.runAndWait()
+        except Exception:
+            return None
+    return audiofile
+
+
 class Alice:
     """ 
     Alice Assitant:
@@ -42,6 +75,8 @@ class Alice:
         self.city = environ.get("location", localInfo())  # Data From (.env)
         self.voice = Client.voice
         self.voiceSpeed = Client.voiceRate
+
+
 
     def severalVoices(self, voicesId=Client.voices):
         """ This is the function to show the user how many voices are available in his/her system 
@@ -77,6 +112,8 @@ class Alice:
                     f"Hey there! I am {index + 1}th voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file")
         engine.runAndWait()
 
+
+
     def speak(self, audio):
         """ Speak function as per the selected voice """
 
@@ -87,11 +124,13 @@ class Alice:
         engine.say(audio)
         engine.runAndWait()
 
+
+
     def takeCommand(self):
-        '''
-        The not having any parameter but it taking the input form the microphone of the user 
+        """
+        The not having any parameter but it taking the input form the microphone of the user
         and return the string object that the user says
-        '''
+        """
         r = sr.Recognizer()
         with sr.Microphone() as source:
             print(f"{self.Assistantname}: Listening....")
@@ -111,6 +150,8 @@ class Alice:
         else:
             return query
 
+
+
     @property
     def goodWish(self):
         presentHour = int(datetime.datetime.now().hour)
@@ -122,6 +163,8 @@ class Alice:
 
         else:
             return "Good Evening"
+
+
 
     def intro(self):
         self.speak(Client.intro)
@@ -151,37 +194,7 @@ class Alice:
         webbrowser.register('edge', None, webbrowser.BackgroundBrowser(edgePath))
         webbrowser.get('edge').open(url)
 
-    def audioBook(self, fromPageNo=0):
-        """ Function to read the pdf and save the audio in a mp3 file at the same directory where the pdf locatied """
-        pdfPath = askopenfilename()
-        print(pdfPath)
-        full_Text = str()
-        if ".pdf" not in pdfPath:
-            return None
 
-        with open(pdfPath, "rb") as book:
-            try:
-                reader = PyPDF2.PdfFileReader(book)
-                audio_reader = pyttsx3.init('sapi5')
-                audio_reader.setProperty("rate", 170)
-                audio_reader.setProperty("voice", Client.voices[Client.voice - 1])
-
-                for page in range(fromPageNo, reader.numPages):
-                    next_page = reader.getPage(page)
-                    content = next_page.extractText()
-                    full_Text += content
-
-                audiofile = pdfPath.replace(".pdf", ".mp3")
-
-                #  To save the voice in a mp3 file, but the problem is that, the large books are not able to be save to file 
-                # audio_reader.save_to_file(content, audiofile)
-
-                # this will say to voice at the current time. While the program will be paused and just book will be readed
-                audio_reader.say(content)
-                audio_reader.runAndWait()
-            except Exception:
-                return None
-        return audiofile
 
     @staticmethod
     def activePC(minutes):
@@ -195,7 +208,10 @@ class Alice:
                 pyautogui.press("shift")
 
 
+
 alice = Alice()  # Object for the Alice class
+
+
 
 if __name__ == "__main__":  # Testing part, just for testing purposes
     test0 = Alice()
