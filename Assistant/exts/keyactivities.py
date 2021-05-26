@@ -15,8 +15,8 @@ def typeWrite(string):
     
 
 def keyboardRecord():
-    """The functions records the keybaord activity and can be just written by using another recordedKeyboardType() functions"""
-    record = keyboard.record(until ='Esc')
+    """The functions records the keyboard activity and can be just written by using another recordedKeyboardType() functions"""
+    record = keyboard.record(until='Esc')
     # keyboard.play(record, speed_factor=5)
     return record
 
