@@ -9,14 +9,14 @@ import psutil
 # import smtplib
 import subprocess
 
-from Assistant.exts import reminder  # noqa
-from Assistant.exts import networks  # noqa
+from Assistant.exts import reminder                                                        # noqa
+from Assistant.exts import networks                                                        # noqa
 from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client  # noqa
 
-from Assistant.resources.login import login  # noqa
-from Assistant.Alice import alice  # noqa
-from Assistant.exts import keyactivities  # noqa
-from Assistant.exts import workWithFiles  # noqa
+from Assistant.resources.login import login                                                 # noqa
+from Assistant.Alice import alice                                                           # noqa
+from Assistant.exts import keyactivities                                                    # noqa
+from Assistant.exts import workWithFiles                                                    # noqa
 
 __all__ = ["logic"]
 
@@ -38,7 +38,7 @@ def logic(queary):
         alice.speak(networks.wiki(queary))
 
 
-    elif 'search' in queary:
+    elif 'search' in queary and 'google' in queary:
         queary = queary.replace("search", "")
         alice.speak(f"Searching {queary} in Google")
         queary = queary.replace(" ", "%20")
@@ -116,6 +116,7 @@ def logic(queary):
     elif 'gmail' in queary:
         alice.speak("Opening Gmail...")
         alice.edge("https://gmail.com")
+
 
 
     # work with GUI or windows :
@@ -448,7 +449,7 @@ def logic(queary):
 
 
     # work with lodging file : i.e.work with E commerce websites accounts
-    elif 'send email' in queary:
+    elif 'send' in queary and "email" in queary:
         alice.speak("To whom you want to send the email")
         try:
             userEmail = alice.takeCommand().lower()  # here taking the name as a input and featuring it in our contacts
@@ -507,8 +508,10 @@ def logic(queary):
         if app is not None:
             alice.speak(f"Launching {app} Application...")
         else:
-            alice.speak(f"Sorry! {applicationName} shortcut didn't got in the Application folder. Please put the shortcuts of all the application do \
-            you use in day to day life in Application folder, Which is in this project folder.")
+            # alice.speak(f"Sorry! {applicationName} shortcut didn't got in the Application folder. Please put the shortcuts of all the application do \
+            # you use in day to day life in Application folder, Which is in this project folder.")
+            pass
+
 
 
 
