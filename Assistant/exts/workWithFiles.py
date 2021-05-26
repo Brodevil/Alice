@@ -36,7 +36,7 @@ def deleteUnwantedFiles():
 
 
 
-def openApplication(ApplicationName, installedApplicationPath):
+def openApplication(ApplicationName: str, installedApplicationPath: str):
     """ To match to queary with the available application in the Application folder i.e. the .lnk files
     And opening or launching the most matching queary name of applications """
 
@@ -54,4 +54,3 @@ def openApplication(ApplicationName, installedApplicationPath):
 if __name__ == "__main__":
     # openApplication("code", "Applications")
     pass
-    
