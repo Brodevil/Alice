@@ -154,8 +154,8 @@ def logic(queary):
 
 
     # reminder        
-    elif 'remind me after' in queary or "wake":
-        queary = queary.replace("remind me after", "")
+    elif 'remind me after' in queary or "wake up me after" in queary:
+        queary = queary.split("remind me after " if "remind me after" in queary else "wake up me after ")[-1]
         queary = queary.replace("i", "you")
         magnitude = int(queary.split()[0])
         unit = queary.split()[1]
@@ -311,7 +311,7 @@ def logic(queary):
 
     elif 'storage' in queary or 'hard drive' in queary:
         alice.speak(
-            f"Total available Storage : {Client.storage['Total']} GB, Used : {Client.storage['Used']} GB, Free : {Client.storage['Free']} GB")
+            f"Total Usable Storage : {Client.storage['Total']} GB, Used : {Client.storage['Used']} GB, Free : {Client.storage['Free']} GB")
 
 
     elif 'internet' in queary:
