@@ -169,12 +169,14 @@ class Alice:
     def intro(self):
         self.speak(Client.intro)
         self.speak(
-            f"Its {datetime.datetime.now().strftime('%I:%M %p')}, and todays date is {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year} ")
+            f"Its {datetime.datetime.now().strftime('%I:%M %p')}, and today's date is {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year} ")
         self.speak(
-            f"Storage : {Client.storage['Total']} GB, Memory Used : {Client.memory_status}%,  CPU Used : {Client.cpu_status}%")
+            f"Usable Storage : {Client.storage['Total']} GB, Memory Used : {Client.memory_status}%,  CPU Used : {Client.cpu_status}%")
         try:
             self.speak(
-                f"Battery is {Client.battery_status}% Charged!, " + "And its still in charging." if Client.battery_pugged else "" + "You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {self.gender}!")
+                f"You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {self.gender}!. "
+                f"Battery is {Client.battery_status}% Charged!, " + "And its still in charging." if Client.battery_pugged else "")
+
             self.speak(Client.weatherInfo)  # Trying to say the weather report ond the client local area'
         except Exception:
             pass
@@ -193,7 +195,6 @@ class Alice:
         edgePath = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
         webbrowser.register('edge', None, webbrowser.BackgroundBrowser(edgePath))
         webbrowser.get('edge').open(url)
-
 
 
     @staticmethod
