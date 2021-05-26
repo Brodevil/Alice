@@ -154,7 +154,7 @@ def logic(queary):
 
 
     # reminder        
-    elif 'remind me after' in queary:
+    elif 'remind me after' in queary or "wake":
         queary = queary.replace("remind me after", "")
         queary = queary.replace("i", "you")
         magnitude = int(queary.split()[0])
@@ -426,7 +426,7 @@ def logic(queary):
         topTen = networks.news()
         if topTen is not None:
             for index, articles in enumerate(topTen):
-                alice.speak("Moving On " + "a" if index is 0 else "another" + " fresh news!")
+                alice.speak("Moving On " + "a" if index == 0 else "another" + " fresh news!")
                 alice.speak(
                     f" {articles['title']}. \n{articles['description']}. " + f" {articles['content']}\n" if articles['content'] is not None else "")
                 print(f"For more info... Go to ==>>> {articles['url']}\n\n")
@@ -484,7 +484,7 @@ def logic(queary):
 
     elif "read book" in queary or "audio book" in queary or "speak pdf" in queary or "read pdf" in queary:
         alice.speak(f"{alice.gender} select the pdf file which you want to make read!")
-        audioFile = alice.audioBook()
+        audioFile = audioBook()
         if audioFile is None:
             alice.speak(
                 "Some thing went wrong!, It might be not a pdf file or the pdf file content will be in images form.")
