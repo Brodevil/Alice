@@ -1,16 +1,8 @@
 from plyer import notification
 import pyttsx3
 import time
+from Assistant.Alice import alice
 
-
-def speakRichard(audio):
-    engine = pyttsx3.init()
-    engine.setProperty('voice', engine.getProperty('voices')[2].id)
-    engine.setProperty("rate", 170)
-    engine.setProperty('volume', 50)
-    print(f"Alice : {audio}\n")
-    engine.say(audio)
-    engine.runAndWait()
 
 
 def notifier(reason, string, ico):
@@ -23,12 +15,16 @@ def notifier(reason, string, ico):
             
 
 def reminder(magnitude, unit, pourpose):
+    print("bhai atlest function me ghuss gaya hu me")
     if unit.lower() == "myournutes" or unit.lower() == "myounutes":     # this is actually the computer sense word to minutes as a myournutes     #noqa
         remindTime = int(magnitude*60 + time.time())
+        print("in program")
         while True:
+            print("in while loop bro")
             presentTime = int(time.time())
             if presentTime == remindTime:
-                speakRichard("Time Out Sir!")
+                print('wah bete moj kr di')
+                alice.speak("Time Out Sir!")
                 notifier(
                     reason=pourpose,
                     string="Alice : Time Out Sir!",
@@ -41,7 +37,7 @@ def reminder(magnitude, unit, pourpose):
         while(True):
             presentTime = int(time.time())
             if presentTime == remindTime:
-                speakRichard("Time Out Sir!")
+                alice.speak("Time Out Sir!")
                 notifier(
                     reason=pourpose,
                     string="Alice : Time Out Sir!",
