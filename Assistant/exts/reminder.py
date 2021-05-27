@@ -16,11 +16,10 @@ def notifier(reason, string, ico):
 
 def reminder(magnitude, unit, pourpose):
     print("bhai atlest function me ghuss gaya hu me")
-    if unit.lower() == "myournutes" or unit.lower() == "myounutes":     # this is actually the computer sense word to minutes as a myournutes     #noqa
+    if unit.lower() == "myounute" or unit.lower() == "myounutes":     # this is actually the computer sense word to minutes as a myournutes     #noqa
         remindTime = int(magnitude*60 + time.time())
         print("in program")
         while True:
-            print("in while loop bro")
             presentTime = int(time.time())
             if presentTime == remindTime:
                 print('wah bete moj kr di')
