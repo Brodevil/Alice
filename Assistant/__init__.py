@@ -6,7 +6,8 @@ import random
 import sys
 
 import psutil
-# import smtplib
+import smtplib
+import multiprocessing as mp
 import subprocess
 
 from Assistant.exts import reminder                                                        # noqa
@@ -17,6 +18,8 @@ from Assistant.resources.login import login                                     
 from Assistant.Alice import alice                                                           # noqa
 from Assistant.exts import keyactivities                                                    # noqa
 from Assistant.exts import workWithFiles                                                    # noqa
+
+
 
 __all__ = ["logic"]
 
@@ -40,9 +43,11 @@ def logic(queary):
 
     elif 'search' in queary and 'google' in queary:
         queary = queary.replace("search", "")
+        queary = queary.replace("google", "")
         alice.speak(f"Searching {queary} in Google")
         queary = queary.replace(" ", "%20")
         alice.edge(f"https://www.google.com/search?q={queary}")
+
 
 
     elif "youtube" in queary and "search" in queary:
@@ -166,10 +171,10 @@ def logic(queary):
         except Exception:  # the user can give the reason as a option
             pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
 
-        subprocess.run(reminder.reminder(magnitude, unit, pourpose))
-
-
-
+        side_reminder = mp.Process(target=reminder.reminder, args=(magnitude, unit, pourpose))
+        side_reminder.start()
+        side_reminder.join()
+    
 
 
 
@@ -188,7 +193,7 @@ def logic(queary):
             pass
 
 
-    elif "play my music" in queary or "play my song" in queary:
+    elif "play my music" in queary or "play my song" in queary or "i am feeling bad" in queary or "sad" in  queary  and "feeling" in queary or "unhappy" in queary and "feeling" in queary:
         os.startfile(Client.favouriteMusic)
 
 
@@ -213,7 +218,7 @@ def logic(queary):
         alice.speak(f"Hello {alice.gender}! {random.choice(POSITIVE_REPLIES)}")
 
 
-    elif 'hello' in queary or "hello alice" in queary:
+    elif 'hello' in queary or "hello alice" in queary or queary == "alice":
         alice.speak(f"Hello {alice.gender}! how may I can help you.")
 
 
