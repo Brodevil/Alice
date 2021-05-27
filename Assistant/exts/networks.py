@@ -48,11 +48,11 @@ def weather(location=None, apikey=(environ.get("OpenWeatherMapApi"))):
             try:
                 response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={apikey}")
                 response = json.loads(response.text)
-                return f"It seemed to be approximately {int(response['main']['temp'] - 273.15)} degree Celcius! I guess its like {response['weather'][0]['main']} Weather outside the door, and the wind speed is feels like {int(response['wind']['speed']*3.6)} kilometer per hour"
+                return f"It seemed to be approximately {int(response['main']['temp'] - 273.15)} degree Celsius! I guess its like {response['weather'][0]['main']} Weather outside the door, and the wind speed is feels like {int(response['wind']['speed']*3.6)} kilometer per hour"
             except ConnectionError:
                 return None
             except IndexError:
-                return "Sorry! Weather report not avilable for {location}"
+                return "Sorry! Weather report not available for {location}"
         else:
             return None
 
