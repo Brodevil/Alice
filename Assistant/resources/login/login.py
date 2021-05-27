@@ -24,7 +24,7 @@ def sendEmail(to, subject, content):
     else:
         return True
     finally:
-        server.close()
+        server.close()                                                      # noqa
 
 
 
