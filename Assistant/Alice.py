@@ -19,38 +19,6 @@ __all__ = ("Alice", "alice")
 load_dotenv()
 
 
-def audioBook(fromPageNo=0):
-    """ Function to read the pdf and save the audio in a mp3 file at the same directory where the pdf located """
-    pdfPath = askopenfilename()
-    print(pdfPath)
-    full_Text = str()
-    if ".pdf" not in pdfPath:
-        return None
-
-    with open(pdfPath, "rb") as book:
-        try:
-            reader = PyPDF2.PdfFileReader(book)
-            audio_reader = pyttsx3.init('sapi5')
-            audio_reader.setProperty("rate", 170)
-            audio_reader.setProperty("voice", Client.voices[Client.voice - 1])
-
-            for page in range(fromPageNo, reader.numPages):
-                next_page = reader.getPage(page)
-                content = next_page.extractText()
-                full_Text += content
-
-            audiofile = pdfPath.replace(".pdf", ".mp3")
-
-            #  To save the voice in a mp3 file, but the problem is that, the large books are not able to be save to file
-            # audio_reader.save_to_file(content, audible)
-
-            # this will say to voice at the current time. While the program will be paused and just book will be read
-            audio_reader.say(content)
-            audio_reader.runAndWait()
-        except Exception:
-            return None
-    return audiofile
-
 
 class Alice:
     """ 
@@ -207,6 +175,41 @@ class Alice:
                 pyautogui.moveTo(500, i * 5)
             for i in range(0, 5):
                 pyautogui.press("shift")
+
+
+
+    @staticmethod
+    def audioBook(fromPageNo=0):
+        """ Function to read the pdf and save the audio in a mp3 file at the same directory where the pdf located """
+        pdfPath = askopenfilename()
+        full_Text = str()
+        if ".pdf" not in pdfPath:
+            return None
+
+        with open(pdfPath, "rb") as book:
+            try:
+                reader = PyPDF2.PdfFileReader(book)
+                audio_reader = pyttsx3.init('sapi5')
+                audio_reader.setProperty("rate", 170)
+                audio_reader.setProperty("voice", Client.voices[Client.voice - 1])
+
+                for page in range(fromPageNo, reader.numPages):
+                    next_page = reader.getPage(page)
+                    content = next_page.extractText()
+                    full_Text += content
+
+                audioFile = pdfPath.replace(".pdf", ".mp3")
+
+                #  To save the voice in a mp3 file, but the problem is that, the large books are not able to be save to file
+                # audio_reader.save_to_file(content, audible)
+
+                # this will say to voice at the current time. While the program will be paused and just book will be read
+                audio_reader.say(content)
+                audio_reader.runAndWait()
+            except Exception:
+                return None
+        return audioFile
+
 
 
 
