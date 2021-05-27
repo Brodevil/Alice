@@ -166,7 +166,8 @@ def logic(queary):
         except Exception:  # the user can give the reason as a option
             pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
 
-        reminder.reminder(magnitude, unit, pourpose)
+        subprocess.run(reminder.reminder(magnitude, unit, pourpose))
+
 
 
 
@@ -382,6 +383,11 @@ def logic(queary):
 
 
     # make Alice to type, Keyboard features
+
+    elif 'open' in queary and 'windows' in queary:
+        keyboard.press("win")
+
+
     elif "type that" in queary or "send that" in queary:
         queary = queary.split("that")[-1]
         keyactivities.typeWrite(queary)
@@ -402,6 +408,7 @@ def logic(queary):
         alice.speak(
             f"Okay {alice.gender}! Note that, your keyboard activies will be recording till you prese Escap button on your keyboard")
         globals()['keyRecorded'] = keyactivities.keyboardRecord()
+
 
 
     elif 'play the keyboard recording' in queary:
@@ -467,7 +474,7 @@ def logic(queary):
                     alice.speak(
                         f"Sorry {alice.gender}! I didn't get that. Please type the email Address in the terminal!")
                     userEmail = input("Enter the Email Address :\t")
-        except Exception as e:
+        except Exception:
             alice.speak(f"{random.choice(ERROR_REPLIES)}, Some thing went Wrong")
 
         alice.speak("What's the subject...")
@@ -485,7 +492,7 @@ def logic(queary):
 
     elif "read book" in queary or "audio book" in queary or "speak pdf" in queary or "read pdf" in queary:
         alice.speak(f"{alice.gender} select the pdf file which you want to make read!")
-        audioFile = audioBook()
+        audioFile = alice.audioBook()
         if audioFile is None:
             alice.speak(
                 "Some thing went wrong!, It might be not a pdf file or the pdf file content will be in images form.")
@@ -498,6 +505,16 @@ def logic(queary):
 
 
     # Launching the software stuffs
+
+
+    elif "open file explorer" in queary or "this pc" in queary:
+        try:
+            subprocess.Popen(r'explorer /select,"C:\path\of\folder\file"')
+            alice.speak("Opening File Explorer...")
+        except Exception:
+            alice.speak("Some thing went Wrong")
+
+
 
     elif 'open' in queary or 'launch' in queary:
         applicationName = queary.split("open" if "open" in queary else "launch")[-1].split()[0]
@@ -515,12 +532,7 @@ def logic(queary):
 
 
 
-    elif "open file explorer" in queary or "this pc" in queary:
-        try:
-            subprocess.Popen(r'explorer /select,"C:\path\of\folder\file"')
-            alice.speak("Opening File Explorer...")
-        except Exception:
-            alice.speak("Some thing went Wrong")
+
 
 
 if __name__ == "__main__":
