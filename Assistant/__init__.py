@@ -210,6 +210,8 @@ def logic(queary):
         alice.speak("Deleting unwanted files...")
         workWithFiles.deleteUnwantedFiles()
 
+
+
         # Natural Talks/ Fun commands :
     elif 'is i am audio able' in queary:
         alice.speak(random.choice(POSITIVE_REPLIES))
