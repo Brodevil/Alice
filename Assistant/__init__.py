@@ -180,7 +180,7 @@ def logic(queary):
 
 
     # music
-    elif 'play music' in queary or "play another music" in queary or "play another song" in queary or "play song" in queary or "play" in queary and "random" in queary:
+    elif 'play music' in queary or "play another music" in queary or "play another song" in queary or "play song" in queary or "play" in queary and "random" in queary and "music" in queary:
         music = os.listdir(Client.musicDirectory)
         os.startfile(os.path.join(Client.musicDirectory, random.choice(music)))
         alice.speak("Playing Music...")
