@@ -4,10 +4,11 @@ import time
 import keyboard
 import random
 import sys
+import webbrowser
 
 import psutil
-import smtplib
 from playsound import playsound
+import pywhatkit
 import multiprocessing as mp
 import subprocess
 
@@ -45,15 +46,19 @@ def logic(queary):
     elif 'search' in queary and 'google' in queary:
         queary = queary.replace("search", "")
         queary = queary.replace("google", "")
-        alice.speak(f"Searching {queary} in Google")
-        queary = queary.replace(" ", "%20")
-        alice.edge(f"https://www.google.com/search?q={queary}")
+        alice.speak(f"Fetching the related queary in Google")
+        pywhatkit.search(queary)
 
 
 
     elif "youtube" in queary and "search" in queary:
-        search = queary.split("youtube")[-1]
-        alice.edge(f"https://www.youtube.com/results?search_query={search.replace(' ', '+')}")
+        try:
+            search = queary.split("youtube")[-1]
+            alice.speak("Fetching Data....")
+            pywhatkit.playonyt(search)
+        except Exception:
+            alice.speak(f"No results found on {search} on youtube")
+
 
 
     # quiting the program
@@ -71,7 +76,7 @@ def logic(queary):
 
     elif 'open youtube' in queary:
         alice.speak("Opening youtube...")
-        alice.edge("youtube.com")
+        webbrowser.open("youtube.com")
 
 
     elif 'open google' in queary:
@@ -195,7 +200,8 @@ def logic(queary):
 
 
     elif "play my music" in queary or "play my song" in queary or "i am feeling bad" in queary or "sad" in  queary  and "feeling" in queary or "unhappy" in queary and "feeling" in queary:
-        os.startfile(Client.favouriteMusic)
+        coolMuisc = mp.Process(target=playsound, args=(Client.favouriteMusic, ))
+        coolMuisc.start()
 
 
     elif 'play' in queary:
@@ -432,6 +438,7 @@ def logic(queary):
 
 
 
+
     # local info work with internet :
     elif "what's my location" in queary or 'where am i' in queary or 'where i am' in queary:
         alice.speak(
@@ -536,7 +543,6 @@ def logic(queary):
             # alice.speak(f"Sorry! {applicationName} shortcut didn't got in the Application folder. Please put the shortcuts of all the application do \
             # you use in day to day life in Application folder, Which is in this project folder.")
             pass
-
 
 
 
