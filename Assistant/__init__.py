@@ -7,6 +7,7 @@ import sys
 
 import psutil
 import smtplib
+from playsound import playsound
 import multiprocessing as mp
 import subprocess
 
@@ -173,7 +174,7 @@ def logic(queary):
 
         side_reminder = mp.Process(target=reminder.reminder, args=(magnitude, unit, pourpose))
         side_reminder.start()
-        side_reminder.join()
+
     
 
 
@@ -188,7 +189,7 @@ def logic(queary):
     elif 'brown munde' in queary:  # this function is just for my self i.e. For Abhinav personal songs
         try:
             os.startfile(
-                r"E:\ADMIN\Music\BRODEVIL\Hollywood_song\sunna_hai_kya\BROWN MUNDE - AP DHILLON GURINDER GILL SHINDA KAHLON GMINXR.mp3")
+                r"E:\ADMIN\Music\BRODEVIL\Hollywood_song\sunna_hai_kya\BROWN MUNDE.mp3")
         except Exception:
             pass
 
@@ -389,7 +390,7 @@ def logic(queary):
 
     # make Alice to type, Keyboard features
 
-    elif 'open' in queary and 'windows' in queary:
+    elif 'open' in queary and 'windows' in queary or "close" in queary and "windows" in queary:
         keyboard.press("win")
 
 
@@ -541,5 +542,7 @@ def logic(queary):
 
 
 if __name__ == "__main__":
-    command = input("Enter the command for Alice :\t")
-    logic(command)
+    while True:
+        command = input("Enter the command for Alice :\t")
+        logic(command)
+
