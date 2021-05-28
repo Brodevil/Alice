@@ -43,21 +43,25 @@ def logic(queary):
         alice.speak(networks.wiki(queary))
 
 
-    elif 'search' in queary and 'google' in queary:
-        queary = queary.replace("search", "")
-        queary = queary.replace("google", "")
+    elif 'search' in queary and 'on google' in queary:
+        try:
+            queary = queary.replace("search", "")
+            queary = queary.replace("on google", "")
+        except:
+            pass
         alice.speak(f"Fetching the related queary in Google")
         pywhatkit.search(queary)
 
 
 
-    elif "youtube" in queary and "search" in queary:
+    elif "on youtube" in queary and "search" in queary:
         try:
-            search = queary.split("youtube")[-1]
-            alice.speak("Fetching Data....")
-            pywhatkit.playonyt(search)
+            queary = queary.replace("on youtube", "")
+            queary = queary.replace("search", "")
+            alice.speak("Fetching Data...")
+            pywhatkit.playonyt(queary)
         except Exception:
-            alice.speak(f"No results found on {search} on youtube")
+            alice.speak(f"No results found on {queary} on youtube")                             # noqa
 
 
 
@@ -127,6 +131,8 @@ def logic(queary):
     elif 'gmail' in queary:
         alice.speak("Opening Gmail...")
         alice.edge("https://gmail.com")
+
+
 
 
 
@@ -200,8 +206,8 @@ def logic(queary):
 
 
     elif "play my music" in queary or "play my song" in queary or "i am feeling bad" in queary or "sad" in  queary  and "feeling" in queary or "unhappy" in queary and "feeling" in queary:
-        coolMuisc = mp.Process(target=playsound, args=(Client.favouriteMusic, ))
-        coolMuisc.start()
+        coolMusic = mp.Process(target=playsound, args=(Client.favouriteMusic, ))
+        coolMusic.start()
 
 
     elif 'play' in queary:
