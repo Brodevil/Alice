@@ -82,7 +82,7 @@ class Client:
 
     if battery is not None:
         battery_status = battery.percent
-        battery_pugged = battery.power_plugged
+        battery_plugged = battery.power_plugged
 
 
     # Networks infos
