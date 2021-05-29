@@ -141,7 +141,7 @@ class Alice:
         try:
             self.speak(
                 f"You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {self.gender}!. "
-                f"Battery is {Client.battery_status}% Charged!, " + "And its still in charging." if Client.battery_pugged else "")
+                f"Battery is {Client.battery_status}% Charged!, " + "And its still in charging." if Client.battery_plugged else "")
 
             self.speak(Client.weatherInfo)  # Trying to say the weather report ond the client local area'
         except Exception:
