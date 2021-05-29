@@ -17,7 +17,6 @@
 # unwanted file formats
 *.log
 *.pdf
-*.xlsx
 *.mp3
 *.mp4
 
@@ -41,8 +40,6 @@ contactinfo.xlsx
 
 
 # Cached folders
-**/Assistant/__pycache__/
-**/Assistant/pywhatkit_dbs.txt
-**/Assistant/exts/__pycache__/
+
 
 
