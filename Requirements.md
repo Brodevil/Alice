@@ -8,7 +8,7 @@
 <br>
 1. First a fall, You will defiantly need to Clone the Project or Download the zip file 
 <br><br>
-2. Install the required modules by just running the command `pip install -r Requirements.txt` in the same directory's terminal
+2. Install the required modules by just running the command `pip install -r Requirements.txt` in the same directory's terminal, Then just we will install PyAduio by running the command `pip install PyAudio-0.2.11-cp38-cp38-win_amd64.whl`, the wheel file of pyaudio is available in this Project.
 <br><br>
 3. Then create .env file in that directory and put the following info :<br>
     1. `AssistantName=Alice`  **(You can change the name of Assistant)**
