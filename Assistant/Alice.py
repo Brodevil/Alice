@@ -103,17 +103,15 @@ class Alice:
         with sr.Microphone() as source:
             print(f"{self.AssistantName}: Listening....")
             r.pause_threshold = 1
-            r.energy_threshold = 200
+            r.energy_threshold = 300
             audio = r.listen(source)
 
         try:
             print(f"{self.AssistantName} : Recognizing....")
             query = r.recognize_google(audio, language="en-in")
             print(f"{self.name} : {query}\n")
-
-        except Exception as e:
-            print("Alice : Sorry! I didn't get that...\n")
-            r = sr.Recognizer()
+        except Exception:
+            print(f"{self.AssistantName} : Sorry! I didn't get that...\n")
             return "None"
         else:
             return query
