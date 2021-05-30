@@ -48,9 +48,3 @@ def reminderAlarm(magnitude, unit, pourpose):
                 alice.speak("Time Out Sir!")
                 break
 
-
-
-
-
-if __name__ == "__main__":
-    reminderAlarm(1, "myounute", "Test 0")

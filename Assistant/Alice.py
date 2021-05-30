@@ -195,6 +195,7 @@ class Alice:
                 return None
         return audioFile
 
+
     def dailyTaskReminder(self, task: dict):
         while True:
             for exelTime, work in task.items():
@@ -211,8 +212,4 @@ class Alice:
 alice = Alice()  # Object for the Alice class
 
 
-
-if __name__ == "__main__":  # Testing part, just for testing purposes
-    # alice.dailyTaskReminder()
-    pass
 
