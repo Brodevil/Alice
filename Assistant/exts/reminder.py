@@ -1,10 +1,20 @@
 from plyer import notification
 import time
-from Assistant.Alice import alice
 import winsound
+import pyttsx3
+from dotenv import load_dotenv
+import os
+
+
+load_dotenv()
 
 
 __all__ = ["notifier", "reminderAlarm"]
+
+
+def speak(str):
+    engine = pyttsx3.init("sapi5")
+    engine.setProperty("voice", engine.getProperty("voices")[os.environ.get("")])
 
 
 def notifier(reason, string, ico):
@@ -31,7 +41,7 @@ def reminderAlarm(magnitude, unit, pourpose):
                     ico=r"Assistant\media\time-out.ico"
                 )
                 winsound.Beep(frequency=2500, duration=4000)
-                alice.speak("Time Out Sir!")
+                print("Time Out Sir!")
                 break
 
     elif unit.lower() == "hours" or unit.lower() == "hour":
