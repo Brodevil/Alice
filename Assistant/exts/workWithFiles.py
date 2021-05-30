@@ -25,14 +25,14 @@ def contactInfo(path):
 def DailyWorksExel(path):
     wb_obj = openpyxl.load_workbook(path)
     sheet_obj = wb_obj.active
-    task = dict()
+    tasks = dict()
 
     for j in range(3, sheet_obj.max_row + 1):
         workTime = sheet_obj.cell(row=j, column=1)
         work = sheet_obj.cell(row=j, column=2)
-        task.update(workTime, work)
+        tasks.update({workTime: work})
 
-
+    return tasks
 
 
 def deleteUnwantedFiles():
@@ -49,8 +49,8 @@ def deleteUnwantedFiles():
 
 
 def openApplication(ApplicationName: str, installedApplicationPath: str):
-    """ To match to queary with the available application in the Application folder i.e. the .lnk files
-    And opening or launching the most matching queary name of applications """
+    """ To match to queary with the available application in the Application folder i.e.
+     the .lnk files And opening or launching the most matching queary name of applications """
 
     installed_application_shortcut_path = os.listdir(installedApplicationPath)
     
