@@ -37,16 +37,16 @@ def logic(queary):
 
     # fetching info from internet
 
-    if 'wikipedia' in queary:
+    if 'search' in queary and 'on wikipedia' in queary:
+        queary = queary.split("search")[-1].split("on wikipedia")[0]
         alice.speak("Searching Wikipedia...")
-        queary = queary.replace("wikipedia", "")
         alice.speak(networks.wiki(queary))
+
 
 
     elif 'search' in queary and 'on google' in queary:
         try:
-            queary = queary.replace("search", "")
-            queary = queary.replace("on google", "")
+            queary = queary.split("search ")[-1].split("on google")[0]
         except:
             pass
         alice.speak(f"Fetching the related queary in Google")
@@ -56,8 +56,7 @@ def logic(queary):
 
     elif "on youtube" in queary and "search" in queary:
         try:
-            queary = queary.replace("on youtube", "")
-            queary = queary.replace("search", "")
+            queary = queary.split("search ")[-1].split("on youtube")[0]
             alice.speak("Fetching Data...")
             pywhatkit.playonyt(queary)
         except Exception:
@@ -149,7 +148,7 @@ def logic(queary):
     elif 'shutdown pc' in queary:
         os.startfile(r"C:\Windows\System32\SlideToShutDown.exe")
         alice.speak("Shuting down pc....")
-        time.sleep(1)
+        time.sleep(2)
         keyboard.press_and_release("enter")
 
 
@@ -183,7 +182,7 @@ def logic(queary):
         except Exception:  # the user can give the reason as a option
             pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
 
-        side_reminder = mp.Process(target=reminder.reminder, args=(magnitude, unit, pourpose))
+        side_reminder = mp.Process(target=reminder.reminderAlarm, args=(magnitude, unit, pourpose))
         side_reminder.start()
 
     
