@@ -1,7 +1,10 @@
 from plyer import notification
 import time
 from Assistant.Alice import alice
+import winsound
 
+
+__all__ = ["notifier", "reminderAlarm"]
 
 
 def notifier(reason, string, ico):
@@ -16,20 +19,19 @@ def notifier(reason, string, ico):
         pass
 
 
-
-
-def reminder(magnitude, unit, pourpose):
+def reminderAlarm(magnitude, unit, pourpose):
     if unit.lower() == "myounute" or unit.lower() == "myounutes":  # this is actually the computer sense word to minutes as a myounutes     #noqa
         remindTime = int(magnitude * 60 + time.time())
         while True:
             presentTime = int(time.time())
             if presentTime == remindTime:
-                alice.speak("Time Out Sir!")
                 notifier(
                     reason=pourpose,
                     string="Alice : Time Out Sir!",
                     ico=r"Assistant\media\time-out.ico"
                 )
+                winsound.Beep(frequency=2500, duration=4000)
+                alice.speak("Time Out Sir!")
                 break
 
     elif unit.lower() == "hours" or unit.lower() == "hour":
@@ -37,14 +39,18 @@ def reminder(magnitude, unit, pourpose):
         while True:
             presentTime = int(time.time())
             if presentTime == remindTime:
-                alice.speak("Time Out Sir!")
                 notifier(
                     reason=pourpose,
                     string="Alice : Time Out Sir!",
                     ico=r"Assistant\media\time-out.ico"
                 )
+                winsound.Beep(frequency=2500, duration=4000)
+                alice.speak("Time Out Sir!")
                 break
 
 
+
+
+
 if __name__ == "__main__":
-    reminder(1, "minutes", "Test 0")
+    reminderAlarm(1, "myounute", "Test 0")
