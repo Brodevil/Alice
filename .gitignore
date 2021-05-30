@@ -35,13 +35,19 @@ contactinfo.xlsx
 
 
 # The shortcut files for the Application folder : 
-*.lnk
-*.ini
+Applications/Arduino.lnk
+Applications/Google Chrome.lnk
+Applications/DroidCamApp.lnk
+Applications/Visual Studio Code.lnk
+Applications/PyCharm Professional.lnk
+Applications/Sublime Text.lnk
+Applications/Discord.lnk
 
 
 # Cached folders
 ~$Contacts.xlsx
 ~$contactinfo.xlsx
+pywhatkit_dbs.txt
 
 
 

@@ -1,11 +1,13 @@
 from os import environ
+import os
 from dotenv import load_dotenv
 import pyttsx3
 import platform
-from Assistant.exts.networks import localInfo, weather, internetConnection  # noqa
+
 import shutil
 import psutil
 import string
+from Assistant.exts.networks import localInfo, weather, internetConnection  # noqa
 
 
 __all__ = ["Client", "Contacts", "ERROR_REPLIES", "NEGATIVE_REPLIES", "POSITIVE_REPLIES",
@@ -75,7 +77,7 @@ class Client:
     # Few user Info :
     musicDirectory = environ.get("MUSIC", r"C:\Users\ADMIN\Music")  # Music directory should be without space
     favouriteMusic = environ.get("FavMusic", None)
-    ApplicationShortcutPath = environ.get("APPLICATION")            # Application folder where all the using application shortcuts will available to the user
+    ApplicationShortcutPath = os.getcwd().replace(r"\Alice\Assistant", r"\Alice\Application")          # Application folder where all the using application shortcuts will available to the user
     userGithub = environ.get("GITHUB", "Brodevil")
 
 
