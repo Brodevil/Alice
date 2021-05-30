@@ -12,7 +12,9 @@ from dotenv import load_dotenv
 from tkinter.filedialog import *
 
 from Assistant.exts.networks import localInfo  # noqa
+from Assistant.exts.reminder import notifier
 from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client  # noqa
+
 
 __all__ = ("Alice", "alice")
 
@@ -207,6 +209,20 @@ class Alice:
             except Exception:
                 return None
         return audioFile
+
+
+
+    def dailyTaskReminder(self, task:dict):
+            while True:
+                for exelTime, work in task.items():
+                    currentTime = datetime.time(int(datetime.datetime.now().strftime("%H")),
+                                                int(datetime.datetime.now().strftime("%M")))
+                        if exelTime == currentTime:
+                            notifier(re)
+
+
+
+
 
 
 
