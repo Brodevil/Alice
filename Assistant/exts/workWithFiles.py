@@ -61,9 +61,3 @@ def openApplication(ApplicationName: str, installedApplicationPath: str):
                 return app.split(".")[0]
     return None
 
-
-
-
-if __name__ == "__main__":
-    # openApplication("code", "Applications")
-    pass
