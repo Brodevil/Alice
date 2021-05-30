@@ -5,6 +5,7 @@ from os import environ
 import PyPDF2  # noqa
 import webbrowser
 import pyautogui
+import winsound
 
 import speech_recognition as sr
 import pyttsx3
@@ -15,11 +16,9 @@ from Assistant.exts.networks import localInfo  # noqa
 from Assistant.exts.reminder import notifier
 from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client  # noqa
 
-
 __all__ = ("Alice", "alice")
 
 load_dotenv()
-
 
 
 class Alice:
@@ -45,8 +44,6 @@ class Alice:
         self.city = environ.get("location", localInfo())  # Data From (.env)
         self.voice = Client.voice
         self.voiceSpeed = Client.voiceRate
-
-
 
     def severalVoices(self, voicesId=Client.voices):
         """ This is the function to show the user how many voices are available in his/her system 
@@ -82,8 +79,6 @@ class Alice:
                     f"Hey there! I am {index + 1}th voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file")
         engine.runAndWait()
 
-
-
     def speak(self, audio):
         """ Speak function as per the selected voice """
 
@@ -93,8 +88,6 @@ class Alice:
         print(f"{self.AssistantName} : {audio}\n")
         engine.say(audio)
         engine.runAndWait()
-
-
 
     def takeCommand(self):
         """
@@ -118,8 +111,6 @@ class Alice:
         else:
             return query
 
-
-
     @property
     def goodWish(self):
         presentHour = int(datetime.datetime.now().hour)
@@ -131,8 +122,6 @@ class Alice:
 
         else:
             return "Good Evening"
-
-
 
     def intro(self):
         self.speak(Client.intro)
@@ -157,13 +146,11 @@ class Alice:
                 f"{self.gender}! Internet is not connected. I going to work with Internet, Please get connect with internet.")
             exit()
 
-
     @staticmethod
     def edge(url):
         edgePath = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
         webbrowser.register('edge', None, webbrowser.BackgroundBrowser(edgePath))
         webbrowser.get('edge').open(url)
-
 
     @staticmethod
     def activePC(minutes):
@@ -175,8 +162,6 @@ class Alice:
                 pyautogui.moveTo(500, i * 5)
             for i in range(0, 5):
                 pyautogui.press("shift")
-
-
 
     @staticmethod
     def audioBook(fromPageNo=0):
@@ -210,20 +195,16 @@ class Alice:
                 return None
         return audioFile
 
-
-
-    def dailyTaskReminder(self, task:dict):
-            while True:
-                for exelTime, work in task.items():
-                    currentTime = datetime.time(int(datetime.datetime.now().strftime("%H")),
-                                                int(datetime.datetime.now().strftime("%M")))
-                        if exelTime == currentTime:
-                            notifier(re)
-
-
-
-
-
+    def dailyTaskReminder(self, task: dict):
+        while True:
+            for exelTime, work in task.items():
+                currentTime = datetime.time(int(datetime.datetime.now().strftime("%H")),
+                                            int(datetime.datetime.now().strftime("%M")))
+                if exelTime == currentTime:
+                    notifier(work, f"{Client.AssistantName} :  I am reminding you sir for your Following task",
+                             r"Assistant/media/time-out.ico")
+                    winsound.Beep(frequency=2500, duration=4000)
+                    self.speak(f"{self.gender}! You had a task that, {work.replace('i', 'you')}")
 
 
 
@@ -232,5 +213,6 @@ alice = Alice()  # Object for the Alice class
 
 
 if __name__ == "__main__":  # Testing part, just for testing purposes
-    test0 = Alice()
-    test0.activePC(1)
+    # alice.dailyTaskReminder()
+    pass
+
