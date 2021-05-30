@@ -43,6 +43,6 @@
    this software easily by just voice command :}
    
 <br><br>
-5. Now, You have to open the [DailyWorks.xlsx](DailyWorks.xlsx) which is an Exel file and by the given example, 
-   you can understand who to write the data. You just change to put the time in 24 Hr or in 12 Hr in first column
-   and in the second column write the work which you have to do, So in this way the Alice will going to run whole
+5. Now, You have to open the [DailyWorks.xlsx](DailyWorks.xlsx) which is an Exel file and by the given example inside the Exel file, 
+   you can understand who to write the data.
+
