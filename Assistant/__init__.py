@@ -516,19 +516,16 @@ def logic(queary):
     elif "read book" in queary or "audio book" in queary or "speak pdf" in queary or "read pdf" in queary:
         alice.speak(f"{alice.gender} select the pdf file which you want to make read!")
         audioFile = alice.audioBook()
-        if audioFile is None:
-            alice.speak(
-                "Some thing went wrong!, It might be not a pdf file or the pdf file content will be in images form.")
-        try:
-            alice.speak(f"{alice.gender}! The audio file had created in that same path with same name.")
-            os.startfile(audioFile)
-        except Exception:
-            pass
+        if audioFile is not None:
+            try:
+                alice.speak(f"{alice.gender}! The audio file had created in that same path with same name.")
+                os.startfile(audioFile)
+            except Exception:
+                pass
 
 
 
     # Launching the software stuffs
-
 
     elif "open file explorer" in queary or "this pc" in queary:
         try:
