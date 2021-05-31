@@ -200,6 +200,7 @@ class Alice:
 
 
     def dailyTaskReminder(self, task: dict):
+        print("function me paunch gaye bhai")
         while True:
             for exelTime, work in task.items():
                 currentTime = datetime.time(int(datetime.datetime.now().strftime("%H")),
@@ -209,7 +210,7 @@ class Alice:
                              r"Assistant/media/time-out.ico")
                     winsound.Beep(frequency=2500, duration=4000)
                     self.speak(f"{self.gender}! You had a task that, {work.replace('i', 'you')}")
-
+                    time.sleep(62)
 
 
 alice = Alice()  # Object for the Alice class

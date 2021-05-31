@@ -9,7 +9,7 @@ __all__ = ["queary", ]
 __authors__ = ("Abhinav", "Brodevil")  # Both are the same person lol
 
 tasks = DailyWorksExel("DailyWorks.xlsx")
-DailyTasks = multiprocessing.Process(target=alice.dailyTaskReminder, args=tasks)
+DailyTasks = multiprocessing.Process(target=alice.dailyTaskReminder, args=(tasks,))
 
 
 # Running part of the Alice Program
