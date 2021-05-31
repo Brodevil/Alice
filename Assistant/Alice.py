@@ -166,9 +166,9 @@ class Alice:
     @staticmethod
     def audioBook(fromPageNo=0):
         """ Function to read the pdf and save the audio in a mp3 file at the same directory where the pdf located """
-        pdfPath = askopenfilename()
+        pdfPath = askopenfilename(mode='r', defaultextension=".pdf")
         full_Text = str()
-        if ".pdf" not in pdfPath:
+        if pdfPath is None:         # this condition happened when the user will click cancel
             return None
 
         with open(pdfPath, "rb") as book:
@@ -183,17 +183,20 @@ class Alice:
                     content = next_page.extractText()
                     full_Text += content
 
-                audioFile = pdfPath.replace(".pdf", ".mp3")
-
-                #  To save the voice in a mp3 file, but the problem is that, the large books are not able to be save to file
-                # audio_reader.save_to_file(content, audible)
+                '''commented part, if the pdf file is small then we can just created .mp3 file and save the voice in it
+                but the big pdf files will not able to convert into mp3 so we can directly speak by audio_reader.say()'''
+                # To save the voice in a mp3 file, but the problem is that, the large books are not able to be save to file
+                # audioFile = asksaveasfile(mode='w', defaultextension=".mp3")
+                # if audioFile is None:
+                #     return None
+                # audio_reader.save_to_file(content, audioFile)
 
                 # this will say to voice at the current time. While the program will be paused and just book will be read
                 audio_reader.say(content)
                 audio_reader.runAndWait()
             except Exception:
                 return None
-        return audioFile
+        # return audioFile
 
 
     def dailyTaskReminder(self, task: dict):
