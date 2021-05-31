@@ -1,7 +1,7 @@
 import keyboard
 
 
-__all__ = ("", "")
+__all__ = ("typeWrite", "keyboardRecord", "recordedKeyboard")
 
 
 def typeWrite(string):
@@ -21,7 +21,7 @@ def keyboardRecord():
     return record
 
 
-def recordedKeyboardType(record):
+def recordedKeyboard(record):
     """Function to type the recorded keyboard activity which is recorded by keyboardRecord() functions"""
     keyboard.play(record, speed_factor = 5)
 
