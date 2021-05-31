@@ -452,7 +452,7 @@ def logic(queary):
 
 
     elif 'news' in queary:
-        topTen = networks.news()
+        topTen = login.news()
         if topTen is not None:
             for index, articles in enumerate(topTen):
                 alice.speak("Moving On " + "a" if index == 0 else "another" + " fresh news!")
@@ -461,6 +461,8 @@ def logic(queary):
                 print(f"For more info... Go to ==>>> {articles['url']}\n\n")
 
             alice.speak("Thank you for listening")
+        else:
+            alice.speak(f"{random.choice(ERROR_REPLIES)}, Check your internet connection {alice.gender}!")
 
 
     elif 'weather report of' in queary:
@@ -549,8 +551,6 @@ def logic(queary):
             # alice.speak(f"Sorry! {applicationName} shortcut didn't got in the Application folder. Please put the shortcuts of all the application do \
             # you use in day to day life in Application folder, Which is in this project folder.")
             pass
-
-
 
 
 
