@@ -4,11 +4,13 @@ import Assistant
 from Assistant import alice
 from Assistant.exts.workWithFiles import DailyWorksExel
 
+
 __all__ = ["queary", ]
 __authors__ = ("Abhinav", "Brodevil")  # Both are the same person lol
 
 tasks = DailyWorksExel("DailyWorks.xlsx")
 DailyTasks = multiprocessing.Process(target=alice.dailyTaskReminder, args=tasks)
+
 
 # Running part of the Alice Program
 if __name__ == "__main__":

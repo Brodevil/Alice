@@ -8,7 +8,7 @@ import wikipedia
 
 
 
-__all__ = ["internetConnection", "localInfo", "weather", "wiki", "networkSpeed"]
+__all__ = ["internetConnection", "localInfo", "weather", "wiki"]
 
 load_dotenv()
 
