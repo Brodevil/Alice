@@ -8,7 +8,7 @@ import wikipedia
 
 
 
-__all__ = ["internetConnection", "localInfo", "weather", "news", "wiki"]
+__all__ = ["internetConnection", "localInfo", "weather", "wiki", "networkSpeed"]
 
 load_dotenv()
 
@@ -35,7 +35,6 @@ def localInfo():
         return [response['city'], response]
     except ConnectionError:
         return None
-    
 
 
 def weather(location=None, apikey=(environ.get("OpenWeatherMapApi"))):
@@ -44,9 +43,9 @@ def weather(location=None, apikey=(environ.get("OpenWeatherMapApi"))):
     if location is None:
         local_info = localInfo()
         if local_info is not None:
-            location = localInfo()[0] 
+            location = localInfo()[0]
             try:
-                response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={apikey}")
+                response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={apikey}")              # noqa
                 response = json.loads(response.text)
                 return f"It seemed to be approximately {int(response['main']['temp'] - 273.15)} degree Celsius! I guess its like {response['weather'][0]['main']} Weather outside the door, and the wind speed is feels like {int(response['wind']['speed']*3.6)} kilometer per hour"
             except ConnectionError:
@@ -57,23 +56,17 @@ def weather(location=None, apikey=(environ.get("OpenWeatherMapApi"))):
             return None
 
 
-
-def news(apikey=environ.get("NewsApiKey")):
-    try:
-        response = requests.get(f"https://newsapi.org/v2/top-headlines?sources=the-times-of-india&apikey={apikey}")
-        json_data = json.loads(response.text)
-        return json_data['articles']
-    except ConnectionError:
-        return None
-
-
-
 def wiki(queary):
     try:
         results = wikipedia.summary(queary, sentences=2)
         return f"According to wikipedia. {results}"
     except Exception:
         return "Sorry! I didn't got that stuff in wikipedia"
+
+
+def networkSpeed():
+    """Function will return the internet speed of the User's windows machine"""
+    pass
 
 
 
