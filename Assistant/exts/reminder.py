@@ -2,11 +2,7 @@ from plyer import notification
 import time
 import winsound
 import pyttsx3
-from dotenv import load_dotenv
-import os
-
-
-load_dotenv()
+from Assistant.constants import Client
 
 
 __all__ = ["notifier", "reminderAlarm"]
@@ -14,7 +10,9 @@ __all__ = ["notifier", "reminderAlarm"]
 
 def speak(str):
     engine = pyttsx3.init("sapi5")
-    engine.setProperty("voice", engine.getProperty("voices")[os.environ.get("")])
+    engine.setProperty("voice", engine.getProperty("voices")[Client.voice - 1].id)
+    engine.say(str)
+    engine.runAndWait()
 
 
 def notifier(reason, string, ico):
@@ -30,7 +28,7 @@ def notifier(reason, string, ico):
 
 
 def reminderAlarm(magnitude, unit, pourpose):
-    if unit.lower() == "myounute" or unit.lower() == "myounutes":  # this is actually the computer sense word to minutes as a myounutes     #noqa
+    if unit.lower() == "myounute" or unit.lower() == "myounutes" or unit.lower() == "minute" or unit.lower() == "minutes":  # this is actually the computer sense word to minutes as a myounutes     #noqa
         remindTime = int(magnitude * 60 + time.time())
         while True:
             presentTime = int(time.time())
@@ -41,7 +39,8 @@ def reminderAlarm(magnitude, unit, pourpose):
                     ico=r"Assistant\media\time-out.ico"
                 )
                 winsound.Beep(frequency=2500, duration=4000)
-                print("Time Out Sir!")
+                speak(
+                    f"Time Up, You had told me to remind your after {magnitude} minutes, Now its time to remind you, Wake up.")
                 break
 
     elif unit.lower() == "hours" or unit.lower() == "hour":
@@ -55,6 +54,10 @@ def reminderAlarm(magnitude, unit, pourpose):
                     ico=r"Assistant\media\time-out.ico"
                 )
                 winsound.Beep(frequency=2500, duration=4000)
-                alice.speak("Time Out Sir!")
+                speak(
+                    f"Time Up, You had told me to remind your after {magnitude} hours, Now its time to remind you, Wake up.")
                 break
 
+
+if __name__ == '__main__':
+    reminderAlarm(1, "minute", "Test 0")
