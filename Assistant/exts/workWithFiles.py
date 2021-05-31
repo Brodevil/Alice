@@ -2,9 +2,7 @@ import openpyxl
 import os
 from pprint import pprint
 
-
 __all__ = ["contactInfo", "deleteUnwantedFiles", "openApplication", "DailyWorksExel"]
-
 
 
 def contactInfo(path):
@@ -19,7 +17,7 @@ def contactInfo(path):
         for i in range(1, sheet_obj.max_column + 1):
             content = sheet_obj.cell(row=j, column=i)
             records.append(content.value)
-    records = {records[i]: [records[i+1], records[i+2]] for i in range(0, len(records)-1, 3)}
+    records = {records[i]: [records[i + 1], records[i + 2]] for i in range(0, len(records) - 1, 3)}
     return records
 
 
@@ -31,7 +29,7 @@ def DailyWorksExel(path):
     for j in range(3, sheet_obj.max_row + 1):
         workTime = sheet_obj.cell(row=j, column=1)
         work = sheet_obj.cell(row=j, column=2)
-        tasks.update({workTime: work})
+        tasks.update({workTime.value: work.value})
     return tasks
 
 
@@ -53,7 +51,7 @@ def openApplication(ApplicationName: str, installedApplicationPath: str):
      the .lnk files And opening or launching the most matching queary name of applications """
 
     installed_application_shortcut_path = os.listdir(installedApplicationPath)
-    
+
     for app in installed_application_shortcut_path:
         for name in ApplicationName.split():
             if name.lower() in app[:-4].lower().split():
@@ -63,5 +61,6 @@ def openApplication(ApplicationName: str, installedApplicationPath: str):
 
 
 if __name__ == "__main__":
-    # pprint(DailyWorksExel(r"M:\ADMIN\Critical Data\VS-Code\Alice\DailyWorks.xlsx"))
-    pprint(contactInfo(r"M:\ADMIN\Critical Data\VS-Code\Alice\contactinfo.xlsx"))
+    pprint(DailyWorksExel(r"M:\ADMIN\Critical Data\VS-Code\Alice\DailyWorks.xlsx"))
+    # pprint(contactInfo(r"M:\ADMIN\Critical Data\VS-Code\Alice\contactinfo.xlsx"))
+    # pprint(contactInfo(r"M:\ADMIN\Critical Data\VS-Code\Alice\Contacts.xlsx"))
