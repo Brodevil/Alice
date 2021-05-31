@@ -1,44 +1,16 @@
 import requests
 import json
-from pprint import pprint
 from os import environ
 from dotenv import load_dotenv
 from requests.exceptions import ConnectionError
 import wikipedia
-import psutil
-import pyspeedtest
-from tabulate import tabulate
+
 
 
 
 __all__ = ["internetConnection", "localInfo", "weather", "wiki", "networkSpeed"]
 
 load_dotenv()
-
-
-
-class Network_Details(object):
-    def __init__(self):
-        self.parser = psutil.net_if_addrs()
-        self.speed_parser = pyspeedtest.SpeedTest()
-        self.interfaces = self.interfaces()[0]
-
-    def interfaces(self):
-        interfaces = list()
-        for interface_name, _ in self.parser.items():
-            interfaces.append(str(interface_name))
-        return interfaces
-
-    def __repr__(self):
-        down = str(f"{round(self.speed_parser.download()/1_000_000, 2)} Mbps")
-        up = str(f"{round(self.speed_parser.upload() / 1_000_000, 2)} Mbps")
-        interface = self.interfaces()
-        data = {"Interface :" : [interface],
-                "Download :" : [down],
-                "Upload :" : [up]}
-        table = tabulate(data, headers="Keys", tablefmt="pretty")
-        return table
-
 
 
 
@@ -92,8 +64,4 @@ def wiki(queary):
         return "Sorry! I didn't got that stuff in wikipedia"
 
 
-
-
-if __name__ == "__main__":
-    print(Network_Details())
 
