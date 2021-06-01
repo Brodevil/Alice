@@ -10,18 +10,20 @@ def contactInfo(path):
 
     wb_obj = openpyxl.load_workbook(path)
     sheet_obj = wb_obj.active
-    records = list()
+    records = dict()
 
     # Loop will returning all columns name
-    for j in range(3, sheet_obj.max_row + 1):
-        for i in range(1, sheet_obj.max_column + 1):
-            content = sheet_obj.cell(row=j, column=i)
-            records.append(content.value)
-    records = {records[i]: [records[i + 1], records[i + 2]] for i in range(0, len(records) - 1, 3)}
-    return records
+    for row in range(3, sheet_obj.max_row-1):
+        name, email, phone_number = sheet_obj.cell(row=row, column=1), sheet_obj.cell(row=row, column=2), sheet_obj.cell(row=row, column=3)
+        records.update({name.value: [email.value, phone_number.value]})
+    else:
+        return records
 
 
 def DailyWorksExel(path):
+    """Daily task are noted in the file which had been read here and return as a dict
+    Time : Task/Work to do
+    """
     wb_obj = openpyxl.load_workbook(path)
     sheet_obj = wb_obj.active
     tasks = dict()
@@ -31,6 +33,7 @@ def DailyWorksExel(path):
         work = sheet_obj.cell(row=j, column=2)
         tasks.update({workTime.value: work.value})
     return tasks
+
 
 
 def deleteUnwantedFiles():
@@ -61,8 +64,5 @@ def openApplication(ApplicationName: str, installedApplicationPath: str):
 
 
 if __name__ == "__main__":
-    for i, j in DailyWorksExel(r"M:\ADMIN\Critical Data\VS-Code\Alice\DailyWorks.xlsx").items():
-        print(i, j)
-
-    # pprint(contactInfo(r"M:\ADMIN\Critical Data\VS-Code\Alice\contactinfo.xlsx"))
-    # pprint(contactInfo(r"M:\ADMIN\Critical Data\VS-Code\Alice\Contacts.xlsx"))
+    for i, j in contactInfo(r"M:\ADMIN\Critical Data\VS-Code\Alice\contactinfo.xlsx").items():
+        print(i, j, sep="\t")
