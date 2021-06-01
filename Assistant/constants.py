@@ -8,6 +8,7 @@ import shutil
 import psutil
 import string
 from Assistant.exts.networks import localInfo, weather, internetConnection  # noqa
+from Assistant.exts.workWithFiles import contactInfo
 
 
 __all__ = ["Client", "Contacts", "ERROR_REPLIES", "NEGATIVE_REPLIES", "POSITIVE_REPLIES",
@@ -95,9 +96,15 @@ class Client:
 
 
 class Contacts:
-    emails = {}
+    files = os.listdir()
+    if "contactinfo.xlsx" in files:
+        contactsFile = os.getcwd().replace(r"Alice\Assistant\constants.py", "Alice\Contacts.xlsx")
+    else:
+        contactsFile = os.getcwd().replace(r"Alice\Assistant\constants.py", "Alice\constants.py")
 
-    contactNumber = {}
+    emails = {name: email[0] for name, email in contactInfo(contactsFile).items()}
+    contactNumber = {name: contactNumber[1] for name, contactNumber in contactInfo("contactinfo.xlsx").items()}
+
 
 
 
