@@ -32,7 +32,9 @@ except Exception:
     battery = None
 
 
-def logic(queary):
+
+
+def logic(queary: str, taskMultiProcessing: mp.Process):
     """This is the logic of the Program as it will be matching several query and do the programmed task """
 
     # fetching info from internet
@@ -67,6 +69,11 @@ def logic(queary):
     # quiting the program
     elif "bye" in queary or 'kill yourself' in queary or 'quit' in queary:
         alice.speak("That's it, I m quiting....")
+        taskMultiProcessing.terminate()
+        try:
+            globals()['side_reminder'].terminate()
+        except :
+            pass
         sys.exit(0)
 
 
@@ -182,8 +189,8 @@ def logic(queary):
         except Exception:  # the user can give the reason as a option
             pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
 
-        side_reminder = mp.Process(target=reminder.reminderAlarm, args=(magnitude, unit, pourpose))
-        side_reminder.start()
+        globals()['side_reminder'] = mp.Process(target=reminder.reminderAlarm, args=(magnitude, unit, pourpose))
+        globals()['side_reminder'].start()
 
     
 
