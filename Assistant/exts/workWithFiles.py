@@ -61,6 +61,8 @@ def openApplication(ApplicationName: str, installedApplicationPath: str):
 
 
 if __name__ == "__main__":
-    pprint(DailyWorksExel(r"M:\ADMIN\Critical Data\VS-Code\Alice\DailyWorks.xlsx"))
+    for i, j in DailyWorksExel(r"M:\ADMIN\Critical Data\VS-Code\Alice\DailyWorks.xlsx").items():
+        print(i, j)
+
     # pprint(contactInfo(r"M:\ADMIN\Critical Data\VS-Code\Alice\contactinfo.xlsx"))
     # pprint(contactInfo(r"M:\ADMIN\Critical Data\VS-Code\Alice\Contacts.xlsx"))
