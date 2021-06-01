@@ -63,6 +63,4 @@ def openApplication(ApplicationName: str, installedApplicationPath: str):
     return None
 
 
-if __name__ == "__main__":
-    for i, j in contactInfo(r"M:\ADMIN\Critical Data\VS-Code\Alice\contactinfo.xlsx").items():
-        print(i, j, sep="\t")
+
