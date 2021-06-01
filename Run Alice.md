@@ -44,5 +44,11 @@
    
 <br><br>
 5. Now, You have to open the [DailyWorks.xlsx](DailyWorks.xlsx) which is an Exel file and by the given example inside the Exel file, 
-   you can understand who to write the data.
+   you can understand who to write the data. You just have to Write the time in this format `13:09` or you can simply use `01:09 PM`
+   and then in another column put the work which you have, so that Alice will be reminding you whole day for your every task, So that you will 
+   not forget those all.
+   
+For Example :
+    ![DailyWorks]()
+
 
