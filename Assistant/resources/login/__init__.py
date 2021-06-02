@@ -8,7 +8,7 @@ from requests.exceptions import ConnectionError
 
 
 
-__all__ = ("sendEmail", "initialCommit")
+__all__ = ["sendEmail", "initialCommit", "news"]
 load_dotenv()
 
 
@@ -19,7 +19,7 @@ def sendEmail(to, subject, content):
         server.ehlo()
         server.starttls()
         content = f"Subject :{subject}\n\n{content}"
-        server.login(os.getenv("emailID"),os.getenv("emailPassword"))
+        server.login(os.getenv("emailID"), os.getenv("emailPassword"))
         server.sendmail(os.getenv("emailID"), to, content)
     except Exception:
         return False

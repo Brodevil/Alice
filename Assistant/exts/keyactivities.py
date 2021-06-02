@@ -1,7 +1,6 @@
 import keyboard
 
-
-__all__ = ("typeWrite", "keyboardRecord", "recordedKeyboard")
+__all__ = ("typeWrite", "keyboardRecord", "playKeyboard")
 
 
 def typeWrite(string):
@@ -11,8 +10,8 @@ def typeWrite(string):
         elif i.lower() == "next" or i.lower() == "new":
             keyboard.press_and_release("shift+enter")
         else:
-            keyboard.write(f"{i} ") 
-    
+            keyboard.write(f"{i} ")
+
 
 def keyboardRecord():
     """The functions records the keyboard activity and can be just written by using another recordedKeyboardType() functions"""
@@ -23,6 +22,4 @@ def keyboardRecord():
 
 def playKeyboard(record):
     """Function to type the recorded keyboard activity which is recorded by keyboardRecord() functions"""
-    keyboard.play(record, speed_factor = 5)
-
-
+    keyboard.play(record, speed_factor=5)
