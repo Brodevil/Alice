@@ -7,8 +7,8 @@ import platform
 import shutil
 import psutil
 import string
-from Assistant.exts.networks import localInfo, weather, internetConnection  # noqa
-from Assistant.exts.workWithFiles import contactInfo
+from Assistant.exts.networks import localInfo, weather, internetConnection              # noqa
+from Assistant.exts.workWithFiles import contactInfo                                    # noqa
 
 
 __all__ = ["Client", "Contacts", "ERROR_REPLIES", "NEGATIVE_REPLIES", "POSITIVE_REPLIES",

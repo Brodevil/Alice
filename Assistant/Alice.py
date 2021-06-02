@@ -12,9 +12,10 @@ import pyttsx3
 from dotenv import load_dotenv
 from tkinter.filedialog import *
 
-from Assistant.exts.networks import localInfo  # noqa
-from Assistant.exts.reminder import notifier
-from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client  # noqa
+from Assistant.exts.networks import localInfo                                                           # noqa
+from Assistant.exts.reminder import notifier                                                            # noqa
+from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client     # noqa
+
 
 __all__ = ("Alice", "alice")
 
