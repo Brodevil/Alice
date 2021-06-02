@@ -21,7 +21,7 @@ def keyboardRecord():
     return record
 
 
-def recordedKeyboard(record):
+def playKeyboard(record):
     """Function to type the recorded keyboard activity which is recorded by keyboardRecord() functions"""
     keyboard.play(record, speed_factor = 5)
 
