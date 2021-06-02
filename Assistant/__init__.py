@@ -12,14 +12,14 @@ import pywhatkit
 import multiprocessing as mp
 import subprocess
 
-from Assistant.exts import reminder                                                        # noqa
-from Assistant.exts import networks                                                        # noqa
-from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client  # noqa
+from Assistant.exts import reminder                                                                     # noqa
+from Assistant.exts import networks                                                                     # noqa
+from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client     # noqa
 
-from Assistant.resources.login import login                                                 # noqa
-from Assistant.Alice import alice                                                           # noqa
-from Assistant.exts import keyactivities                                                    # noqa
-from Assistant.exts import workWithFiles                                                    # noqa
+from Assistant.resources import login                                                                   # noqa
+from Assistant.Alice import alice                                                                       # noqa
+from Assistant.exts import keyactivities                                                                # noqa
+from Assistant.exts import workWithFiles                                                                # noqa
 
 
 
@@ -347,7 +347,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
             alice.speak(f"Yes {alice.gender}! Internet is connected")
         else:
             alice.speak(
-                f"No {alice.gender}! Internet is not connected, But I don't know How I am working without internet, lol")
+                f"No {alice.gender}! Internet is not connected, But I don't know How I am working without internet, lol\nActive internet is needed to run Alice")
 
 
 
@@ -433,7 +433,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
     elif 'record keyboard' in queary:
         alice.speak(
-            f"Okay {alice.gender}! Note that, your keyboard activies will be recording till you prese Escap button on your keyboard")
+            f"Okay {alice.gender}! Note that, your keyboard actives will be recording till you press Escape button on your keyboard")
         globals()['keyRecorded'] = keyactivities.keyboardRecord()
 
 
@@ -447,7 +447,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
             alice.speak(
                 f"Okay {alice.gender}! Playing the keyboard Activity recording, Note that have to put the cursor where you want to play it.")
             time.sleep(7)
-            keyactivities.recordedKeyboardType(globals()["keyRecorded"])
+            keyactivities.playKeyboard(globals()["keyRecorded"])
 
 
 
@@ -489,34 +489,29 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
     elif 'send' in queary and "email" in queary:
         alice.speak("To whom you want to send the email")
         try:
-            userEmail = alice.takeCommand().lower()  # here taking the name as a input and featuring it in our contacts
+            userName = alice.takeCommand().lower()  # here taking the name as a input and featuring it in our contacts
             for i in Contacts.emails.keys():
-                if i.split()[0].lower() == userEmail.split()[0]:
+                if userName.split()[0] in i.lower().split():
                     userEmail = Contacts.emails[i]
                     break
             else:
                 alice.speak(
-                    f"{alice.gender}! We didn't got {userEmail} in your contact. Can you tell the email address!")
-                userEmail = alice.takeCommand()  # taking email address by speak function
-                if userEmail != "None":
-                    userEmail = userEmail.replace(" ", "").lower()
-                else:
-                    alice.speak(
-                        f"Sorry {alice.gender}! I didn't get that. Please type the email Address in the terminal!")
-                    userEmail = input("Enter the Email Address :\t")
+                    f"Sorry {alice.gender}! I didn't got {userName} in your contacts. Please type the email Address in the terminal!")
+                userEmail = input("Enter the Email Address :\t")
+
+            alice.speak("What's the subject...")
+            subject = alice.takeCommand()
+            alice.speak("What's the content...")
+            content = alice.takeCommand()
+            result = login.sendEmail(userEmail, subject, content)
+
+            if result is False:
+                alice.speak(f"Some thing went wrong! Unable to send Email")
+            else:
+                alice.speak(f"Email send successfully to {userEmail}!")
+
         except Exception:
             alice.speak(f"{random.choice(ERROR_REPLIES)}, Some thing went Wrong")
-
-        alice.speak("What's the subject...")
-        subject = alice.takeCommand()
-        alice.speak("What's the content...")
-        content = alice.takeCommand()
-        result = login.sendEmail(userEmail, subject, content)  # noqa
-
-        if result is False:
-            alice.speak(f"{random.choice(ERROR_REPLIES)}, Some thing went Wrong")
-        else:
-            alice.speak(f"Email send successfully to {userEmail}!")
 
 
 
@@ -562,5 +557,6 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 if __name__ == "__main__":
     while True:
         command = input("Enter the command for Alice :\t")
-        logic(command)
+        # logic(command, None)
+
 
