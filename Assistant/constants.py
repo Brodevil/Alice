@@ -98,14 +98,12 @@ class Client:
 class Contacts:
     files = os.listdir()
     if "contactinfo.xlsx" in files:
-        contactsFile = os.getcwd().replace(r"Alice\Assistant\constants.py", "Alice\Contacts.xlsx")
+        contactsFile = os.getcwd().replace("Alice\\Assistant", "Alice\\contactinfo.xlsx")
     else:
-        contactsFile = os.getcwd().replace(r"Alice\Assistant\constants.py", "Alice\constants.py")
+        contactsFile = os.getcwd().replace("Alice\\Assistant", "Alice\\Contacts.xlsx")
 
     emails = {name: email[0] for name, email in contactInfo(contactsFile).items()}
-    contactNumber = {name: contactNumber[1] for name, contactNumber in contactInfo("contactinfo.xlsx").items()}
-
-
+    contactNumber = {name: contactNumber[1] for name, contactNumber in contactInfo(contactsFile).items()}
 
 
 
