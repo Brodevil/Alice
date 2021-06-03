@@ -111,7 +111,7 @@ ERROR_REPLIES = [
     "Please don't do that.",
     "You have to stop.",
     "Do you mind?",
-    "In the future, don't do that.",
+    "In the future, don't do that.", 
     "That was a mistake.",
     "You blew it.",
     "You're bad at computers.",
