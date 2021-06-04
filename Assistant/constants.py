@@ -79,7 +79,7 @@ class Client:
     musicDirectory = environ.get("MUSIC", r"C:\Users\ADMIN\Music")  # Music directory should be without space
     favouriteMusic = environ.get("FavMusic", None)
     ApplicationShortcutPath = os.getcwd().replace(r"\Alice\Assistant", r"\Alice\Application")          # Application folder where all the using application shortcuts will available to the user
-    alice_path = os.getcwd().replace("Assistant\\", "")
+    alice_path = os.getcwd().replace("\\Assistant", "")
     userGithub = environ.get("GITHUB", "Brodevil")
 
 
@@ -161,6 +161,4 @@ POSITIVE_REPLIES = [
     "I'll allow it.",
 ]
 
-if __name__ == "__main__":
-    # print(Client.storage)
-    pass
+
