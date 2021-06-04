@@ -79,6 +79,7 @@ class Client:
     musicDirectory = environ.get("MUSIC", r"C:\Users\ADMIN\Music")  # Music directory should be without space
     favouriteMusic = environ.get("FavMusic", None)
     ApplicationShortcutPath = os.getcwd().replace(r"\Alice\Assistant", r"\Alice\Application")          # Application folder where all the using application shortcuts will available to the user
+    alice_path = os.getcwd().replace("Assistant\\", "")
     userGithub = environ.get("GITHUB", "Brodevil")
 
 
@@ -95,13 +96,13 @@ class Client:
         weatherInfo = weather()
 
 
-class Contacts:
-    files = os.listdir()
-    if "contactinfo.xlsx" in files:
-        contactsFile = os.getcwd().replace("Alice\\Assistant", "Alice\\contactinfo.xlsx")
-    else:
-        contactsFile = os.getcwd().replace("Alice\\Assistant", "Alice\\Contacts.xlsx")
 
+class Contacts:
+    files = os.listdir(Client.alice_path)
+    if "contactinfo.xlsx" in files:
+        contactsFile = os.path.join(Client.alice_path, "contactinfo.xlsx")
+    else:
+        contactsFile = os.path.join(Client.alice_path, "Contact.xlsx")
     emails = {name: email[0] for name, email in contactInfo(contactsFile).items()}
     contactNumber = {name: contactNumber[1] for name, contactNumber in contactInfo(contactsFile).items()}
 
