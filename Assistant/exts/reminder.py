@@ -2,15 +2,17 @@ from plyer import notification
 import time
 import winsound
 import pyttsx3
-from Assistant.constants import Client
+from os import environ
+from dotenv import load_dotenv
 
+load_dotenv()
 
 __all__ = ["notifier", "reminderAlarm"]
 
 
 def speak(str):
     engine = pyttsx3.init("sapi5")
-    engine.setProperty("voice", engine.getProperty("voices")[Client.voice - 1].id)
+    engine.setProperty("voice", engine.getProperty("voices")[int(environ.get("VoiceNumber", 1))-1].id)
     engine.say(str)
     engine.runAndWait()
 
