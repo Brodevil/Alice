@@ -8,20 +8,18 @@ import webbrowser
 
 import psutil
 from playsound import playsound
-import pywhatkit
 import multiprocessing as mp
 import subprocess
+import pywhatkit
 
-from Assistant.exts import reminder                                                                     # noqa
-from Assistant.exts import networks                                                                     # noqa
-from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client     # noqa
+from Assistant.exts import reminder  # noqa
+from Assistant.exts import networks  # noqa
+from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client  # noqa
 
-from Assistant.resources import login                                                                   # noqa
-from Assistant.Alice import alice                                                                       # noqa
-from Assistant.exts import keyactivities                                                                # noqa
-from Assistant.exts import workWithFiles                                                                # noqa
-
-
+from Assistant.resources import login  # noqa
+from Assistant.Alice import alice  # noqa
+from Assistant.exts import keyactivities  # noqa
+from Assistant.exts import workWithFiles  # noqa
 
 __all__ = ["logic"]
 
@@ -30,8 +28,6 @@ try:
     battery = psutil.sensors_battery()
 except Exception:
     battery = None
-
-
 
 
 def logic(queary: str, taskMultiProcessing: mp.Process):
@@ -62,7 +58,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
             alice.speak("Fetching Data...")
             pywhatkit.playonyt(queary)
         except Exception:
-            alice.speak(f"No results found on {queary} on youtube")                             # noqa
+            alice.speak(f"No results found on {queary} on youtube")  # noqa
 
 
 
@@ -72,7 +68,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         taskMultiProcessing.terminate()
         try:
             globals()['side_reminder'].terminate()
-        except :
+        except:
             pass
         sys.exit(0)
 
@@ -192,7 +188,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         globals()['side_reminder'] = mp.Process(target=reminder.reminderAlarm, args=(magnitude, unit, pourpose))
         globals()['side_reminder'].start()
 
-    
+
 
 
 
@@ -211,8 +207,8 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
             pass
 
 
-    elif "play my music" in queary or "play my song" in queary or "i am feeling bad" in queary or "sad" in  queary  and "feeling" in queary or "unhappy" in queary and "feeling" in queary:
-        coolMusic = mp.Process(target=playsound, args=(Client.favouriteMusic, ))
+    elif "play my music" in queary or "play my song" in queary or "i am feeling bad" in queary or "sad" in queary and "feeling" in queary or "unhappy" in queary and "feeling" in queary:
+        coolMusic = mp.Process(target=playsound, args=(Client.favouriteMusic,))
         coolMusic.start()
 
 
@@ -227,8 +223,6 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
     elif 'delete unwanted files' in queary:
         alice.speak("Deleting unwanted files...")
         workWithFiles.deleteUnwantedFiles()
-
-
 
         # Natural Talks/ Fun commands :
     elif 'is i am audio able' in queary:
@@ -328,7 +322,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
         if battery is not None:
             alice.speak(
-                        f"Battery is {battery.percent}% Charged! " + "And its still in charging." if battery.power_plugged else "")
+                f"Battery is {battery.percent}% Charged! " + "And its still in charging." if battery.power_plugged else "")
         else:
             alice.speak(f"Something went wrong {random.choice(ERROR_REPLIES)}. I think you are in desktop")
 
@@ -368,7 +362,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
             minutes = int(input("Enter the number of Minutes :\t"))
         finally:
             alice.speak(
-                f"Okay {alice.gender}, I will be keep your windows machine active for next {minutes} Minutes!, "    # noqa
+                f"Okay {alice.gender}, I will be keep your windows machine active for next {minutes} Minutes!, "  # noqa
                 f"Till that time you can grape a cup of coffee.")
             #
             alice.activePC(minutes)
@@ -464,7 +458,8 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
             for index, articles in enumerate(topTen):
                 alice.speak("Moving On " + "a" if index == 0 else "another" + " fresh news!")
                 alice.speak(
-                    f" {articles['title']}. \n{articles['description']}. " + f" {articles['content']}\n" if articles['content'] is not None else "")
+                    f" {articles['title']}. \n{articles['description']}. " + f" {articles['content']}\n" if articles[
+                                                                                                                'content'] is not None else "")
                 print(f"For more info... Go to ==>>> {articles['url']}\n\n")
 
             alice.speak("Thank you for listening")
@@ -552,11 +547,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
             pass
 
 
-
-
 if __name__ == "__main__":
     while True:
         command = input("Enter the command for Alice :\t")
         # logic(command, None)
-
-
