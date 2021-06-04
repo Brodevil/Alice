@@ -1,5 +1,13 @@
-import multiprocessing
+from requests.exceptions import ConnectionError
+from Assistant.exts.networks import internetConnection
 
+internet = internetConnection()
+if internet is False:
+    raise ConnectionError("Alice works with internet, Please get connected with internet.")
+
+
+import multiprocessing
+from os import getcwd
 import Assistant
 from Assistant import alice
 from Assistant.exts.workWithFiles import DailyWorksExel
@@ -8,7 +16,7 @@ from Assistant.exts.workWithFiles import DailyWorksExel
 __all__ = ["queary", ]
 __authors__ = ("Abhinav", "Brodevil")  # Both are the same person lol
 
-tasks = DailyWorksExel("DailyWorks.xlsx")
+tasks = DailyWorksExel(getcwd().replace("Alice\\Assistant", "Alice\\DailyWorks.xlsx"))
 DailyTasks = multiprocessing.Process(target=alice.dailyTaskReminder, args=(tasks,))
 
 
