@@ -3,7 +3,7 @@ import datetime
 
 
 
-class Camera:
+class VisualMedia:
     def __init__(self):
         self.cam = VideoCapture(0)      # initialize the camera
 

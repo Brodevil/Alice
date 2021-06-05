@@ -1,5 +1,5 @@
 from requests.exceptions import ConnectionError
-from Assistant.utils.networks import internetConnection
+from Assistant.exts.networks import internetConnection
 
 internet = internetConnection()
 if internet is False:
@@ -10,7 +10,7 @@ import multiprocessing
 from os import getcwd
 import Assistant
 from Assistant import alice
-from Assistant.utils.workWithFiles import DailyWorksExel
+from Assistant.exts.workWithFiles import DailyWorksExel
 
 
 __all__ = ["queary", ]

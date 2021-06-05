@@ -12,8 +12,8 @@ import pyttsx3
 from dotenv import load_dotenv
 from tkinter.filedialog import *
 
-from Assistant.utils.networks import localInfo                                                           # noqa
-from Assistant.utils.reminder import notifier                                                            # noqa
+from Assistant.exts.networks import localInfo                                                           # noqa
+from Assistant.exts.reminder import notifier                                                            # noqa
 from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client     # noqa
 
 
@@ -208,7 +208,7 @@ class Alice:
                                             int(datetime.datetime.now().strftime("%M")))
                 if exelTime == currentTime:
                     notifier(work, f"{Client.AssistantName} :  I am reminding you sir for your Following task",
-                             r"Assistant/media/time-out.ico")
+                             r"Assistant/utils/time-out.ico")
                     winsound.Beep(frequency=2500, duration=4000)
                     self.speak(f"{self.gender}! You had a task that, {work.replace('i', 'you')}")
                     time.sleep(62)
