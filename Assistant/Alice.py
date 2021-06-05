@@ -12,9 +12,9 @@ import pyttsx3
 from dotenv import load_dotenv
 from tkinter.filedialog import *
 
-from Assistant.exts.networks import localInfo  # noqa
-from Assistant.exts.alarm import notifier  # noqa
-from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client  # noqa
+from Assistant.exts.networks import localInfo                                                           # noqa
+from Assistant.exts.alarm import notifier                                                               # noqa
+from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client     # noqa
 
 __all__ = ("Alice", "alice")
 
@@ -214,7 +214,6 @@ class Alice:
         # return audioFile
 
     def dailyTaskReminder(self, task: dict):
-        print("function me paunch gaye bhai")
         while True:
             for exelTime, work in task.items():
                 currentTime = datetime.time(int(datetime.datetime.now().strftime("%H")),
@@ -225,7 +224,6 @@ class Alice:
                     winsound.Beep(frequency=2500, duration=4000)
                     self.speak(f"{self.gender}! You had a task that, {work.replace('i', 'you')}")
                     time.sleep(62)
-
 
 
 # Object for the Alice class
