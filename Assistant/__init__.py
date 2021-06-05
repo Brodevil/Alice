@@ -46,19 +46,32 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         try:
             queary = queary.split("search ")[-1].split("on google")[0]
         except:
-            pass
-        alice.speak(f"Fetching the related queary in Google")
-        pywhatkit.search(queary)
+            alice.speak("Sir, I didn't get that can you type that in the terminal.")
+            queary = input(f"Enter the your Google Search {alice.gender}: \t")
+        finally:
+            alice.speak(f"Fetching the related queary in Google...")
+            pywhatkit.search(queary)
 
 
 
-    elif "on youtube" in queary and "search" in queary:
+    elif "on youtube" in queary and "play" in queary:
         try:
-            queary = queary.split("search ")[-1].split("on youtube")[0]
+            queary = queary.split("play ")[-1].split("on youtube")[0]
             alice.speak("Fetching Data...")
             pywhatkit.playonyt(queary)
         except Exception:
             alice.speak(f"No results found on {queary} on youtube")  # noqa
+
+        
+    elif "search" in queary and "on youtube" in queary:
+        try:
+            queary - queary.split("search")[-1].split("on youtube")[0]
+            alice.speak("Fetching results...")
+            alice.edge(f"https://www.youtube.com/results?search_query={queary}")
+        except Exception:
+            alice.speak("Sir, I didn't get that can you type that in the interminal.")
+            queary = input(f"Enter the your YouTube Search {alice.gender}: \t")
+            alice.edge(f"https://www.youtube.com/results?search_query={queary}")
 
 
 
@@ -175,20 +188,25 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
     # reminder        
     elif 'remind me after' in queary or "wake up me after" in queary:
-        queary = queary.split("remind me after " if "remind me after" in queary else "wake up me after ")[-1]
-        queary = queary.replace("i", "you")
-        magnitude = int(queary.split()[0])
-        unit = queary.split()[1]
-        alice.speak(f"Okay {alice.gender}! I will be reminding you after {magnitude} {unit}!")
-        try:
-            pourpose = queary.split("so that ")[1]
-        except Exception:  # the user can give the reason as a option
-            pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
+        try: 
+            side_reminder                   # noqa
+        except NameError:        
+            queary = queary.split("remind me after " if "remind me after" in queary else "wake up me after ")[-1]
+            queary = queary.replace("i", "you")
+            magnitude = int(queary.split()[0])
+            unit = queary.split()[1]
+            alice.speak(f"Okay {alice.gender}! I will be reminding you after {magnitude} {unit}!")
+            try:
+                pourpose = queary.split("so that ")[1]
+            except Exception:  # the user can give the reason as a option
+                pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
 
-        globals()['side_reminder'] = mp.Process(target=alarm.reminderAlarm, args=(magnitude, unit, pourpose))
-        globals()['side_reminder'].start()
+            globals()['side_reminder'] = mp.Process(target=alarm.reminderAlarm, args=(magnitude, unit, pourpose))
+            globals()['side_reminder'].start()
 
-
+        else:
+            alice.speak(f"Sorry {alice.gender}!, You had already reminder been set,\
+                You can again make reminder after finished first one")
 
 
 
