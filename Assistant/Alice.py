@@ -93,7 +93,7 @@ class Alice:
         engine = pyttsx3.init('sapi5')
         engine.setProperty("voice", Client.voices[self.voice - 1])
         engine.setProperty("rate", self.voiceSpeed)
-        print(f"{self.AssistantName} : {*args}")
+        print("{0} : {1}\n".format(self.AssistantName, *args))
         engine.say(*args)
         engine.runAndWait()
 
@@ -146,11 +146,11 @@ class Alice:
             f"Usable Storage : {Client.storage['Total']} GB, Memory Used : {Client.memory_status}%,  CPU Used : {Client.cpu_status}%")
         try:
             self.speak(
-                f"You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {self.gender}!. "
-                f"Battery is {Client.battery_status}% Charged!, " + "And its still in charging." if Client.battery_plugged else "")
+                f"You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {self.gender}!. \
+                Battery is {Client.battery_status}% Charged!, " + "And its still in charging." if Client.battery_plugged else "")
 
             self.speak(Client.weatherInfo)  # Trying to say the weather report ond the client local area'
-        except Exception:
+        except NameError:
             pass
 
         self.speak(
