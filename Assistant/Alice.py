@@ -93,7 +93,7 @@ class Alice:
         engine = pyttsx3.init('sapi5')
         engine.setProperty("voice", Client.voices[self.voice - 1])
         engine.setProperty("rate", self.voiceSpeed)
-        print(f"{self.AssistantName} : {*args}\n")
+        print(f"{self.AssistantName} : {*args}")
         engine.say(*args)
         engine.runAndWait()
 
