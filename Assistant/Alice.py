@@ -12,10 +12,9 @@ import pyttsx3
 from dotenv import load_dotenv
 from tkinter.filedialog import *
 
-from Assistant.exts.networks import localInfo                                                           # noqa
-from Assistant.exts.alarm import notifier                                                            # noqa
-from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client     # noqa
-
+from Assistant.exts.networks import localInfo  # noqa
+from Assistant.exts.alarm import notifier  # noqa
+from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client  # noqa
 
 __all__ = ("Alice", "alice")
 
@@ -48,7 +47,9 @@ class Alice:
 
     def severalVoices(self, voicesId=Client.voices):
         """ This is the function to show the user how many voices are available in his/her system 
-        So that the user will able to choose his own liked voice """
+        So that the user will able to choose his own liked voice 
+        """
+
         engine = pyttsx3.init("sapi5")
         for index, voice in enumerate(voicesId):
             engine.setProperty("voice", voice)
@@ -81,7 +82,13 @@ class Alice:
         engine.runAndWait()
 
     def speak(self, audio):
-        """ Speak function as per the selected voice """
+        """ Speak function as per the selected voice by the user in .env file
+         
+         argument : string
+         work : spoke the string in the user's selected voice by default speaker
+         return : None
+         
+         """
 
         engine = pyttsx3.init('sapi5')
         engine.setProperty("voice", Client.voices[self.voice - 1])
@@ -94,7 +101,14 @@ class Alice:
         """
         The not having any parameter but it taking the input form the microphone of the user
         and return the string object that the user says
+
+        takes : audio from the default mic
+        return :  the sentence spoke by the user return it as a string
+
+        behind the seen the function takes google's api to recognize the audio,
+        so indirectly Alice will needed to be online for working properly.
         """
+
         r = sr.Recognizer()
         with sr.Microphone() as source:
             print(f"{self.AssistantName}: Listening....")
@@ -169,7 +183,7 @@ class Alice:
         """ Function to read the pdf and save the audio in a mp3 file at the same directory where the pdf located """
         pdfPath = askopenfilename(mode='r', defaultextension=".pdf")
         full_Text = str()
-        if pdfPath is None:         # this condition happened when the user will click cancel
+        if pdfPath is None:  # this condition happened when the user will click cancel
             return None
 
         with open(pdfPath, "rb") as book:
@@ -199,7 +213,6 @@ class Alice:
                 return None
         # return audioFile
 
-
     def dailyTaskReminder(self, task: dict):
         print("function me paunch gaye bhai")
         while True:
@@ -214,7 +227,6 @@ class Alice:
                     time.sleep(62)
 
 
-alice = Alice()  # Object for the Alice class
 
-
-
+# Object for the Alice class
+alice = Alice()
