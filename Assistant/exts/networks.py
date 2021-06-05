@@ -24,7 +24,7 @@ def internetConnection() -> bool:
 
 
 
-def localInfo():
+def localInfo() -> list:
     """ unction to return the most of the information about current location using ip address
     From ip-api.com """
     url = "http://ip-api.com/json/"
@@ -64,4 +64,6 @@ def wiki(queary):
         return "Sorry! I didn't got that stuff in wikipedia"
 
 
-
+if __name__ == "__main__":
+    from pprint import pprint
+    pprint(localInfo())

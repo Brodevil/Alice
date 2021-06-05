@@ -70,7 +70,6 @@ class Client:
     storage = {"Total": storageInfo[0], "Used": storageInfo[1], "Free": storageInfo[2]}  # values are in GB
     memory_status = psutil.virtual_memory().percent  # Used memory in percentage
     cpu_status = psutil.cpu_percent()  # cpu uses in percentage
-    internet = internetConnection()
     computerInfo = {"System": userSystem.system, "Node name": userSystem.node, "Release": userSystem.release,
                     "Version": userSystem.version, "Machine": userSystem.machine, "Processor": userSystem.processor}
 
@@ -103,8 +102,8 @@ class Contacts:
         contactsFile = os.path.join(Client.alice_path, "contactinfo.xlsx")
     else:
         contactsFile = os.path.join(Client.alice_path, "Contact.xlsx")
-    emails = {name: email[0] for name, email in contactInfo(contactsFile).items()}
-    contactNumber = {name: contactNumber[1] for name, contactNumber in contactInfo(contactsFile).items()}
+    emails = {name: email[0] for name, email in contactInfo(contactsFile).items()}                              # noqa
+    contactNumber = {name: contactNumber[1] for name, contactNumber in contactInfo(contactsFile).items()}       # noqa
 
 
 
