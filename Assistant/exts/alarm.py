@@ -60,6 +60,3 @@ def reminderAlarm(magnitude, unit, pourpose):
                     f"Time Up, You had told me to remind your after {magnitude} hours, Now its time to remind you, Wake up.")
                 break
 
-
-if __name__ == '__main__':
-    reminderAlarm(1, "minute", "Test 0")

@@ -12,7 +12,7 @@ import multiprocessing as mp
 import subprocess
 import pywhatkit
 
-from Assistant.exts import reminder  # noqa
+from Assistant.exts import alarm  # noqa
 from Assistant.exts import networks  # noqa
 from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client  # noqa
 
@@ -185,7 +185,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         except Exception:  # the user can give the reason as a option
             pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
 
-        globals()['side_reminder'] = mp.Process(target=reminder.reminderAlarm, args=(magnitude, unit, pourpose))
+        globals()['side_reminder'] = mp.Process(target=alarm.reminderAlarm, args=(magnitude, unit, pourpose))
         globals()['side_reminder'].start()
 
 
