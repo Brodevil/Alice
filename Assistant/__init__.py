@@ -80,7 +80,8 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         alice.speak("That's it, I m quiting....")
         taskMultiProcessing.terminate()
         try:
-            globals()['side_reminder'].terminate()
+            for reminder in globals()['side_reminder']:
+                reminder.terminate()
         except:
             pass
         sys.exit(0)
@@ -188,25 +189,21 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
     # reminder        
     elif 'remind me after' in queary or "wake up me after" in queary:
-        try: 
-            side_reminder                   # noqa
-        except NameError:        
-            queary = queary.split("remind me after " if "remind me after" in queary else "wake up me after ")[-1]
-            queary = queary.replace("i", "you")
-            magnitude = int(queary.split()[0])
-            unit = queary.split()[1]
-            alice.speak(f"Okay {alice.gender}! I will be reminding you after {magnitude} {unit}!")
-            try:
-                pourpose = queary.split("so that ")[1]
-            except Exception:  # the user can give the reason as a option
-                pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
+        queary = queary.split("remind me after " if "remind me after" in queary else "wake up me after ")[-1]
+        queary = queary.replace("i", "you")
+        magnitude = int(queary.split()[0])
+        unit = queary.split()[1]
+        alice.speak(f"Okay {alice.gender}! I will be reminding you after {magnitude} {unit}!")
+        try:
+            pourpose = queary.split("so that ")[1]
+        except Exception:  # the user can give the reason as a option
+            pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
 
-            globals()['side_reminder'] = mp.Process(target=alarm.reminderAlarm, args=(magnitude, unit, pourpose))
-            globals()['side_reminder'].start()
+        globals()['side_reminder'] = list()
+        globals()['side_reminder'].append(mp.Process(target=alarm.reminderAlarm, args=(magnitude, unit, pourpose)))
+        globals()['side_reminder'][-1].start()
 
-        else:
-            alice.speak(f"Sorry {alice.gender}!, You had already reminder been set,\
-                You can again make reminder after finished first one")
+       
 
 
 
@@ -354,6 +351,13 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
             f"Total Usable Storage : {Client.storage['Total']} GB, Used : {Client.storage['Used']} GB, Free : {Client.storage['Free']} GB")
 
 
+    elif "internet info" in queary or "network info" in queary:
+        try:
+            alice.speak("Internet is connected! with", Client.networks)
+        except NameError:
+            alice.speak(random.choice(ERROR_REPLIES), "Some thing went wrong!")
+
+
     elif 'internet' in queary:
         if Client.internet:
             alice.speak(f"Yes {alice.gender}! Internet is connected")
@@ -373,7 +377,6 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
             minutes, unit = queary.split("for ")[-1].split()
             if unit == "hours" or unit == "hour":
                 minutes = minutes * 60
-
         except Exception:
             alice.speak(
                 f"{alice.gender}! Please Enter how many minutes in numbers, I should keep active your windows machine.")

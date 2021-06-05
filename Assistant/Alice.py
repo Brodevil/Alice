@@ -81,7 +81,7 @@ class Alice:
                     f"Hey there! I am {index + 1}th voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file")
         engine.runAndWait()
 
-    def speak(self, audio):
+    def speak(self, *args):
         """ Speak function as per the selected voice by the user in .env file
          
          argument : string
@@ -93,8 +93,8 @@ class Alice:
         engine = pyttsx3.init('sapi5')
         engine.setProperty("voice", Client.voices[self.voice - 1])
         engine.setProperty("rate", self.voiceSpeed)
-        print(f"{self.AssistantName} : {audio}\n")
-        engine.say(audio)
+        print(f"{self.AssistantName} : {*args}\n")
+        engine.say(*args)
         engine.runAndWait()
 
     def takeCommand(self):
