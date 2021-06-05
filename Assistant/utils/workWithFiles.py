@@ -62,20 +62,3 @@ def openApplication(ApplicationName: str, installedApplicationPath: str):
                 return app.split(".")[0]
     return None
 
-
-if __name__ == '__main__':
-    alice_path = os.getcwd().replace("Assistant\\exts", "")
-    files = os.listdir(alice_path)
-    if "contactinfo.xlsx" in files:
-        contactsFile = os.path.join(alice_path, "contactinfo.xlsx")
-    else:
-        contactsFile = os.path.join(alice_path, "Contact.xlsx")
-    print(files)
-    print(contactsFile)
-    data = contactInfo(contactsFile)
-    pprint(data)
-
-    emails = {name: email[0] for name, email in contactInfo(r"M:\ADMIN\Critical Data\VS-Code\Alice\contactinfo.xlsx").items()}
-    # contactNumber = {name: contactNumber[1] for name, contactNumber in contactInfo(contactsFile).items()}
-    pprint(emails)
-    print(contactsFile)
