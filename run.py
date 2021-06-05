@@ -16,7 +16,7 @@ from Assistant.exts.workWithFiles import DailyWorksExel
 __all__ = ["queary", ]
 __authors__ = ("Abhinav", "Brodevil")  # Both are the same person lol
 
-tasks = DailyWorksExel(getcwd().replace("Alice\\Assistant", "Alice\\DailyWorks.xlsx"))
+tasks = DailyWorksExel(getcwd().replace("\\Alice", "\\Alice\\DailyWorks.xlsx"))
 DailyTasks = multiprocessing.Process(target=alice.dailyTaskReminder, args=(tasks,))
 
 
