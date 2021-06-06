@@ -12,9 +12,9 @@ import pyttsx3
 from dotenv import load_dotenv
 from tkinter.filedialog import *
 
-from Assistant.exts.networks import localInfo                                                           # noqa
-from Assistant.exts.alarm import notifier                                                               # noqa
-from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client     # noqa
+from Assistant.exts.networks import localInfo  # noqa
+from Assistant.exts.alarm import notifier  # noqa
+from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client  # noqa
 
 __all__ = ("Alice", "alice")
 
@@ -34,7 +34,7 @@ class Alice:
         self.name = environ.get("UserName",
                                 "Abhinav")  # this is the user name of the person who suppose to use this program : Data From (.env)
         self.AssistantName = Client.AssistantName
-        
+
         self.city = environ.get("location", localInfo())  # Data From (.env)
         self.voice = Client.voice
         self.voiceSpeed = Client.voiceRate
@@ -133,36 +133,54 @@ class Alice:
             return "Good Evening"
 
     def intro(self):
+        """
+        the function will run at the startup of the program, after the Alice get initialized
+
+        introduction of Alice as follow:
+        1. How is Alice?
+        2. Time and Date
+        3. Total usable storage, Memory used, CPU used
+        4. Location
+        5. If battery is there then its changed percentage and charging status
+        6. Its own location's weather, which had tracked by ip and weather by api
+        7. Good Wish = Morning/ Afternoon/ Evening as per the time
+        """
+
         self.speak(Client.intro)
         self.speak(
             f"Its {datetime.datetime.now().strftime('%I:%M %p')}, and today's date is {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year} ")
         self.speak(
-            f"Usable Storage : {Client.storage['Total']} GB, Memory Used : {Client.memory_status}%,  CPU Used : {Client.cpu_status}%")
+            f"Total Usable Storage : {Client.storage['Total']} GB, Memory Used : {Client.memory_status}%,  CPU Used : {Client.cpu_status}%")
+        self.speak(
+            f"You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {Client.gender}!. ")
+
         try:
             self.speak(
-                f"You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {Client.gender}!. "
                 f"Battery is {Client.battery_status}% Charged!, " + "And its still in charging." if Client.battery_plugged else "")
-
-            self.speak(Client.weatherInfo)  # Trying to say the weather report ond the client local area'
         except NameError:
             pass
 
+        self.speak(Client.weatherInfo)  # Trying to say the weather report ond the client local area'
         self.speak(
             f"{self.goodWish} {self.name} {Client.gender}!, System is now fully Operational. How Can I help you {Client.gender}")
 
-        if not Client.internet:
-            self.speak(
-                f"{Client.gender}! Internet is not connected. I going to work with Internet, Please get connect with internet.")
-            exit()
-
     @staticmethod
     def edge(url):
+        """Edge is my Favorite Browser so this function initialize the edge browser
+        Argument: url of the website
+        process : opine that url or website in the edge browser
+         """
         edgePath = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
         webbrowser.register('edge', None, webbrowser.BackgroundBrowser(edgePath))
         webbrowser.get('edge').open(url)
 
     @staticmethod
     def activePC(minutes):
+        """
+        The function to keep pc active while it will just do some activities like moving mouse and click shif
+        so that your pc will active for number of minutes
+        """
+
         pyautogui.FAILSAFE = False
         presentTime = int(time.time())
         while presentTime + minutes * 60 >= int(time.time()):
@@ -213,11 +231,13 @@ class Alice:
                 currentTime = datetime.time(int(datetime.datetime.now().strftime("%H")),
                                             int(datetime.datetime.now().strftime("%M")))
                 if exelTime == currentTime:
-                    notifier(work, f"{Client.AssistantName} :  I am reminding you {Client.gender} for your Following task",
+                    notifier(work,
+                             f"{Client.AssistantName} :  I am reminding you {Client.gender} for your Following task",
                              os.getcwd().replace("\\Alice\\Assistant", "\\Alice\\Assistant\\media\\time-out.ico"))
 
                     winsound.Beep(frequency=2500, duration=4000)
-                    self.speak(f"{Client.gender}! You had a task that, {work.replace('i', 'you').replace('my', 'your')}")
+                    self.speak(
+                        f"{Client.gender}! You had a task that, {work.replace('i', 'you').replace('my', 'your')}")
                     time.sleep(62)
 
 
