@@ -2,7 +2,7 @@ import datetime
 import time
 from os import environ
 
-import PyPDF2  # noqa
+import PyPDF2
 import webbrowser
 import pyautogui
 import winsound
@@ -233,7 +233,7 @@ class Alice:
                 if exelTime == currentTime:
                     notifier(work,
                              f"{Client.AssistantName} :  I am reminding you {Client.gender} for your Following task",
-                             os.getcwd().replace("\\Alice\\Assistant", "\\Alice\\Assistant\\media\\time-out.ico"))
+                             os.getcwd().replace("\\Alice\\Assistant", "\\Alice\\Assistant\\resources\\Images\\time-out.ico"))
 
                     winsound.Beep(frequency=2500, duration=4000)
                     self.speak(
