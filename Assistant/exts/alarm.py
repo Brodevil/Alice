@@ -37,6 +37,8 @@ def reminderAlarm(magnitude, unit, pourpose):
     elif unit.lower() == "hours" or unit.lower() == "hour":
         remindTime = int(magnitude * 60 * 60 + time.time())
         is_hour = True
+    else:
+        reminderTime = None
 
     while True:
         presentTime = int(time.time())
