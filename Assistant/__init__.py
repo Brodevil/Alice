@@ -576,9 +576,3 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None):
             # alice.speak(f"Sorry! {applicationName} shortcut didn't got in the Application folder. Please put the shortcuts of all the application do \
             # you use in day to day life in Application folder, Which is in this project folder.")
             pass
-
-
-if __name__ == '__main__':
-    while True:
-        command = input("Enter the command of Alice :\t")
-        logic(command)
