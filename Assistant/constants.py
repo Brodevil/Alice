@@ -56,6 +56,13 @@ class Client:
     contact = "brodevil89@gmail.com"
     github_assistant_repo = "https://github.com/Brodevil/Alice"
     DiscordId = "Brodevil#5822"
+    gender = environ.get("GENDER")
+    if gender == "male":
+        gender = "Sir"
+    elif gender == "female":
+        gender = "Mam"
+    else:
+        raise ValueError("In .env file GENDER= always should  be 'male or female!' which will your gender")
 
 
     # Client Choice to Alice
@@ -72,6 +79,7 @@ class Client:
     cpu_status = psutil.cpu_percent()  # cpu uses in percentage
     computerInfo = {"System": userSystem.system, "Node name": userSystem.node, "Release": userSystem.release,
                     "Version": userSystem.version, "Machine": userSystem.machine, "Processor": userSystem.processor}
+    internet = internetConnection()
 
 
     # Few user Info :
