@@ -30,7 +30,7 @@ def notifier(reason, string, ico):
 
 
 def reminderAlarm(magnitude, unit, pourpose):
-    if unit.lower() == "myounute" or unit.lower() == "myounutes" or unit.lower() == "minute" or unit.lower() == "minutes":  # this is actually the computer sense word to minutes as a myounutes     #noqa
+    if unit.lower() == "minute" or unit.lower() == "minutes":
         remindTime = int(magnitude * 60 + time.time())
         is_hour = False
 
@@ -46,7 +46,7 @@ def reminderAlarm(magnitude, unit, pourpose):
             notifier(
                 reason=pourpose,
                 string="Alice : Time Out Sir!",
-                ico=getcwd().replace("\\Alice\\Assistant\\exts", "\\Alice\\Assistant\\media\\time-out.ico")
+                ico=getcwd().replace("\\Alice\\Assistant\\exts", "\\Alice\\Assistant\\resources\\Images\\time-out.ico")
             )
             winsound.Beep(frequency=2500, duration=4000)
             speak(
