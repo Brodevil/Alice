@@ -33,9 +33,3 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
        
 
-
-      if-no-files-found: # optional, default is warn
-      # Duration after which artifact will expire in days. 0 means using default retention.
-    Minimum 1 day. Maximum 90 days unless changed from the repository settings page.
-
-      retention-days: # optional
