@@ -419,12 +419,13 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None):
         queary = queary.split("say" if 'say' in queary else "speak")[-1]
         alice.speak(queary)
 
-    elif 'start follwing my' in queary:
+    elif 'start following my' in queary:
         alice.speak("I will be now following your while repeating yourself, say stop to quit this")
         sentance = str()
         while "stop" not in queary or "quit" not in queary or "break" not in queary:
             sentance = alice.takeCommand()
             alice.speak(sentance)
+
 
     elif 'spell' in queary:
         alice.speak(f"Enter what I should spell in terminal {Client.gender}!")
