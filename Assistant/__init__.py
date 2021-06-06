@@ -24,7 +24,7 @@ from Assistant.exts import workWithFiles  # noqa
 __all__ = ["logic"]
 
 # reminder list, contain the multiprocessing object of reminding tasks
-side_reminder = list[mp:subprocess]
+side_reminder = list()
 
 # load_dotenv()
 try:
