@@ -34,13 +34,7 @@ class Alice:
         self.name = environ.get("UserName",
                                 "Abhinav")  # this is the user name of the person who suppose to use this program : Data From (.env)
         self.AssistantName = Client.AssistantName
-        if gender == "male":
-            self.gender = "Sir"
-        elif gender == "female":
-            self.gender = "Mam"
-        else:
-            raise ValueError("In .env file GENDER= always should  be 'male or female!' which will your gender")
-
+        
         self.city = environ.get("location", localInfo())  # Data From (.env)
         self.voice = Client.voice
         self.voiceSpeed = Client.voiceRate
@@ -57,28 +51,28 @@ class Alice:
 
             if index == 0:
                 print(
-                    f"{Client.AssistantName} : Hey there! I am {index + 1}st voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file\n")
+                    f"{Client.AssistantName} : Hey there! I am {index + 1}st voice of your system {Client.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file\n")
                 engine.say(
-                    f"Hey there! I am {index + 1}st voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file")
+                    f"Hey there! I am {index + 1}st voice of your system {Client.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file")
 
 
             elif index == 1:
                 print(
-                    f"{Client.AssistantName} : Hey there! I am {index + 1}nd voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file\n")
+                    f"{Client.AssistantName} : Hey there! I am {index + 1}nd voice of your system {Client.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file\n")
                 engine.say(
-                    f"Hey there! I am {index + 1}nd voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file")
+                    f"Hey there! I am {index + 1}nd voice of your system {Client.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file")
 
             elif index == 2:
                 print(
-                    f"{Client.AssistantName} : Hey there! I am {index + 1}rd voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file\n")
+                    f"{Client.AssistantName} : Hey there! I am {index + 1}rd voice of your system {Client.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file\n")
                 engine.say(
-                    f"Hey there! I m {index + 1}rd voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file")
+                    f"Hey there! I m {index + 1}rd voice of your system {Client.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file")
 
             else:
                 print(
-                    f"{Client.AssistantName} : Hey there! I am {index + 1}th voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file\n")
+                    f"{Client.AssistantName} : Hey there! I am {index + 1}th voice of your system {Client.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file\n")
                 engine.say(
-                    f"Hey there! I am {index + 1}th voice of your system {self.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file")
+                    f"Hey there! I am {index + 1}th voice of your system {Client.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file")
         engine.runAndWait()
 
     def speak(self, *args):
@@ -146,19 +140,19 @@ class Alice:
             f"Usable Storage : {Client.storage['Total']} GB, Memory Used : {Client.memory_status}%,  CPU Used : {Client.cpu_status}%")
         try:
             self.speak(
-                f"You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {self.gender}!. \
-                Battery is {Client.battery_status}% Charged!, " + "And its still in charging." if Client.battery_plugged else "")
+                f"You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {Client.gender}!. "
+                f"Battery is {Client.battery_status}% Charged!, " + "And its still in charging." if Client.battery_plugged else "")
 
             self.speak(Client.weatherInfo)  # Trying to say the weather report ond the client local area'
         except NameError:
             pass
 
         self.speak(
-            f"{self.goodWish} {self.name} {self.gender}!, System is now fully Operational. How Can I help you {self.gender}")
+            f"{self.goodWish} {self.name} {Client.gender}!, System is now fully Operational. How Can I help you {Client.gender}")
 
         if not Client.internet:
             self.speak(
-                f"{self.gender}! Internet is not connected. I going to work with Internet, Please get connect with internet.")
+                f"{Client.gender}! Internet is not connected. I going to work with Internet, Please get connect with internet.")
             exit()
 
     @staticmethod
@@ -219,10 +213,11 @@ class Alice:
                 currentTime = datetime.time(int(datetime.datetime.now().strftime("%H")),
                                             int(datetime.datetime.now().strftime("%M")))
                 if exelTime == currentTime:
-                    notifier(work, f"{Client.AssistantName} :  I am reminding you sir for your Following task",
-                             r"Assistant/utils/time-out.ico")
+                    notifier(work, f"{Client.AssistantName} :  I am reminding you {Client.gender} for your Following task",
+                             os.getcwd().replace("\\Alice\\Assistant", "\\Alice\\Assistant\\media\\time-out.ico"))
+
                     winsound.Beep(frequency=2500, duration=4000)
-                    self.speak(f"{self.gender}! You had a task that, {work.replace('i', 'you')}")
+                    self.speak(f"{Client.gender}! You had a task that, {work.replace('i', 'you').replace('my', 'your')}")
                     time.sleep(62)
 
 
