@@ -1,8 +1,7 @@
 from requests.exceptions import ConnectionError
 from Assistant.exts.networks import internetConnection
 
-internet = internetConnection()
-if internet is False:
+if internetConnection() is False:
     raise ConnectionError("Alice works with internet, Please get connected with internet.")
 
 
