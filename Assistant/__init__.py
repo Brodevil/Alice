@@ -12,14 +12,14 @@ import multiprocessing as mp
 import subprocess
 import pywhatkit
 
-from Assistant.exts import alarm  # noqa
-from Assistant.exts import networks  # noqa
-from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client  # noqa
+from Assistant.exts import alarm                                                                        # noqa
+from Assistant.exts import networks                                                                     # noqa
+from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client     # noqa
 
-from Assistant.utils import login
-from Assistant.Alice import alice  # noqa
-from Assistant.exts import keyactivities  # noqa
-from Assistant.exts import workWithFiles  # noqa
+from Assistant.utils import login                                                                       # noqa
+from Assistant.Alice import alice                                                                       # noqa
+from Assistant.exts import keyactivities                                                                # noqa
+from Assistant.exts import workWithFiles                                                                # noqa
 
 __all__ = ["logic"]
 
@@ -33,7 +33,7 @@ except Exception:
     battery = None
 
 
-def logic(queary: str, taskMultiProcessing: mp.Process):
+def logic(queary: str, taskMultiProcessing: mp.Process = None):
     """This is the logic of the Program as it will be matching several query and do the programmed task """
 
     # fetching info from internet
@@ -133,7 +133,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
 
     elif 'open whatsapp' in queary:
-        alice.speak("Opening  Whatsapp.....")
+        alice.speak("Opening Whatsapp.....")
         alice.edge("https://web.whatsapp.com/")
 
 
@@ -147,7 +147,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         alice.edge("https://www.python.org/dev/peps/pep-0008/")
 
 
-    elif 'gmail' in queary:
+    elif 'open gmail' in queary or 'show' in queary and 'inbox' in queary:
         alice.speak("Opening Gmail...")
         alice.edge("https://gmail.com")
 
@@ -188,17 +188,20 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         keyboard.press_and_release("ctrl+win+left")
 
 
+    elif 'close this website' in queary or 'close the webpage' in queary:
+        keyboard.press_and_release("ctrl+w")
+
 
 
     # reminder        
     elif 'remind me after' in queary or "wake up me after" in queary:
-        queary = queary.split("remind me after " if "remind me after" in queary else "wake up me after ")[-1]
-        queary = queary.replace("i", "you").replace('my', 'your')
+        queary = queary.split("remind me after " if 'remind me after' in queary else "wake up me after")[-1]
         magnitude = int(queary.split()[0])
         unit = queary.split()[1]
         alice.speak(f"Okay {Client.gender}! I will be reminding you after {magnitude} {unit}!")
         try:
-            pourpose = queary.split("so that ")[1]
+            # if reason is there, then it will going to replace the sentence "I will back to my work again" to "you will back to your work again"
+            pourpose = queary.split("so that ")[1].replace("i", "you").replace('my', 'your')
         except Exception:  # the user can give the reason as a option
             pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
 
@@ -220,7 +223,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         try:
             os.startfile(
                 r"E:\ADMIN\Music\BRODEVIL\Hollywood_song\sunna_hai_kya\BROWN MUNDE.mp3")
-        except Exception:
+        except FileNotFoundError:
             pass
 
 
@@ -412,10 +415,16 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
 
     # make Alice to speak features
-    elif 'say' in queary:
-        queary = queary.replace("say ", "")
+    elif 'say' in queary or 'speak' in queary:
+        queary = queary.split("say" if 'say' in queary else "speak")[-1]
         alice.speak(queary)
 
+    elif 'start follwing my' in queary:
+        alice.speak("I will be now following your while repeating yourself, say stop to quit this")
+        sentance = str()
+        while "stop" not in queary or "quit" not in queary or "break" not in queary:
+            sentance = alice.takeCommand()
+            alice.speak(sentance)
 
     elif 'spell' in queary:
         alice.speak(f"Enter what I should spell in terminal {Client.gender}!")
@@ -440,12 +449,10 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
     elif 'start' in queary and 'typ' in queary:
         alice.speak(f"{Client.gender}! You start to speak I will type that And then to quit plz say quite or close.")
         string = str()
-        while "stop" not in string.lower():
+        while "stop" not in string.lower() or 'quit' not in queary or 'close' in queary:
             string = alice.takeCommand()
-            if string is not None:
+            if string != "None":
                 keyactivities.typeWrite(string)
-                print(string)
-
 
 
     elif 'record keyboard' in queary:
@@ -570,3 +577,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
             pass
 
 
+if __name__ == '__main__':
+    while True:
+        command = input("Enter the command of Alice :\t")
+        logic(command)
