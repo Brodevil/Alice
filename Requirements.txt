@@ -2,6 +2,7 @@ atomicwrites==1.4.0
 attrs==21.2.0
 beautifulsoup4==4.9.3
 certifi==2020.12.5
+cffi==1.14.5
 chardet==4.0.0
 click==7.1.2
 colorama==0.4.4
@@ -29,6 +30,7 @@ psutil==5.8.0
 py==1.10.0
 PyAudio @ file:///M:/ADMIN/Critical%20Data/VS-Code/Alice/PyAudio-0.2.11-cp38-cp38-win_amd64.whl
 PyAutoGUI==0.9.52
+pycparser==2.20
 PyGetWindow==0.0.9
 PyMsgBox==1.0.9
 pyparsing==2.4.7
