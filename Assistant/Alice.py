@@ -1,6 +1,6 @@
 import datetime
 import time
-from os import environ
+from os import environ, getcwd
 
 import PyPDF2
 import webbrowser
@@ -10,7 +10,7 @@ import winsound
 import speech_recognition as sr
 import pyttsx3
 from dotenv import load_dotenv
-from tkinter.filedialog import *
+from tkinter.filedialog import askopenfilename 
 
 from Assistant.exts.networks import localInfo  # noqa
 from Assistant.exts.alarm import notifier  # noqa
@@ -233,7 +233,7 @@ class Alice:
                 if exelTime == currentTime:
                     notifier(work,
                              f"{Client.AssistantName} :  I am reminding you {Client.gender} for your Following task",
-                             os.getcwd().replace("\\Alice\\Assistant", "\\Alice\\Assistant\\resources\\Images\\time-out.ico"))
+                             getcwd().replace("\\Alice\\Assistant", "\\Alice\\Assistant\\resources\\Images\\time-out.ico"))
 
                     winsound.Beep(frequency=2500, duration=4000)
                     self.speak(
@@ -243,3 +243,7 @@ class Alice:
 
 # Object for the Alice class
 alice = Alice()
+
+
+if __name__ == "__main__":
+    alice.edge("codewithharry.in")
