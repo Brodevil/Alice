@@ -21,7 +21,7 @@ load_dotenv()
 
 
 def Storage():
-    """ Function to get total harder storage as per the drive """
+    """ Function to get total harder STORAGE as per the drive """
     totalStorage = 0
     usedStorage = 0
     freeStorage = 0
@@ -39,79 +39,79 @@ def Storage():
 
 storageInfo = Storage()
 engine = pyttsx3.init()
-localInformation = localInfo()
+LOCAL_INFOMATION = localInfo()
 userSystem = platform.uname()
 try:
-    battery = psutil.sensors_battery()
+    BATTERY = psutil.sensors_battery()
 except Exception:
-    battery = None
+    BATTERY = None
 
 
 class Client:
-    AssistantName = environ.get("AssistantName", "Alice")
-    intro = f"Hey There! Now me to introduce myself, I am {AssistantName}. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day, seven days a week, Importing all preferences from home interface, system is now initializing!"
-    aliceInfo = "I am written in python by Abhinav, My birthday is 21 December of 2020."
+    ASSISTANT_NAME = environ.get("ASSISTANT_NAME", "Alice")
+    INTRO = f"Hey There! Now me to introduce myself, I am {ASSISTANT_NAME}. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day, seven days a week, Importing all preferences from home interface, system is now initializing!"
+    ALICE_INFO = "I am written in python by Abhinav, My birthday is 21 December of 2020."
 
 
     # Author Info
-    author = "Abhinav(Brodevil)"
-    contact = "brodevil89@gmail.com"
-    github_assistant_repo = "https://github.com/Brodevil/Alice"
-    DiscordId = "Brodevil#5822"
-    gender = environ.get("GENDER")
-    if gender == "male":
-        gender = "Sir"
-    elif gender == "female":
-        gender = "Mam"
+    AUTHOR = "Abhinav(Brodevil)"
+    CONTACT = "brodevil89@gmail.com"
+    ALICE_GITHUB_REPOSITORY = "https://github.com/Brodevil/Alice"
+    DISCORD_ID = "Brodevil#5822"
+    GENDER = environ.get("GENDER")
+    if GENDER == "male":
+        GENDER = "Sir"
+    elif GENDER == "female":
+        GENDER = "Mam"
     else:
-        raise EvnFileValueError("In .env file GENDER= always should  be 'male or female!' which will your gender")
+        raise EvnFileValueError("In .env file GENDER= always should  be 'male or female!' which will your GENDER")
 
 
     # Client Choice to Alice
-    voices = [engine.id for engine in engine.getProperty("voices")]                                               # noqa
-    voiceRate = int(environ.get("VoiceRate", 175))
-    voice = int(environ.get("VoiceNumber", 1))
-    if voice > len(voices):
-        raise EvnFileValueError(f"There are just {len(voices)} available in your system and you had choice the {voice} number of voice! please Change it in .env file")
+    VOICES = [engine.id for engine in engine.getProperty("VOICES")]                                               # noqa
+    VOICE_RATE = int(environ.get("VoiceRate", 175))
+    VOICE = int(environ.get("VoiceNumber", 1))
+    if VOICE > len(VOICES):
+        raise EvnFileValueError(f"There are just {len(VOICES)} available in your system and you had choice the {VOICE} number of voice! please Change it in .env file")
 
 
     # Few Computer status
-    storage = {"Total": storageInfo[0], "Used": storageInfo[1], "Free": storageInfo[2]}  # values are in GB
-    memory_status = psutil.virtual_memory().percent                                      # Used memory in percentage
-    cpu_status = psutil.cpu_percent()                                                    # cpu uses in percentage
-    computerInfo = {"System": userSystem.system, "Node name": userSystem.node, "Release": userSystem.release,
+    STORAGE = {"Total": storageInfo[0], "Used": storageInfo[1], "Free": storageInfo[2]}  # values are in GB
+    MEMORY_STATUS = psutil.virtual_memory().percent                                      # Used memory in percentage
+    CPU_STATUS = psutil.cpu_percent()                                                    # cpu uses in percentage
+    COMPUTER_INFO = {"System": userSystem.system, "Node name": userSystem.node, "Release": userSystem.release,
                     "Version": userSystem.version, "Machine": userSystem.machine, "Processor": userSystem.processor}
-    internet = internetConnection()
+    INTERNET_CONNECTION = internetConnection()
 
 
     # Few user Info :
-    musicDirectory = environ.get("MUSIC", r"C:\Users\ADMIN\Music")  # Music directory should be without space
-    favouriteMusic = environ.get("FavMusic", None)
-    ApplicationShortcutPath = os.getcwd().replace(r"\Alice\Assistant", r"\Alice\Application")          # Application folder where all the using application shortcuts will available to the user
-    alice_path = os.getcwd().replace("\\Assistant", "")
-    userGithub = environ.get("GITHUB", "Brodevil")
+    MUSIC_DIRECTORY = environ.get("MUSIC", r"C:\Users\ADMIN\Music")  # Music directory should be without space
+    FAVOURITE_MUSIC = environ.get("FavMusic", None)
+    APPLICATIONS_SHOTCUTS_PATH = os.getcwd().replace(r"\Alice\Assistant", r"\Alice\Application")          # Application folder where all the using application shortcuts will available to the user
+    ALICE_PATH = os.getcwd().replace("\\Alice\\Assistant", "\\Alice")
+    USER_GITHUB = environ.get("GITHUB", "Brodevil")
 
 
-    if battery is not None:
-        battery_status = battery.percent
-        battery_plugged = battery.power_plugged
+    if BATTERY is not None:
+        BATTERY_STATUS = BATTERY.percent
+        BATTERY_PLUGGED = BATTERY.power_plugged
 
 
     # Networks infos
-    if localInformation is not None and weather() is not None:
-        city = localInformation[0]
-        location = localInformation[1]['country'], localInformation[1]["regionName"], localInformation[1]["city"]
-        network = localInformation[1]["isp"]
-        weatherInfo = weather()
+    if LOCAL_INFOMATION is not None and weather() is not None:
+        CITY = LOCAL_INFOMATION[0]
+        LOCATION = LOCAL_INFOMATION[1]['country'], LOCAL_INFOMATION[1]["regionName"], LOCAL_INFOMATION[1]["CITY"]
+        NETWORK = LOCAL_INFOMATION[1]["isp"]
+        WEATHER_INFO = weather()
 
 
 
 class Contacts:
-    files = os.listdir(Client.alice_path)
+    files = os.listdir(Client.ALICE_PATH)
     if "contactinfo.xlsx" in files:
-        contactsFile = os.path.join(Client.alice_path, "contactinfo.xlsx")
+        contactsFile = os.path.join(Client.ALICE_PATH, "contactinfo.xlsx")
     else:
-        contactsFile = os.path.join(Client.alice_path, "Contact.xlsx")
+        contactsFile = os.path.join(Client.ALICE_PATH, "Contact.xlsx")
     emails = {name: email[0] for name, email in contactInfo(contactsFile).items()}                              # noqa
     contactNumber = {name: contactNumber[1] for name, contactNumber in contactInfo(contactsFile).items()}       # noqa
 
