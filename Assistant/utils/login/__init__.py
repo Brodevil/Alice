@@ -1,5 +1,5 @@
 import smtplib
-from os import system, chdir, getenv
+from os import system, chdir, environ
 
 import requests
 import json
@@ -13,8 +13,8 @@ __all__ = ["sendEmail", "initialCommit", "news"]
 load_dotenv()
 
 
-emailID = getenv("emailID")
-emailPassword = getenv("emailPassword")
+emailID = environ.get("emailID")
+emailPassword = environ.get("emailPassword")
 
 if len(emailID) or len(emailPassword):
     raise EnvironmentError("Please ensure that you had written your correct email Id or Email password in .env file\nGo through the `Run Alice.md` file on github `https://github.com/Brodevil/Alice/blob/main/Run%20Alice.md` ")
@@ -47,13 +47,16 @@ def initialCommit(path):
 
 
 
-def news(apikey=environ.get("NewsApiKey")):
+def news():
+    apikey = environ.get("NewsApiKey")
+    if len(apikey):
+        raise EvnFileValueError("Enter your API KEY of newsapi.org in .env file as NewsApiKey=(your Key). \nGo through the `Run Alice.md` file on github `https://github.com/Brodevil/Alice/blob/main/Run%20Alice.md`")
     try:
         response = requests.get(f"https://newsapi.org/v2/top-headlines?sources=the-times-of-india&apikey={apikey}")
         json_data = json.loads(response.text)
         return json_data['articles']
     except ConnectionError:
         return None
-
+   
 
 
