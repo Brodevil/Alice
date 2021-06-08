@@ -10,10 +10,10 @@ load_dotenv()
 __all__ = ["notifier", "reminderAlarm"]
 
 
-def speak(str):
+def speak(string):
     engine = pyttsx3.init("sapi5")
     engine.setProperty("voice", engine.getProperty("voices")[int(environ.get("VoiceNumber", 1)) - 1].id)
-    engine.say(str)
+    engine.say(string)
     engine.runAndWait()
 
 
@@ -50,6 +50,10 @@ def reminderAlarm(magnitude, unit, pourpose):
             )
             winsound.Beep(frequency=2500, duration=4000)
             speak(
-                f"Time Up, You had told me to remind your after {magnitude}" " hours " if is_hour else " minutes" +                         # noqa
+                f"Time Up, You had told me to remind your after {magnitude}" " hours " if is_hour else " minutes" +  # noqa
                                                                                                        "Now its time to remind you, Wake up.")
             break
+
+
+
+speak("hello, My name is Abhinav")
