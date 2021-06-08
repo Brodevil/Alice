@@ -9,6 +9,8 @@ import psutil
 import string
 from Assistant.exts.networks import localInfo, weather, internetConnection              # noqa
 from Assistant.exts.workWithFiles import contactInfo                                    # noqa
+from Assistant.utils.exceptions import EvnFileValueError                                # noqa
+
 
 
 __all__ = ["Client", "Contacts", "ERROR_REPLIES", "NEGATIVE_REPLIES", "POSITIVE_REPLIES",
@@ -62,7 +64,7 @@ class Client:
     elif gender == "female":
         gender = "Mam"
     else:
-        raise ValueError("In .env file GENDER= always should  be 'male or female!' which will your gender")
+        raise EvnFileValueError("In .env file GENDER= always should  be 'male or female!' which will your gender")
 
 
     # Client Choice to Alice
@@ -70,13 +72,13 @@ class Client:
     voiceRate = int(environ.get("VoiceRate", 175))
     voice = int(environ.get("VoiceNumber", 1))
     if voice > len(voices):
-        raise Exception(f"There are just {len(voices)} available in your system and you had choice the {voice} number of voice! please Change it in .env file")
+        raise EvnFileValueError(f"There are just {len(voices)} available in your system and you had choice the {voice} number of voice! please Change it in .env file")
 
 
     # Few Computer status
     storage = {"Total": storageInfo[0], "Used": storageInfo[1], "Free": storageInfo[2]}  # values are in GB
-    memory_status = psutil.virtual_memory().percent  # Used memory in percentage
-    cpu_status = psutil.cpu_percent()  # cpu uses in percentage
+    memory_status = psutil.virtual_memory().percent                                      # Used memory in percentage
+    cpu_status = psutil.cpu_percent()                                                    # cpu uses in percentage
     computerInfo = {"System": userSystem.system, "Node name": userSystem.node, "Release": userSystem.release,
                     "Version": userSystem.version, "Machine": userSystem.machine, "Processor": userSystem.processor}
     internet = internetConnection()
