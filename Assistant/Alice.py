@@ -73,7 +73,7 @@ class Alice:
                     f"{Client.AssistantName} : Hey there! I am {index + 1}th voice of your system {Client.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file\n")
                 engine.say(
                     f"Hey there! I am {index + 1}th voice of your system {Client.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file")
-        engine.runAndWait()
+            engine.runAndWait()
 
     def speak(self, *args):
         """ Speak function as per the selected voice by the user in .env file
@@ -155,8 +155,7 @@ class Alice:
             f"You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {Client.gender}!. ")
 
         try:
-            self.speak(
-                f"Battery is {Client.battery_status}% Charged!, " + "And its still in charging." if Client.battery_plugged else "")
+            self.speak(f"Battery is {Client.battery_status}% Charged!, " + "And its still in charging." if Client.battery_plugged else "")
         except NameError:
             pass
 
@@ -202,7 +201,7 @@ class Alice:
             try:
                 reader = PyPDF2.PdfFileReader(book)
                 audio_reader = pyttsx3.init('sapi5')
-                audio_reader.setProperty("rate", 170)
+                audio_reader.setProperty("rate", 175)
                 audio_reader.setProperty("voice", Client.voices[Client.voice - 1])
 
                 for page in range(fromPageNo, reader.numPages):
