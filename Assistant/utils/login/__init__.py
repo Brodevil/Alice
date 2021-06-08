@@ -47,7 +47,7 @@ def initialCommit(path):
 
 
 
-def news(apikey=os.environ.get("NewsApiKey")):
+def news(apikey=environ.get("NewsApiKey")):
     try:
         response = requests.get(f"https://newsapi.org/v2/top-headlines?sources=the-times-of-india&apikey={apikey}")
         json_data = json.loads(response.text)
