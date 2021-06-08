@@ -1,12 +1,12 @@
-from requests.exceptions import ConnectionError
+import time
+present_time = time.perf_counter()
+
 from Assistant.exts.networks import internetConnection
 from Assistant.utils.exceptions import InternetException
-import time
 
-late_time = time.time()
 
-if internetConnection(late_time) is False:
-    raise InternetException("Alice works with internet, Please get connected with internet.")
+if internetConnection() is False:
+    raise InternetException("Alice works with INTERNET_CONNECTION, Please get connected with INTERNET_CONNECTION.")
 
 
 import multiprocessing
@@ -27,6 +27,7 @@ DailyTasks = multiprocessing.Process(target=alice.dailyTaskReminder, args=(tasks
 if __name__ == "__main__":
     alice.intro()  # Introduction
     DailyTasks.start()
+    print(time.perf_counter() - present_time)
 
     while True:  # The program will be going to run on Infinite loop
         queary = alice.takeCommand().lower()
