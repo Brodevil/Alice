@@ -27,13 +27,10 @@ __all__ = ["logic"]
 side_reminder = list()
 
 # load_dotenv()
-try:
-    battery = psutil.sensors_battery()
-except Exception:
-    battery = None
 
 
-def logic(queary: str, taskMultiProcessing: mp.Process = None):
+
+def logic(queary: str, taskMultiProcessing: mp.Process):
     """This is the logic of the Program as it will be matching several query and do the programmed task """
 
     # fetching info from internet
@@ -339,6 +336,10 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None):
 
 
     elif 'battery' in queary:
+        try:
+            battery = psutil.sensors_battery()
+        except Exception:
+            battery = None
 
         if battery is not None:
             alice.speak(
@@ -373,8 +374,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None):
 
 
     elif 'system' in queary or 'computer info' in queary:
-        alice.speak(
-            f"Its a {Client.computerInfo['System']} {Client.computerInfo['Release']}, A {Client.computerInfo['Machine'][-3:-1]} bit Machine, Version {Client.computerInfo['Version']}, Admin user is {Client.computerInfo['Node name']}. {Client.computerInfo['Processor']} Processor.")
+        alice.speak(f"Its a {Client.computerInfo['System']} {Client.computerInfo['Release']}, A {Client.computerInfo['Machine'][-3:-1]} bit Machine, Version {Client.computerInfo['Version']}, Admin user is {Client.computerInfo['Node name']}. {Client.computerInfo['Processor']} Processor.")
 
 
     elif "active" in queary and "pc" in queary or "active" in queary and "computer" in queary:
@@ -440,6 +440,9 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None):
     elif 'open' in queary and 'windows' in queary or "close" in queary and "windows" in queary:
         keyboard.press("win")
 
+
+    elif 'close this applications' in queary:
+        keyboard.press_and_release("alt+f4")
 
     elif "type that" in queary or "send that" in queary:
         queary = queary.split("that")[-1]
@@ -565,7 +568,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None):
 
 
     elif 'open' in queary or 'launch' in queary:
-        applicationName = queary.split("open" if "open" in queary else "launch")[-1].split()[0]
+        applicationName = queary.split("open" if "open" in queary else "launch")[-1]
 
         # the second argument is the related path of the folder where all the used or usable software shortcuts are available by the user
         app = workWithFiles.openApplication(applicationName, Client.ApplicationShortcutPath)
@@ -576,3 +579,4 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None):
             # alice.speak(f"Sorry! {applicationName} shortcut didn't got in the Application folder. Please put the shortcuts of all the application do \
             # you use in day to day life in Application folder, Which is in this project folder.")
             pass
+
