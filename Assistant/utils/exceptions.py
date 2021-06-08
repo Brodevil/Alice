@@ -7,3 +7,16 @@ class InternetException(Exception):
         
     def __repr__(self):
         return f"Alice => {self.reason}"
+
+
+class EvnFileValueError(Exception):
+    """ Raised when any problem regarding the env files, just like email had not return or password
+    inside the env lots of data had been required """
+
+    def __init__(self, error):
+        self.error = error
+
+    def __repr__(self):
+        return f"Alice => {self.error}"
+    
+    
