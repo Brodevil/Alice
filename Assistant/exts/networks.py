@@ -1,9 +1,13 @@
 import requests
 import json
+import wikipedia
+
 from os import environ
 from dotenv import load_dotenv
+from typing import Optional
+
 from requests.exceptions import ConnectionError
-import wikipedia
+from Assistant.utils.exceptions import EvnFileValueError
 
 
 
@@ -14,31 +18,31 @@ load_dotenv()
 
 
 
-def internetConnection(late_time) -> bool:
-    """ Function to check the internet is connected or not """
+def internetConnection() -> bool:
+    """ Function to check the INTERNET_CONNECTION is connected or not """
     try:
-        requests.get("www.google.com", timeout=5)
+        requests.get("https://www.google.com/", timeout=5)
         return True
     except ConnectionError:
         return False
 
 
 
-def localInfo() -> list:
-    """ unction to return the most of the information about current location using ip address
+def localInfo() -> Optional[list]:
+    """ unction to return the most of the information about current LOCATION using ip address
     From ip-api.com """
     url = "http://ip-api.com/json/"
     try:
         response = requests.get(url)
         response = json.loads(response.text)
         del response['status'], response['countryCode'], response['region']
-        return [response['city'], response]
+        return [response['CITY'], response]
     except ConnectionError:
         return None
 
 
 def weather(location=None, apikey=(environ.get("OpenWeatherMapApi"))):
-    """ Function to return the most of the information about current location using ip address
+    """ Function to return the most of the information about current LOCATION using ip address
     From openwethermap.org apis """
     if location is None:
         local_info = localInfo()
@@ -51,7 +55,7 @@ def weather(location=None, apikey=(environ.get("OpenWeatherMapApi"))):
             except ConnectionError:
                 return None
             except IndexError:
-                return "Sorry! Weather report not available for {location}"
+                raise EvnFileValueError("your api key is wrong please recheck your api key and put it in .env file as `OpenWeatherMapApi=(your api key)` go through the `Run Alice.md` file on github `https://github.com/Brodevil/Alice/blob/main/Run%20Alice.md`")
         else:
             return None
 
