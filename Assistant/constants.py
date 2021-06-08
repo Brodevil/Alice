@@ -167,5 +167,3 @@ POSITIVE_REPLIES = [
     "Aye aye, cap'n!",
     "I'll allow it.",
 ]
-
-
