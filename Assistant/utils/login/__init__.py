@@ -1,15 +1,23 @@
-from dotenv import load_dotenv
 import smtplib
-import os
+from os import system, chdir, getenv
+
 import requests
 import json
-from pprint import pprint
-from requests.exceptions import ConnectionError
+from dotenv import load_dotenv
 
+from requests.exceptions import ConnectionError
+from Assistant.utils.exceptions import EvnFileValueError
 
 
 __all__ = ["sendEmail", "initialCommit", "news"]
 load_dotenv()
+
+
+emailID = getenv("emailID")
+emailPassword = getenv("emailPassword")
+
+if len(emailID) or len(emailPassword):
+    raise EnvironmentError("Please ensure that you had written your correct email Id or Email password in .env file\nGo through the `Run Alice.md` file on github `https://github.com/Brodevil/Alice/blob/main/Run%20Alice.md` ")
 
 
 
@@ -19,8 +27,8 @@ def sendEmail(to, subject, content):
         server.ehlo()
         server.starttls()
         content = f"Subject :{subject}\n\n{content}"
-        server.login(os.getenv("emailID"), os.getenv("emailPassword"))
-        server.sendmail(os.getenv("emailID"), to, content)
+        server.login(emailID, emailPassword)
+        server.sendmail(emailID, to, content)
     except Exception:
         return False
     else:
@@ -32,16 +40,16 @@ def sendEmail(to, subject, content):
 
 
 def initialCommit(path):
-    os.chdir(path)
-    os.system("git add .")
-    os.system('git commit -m "Initial Commit by Alice"')
-    os.system("git push -u origin main")
+    chdir(path)
+    system("git add .")
+    system('git commit -m "Initial Commit by Alice"')
+    system("git push -u origin main")
 
 
 
 def news(apikey=os.environ.get("NewsApiKey")):
     try:
-        response = requests.get(f"https://newsapi.org/v2/top-headlines?sources=the-times-of-india&apikey={apikey}", timeout=5)
+        response = requests.get(f"https://newsapi.org/v2/top-headlines?sources=the-times-of-india&apikey={apikey}")
         json_data = json.loads(response.text)
         return json_data['articles']
     except ConnectionError:
@@ -49,6 +57,3 @@ def news(apikey=os.environ.get("NewsApiKey")):
 
 
 
-if __name__ == "__main__":
-    # sendEmail("shivamgopale31@gmail.com", "Test 0", "Test 0 By Alice Project to send Email")
-    pprint(news())
