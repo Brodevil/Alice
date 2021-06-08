@@ -33,7 +33,7 @@ side_reminder = list()
 def logic(queary: str, taskMultiProcessing: mp.Process):
     """This is the logic of the Program as it will be matching several query and do the programmed task """
 
-    # fetching info from internet
+    # fetching info from INTERNET_CONNECTION
 
     if 'search' in queary and 'on wikipedia' in queary:
         queary = queary.split("search")[-1].split("on wikipedia")[0]
@@ -47,7 +47,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
             queary = queary.split("search ")[-1].split("on google")[0]
         except:
             alice.speak("Sir, I didn't get that can you type that in the terminal.")
-            queary = input(f"Enter the your Google Search {Client.gender}: \t")
+            queary = input(f"Enter the your Google Search {Client.GENDER}: \t")
         finally:
             alice.speak(f"Fetching the related queary in Google...")
             pywhatkit.search(queary)
@@ -70,7 +70,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
             alice.edge(f"https://www.youtube.com/results?search_query={queary}")
         except Exception:
             alice.speak("Sir, I didn't get that can you type that in the interminal.")
-            queary = input(f"Enter the your YouTube Search {Client.gender}: \t")
+            queary = input(f"Enter the your YouTube Search {Client.GENDER}: \t")
             alice.edge(f"https://www.youtube.com/results?search_query={queary}")
 
 
@@ -116,7 +116,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
     elif 'open github' in queary:
         alice.speak("Opening Github.....")
-        alice.edge(f"https://github.com/{Client.userGithub}")
+        alice.edge(f"https://github.com/{Client.USER_GITHUB}")
 
 
     elif 'open discord' in queary:
@@ -195,7 +195,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         queary = queary.split("remind me after " if 'remind me after' in queary else "wake up me after")[-1]
         magnitude = int(queary.split()[0])
         unit = queary.split()[1]
-        alice.speak(f"Okay {Client.gender}! I will be reminding you after {magnitude} {unit}!")
+        alice.speak(f"Okay {Client.GENDER}! I will be reminding you after {magnitude} {unit}!")
         try:
             # if reason is there, then it will going to replace the sentence "I will back to my work again" to "you will back to your work again"
             pourpose = queary.split("so that ")[1].replace("i", "you").replace('my', 'your')
@@ -211,8 +211,8 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
     # music
     elif 'play music' in queary or "play another music" in queary or "play another song" in queary or "play song" in queary or "play" in queary and "random" in queary and "music" in queary:
-        music = os.listdir(Client.musicDirectory)
-        os.startfile(os.path.join(Client.musicDirectory, random.choice(music)))
+        music = os.listdir(Client.MUSIC_DIRECTORY)
+        os.startfile(os.path.join(Client.MUSIC_DIRECTORY, random.choice(music)))
         alice.speak("Playing Music...")
 
 
@@ -225,11 +225,11 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
 
     elif "play my music" in queary or "play my song" in queary or "i am feeling bad" in queary or "sad" in queary and "feeling" in queary or "unhappy" in queary and "feeling" in queary:
-        if Client.favouriteMusic is not None: 
-            coolMusic = mp.Process(target=playsound, args=(Client.favouriteMusic,))
+        if Client.FAVOURITE_MUSIC is not None:
+            coolMusic = mp.Process(target=playsound, args=(Client.FAVOURITE_MUSIC,))
             coolMusic.start()
         else:
-            alice.speak(f"{Client.gender}! Please run the documentation of Alice and then ")
+            alice.speak(f"{Client.GENDER}! Please run the documentation of Alice and then ")
 
 
     elif 'play' in queary:
@@ -250,23 +250,23 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
 
     elif 'testing' in queary:
-        alice.speak(f"Hello {Client.gender}! {random.choice(POSITIVE_REPLIES)}")
+        alice.speak(f"Hello {Client.GENDER}! {random.choice(POSITIVE_REPLIES)}")
 
 
     elif 'hello' in queary or "hello alice" in queary or queary == "alice":
-        alice.speak(f"Hello {Client.gender}! how may I can help you.")
+        alice.speak(f"Hello {Client.GENDER}! how may I can help you.")
 
 
     elif 'good morning' in queary or 'good afternoon' in queary or 'good evening' in queary:
         wish = alice.goodWish
         if wish.lower() in queary:
-            alice.speak(f"{wish} {Client.gender}!")
+            alice.speak(f"{wish} {Client.GENDER}!")
         else:
-            alice.speak(f"{Client.gender}! Its {wish.split()[1]} Right now!")
+            alice.speak(f"{Client.GENDER}! Its {wish.split()[1]} Right now!")
 
 
     elif "time" in queary:
-        alice.speak(f"Its {datetime.datetime.now().strftime('%I:%M %p')} {Client.gender}!")
+        alice.speak(f"Its {datetime.datetime.now().strftime('%I:%M %p')} {Client.GENDER}!")
 
 
     elif "date" in queary:
@@ -275,11 +275,11 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
 
     elif 'who are you' in queary or "introduction" in queary:
-        alice.intro()
+        alice.INTRO()
 
 
     elif "what's my name" in queary or "what is my name" in queary or "who i am" in queary:
-        alice.speak(f"You are {alice.name} {Client.gender}!, But why did you are asking this?")
+        alice.speak(f"You are {alice.name} {Client.GENDER}!, But why did you are asking this?")
 
 
     elif "to kaise hain aap log" in queary:  # just for ha
@@ -291,34 +291,34 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
 
     elif 'voices' in queary or "change your voice" in queary:
-        alice.severalVoices(voicesId=Client.voices)
+        alice.severalVoices(voicesId=Client.VOICES)
 
 
     elif 'pause' in queary or "stop for" in queary:
         try:
             period = int(queary.split("for")[-1].split()[0])
         except Exception:
-            alice.speak(f"{Client.gender} For how many minutes I should stop or sleep")
+            alice.speak(f"{Client.GENDER} For how many minutes I should stop or sleep")
             try:
                 period = int(alice.takeCommand())
             except ValueError:
                 try:
                     alice.speak(
-                        f"Sorry {Client.gender}! I didn't get that, Can you type the number of minutes in terminal ")
+                        f"Sorry {Client.GENDER}! I didn't get that, Can you type the number of minutes in terminal ")
                     period = int(input("Enter the number of minutes I should sleep :\t"))
                 except ValueError:
                     pass
 
-        alice.speak(f"Okay {Client.gender}! I will be wake up after {period} minutes.")  # noqa
+        alice.speak(f"Okay {Client.GENDER}! I will be wake up after {period} minutes.")  # noqa
         time.sleep(60 * period)
 
-        alice.speak(f"{alice.goodWish} {Client.gender}!, I wake up after {period} minutes, Lets back to work.")
+        alice.speak(f"{alice.goodWish} {Client.GENDER}!, I wake up after {period} minutes, Lets back to work.")
         del period
 
 
 
     elif 'thank you' in queary or 'thanks' in queary:
-        alice.speak(f"Your most welcome {Client.gender}!")
+        alice.speak(f"Your most welcome {Client.GENDER}!")
 
 
     elif 'how are you' in queary:
@@ -327,9 +327,9 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
     elif 'alice' in queary and 'info' in queary or "your" in queary and "info" in queary:
         alice.speak(
-            f"I am written in Python by {Client.author}Sir!. To contact him you can email at ({Client.contact}), Check out his GitHub Profile You will know more about my sir")
+            f"I am written in Python by {Client.AUTHOR}Sir!. To CONTACT him you can email at ({Client.CONTACT}), Check out his GitHub Profile You will know more about my sir")
         print(
-            f"Alice : Mr. Abhinav's  Email:{Client.contact}. Github link :{Client.github_assistant_repo}. Discord Id : {Client.DiscordId}")
+            f"Alice : Mr. Abhinav's  Email:{Client.CONTACT}. Github link :{Client.ALICE_GITHUB_REPOSITORY}. Discord Id : {Client.DISCORD_ID}")
 
 
 
@@ -338,7 +338,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         alice.speak(f"CPU used : {psutil.cpu_percent()}%")
 
 
-    elif 'battery' in queary:
+    elif 'BATTERY' in queary:
         try:
             battery = psutil.sensors_battery()
         except Exception:
@@ -355,29 +355,29 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         alice.speak(f"Memory Used : {psutil.virtual_memory().percent}%")
 
 
-    elif 'storage' in queary or 'hard drive' in queary:
+    elif 'STORAGE' in queary or 'hard drive' in queary:
         alice.speak(
-            f"Total Usable Storage : {Client.storage['Total']} GB, Used : {Client.storage['Used']} GB, Free : {Client.storage['Free']} GB")
+            f"Total Usable Storage : {Client.STORAGE['Total']} GB, Used : {Client.STORAGE['Used']} GB, Free : {Client.STORAGE['Free']} GB")
 
 
-    elif "internet info" in queary or "network info" in queary:
+    elif "INTERNET_CONNECTION info" in queary or "NETWORK info" in queary:
         try:
-            alice.speak("Internet is connected! with", Client.network)
+            alice.speak("Internet is connected! with", Client.NETWORK)
         except NameError:
             alice.speak(random.choice(ERROR_REPLIES), "Some thing went wrong!")
 
 
-    elif 'internet' in queary:
-        if Client.internet:
-            alice.speak(f"Yes {Client.gender}! Internet is connected")
+    elif 'INTERNET_CONNECTION' in queary:
+        if Client.INTERNET_CONNECTION:
+            alice.speak(f"Yes {Client.GENDER}! Internet is connected")
         else:
             alice.speak(
-                f"No {Client.gender}! Internet is not connected, But I don't know How I am working without internet, lol\nActive internet is needed to run Alice")
+                f"No {Client.GENDER}! Internet is not connected, But I don't know How I am working without INTERNET_CONNECTION, lol\nActive INTERNET_CONNECTION is needed to run Alice")
 
 
 
     elif 'system' in queary or 'computer info' in queary:
-        alice.speak(f"Its a {Client.computerInfo['System']} {Client.computerInfo['Release']}, A {Client.computerInfo['Machine'][-3:-1]} bit Machine, Version {Client.computerInfo['Version']}, Admin user is {Client.computerInfo['Node name']}. {Client.computerInfo['Processor']} Processor.")
+        alice.speak(f"Its a {Client.COMPUTER_INFO['System']} {Client.COMPUTER_INFO['Release']}, A {Client.COMPUTER_INFO['Machine'][-3:-1]} bit Machine, Version {Client.COMPUTER_INFO['Version']}, Admin user is {Client.COMPUTER_INFO['Node name']}. {Client.COMPUTER_INFO['Processor']} Processor.")
 
 
     elif "active" in queary and "pc" in queary or "active" in queary and "computer" in queary:
@@ -387,11 +387,11 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
                 minutes = minutes * 60
         except Exception:
             alice.speak(
-                f"{Client.gender}! Please Enter how many minutes in numbers, I should keep active your windows machine.")
+                f"{Client.GENDER}! Please Enter how many minutes in numbers, I should keep active your windows machine.")
             minutes = int(input("Enter the number of Minutes :\t"))
         finally:
             alice.speak(
-                f"Okay {Client.gender}, I will be keep your windows machine active for next {minutes} Minutes!, "  # noqa
+                f"Okay {Client.GENDER}, I will be keep your windows machine active for next {minutes} Minutes!, "  # noqa
                 f"Till that time you can grape a cup of coffee.")
             #
             alice.activePC(minutes)
@@ -431,7 +431,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
 
     elif 'spell' in queary:
-        alice.speak(f"Enter what I should spell in terminal {Client.gender}!")
+        alice.speak(f"Enter what I should spell in terminal {Client.GENDER}!")
         queary = input("Enter what I should spell :\t")
         alice.speak(queary)
 
@@ -454,7 +454,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
 
     elif 'start' in queary and 'typ' in queary:
-        alice.speak(f"{Client.gender}! You start to speak I will type that And then to quit plz say quite or close.")
+        alice.speak(f"{Client.GENDER}! You start to speak I will type that And then to quit plz say quite or close.")
         string = str()
         while "stop" not in string.lower() or 'quit' not in queary or 'close' in queary:
             string = alice.takeCommand()
@@ -464,7 +464,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
     elif 'record keyboard' in queary:
         alice.speak(
-            f"Okay {Client.gender}! Note that, your keyboard actives will be recording till you press Escape button on your keyboard")
+            f"Okay {Client.GENDER}! Note that, your keyboard actives will be recording till you press Escape button on your keyboard")
         globals()['keyRecorded'] = keyactivities.keyboardRecord()
 
 
@@ -473,20 +473,20 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         try:
             globals()["keyRecorded"]
         except NameError:
-            alice.speak(f"{Client.gender}! there is no keyboard Activity available till now")
+            alice.speak(f"{Client.GENDER}! there is no keyboard Activity available till now")
         else:
             alice.speak(
-                f"Okay {Client.gender}! Playing the keyboard Activity recording, Note that have to put the cursor where you want to play it.")
+                f"Okay {Client.GENDER}! Playing the keyboard Activity recording, Note that have to put the cursor where you want to play it.")
             time.sleep(7)
             keyactivities.playKeyboard(globals()["keyRecorded"])
 
 
 
 
-    # local info work with internet :
+    # local info work with INTERNET_CONNECTION :
     elif "what's my location" in queary or 'where am i' in queary or 'where i am' in queary:
         alice.speak(
-            f" You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {Client.gender}!")
+            f" You are in the Country {Client.LOCATION[0]} and near by {Client.LOCATION[2]} which is in {Client.LOCATION[1]} Region {Client.GENDER}!")
 
 
     elif 'news' in queary:
@@ -501,7 +501,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
             alice.speak("Thank you for listening")
         else:
-            alice.speak(f"{random.choice(ERROR_REPLIES)}, Check your internet connection {Client.gender}!")
+            alice.speak(f"{random.choice(ERROR_REPLIES)}, Check your INTERNET_CONNECTION connection {Client.GENDER}!")
 
 
     elif 'weather report of' in queary:
@@ -511,7 +511,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
     elif "temperature" in queary or "weather report" in queary:
         try:
-            alice.speak(Client.weatherInfo)
+            alice.speak(Client.WEATHER_INFO)
         except:
             alice.speak(random.choice(ERROR_REPLIES))
 
@@ -528,7 +528,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
                     break
             else:
                 alice.speak(
-                    f"Sorry {Client.gender}! I didn't got {userName} in your contacts. Please type the email Address in the terminal!")
+                    f"Sorry {Client.GENDER}! I didn't got {userName} in your contacts. Please type the email Address in the terminal!")
                 userEmail = input("Enter the Email Address :\t")
 
             alice.speak("What's the subject...")
@@ -548,13 +548,13 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
 
     elif "read book" in queary or "audio book" in queary or "speak pdf" in queary or "read pdf" in queary:
-        alice.speak(f"{Client.gender} select the pdf file which you want to make read!")
+        alice.speak(f"{Client.GENDER} select the pdf file which you want to make read!")
         audioFile = alice.audioBook()
         if audioFile is not None:
             try:
-                alice.speak(f"{Client.gender}! The audio file had created in that same path with same name.")
+                alice.speak(f"{Client.GENDER}! The audio file had created in that same path with same name.")
                 os.startfile(audioFile)
-            except Exception:
+            except FileNotFoundError:
                 pass
 
 
@@ -574,7 +574,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         applicationName = queary.split("open" if "open" in queary else "launch")[-1]
 
         # the second argument is the related path of the folder where all the used or usable software shortcuts are available by the user
-        app = workWithFiles.openApplication(applicationName, Client.ApplicationShortcutPath)
+        app = workWithFiles.openApplication(applicationName, Client.APPLICATIONS_SHOTCUTS_PATH)
 
         if app is not None:
             alice.speak(f"Launching {app} Application...")
