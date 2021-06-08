@@ -33,59 +33,59 @@ class Alice:
         gender = str(environ.get("GENDER", 'male'))
         self.name = environ.get("UserName",
                                 "Abhinav")  # this is the user name of the person who suppose to use this program : Data From (.env)
-        self.AssistantName = Client.AssistantName
+        self.AssistantName = Client.ASSISTANT_NAME
 
-        self.city = environ.get("location", localInfo())  # Data From (.env)
-        self.voice = Client.voice
-        self.voiceSpeed = Client.voiceRate
+        self.city = environ.get("LOCATION", localInfo())  # Data From (.env)
+        self.voice = Client.VOICE
+        self.voiceSpeed = Client.VOICE_RATE
 
-    def severalVoices(self, voicesId=Client.voices):
-        """ This is the function to show the user how many voices are available in his/her system 
-        So that the user will able to choose his own liked voice 
+    def severalVoices(self, voicesId=Client.VOICES):
+        """ This is the function to show the user how many VOICES are available in his/her system
+        So that the user will able to choose his own liked VOICE
         """
 
         engine = pyttsx3.init("sapi5")
         for index, voice in enumerate(voicesId):
-            engine.setProperty("voice", voice)
+            engine.setProperty("VOICE", voice)
             engine.setProperty("rate", 170)
 
             if index == 0:
                 print(
-                    f"{Client.AssistantName} : Hey there! I am {index + 1}st voice of your system {Client.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file\n")
+                    f"{Client.ASSISTANT_NAME} : Hey there! I am {index + 1}st VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file\n")
                 engine.say(
-                    f"Hey there! I am {index + 1}st voice of your system {Client.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file")
+                    f"Hey there! I am {index + 1}st VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file")
 
 
             elif index == 1:
                 print(
-                    f"{Client.AssistantName} : Hey there! I am {index + 1}nd voice of your system {Client.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file\n")
+                    f"{Client.ASSISTANT_NAME} : Hey there! I am {index + 1}nd VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file\n")
                 engine.say(
-                    f"Hey there! I am {index + 1}nd voice of your system {Client.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file")
+                    f"Hey there! I am {index + 1}nd VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file")
 
             elif index == 2:
                 print(
-                    f"{Client.AssistantName} : Hey there! I am {index + 1}rd voice of your system {Client.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file\n")
+                    f"{Client.ASSISTANT_NAME} : Hey there! I am {index + 1}rd VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file\n")
                 engine.say(
-                    f"Hey there! I m {index + 1}rd voice of your system {Client.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file")
+                    f"Hey there! I m {index + 1}rd VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file")
 
             else:
                 print(
-                    f"{Client.AssistantName} : Hey there! I am {index + 1}th voice of your system {Client.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file\n")
+                    f"{Client.ASSISTANT_NAME} : Hey there! I am {index + 1}th VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file\n")
                 engine.say(
-                    f"Hey there! I am {index + 1}th voice of your system {Client.gender}! You can select voice as a default by putting my VoiceNumber={index + 1} in .env file")
+                    f"Hey there! I am {index + 1}th VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file")
             engine.runAndWait()
 
     def speak(self, *args):
-        """ Speak function as per the selected voice by the user in .env file
+        """ Speak function as per the selected VOICE by the user in .env file
          
          argument : string
-         work : spoke the string in the user's selected voice by default speaker
+         work : spoke the string in the user's selected VOICE by default speaker
          return : None
          
          """
 
         engine = pyttsx3.init('sapi5')
-        engine.setProperty("voice", Client.voices[self.voice - 1])
+        engine.setProperty("VOICE", Client.VOICES[self.voice - 1])
         engine.setProperty("rate", self.voiceSpeed)
         print("{0} : {1}\n".format(self.AssistantName, *args))
         engine.say(*args)
@@ -139,29 +139,29 @@ class Alice:
         introduction of Alice as follow:
         1. How is Alice?
         2. Time and Date
-        3. Total usable storage, Memory used, CPU used
+        3. Total usable STORAGE, Memory used, CPU used
         4. Location
-        5. If battery is there then its changed percentage and charging status
-        6. Its own location's weather, which had tracked by ip and weather by api
+        5. If BATTERY is there then its changed percentage and charging status
+        6. Its own LOCATION's weather, which had tracked by ip and weather by api
         7. Good Wish = Morning/ Afternoon/ Evening as per the time
         """
 
-        self.speak(Client.intro)
+        self.speak(Client.INTRO)
         self.speak(
             f"Its {datetime.datetime.now().strftime('%I:%M %p')}, and today's date is {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year} ")
         self.speak(
-            f"Usable Storage : {Client.storage['Total']} GB, Memory Used : {Client.memory_status}%,  CPU Used : {Client.cpu_status}%")
+            f"Usable Storage : {Client.STORAGE['Total']} GB, Memory Used : {Client.MEMORY_STATUS}%,  CPU Used : {Client.CPU_STATUS}%")
         self.speak(
-            f"You are in the Country {Client.location[0]} and near by {Client.location[2]} which is in {Client.location[1]} Region {Client.gender}!. ")
+            f"You are in the Country {Client.LOCATION[0]} and near by {Client.LOCATION[2]} which is in {Client.LOCATION[1]} Region {Client.GENDER}!. ")
 
         try:
-            self.speak(f"Battery is {Client.battery_status}% Charged!, " + "And its still in charging." if Client.battery_plugged else "")
+            self.speak(f"Battery is {Client.BATTERY_STATUS}% Charged!, " + "And its still in charging." if Client.BATTERY_PLUGGED else "")
         except NameError:
             pass
 
-        self.speak(Client.weatherInfo)  # Trying to say the weather report ond the client local area'
+        self.speak(Client.WEATHER_INFO)  # Trying to say the weather report ond the client local area'
         self.speak(
-            f"{self.goodWish} {self.name} {Client.gender}!, System is now fully Operational. How Can I help you {Client.gender}")
+            f"{self.goodWish} {self.name} {Client.GENDER}!, System is now fully Operational. How Can I help you {Client.GENDER}")
 
     @staticmethod
     def edge(url):
@@ -202,22 +202,22 @@ class Alice:
                 reader = PyPDF2.PdfFileReader(book)
                 audio_reader = pyttsx3.init('sapi5')
                 audio_reader.setProperty("rate", 175)
-                audio_reader.setProperty("voice", Client.voices[Client.voice - 1])
+                audio_reader.setProperty("VOICE", Client.VOICES[Client.VOICE - 1])
 
                 for page in range(fromPageNo, reader.numPages):
                     next_page = reader.getPage(page)
                     content = next_page.extractText()
                     full_Text += content
 
-                '''commented part, if the pdf file is small then we can just created .mp3 file and save the voice in it
+                '''commented part, if the pdf file is small then we can just created .mp3 file and save the VOICE in it
                 but the big pdf files will not able to convert into mp3 so we can directly speak by audio_reader.say()'''
-                # To save the voice in a mp3 file, but the problem is that, the large books are not able to be save to file
+                # To save the VOICE in a mp3 file, but the problem is that, the large books are not able to be save to file
                 # audioFile = asksaveasfile(mode='w', defaultextension=".mp3")
                 # if audioFile is None:
                 #     return None
                 # audio_reader.save_to_file(content, audioFile)
 
-                # this will say to voice at the current time. While the program will be paused and just book will be read
+                # this will say to VOICE at the current time. While the program will be paused and just book will be read
                 audio_reader.say(content)
                 audio_reader.runAndWait()
             except Exception:
@@ -231,12 +231,12 @@ class Alice:
                                             int(datetime.datetime.now().strftime("%M")))
                 if exelTime == currentTime:
                     notifier(work,
-                             f"{Client.AssistantName} :  I am reminding you {Client.gender} for your Following task",
+                             f"{Client.ASSISTANT_NAME} :  I am reminding you {Client.GENDER} for your Following task",
                              getcwd().replace("\\Alice\\Assistant", "\\Alice\\Assistant\\resources\\Images\\time-out.ico"))
 
                     winsound.Beep(frequency=2500, duration=4000)
                     self.speak(
-                        f"{Client.gender}! You had a task that, {work.replace('i', 'you').replace('my', 'your')}")
+                        f"{Client.GENDER}! You had a task that, {work.replace('i', 'you').replace('my', 'your')}")
                     time.sleep(62)
 
 
@@ -244,5 +244,3 @@ class Alice:
 alice = Alice()
 
 
-if __name__ == "__main__":
-    alice.edge("codewithharry.in")
