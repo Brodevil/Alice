@@ -225,8 +225,11 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
 
     elif "play my music" in queary or "play my song" in queary or "i am feeling bad" in queary or "sad" in queary and "feeling" in queary or "unhappy" in queary and "feeling" in queary:
-        coolMusic = mp.Process(target=playsound, args=(Client.favouriteMusic,))
-        coolMusic.start()
+        if Client.favouriteMusic is not None: 
+            coolMusic = mp.Process(target=playsound, args=(Client.favouriteMusic,))
+            coolMusic.start()
+        else:
+            alice.speak(f"{Client.gender}! Please run the documentation of Alice and then ")
 
 
     elif 'play' in queary:
