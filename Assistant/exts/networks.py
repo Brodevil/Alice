@@ -17,7 +17,7 @@ load_dotenv()
 def internetConnection() -> bool:
     """ Function to check the internet is connected or not """
     try:
-        requests.get("http://ip-api.com/json/?fields=49152", timeout=5)
+        requests.get("http://ip-api.com/json/?fields=49152", timeout=8)
         return True
     except ConnectionError:
         return False
