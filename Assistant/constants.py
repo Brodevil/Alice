@@ -39,7 +39,7 @@ def Storage():
 
 storageInfo = Storage()
 engine = pyttsx3.init()
-LOCAL_INFOMATION = localInfo()
+LOCAL_INFORMATION = localInfo()
 userSystem = platform.uname()
 try:
     BATTERY = psutil.sensors_battery()
@@ -68,7 +68,7 @@ class Client:
 
 
     # Client Choice to Alice
-    VOICES = [engine.id for engine in engine.getProperty("VOICES")]                                               # noqa
+    VOICES = [engine.id for engine in engine.getProperty("voices")]                                               # noqa
     VOICE_RATE = int(environ.get("VoiceRate", 175))
     VOICE = int(environ.get("VoiceNumber", 1))
     if VOICE > len(VOICES):
@@ -98,10 +98,10 @@ class Client:
 
 
     # Networks infos
-    if LOCAL_INFOMATION is not None and weather() is not None:
-        CITY = LOCAL_INFOMATION[0]
-        LOCATION = LOCAL_INFOMATION[1]['country'], LOCAL_INFOMATION[1]["regionName"], LOCAL_INFOMATION[1]["CITY"]
-        NETWORK = LOCAL_INFOMATION[1]["isp"]
+    if LOCAL_INFORMATION is not None and weather() is not None:
+        CITY = LOCAL_INFORMATION[0]
+        LOCATION = LOCAL_INFORMATION[1]['country'], LOCAL_INFORMATION[1]["regionName"], LOCAL_INFORMATION[1]["CITY"]
+        NETWORK = LOCAL_INFORMATION[1]["isp"]
         WEATHER_INFO = weather()
 
 
