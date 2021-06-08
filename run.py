@@ -1,8 +1,12 @@
 from requests.exceptions import ConnectionError
 from Assistant.exts.networks import internetConnection
+from Assistant.utils.exceptions import InternetException
+import time
 
-if internetConnection() is False:
-    raise ConnectionError("Alice works with internet, Please get connected with internet.")
+late_time = time.time()
+
+if internetConnection(late_time) is False:
+    raise InternetException("Alice works with internet, Please get connected with internet.")
 
 
 import multiprocessing
