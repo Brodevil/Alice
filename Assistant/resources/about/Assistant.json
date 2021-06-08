@@ -1,0 +1,29 @@
+{
+    "Assistant Name" : "Alice",
+    "GitHub repository" : "https://github.com/Brodevil/Alice",   
+    "intoductions" : "Hey There! Now me to introduce myself, I am {AssistantName}. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day, seven days a week, Importing all preferences from home interface.",
+    "birth date" : "29 April 2021",
+
+    "Author" : 
+        {
+            "Name" : ["Brodevil", "Abhinav"],
+            "age" : 14,
+            "educations" : "Class 9th",
+            "school" : "Jawahar Navodaya Vidyalaya",
+
+            "contacts" : {
+                "Email" : "brodevil89@gmail.com",
+                "Discord" : "Brodevil#5822",
+                "Twitter" : "https://twitter.com/brodevil2"
+            },
+            
+            "Avaiable on" : {
+                "Instagram" : "https://instagram.com/brodevil89",
+                "Twitter" : "https://twitter.com/brodevil2",
+                "GitHub" : "https://github.com/Brodevil"
+            }
+
+        }
+
+
+}
