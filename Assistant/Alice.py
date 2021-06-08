@@ -30,7 +30,6 @@ class Alice:
 
     def __init__(self):
         super().__init__()
-        gender = str(environ.get("GENDER", 'male'))
         self.name = environ.get("UserName",
                                 "Abhinav")  # this is the user name of the person who suppose to use this program : Data From (.env)
         self.AssistantName = Client.ASSISTANT_NAME
@@ -39,14 +38,15 @@ class Alice:
         self.voice = Client.VOICE
         self.voiceSpeed = Client.VOICE_RATE
 
-    def severalVoices(self, voicesId=Client.VOICES):
+    @staticmethod
+    def severalVoices(voicesId=Client.VOICES):
         """ This is the function to show the user how many VOICES are available in his/her system
         So that the user will able to choose his own liked VOICE
         """
 
         engine = pyttsx3.init("sapi5")
         for index, voice in enumerate(voicesId):
-            engine.setProperty("VOICE", voice)
+            engine.setProperty("voice", voice)
             engine.setProperty("rate", 170)
 
             if index == 0:
@@ -54,38 +54,40 @@ class Alice:
                     f"{Client.ASSISTANT_NAME} : Hey there! I am {index + 1}st VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file\n")
                 engine.say(
                     f"Hey there! I am {index + 1}st VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file")
-
+                engine.runAndWait()
 
             elif index == 1:
                 print(
                     f"{Client.ASSISTANT_NAME} : Hey there! I am {index + 1}nd VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file\n")
                 engine.say(
                     f"Hey there! I am {index + 1}nd VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file")
+                engine.runAndWait()
 
             elif index == 2:
                 print(
                     f"{Client.ASSISTANT_NAME} : Hey there! I am {index + 1}rd VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file\n")
                 engine.say(
                     f"Hey there! I m {index + 1}rd VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file")
+                engine.runAndWait()
 
             else:
                 print(
                     f"{Client.ASSISTANT_NAME} : Hey there! I am {index + 1}th VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file\n")
                 engine.say(
                     f"Hey there! I am {index + 1}th VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file")
-            engine.runAndWait()
+                engine.runAndWait()
 
     def speak(self, *args):
         """ Speak function as per the selected VOICE by the user in .env file
-         
+
          argument : string
          work : spoke the string in the user's selected VOICE by default speaker
          return : None
-         
+
          """
 
         engine = pyttsx3.init('sapi5')
-        engine.setProperty("VOICE", Client.VOICES[self.voice - 1])
+        engine.setProperty("voice", Client.VOICES[self.voice - 1])
         engine.setProperty("rate", self.voiceSpeed)
         print("{0} : {1}\n".format(self.AssistantName, *args))
         engine.say(*args)
@@ -202,7 +204,7 @@ class Alice:
                 reader = PyPDF2.PdfFileReader(book)
                 audio_reader = pyttsx3.init('sapi5')
                 audio_reader.setProperty("rate", 175)
-                audio_reader.setProperty("VOICE", Client.VOICES[Client.VOICE - 1])
+                audio_reader.setProperty("voice", Client.VOICES[Client.VOICE - 1])
 
                 for page in range(fromPageNo, reader.numPages):
                     next_page = reader.getPage(page)
