@@ -46,7 +46,7 @@ def reminderAlarm(magnitude, unit, pourpose):
             notifier(
                 reason=pourpose,
                 string="Alice : Time Out Sir!",
-                ico=getcwd().replace("\\Alice\\Assistant\\exts", "\\Alice\\Assistant\\resources\\Images\\time-out.ico")
+                ico=getcwd().replace("\\Alice", "\\Alice\\Assistant\\resources\\Images\\time-out.ico")
             )
             winsound.Beep(frequency=2500, duration=4000)
             speak(
