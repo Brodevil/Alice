@@ -234,7 +234,7 @@ class Alice:
                 if exelTime == currentTime:
                     notifier(work,
                              f"{Client.ASSISTANT_NAME} :  I am reminding you {Client.GENDER} for your Following task",
-                             getcwd().replace("\\Alice\\Assistant", "\\Alice\\Assistant\\resources\\Images\\time-out.ico"))
+                             getcwd().replace("\\Alice", "\\Alice\\Assistant\\resources\\Images\\time-out.ico"))
 
                     winsound.Beep(frequency=2500, duration=4000)
                     self.speak(
