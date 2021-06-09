@@ -54,6 +54,3 @@ def reminderAlarm(magnitude, unit, pourpose):
                                                                                                        "Now its time to remind you, Wake up.")
             break
 
-
-
-speak("hello, My name is Abhinav")
