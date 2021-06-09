@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 from typing import Optional
 
 from requests.exceptions import ConnectionError
-from Assistant.utils.exceptions import EvnFileValueError
+from Assistant.utils.exceptions import EnvFileValueError
 
 
 
@@ -55,7 +55,7 @@ def weather(location=None, apikey=(environ.get("OpenWeatherMapApi"))):
             except ConnectionError:
                 return None
             except IndexError:
-                raise EvnFileValueError("your api key is wrong please recheck your api key and put it in .env file as `OpenWeatherMapApi=(your api key)` go through the `Run Alice.md` file on github `https://github.com/Brodevil/Alice/blob/main/Run%20Alice.md`")
+                raise EnvFileValueError("your api key is wrong please recheck your api key and put it in .env file as `OpenWeatherMapApi=(your api key)` go through the `Run Alice.md` file on github `https://github.com/Brodevil/Alice/blob/main/Run%20Alice.md`")
         else:
             return None
 

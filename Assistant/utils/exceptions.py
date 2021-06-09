@@ -9,7 +9,7 @@ class InternetException(Exception):
         return f"Alice => {self.reason}"
 
 
-class EvnFileValueError(Exception):
+class EnvFileValueError(Exception):
     """ Raised when any problem regarding the env files, just like email had not return or password
     inside the env lots of data had been required """
 

@@ -574,7 +574,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         applicationName = queary.split("open" if "open" in queary else "launch")[-1]
 
         # the second argument is the related path of the folder where all the used or usable software shortcuts are available by the user
-        app = workWithFiles.openApplication(applicationName, Client.APPLICATIONS_SHOTCUTS_PATH)
+        app = workWithFiles.openApplication(applicationName, Client.APPLICATIONS_SHORTCUTS_PATH)
 
         if app is not None:
             alice.speak(f"Launching {app} Application...")

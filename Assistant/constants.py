@@ -9,7 +9,7 @@ import psutil
 import string
 from Assistant.exts.networks import localInfo, weather, internetConnection              # noqa
 from Assistant.exts.workWithFiles import contactInfo                                    # noqa
-from Assistant.utils.exceptions import EvnFileValueError                                # noqa
+from Assistant.utils.exceptions import EnvFileValueError                                # noqa
 
 
 
@@ -64,7 +64,7 @@ class Client:
     elif GENDER == "female":
         GENDER = "Mam"
     else:
-        raise EvnFileValueError("In .env file GENDER= always should  be 'male or female!' which will your GENDER")
+        raise EnvFileValueError("In .env file GENDER= always should  be 'male or female!' which will your GENDER")
 
 
     # Client Choice to Alice
@@ -72,7 +72,7 @@ class Client:
     VOICE_RATE = int(environ.get("VoiceRate", 175))
     VOICE = int(environ.get("VoiceNumber", 1))
     if VOICE > len(VOICES):
-        raise EvnFileValueError(f"There are just {len(VOICES)} available in your system and you had choice the {VOICE} number of voice! please Change it in .env file")
+        raise EnvFileValueError(f"There are just {len(VOICES)} available in your system and you had choice the {VOICE} number of voice! please Change it in .env file")
 
 
     # Few Computer status
@@ -87,7 +87,7 @@ class Client:
     # Few user Info :
     MUSIC_DIRECTORY = environ.get("MUSIC", r"C:\Users\ADMIN\Music")  # Music directory should be without space
     FAVOURITE_MUSIC = environ.get("FavMusic", None)
-    APPLICATIONS_SHOTCUTS_PATH = os.getcwd().replace(r"\Alice\Assistant", r"\Alice\Application")          # Application folder where all the using application shortcuts will available to the user
+    APPLICATIONS_SHORTCUTS_PATH = os.getcwd().replace(r"\Alice\Assistant", r"\Alice\Application")          # Application folder where all the using application shortcuts will available to the user
     ALICE_PATH = os.getcwd().replace("\\Alice\\Assistant", "\\Alice")
     USER_GITHUB = environ.get("GITHUB", "Brodevil")
 
