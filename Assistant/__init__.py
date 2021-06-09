@@ -294,7 +294,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         alice.severalVoices(voicesId=Client.VOICES)
 
 
-    elif 'pause' in queary or "stop for" in queary:
+    elif 'pause' in queary or "stop for" in queary or "sleep for":
         try:
             period = int(queary.split("for")[-1].split()[0])
         except Exception:
