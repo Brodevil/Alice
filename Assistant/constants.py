@@ -7,17 +7,14 @@ import platform
 import shutil
 import psutil
 import string
-from Assistant.exts.networks import localInfo, weather, internetConnection              # noqa
-from Assistant.exts.workWithFiles import contactInfo                                    # noqa
-from Assistant.utils.exceptions import EnvFileValueError                                # noqa
-
-
+from Assistant.exts.networks import localInfo, weather, internetConnection  # noqa
+from Assistant.exts.workWithFiles import contactInfo  # noqa
+from Assistant.utils.exceptions import EnvFileValueError  # noqa
 
 __all__ = ["Client", "Contacts", "ERROR_REPLIES", "NEGATIVE_REPLIES", "POSITIVE_REPLIES",
            "Storage"]
 
 load_dotenv()
-
 
 
 def Storage():
@@ -36,7 +33,6 @@ def Storage():
     return totalStorage, freeStorage, usedStorage
 
 
-
 storageInfo = Storage()
 engine = pyttsx3.init()
 LOCAL_INFORMATION = localInfo()
@@ -52,7 +48,6 @@ class Client:
     INTRO = f"Hey There! Now me to introduce myself, I am {ASSISTANT_NAME}. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day, seven days a week, Importing all preferences from home interface, system is now initializing!"
     ALICE_INFO = "I am written in python by Abhinav, My birthday is 21 December of 2020."
 
-
     # Author Info
     AUTHOR = "Abhinav(Brodevil)"
     CONTACT = "brodevil89@gmail.com"
@@ -66,36 +61,33 @@ class Client:
     else:
         raise EnvFileValueError("In .env file GENDER= always should  be 'male or female!' which will your GENDER")
 
-
     # Client Choice to Alice
-    VOICES = [engine.id for engine in engine.getProperty("voices")]                                               # noqa
+    VOICES = [engine.id for engine in engine.getProperty("voices")]  # noqa
     VOICE_RATE = int(environ.get("VoiceRate", 175))
     VOICE = int(environ.get("VoiceNumber", 1))
     if VOICE > len(VOICES):
-        raise EnvFileValueError(f"There are just {len(VOICES)} available in your system and you had choice the {VOICE} number of voice! please Change it in .env file")
-
+        raise EnvFileValueError(
+            f"There are just {len(VOICES)} available in your system and you had choice the {VOICE} number of voice! please Change it in .env file")
 
     # Few Computer status
     STORAGE = {"Total": storageInfo[0], "Used": storageInfo[1], "Free": storageInfo[2]}  # values are in GB
-    MEMORY_STATUS = psutil.virtual_memory().percent                                      # Used memory in percentage
-    CPU_STATUS = psutil.cpu_percent()                                                    # cpu uses in percentage
+    MEMORY_STATUS = psutil.virtual_memory().percent  # Used memory in percentage
+    CPU_STATUS = psutil.cpu_percent()  # cpu uses in percentage
     COMPUTER_INFO = {"System": userSystem.system, "Node name": userSystem.node, "Release": userSystem.release,
-                    "Version": userSystem.version, "Machine": userSystem.machine, "Processor": userSystem.processor}
+                     "Version": userSystem.version, "Machine": userSystem.machine, "Processor": userSystem.processor}
     INTERNET_CONNECTION = internetConnection()
-
 
     # Few user Info :
     MUSIC_DIRECTORY = environ.get("MUSIC", r"C:\Users\ADMIN\Music")  # Music directory should be without space
     FAVOURITE_MUSIC = environ.get("FavMusic", None)
-    APPLICATIONS_SHORTCUTS_PATH = os.getcwd().replace(r"\Alice\Assistant", r"\Alice\Application")          # Application folder where all the using application shortcuts will available to the user
-    ALICE_PATH = os.getcwd().replace("\\Alice\\Assistant", "\\Alice")
+    APPLICATIONS_SHORTCUTS_PATH = os.getcwd().replace(r"\Alice\Assistant",
+                                                      r"\Alice\Application")  # Application folder where all the using application shortcuts will available to the user
+    ALICE_PATH = "".join([os.getcwd().split("\\Alice\\Assistant")[0], "\\Alice"])
     USER_GITHUB = environ.get("GITHUB", "Brodevil")
-
 
     if BATTERY is not None:
         BATTERY_STATUS = BATTERY.percent
         BATTERY_PLUGGED = BATTERY.power_plugged
-
 
     # Networks infos
     if LOCAL_INFORMATION is not None and weather() is not None:
@@ -105,23 +97,21 @@ class Client:
         WEATHER_INFO = weather()
 
 
-
 class Contacts:
     files = os.listdir(Client.ALICE_PATH)
     if "contactinfo.xlsx" in files:
         contactsFile = os.path.join(Client.ALICE_PATH, "contactinfo.xlsx")
     else:
         contactsFile = os.path.join(Client.ALICE_PATH, "Contact.xlsx")
-    emails = {name: email[0] for name, email in contactInfo(contactsFile).items()}                              # noqa
-    contactNumber = {name: contactNumber[1] for name, contactNumber in contactInfo(contactsFile).items()}       # noqa
-
+    emails = {name: email[0] for name, email in contactInfo(contactsFile).items()}  # noqa
+    contactNumber = {name: contactNumber[1] for name, contactNumber in contactInfo(contactsFile).items()}  # noqa
 
 
 ERROR_REPLIES = [
     "Please don't do that.",
     "You have to stop.",
     "Do you mind?",
-    "In the future, don't do that.", 
+    "In the future, don't do that.",
     "That was a mistake.",
     "You blew it.",
     "You're bad at computers.",
