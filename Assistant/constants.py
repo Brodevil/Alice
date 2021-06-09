@@ -62,7 +62,7 @@ class Client:
         raise EnvFileValueError("In .env file GENDER= always should  be 'male or female!' which will your GENDER")
 
     # Client Choice to Alice
-    VOICES = [engine.id for engine in engine.getProperty("voices")]  # noqa
+    VOICES = [engine.id for engine in engine.getProperty("voices")]                 # noqa
     VOICE_RATE = int(environ.get("VoiceRate", 175))
     VOICE = int(environ.get("VoiceNumber", 1))
     if VOICE > len(VOICES):
@@ -82,7 +82,7 @@ class Client:
     FAVOURITE_MUSIC = environ.get("FavMusic", None)
     APPLICATIONS_SHORTCUTS_PATH = os.getcwd().replace(r"\Alice\Assistant",
                                                       r"\Alice\Application")  # Application folder where all the using application shortcuts will available to the user
-    ALICE_PATH = "".join([os.getcwd().split("\\Alice\\Assistant")[0], "\\Alice"])
+    ALICE_PATH = "".join([os.getcwd().split("\\Alice")[0], "\\Alice\\"])
     USER_GITHUB = environ.get("GITHUB", "Brodevil")
 
     if BATTERY is not None:

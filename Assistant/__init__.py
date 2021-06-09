@@ -164,7 +164,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
     elif 'shutdown pc' in queary:
         os.startfile(r"C:\Windows\System32\SlideToShutDown.exe")
-        alice.speak("Shuting down pc....")
+        alice.speak("Shutting down pc....")
         time.sleep(2)
         keyboard.press_and_release("enter")
 
