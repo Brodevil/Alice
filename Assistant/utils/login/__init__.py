@@ -17,8 +17,8 @@ load_dotenv()
 emailID = environ.get("emailID")
 emailPassword = environ.get("emailPassword")
 
-if len(emailID) or len(emailPassword):
-    raise EnvironmentError("Please ensure that you had written your correct email Id or Email password in .env file\nGo through the `Run Alice.md` file on github `https://github.com/Brodevil/Alice/blob/main/Run%20Alice.md` ")
+# if len(emailID) or len(emailPassword):
+#     raise EnvironmentError("Please ensure that you had written your correct email Id or Email password in .env file\nGo through the `Run Alice.md` file on github `https://github.com/Brodevil/Alice/blob/main/Run%20Alice.md` ")
 
 
 

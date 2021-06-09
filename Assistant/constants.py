@@ -100,7 +100,7 @@ class Client:
     # Networks infos
     if LOCAL_INFORMATION is not None and weather() is not None:
         CITY = LOCAL_INFORMATION[0]
-        LOCATION = LOCAL_INFORMATION[1]['country'], LOCAL_INFORMATION[1]["regionName"], LOCAL_INFORMATION[1]["CITY"]
+        LOCATION = LOCAL_INFORMATION[1]['country'], LOCAL_INFORMATION[1]["regionName"], LOCAL_INFORMATION[1]["city"]
         NETWORK = LOCAL_INFORMATION[1]["isp"]
         WEATHER_INFO = weather()
 

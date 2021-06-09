@@ -36,7 +36,7 @@ def localInfo() -> Optional[list]:
         response = requests.get(url)
         response = json.loads(response.text)
         del response['status'], response['countryCode'], response['region']
-        return [response['CITY'], response]
+        return [response['city'], response]
     except ConnectionError:
         return None
 

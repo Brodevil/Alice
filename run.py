@@ -1,6 +1,3 @@
-import time
-present_time = time.perf_counter()
-
 from Assistant.exts.networks import internetConnection
 from Assistant.utils.exceptions import InternetException
 
@@ -27,7 +24,7 @@ DailyTasks = multiprocessing.Process(target=alice.dailyTaskReminder, args=(tasks
 if __name__ == "__main__":
     alice.intro()  # Introduction
     DailyTasks.start()
-    print(time.perf_counter() - present_time)
+
 
     while True:  # The program will be going to run on Infinite loop
         queary = alice.takeCommand().lower()
