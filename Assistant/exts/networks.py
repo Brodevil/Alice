@@ -67,7 +67,3 @@ def wiki(queary):
     except Exception:
         return "Sorry! I didn't got that stuff in wikipedia"
 
-
-if __name__ == "__main__":
-    from pprint import pprint
-    pprint(localInfo())
