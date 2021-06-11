@@ -143,7 +143,7 @@ class Alice:
         2. Time and Date
         3. Total usable STORAGE, Memory used, CPU used
         4. Location
-        5. If BATTERY is there then its changed percentage and charging status
+        5. If BATTERY is there then its changed percentage and charging status with suggestion
         6. Its own LOCATION's weather, which had tracked by ip and weather by api
         7. Good Wish = Morning/ Afternoon/ Evening as per the time
         """
@@ -157,7 +157,7 @@ class Alice:
             f"You are in the Country {Client.LOCATION[0]} and near by {Client.LOCATION[2]} which is in {Client.LOCATION[1]} Region {Client.GENDER}!. ")
 
         try:
-            self.speak(f"Battery is {Client.BATTERY_STATUS}% Charged!, " + "And its still in charging." if Client.BATTERY_PLUGGED else "", f"{Client.GENDER}! I guess you should plug out the charger now!" if Client.BATTERY_STATUS >= 95 else "", f"{Client.GENDER}! Its very low battery, Please plug in to charge" if Client.BATTERY_STATUS >= 30 and not Client.BATTERY_PLUGGED else "")
+            self.speak(f"Battery is {Client.BATTERY_STATUS}% Charged!, " + "And its still in charging." if Client.BATTERY_PLUGGED else "", f"{Client.GENDER}! I guess you should plug out the charger now!" if Client.BATTERY_STATUS >= 95 and Client.BATTERY_PLUGGED else "", f"{Client.GENDER}! Its very low battery, Please plug in to charge" if Client.BATTERY_STATUS >= 30 and not Client.BATTERY_PLUGGED else "")
         except NameError:
             pass
 
@@ -227,6 +227,11 @@ class Alice:
         # return audioFile
 
     def dailyTaskReminder(self, task: dict):
+        """
+        Function using multi processing runs in the background while program to remind the user
+        the user can able to write his time and task in the exel file so that the program will be going
+        to remind user whole day
+        """
         while True:
             for exelTime, work in task.items():
                 currentTime = datetime.time(int(datetime.datetime.now().strftime("%H")),
