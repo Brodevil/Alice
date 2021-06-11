@@ -1,7 +1,7 @@
 import requests
 import json
 import wikipedia
-import speedtest_cli
+import speedtest
 
 from os import environ
 from dotenv import load_dotenv
@@ -24,11 +24,12 @@ def internetConnection() -> bool:
         return False
 
 
-def internet_speed() -> float:
+def internet_speed():
     """
     Internet speed test of downloading and uploading with ping by the nearest best server
     """
-    pass
+    test = speedtest.Speedtest()
+    return f"Downloading speed : {test.download() / 1024 / 1024:.2f} Mbps, Uploading speed : {test.upload() / 1204 / 1024:.2f} Mbps, {test.results.ping} ms"
 
 
 def localInfo() -> Union[list, None]:
@@ -78,3 +79,7 @@ def wiki(queary) -> str:
         return f"According to wikipedia. {results}"
     except wikipedia.exceptions.PageError:
         return "Sorry! I didn't got that stuff in wikipedia"
+
+
+if __name__ == '__main__':
+    print(internet_speed())
