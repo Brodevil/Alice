@@ -90,7 +90,7 @@ class Alice:
         engine.setProperty("voice", Client.VOICES[self.voice - 1])
         engine.setProperty("rate", self.voiceSpeed)
         print("{0} : {1}\n".format(self.AssistantName, *args))
-        engine.say(*args)
+        engine.say(" ".join(args))
         engine.runAndWait()
 
     def takeCommand(self):
@@ -157,7 +157,7 @@ class Alice:
             f"You are in the Country {Client.LOCATION[0]} and near by {Client.LOCATION[2]} which is in {Client.LOCATION[1]} Region {Client.GENDER}!. ")
 
         try:
-            self.speak(f"Battery is {Client.BATTERY_STATUS}% Charged!, " + "And its still in charging." if Client.BATTERY_PLUGGED else "")
+            self.speak(f"Battery is {Client.BATTERY_STATUS}% Charged!, " + "And its still in charging." if Client.BATTERY_PLUGGED else "", f"{Client.GENDER}! I guess you should plug out the charger now!" if Client.BATTERY_STATUS >= 95 else "", f"{Client.GENDER}! Its very low battery, Please plug in to charge" if Client.BATTERY_STATUS >= 30 and not Client.BATTERY_PLUGGED else "")
         except NameError:
             pass
 
