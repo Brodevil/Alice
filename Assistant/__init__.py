@@ -244,6 +244,8 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         alice.speak("Deleting unwanted files...")
         workWithFiles.deleteUnwantedFiles()
 
+
+
         # Natural Talks/ Fun commands :
     elif 'is i am audio able' in queary:
         alice.speak(random.choice(POSITIVE_REPLIES))
@@ -294,7 +296,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         alice.severalVoices(voicesId=Client.VOICES)
 
 
-    elif 'pause' in queary or "stop for" in queary or "sleep for":
+    elif 'pause' in queary or "stop for" in queary or "sleep for" in queary:
         try:
             period = int(queary.split("for")[-1].split()[0])
         except Exception:
@@ -338,7 +340,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         alice.speak(f"CPU used : {psutil.cpu_percent()}%")
 
 
-    elif 'BATTERY' in queary:
+    elif 'battery' in queary:
         try:
             battery = psutil.sensors_battery()
         except Exception:
@@ -346,7 +348,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
         if battery is not None:
             alice.speak(
-                f"Battery is {battery.percent}% Charged! " + "And its still in charging." if battery.power_plugged else "")
+                f"Battery is {Client.BATTERY_STATUS}% Charged!, " + "And its still in charging." if Client.BATTERY_PLUGGED else "", f"{Client.GENDER}! I guess you should plug out the charger now!" if Client.BATTERY_STATUS >= 95 else "", f"{Client.GENDER}! Its very low battery, Please plug in to charge" if Client.BATTERY_STATUS >= 30 and not Client.BATTERY_PLUGGED else "")
         else:
             alice.speak(f"Something went wrong {random.choice(ERROR_REPLIES)}. I think you are in desktop")
 
@@ -355,19 +357,19 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         alice.speak(f"Memory Used : {psutil.virtual_memory().percent}%")
 
 
-    elif 'STORAGE' in queary or 'hard drive' in queary:
+    elif 'storage' in queary or 'hard drive' in queary:
         alice.speak(
             f"Total Usable Storage : {Client.STORAGE['Total']} GB, Used : {Client.STORAGE['Used']} GB, Free : {Client.STORAGE['Free']} GB")
 
 
-    elif "INTERNET_CONNECTION info" in queary or "NETWORK info" in queary:
+    elif "internet info" in queary or "network info" in queary:
         try:
             alice.speak("Internet is connected! with", Client.NETWORK)
         except NameError:
             alice.speak(random.choice(ERROR_REPLIES), "Some thing went wrong!")
 
 
-    elif 'INTERNET_CONNECTION' in queary:
+    elif 'internet' in queary:
         if Client.INTERNET_CONNECTION:
             alice.speak(f"Yes {Client.GENDER}! Internet is connected")
         else:
