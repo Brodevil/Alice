@@ -1,15 +1,16 @@
 import requests
 import json
 import wikipedia
+import speedtest_cli
 
 from os import environ
 from dotenv import load_dotenv
-from typing import Optional
+from typing import Union
 
 from requests.exceptions import ConnectionError
 from Assistant.utils.exceptions import EnvFileValueError
 
-__all__ = ["internetConnection", "localInfo", "weather", "wiki"]
+__all__ = ["internetConnection", "internet_speed", "localInfo", "weather", "wiki"]
 
 load_dotenv()
 
@@ -23,9 +24,17 @@ def internetConnection() -> bool:
         return False
 
 
-def localInfo() -> Optional[list]:
-    """ unction to return the most of the information about current LOCATION using ip address
-    From ip-api.com """
+def internet_speed() -> float:
+    """
+    Internet speed test of downloading and uploading with ping by the nearest best server
+    """
+    pass
+
+
+def localInfo() -> Union[list, None]:
+    """
+    Function to return the most of the information about current LOCATION and network using ip address From ip-api.com api
+    """
     url = "http://ip-api.com/json/"
     try:
         response = requests.get(url)
@@ -36,9 +45,12 @@ def localInfo() -> Optional[list]:
         return None
 
 
-def weather(location=None, apikey=(environ.get("OpenWeatherMapApi"))):
-    """ Function to return the most of the information about current LOCATION using ip address
-    From openwethermap.org apis """
+def weather(location=None, apikey=(environ.get("OpenWeatherMapApi"))) -> Union[str, None]:
+    """
+    Function to return the most of the information about current LOCATION using ip address
+    From openwethermap.org apis
+    """
+
     if location is None:
         local_info = localInfo()
         if local_info is not None:
@@ -57,10 +69,12 @@ def weather(location=None, apikey=(environ.get("OpenWeatherMapApi"))):
             return None
 
 
-def wiki(queary):
+def wiki(queary) -> str:
+    """
+    Function to get the 2 lines or info about the queary
+    """
     try:
         results = wikipedia.summary(queary, sentences=2)
         return f"According to wikipedia. {results}"
     except wikipedia.exceptions.PageError:
         return "Sorry! I didn't got that stuff in wikipedia"
-
