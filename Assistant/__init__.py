@@ -36,9 +36,13 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
     # fetching info from INTERNET_CONNECTION
 
     if 'search' in queary and 'on wikipedia' in queary:
-        queary = queary.split("search")[-1].split("on wikipedia")[0]
-        alice.speak("Searching Wikipedia...")
-        alice.speak(networks.wiki(queary))
+        try:
+            queary = queary.split("search")[-1].split("on wikipedia")[0]
+        except ValueError:
+            pass
+        else:
+            alice.speak("Searching Wikipedia...")
+            alice.speak(networks.wiki(queary))
 
 
 
@@ -192,7 +196,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
     # reminder        
     elif 'remind me after' in queary or "wake up me after" in queary:
-        queary = queary.split("remind me after " if 'remind me after' in queary else "wake up me after")[-1]
+        queary = queary.split("remind me after " if 'remind me after' in queary else "wake up me after")[1]
         magnitude = int(queary.split()[0])
         unit = queary.split()[1]
         alice.speak(f"Okay {Client.GENDER}! I will be reminding you after {magnitude} {unit}!")
@@ -255,11 +259,11 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         alice.speak(f"Hello {Client.GENDER}! {random.choice(POSITIVE_REPLIES)}")
 
 
-    elif 'hello' in queary or "hello alice" in queary or queary == "alice":
+    elif 'hello' in queary or queary == "alice":
         alice.speak(f"Hello {Client.GENDER}! how may I can help you.")
 
 
-    elif 'good morning' in queary or 'good afternoon' in queary or 'good evening' in queary:
+    elif 'good' in queary and 'afternoon' in queary or 'evening' in queary or 'morning' in queary:
         wish = alice.goodWish
         if wish.lower() in queary:
             alice.speak(f"{wish} {Client.GENDER}!")
@@ -299,17 +303,14 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
     elif 'pause' in queary or "stop for" in queary or "sleep for" in queary:
         try:
             period = int(queary.split("for")[-1].split()[0])
-        except Exception:
-            alice.speak(f"{Client.GENDER} For how many minutes I should stop or sleep")
+        except ValueError:
             try:
-                period = int(alice.takeCommand())
+                alice.speak(
+                    f"Sorry {Client.GENDER}! I didn't get that, Can you type the number of minutes I should sleep for in terminal ")
+                period = int(input("Enter the number of minutes I should sleep :\t"))
             except ValueError:
-                try:
-                    alice.speak(
-                        f"Sorry {Client.GENDER}! I didn't get that, Can you type the number of minutes in terminal ")
-                    period = int(input("Enter the number of minutes I should sleep :\t"))
-                except ValueError:
-                    pass
+                alice.speak("Wrong Input, I should be a number. Try again")
+                return
 
         alice.speak(f"Okay {Client.GENDER}! I will be wake up after {period} minutes.")  # noqa
         time.sleep(60 * period)
@@ -366,6 +367,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         alice.speak("Wait a while sir, Internet speed test might take time")
         speed = networks.internet_speed()
         alice.speak(f"Internet speed from nearest Server : {speed}")
+        del speed
 
     elif "internet info" in queary or "network info" in queary:
         try:
@@ -379,7 +381,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
             alice.speak(f"Yes {Client.GENDER}! Internet is connected")
         else:
             alice.speak(
-                f"No {Client.GENDER}! Internet is not connected, But I don't know How I am working without INTERNET_CONNECTION, lol\nActive INTERNET_CONNECTION is needed to run Alice")
+                f"No {Client.GENDER}! Internet is not connected, But I don't know How I am working without INTERNET CONNECTION, lol\nActive INTERNET CONNECTION is needed to run Alice")
 
 
     elif 'system' in queary or 'computer info' in queary:
@@ -576,7 +578,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
 
     elif 'open' in queary or 'launch' in queary:
-        applicationName = queary.split("open" if "open" in queary else "launch")[-1]
+        applicationName = queary.split("open" if "open" in queary else "launch")[1]
 
         # the second argument is the related path of the folder where all the used or usable software shortcuts are available by the user
         app = workWithFiles.openApplication(applicationName, Client.APPLICATIONS_SHORTCUTS_PATH)
