@@ -24,12 +24,12 @@ def internetConnection() -> bool:
         return False
 
 
-def internet_speed():
+def internet_speed() -> str:
     """
     Internet speed test of downloading and uploading with ping by the nearest best server
     """
     test = speedtest.Speedtest()
-    return f"Downloading speed : {test.download() / 1024 / 1024:.2f} Mbps, Uploading speed : {test.upload() / 1204 / 1024:.2f} Mbps, {test.results.ping} ms"
+    return f"Downloading speed : {test.download() / 1024 / 1024:.2f} Mbps,  Uploading speed : {test.upload() / 1204 / 1024:.2f} Mbps,  Ping: :{test.results.ping} ms"
 
 
 def localInfo() -> Union[list, None]:
