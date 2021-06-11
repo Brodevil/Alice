@@ -109,7 +109,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         alice.edge("stackoverflow.com")
 
 
-    elif 'reveal your code' in queary or 'your code' in queary:
+    elif 'your code' in queary:
         alice.speak("Opening Github repository.....")
         alice.edge("github.com/Brodevil/Alice")
 
@@ -165,7 +165,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
     elif 'shutdown pc' in queary:
         os.startfile(r"C:\Windows\System32\SlideToShutDown.exe")
         alice.speak("Shutting down pc....")
-        time.sleep(2)
+        time.sleep(1)
         keyboard.press_and_release("enter")
 
 
@@ -210,7 +210,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
 
     # music
-    elif 'play music' in queary or "play another music" in queary or "play another song" in queary or "play song" in queary or "play" in queary and "random" in queary and "music" in queary:
+    elif "play" in queary and "music" in queary or "song" in queary:
         music = os.listdir(Client.MUSIC_DIRECTORY)
         os.startfile(os.path.join(Client.MUSIC_DIRECTORY, random.choice(music)))
         alice.speak("Playing Music...")
@@ -224,7 +224,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
             pass
 
 
-    elif "play my music" in queary or "play my song" in queary or "i am feeling bad" in queary or "sad" in queary and "feeling" in queary or "unhappy" in queary and "feeling" in queary:
+    elif "play my" in queary and "song" in queary or 'music' in queary or  "bad" in queary or "sad" in queary or "unhappy" in queary and "feeling" in queary:
         if Client.FAVOURITE_MUSIC is not None:
             coolMusic = mp.Process(target=playsound, args=(Client.FAVOURITE_MUSIC,))
             coolMusic.start()
@@ -327,7 +327,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         alice.speak("I am quite fine sir, What about you ?")
 
 
-    elif 'alice' in queary and 'info' in queary or "your" in queary and "info" in queary:
+    elif 'alice' in queary or 'your' in queary and 'info' in queary:
         alice.speak(
             f"I am written in Python by {Client.AUTHOR}Sir!. To CONTACT him you can email at ({Client.CONTACT}), Check out his GitHub Profile You will know more about my sir")
         print(
@@ -362,6 +362,11 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
             f"Total Usable Storage : {Client.STORAGE['Total']} GB, Used : {Client.STORAGE['Used']} GB, Free : {Client.STORAGE['Free']} GB")
 
 
+    elif "internet" in queary or "network" in queary and "speed" in queary or "download" in queary or "upload" in queary and 'speed' in queary:
+        alice.speak("Wait a while sir, Internet speed test might take time")
+        speed = networks.internet_speed()
+        alice.speak(f"Internet speed from nearest Server : {speed}")
+
     elif "internet info" in queary or "network info" in queary:
         try:
             alice.speak("Internet is connected! with", Client.NETWORK)
@@ -377,12 +382,11 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
                 f"No {Client.GENDER}! Internet is not connected, But I don't know How I am working without INTERNET_CONNECTION, lol\nActive INTERNET_CONNECTION is needed to run Alice")
 
 
-
     elif 'system' in queary or 'computer info' in queary:
         alice.speak(f"Its a {Client.COMPUTER_INFO['System']} {Client.COMPUTER_INFO['Release']}, A {Client.COMPUTER_INFO['Machine'][-3:-1]} bit Machine, Version {Client.COMPUTER_INFO['Version']}, Admin user is {Client.COMPUTER_INFO['Node name']}. {Client.COMPUTER_INFO['Processor']} Processor.")
 
 
-    elif "active" in queary and "pc" in queary or "active" in queary and "computer" in queary:
+    elif "active" in queary and "pc" in queary or "computer" in queary:
         try:
             minutes, unit = queary.split("for ")[-1].split()
             if unit == "hours" or unit == "hour":
@@ -439,11 +443,10 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
 
 
-
     # make Alice to type, Keyboard features
 
-    elif 'open' in queary and 'windows' in queary or "close" in queary and "windows" in queary:
-        keyboard.press("win")
+    elif 'open' in queary or "close" in queary and 'windows' in queary:
+        keyboard.press_and_release("win")
 
 
     elif 'close this applications' in queary:
