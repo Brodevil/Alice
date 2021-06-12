@@ -30,7 +30,7 @@ def Storage():
             freeStorage += storeInfo[2]
         except Exception:
             pass
-    return totalStorage, freeStorage, usedStorage
+    return totalStorage, usedStorage, freeStorage
 
 
 storageInfo = Storage()
@@ -80,8 +80,8 @@ class Client:
     # Few user Info :
     MUSIC_DIRECTORY = environ.get("MUSIC", r"C:\Users\ADMIN\Music")  # Music directory should be without space
     FAVOURITE_MUSIC = environ.get("FavMusic", None)
-    APPLICATIONS_SHORTCUTS_PATH = os.getcwd().replace(r"\Alice\Assistant",
-                                                      r"\Alice\Application")  # Application folder where all the using application shortcuts will available to the user
+    APPLICATIONS_SHORTCUTS_PATH = os.getcwd().replace("\\Alice",
+                                                      "\Alice\Application")  # Application folder where all the using application shortcuts will available to the user
     ALICE_PATH = "".join([os.getcwd().split("\\Alice")[0], "\\Alice\\"])
     USER_GITHUB = environ.get("GITHUB", "Brodevil")
 
