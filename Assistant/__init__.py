@@ -12,25 +12,25 @@ import multiprocessing as mp
 import subprocess
 import pywhatkit
 
-from Assistant.exts import alarm                                                                        # noqa
-from Assistant.exts import networks                                                                     # noqa
-from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client     # noqa
+from Assistant.exts import alarm  # noqa
+from Assistant.exts import networks  # noqa
+from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client  # noqa
 
-from Assistant.utils import login                                                                       # noqa
-from Assistant.Alice import alice                                                                       # noqa
-from Assistant.exts import keyactivities                                                                # noqa
-from Assistant.exts import workWithFiles                                                                # noqa
+from Assistant.utils import login  # noqa
+from Assistant.Alice import alice  # noqa
+from Assistant.exts import keyactivities  # noqa
+from Assistant.exts import workWithFiles  # noqa
 
 __all__ = ["logic"]
 
 # reminder list, contain the multiprocessing object of reminding tasks
 side_reminder = list()
 
+
 # load_dotenv()
 
 
-
-def logic(queary: str, taskMultiProcessing: mp.Process):
+def logic(queary: str, taskMultiProcessing: mp.Process = None):
     """This is the logic of the Program as it will be matching several query and do the programmed task """
 
     # fetching info from INTERNET_CONNECTION
@@ -144,6 +144,11 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
         alice.edge('https://open.spotify.com/')
 
 
+    elif 'open twitter' in queary:
+        alice.speak("Opening Twitter...")
+        alice.edge("https://twitter.com/")
+
+
     elif 'pep8' in queary:
         alice.edge("https://www.python.org/dev/peps/pep-0008/")
 
@@ -151,7 +156,6 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
     elif 'open gmail' in queary or 'show' in queary and 'inbox' in queary:
         alice.speak("Opening Gmail...")
         alice.edge("https://gmail.com")
-
 
 
 
@@ -228,7 +232,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
             pass
 
 
-    elif "play my" in queary and "song" in queary or 'music' in queary or  "bad" in queary or "sad" in queary or "unhappy" in queary and "feeling" in queary:
+    elif "play my" in queary and "song" in queary or 'music' in queary or "bad" in queary or "sad" in queary or "unhappy" in queary and "feeling" in queary:
         if Client.FAVOURITE_MUSIC is not None:
             coolMusic = mp.Process(target=playsound, args=(Client.FAVOURITE_MUSIC,))
             coolMusic.start()
@@ -247,8 +251,6 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
     elif 'delete unwanted files' in queary:
         alice.speak("Deleting unwanted files...")
         workWithFiles.deleteUnwantedFiles()
-
-
 
         # Natural Talks/ Fun commands :
     elif 'is i am audio able' in queary:
@@ -349,7 +351,9 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
         if battery is not None:
             alice.speak(
-                f"Battery is {Client.BATTERY_STATUS}% Charged!, " + "And its still in charging." if Client.BATTERY_PLUGGED else "", f"{Client.GENDER}! I guess you should plug out the charger now!" if Client.BATTERY_STATUS >= 95 else "", f"{Client.GENDER}! Its very low battery, Please plug in to charge" if Client.BATTERY_STATUS >= 30 and not Client.BATTERY_PLUGGED else "")
+                f"Battery is {Client.BATTERY_STATUS}% Charged!, " + "And its still in charging." if Client.BATTERY_PLUGGED else "",
+                f"{Client.GENDER}! I guess you should plug out the charger now!" if Client.BATTERY_STATUS >= 95 and Client.BATTERY_PLUGGED else "",
+                f"{Client.GENDER}! Its very low battery, Please plug in to charge" if Client.BATTERY_STATUS >= 30 and not Client.BATTERY_PLUGGED else "")
         else:
             alice.speak(f"Something went wrong {random.choice(ERROR_REPLIES)}. I think you are in desktop")
 
@@ -363,7 +367,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
             f"Total Usable Storage : {Client.STORAGE['Total']} GB, Used : {Client.STORAGE['Used']} GB, Free : {Client.STORAGE['Free']} GB")
 
 
-    elif "internet" in queary or "network" in queary and "speed" in queary or "download" in queary or "upload" in queary and 'speed' in queary:
+    elif "internet speed" in queary or "network speed" in queary or "download" in queary and 'speed' in queary or "upload" in queary and 'speed' in queary:
         alice.speak("Wait a while sir, Internet speed test might take time")
         speed = networks.internet_speed()
         alice.speak(f"Internet speed from nearest Server : {speed}")
@@ -385,7 +389,8 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
 
 
     elif 'system' in queary or 'computer info' in queary:
-        alice.speak(f"Its a {Client.COMPUTER_INFO['System']} {Client.COMPUTER_INFO['Release']}, A {Client.COMPUTER_INFO['Machine'][-3:-1]} bit Machine, Version {Client.COMPUTER_INFO['Version']}, Admin user is {Client.COMPUTER_INFO['Node name']}. {Client.COMPUTER_INFO['Processor']} Processor.")
+        alice.speak(
+            f"Its a {Client.COMPUTER_INFO['System']} {Client.COMPUTER_INFO['Release']}, A {Client.COMPUTER_INFO['Machine'][-3:-1]} bit Machine, Version {Client.COMPUTER_INFO['Version']}, Admin user is {Client.COMPUTER_INFO['Node name']}. {Client.COMPUTER_INFO['Processor']} Processor.")
 
 
     elif "active" in queary and "pc" in queary or "computer" in queary:
@@ -590,3 +595,8 @@ def logic(queary: str, taskMultiProcessing: mp.Process):
             # you use in day to day life in Application folder, Which is in this project folder.")
             pass
 
+
+if __name__ == '__main__':
+    while True:
+        command = input()
+        logic(command)
