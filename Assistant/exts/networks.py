@@ -29,7 +29,7 @@ def internet_speed() -> str:
     Internet speed test of downloading and uploading with ping by the nearest best server
     """
     test = speedtest.Speedtest()
-    return f"Downloading speed : {test.download() / 1024 / 1024:.2f} Mbps,  Uploading speed : {test.upload() / 1204 / 1024:.2f} Mbps,  Ping: :{test.results.ping} ms"
+    return f"Downloading speed : {test.download() / 1024 / 1024:.2f} Megabits per Seconds,  Uploading speed : {test.upload() / 1204 / 1024:.2f} Megabits per Seconds,  Ping: :{test.results.ping} milliseconds"
 
 
 def localInfo() -> Union[list, None]:
