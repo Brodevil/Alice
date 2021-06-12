@@ -30,7 +30,7 @@ side_reminder = list()
 # load_dotenv()
 
 
-def logic(queary: str, taskMultiProcessing: mp.Process = None):
+def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
     """This is the logic of the Program as it will be matching several query and do the programmed task """
 
     # fetching info from INTERNET_CONNECTION
@@ -218,7 +218,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None):
 
 
     # music
-    elif "play" in queary and "music" in queary or "song" in queary:
+    elif "play" in queary and "music" in queary or "song" in queary and "music" in queary:
         music = os.listdir(Client.MUSIC_DIRECTORY)
         os.startfile(os.path.join(Client.MUSIC_DIRECTORY, random.choice(music)))
         alice.speak("Playing Music...")
@@ -232,7 +232,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None):
             pass
 
 
-    elif "play my" in queary and "song" in queary or 'music' in queary or "bad" in queary or "sad" in queary or "unhappy" in queary and "feeling" in queary:
+    elif "play my" in queary and "song" in queary or "play my" in queary and "music" in queary:
         if Client.FAVOURITE_MUSIC is not None:
             coolMusic = mp.Process(target=playsound, args=(Client.FAVOURITE_MUSIC,))
             coolMusic.start()
@@ -330,7 +330,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None):
         alice.speak("I am quite fine sir, What about you ?")
 
 
-    elif 'alice' in queary or 'your' in queary and 'info' in queary:
+    elif 'alice info' in queary or 'your info' in queary:
         alice.speak(
             f"I am written in Python by {Client.AUTHOR}Sir!. To CONTACT him you can email at ({Client.CONTACT}), Check out his GitHub Profile You will know more about my sir")
         print(
@@ -452,7 +452,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None):
 
     # make Alice to type, Keyboard features
 
-    elif 'open' in queary or "close" in queary and 'windows' in queary:
+    elif 'open' in queary  and "windows" in queary or "close" in queary and 'windows' in queary:
         keyboard.press_and_release("win")
 
 
