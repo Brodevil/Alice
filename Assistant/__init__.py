@@ -437,10 +437,11 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
 
     elif 'start following my' in queary:
         alice.speak("I will be now following your while repeating yourself, say stop to quit this")
-        sentance = str()
-        while "stop" not in queary or "quit" not in queary or "break" not in queary:
-            sentance = alice.takeCommand()
-            alice.speak(sentance)
+        sentence = str()
+        while "stop" not in sentence or "quit" not in sentence or "break" not in sentence:
+            sentence = alice.takeCommand()
+            alice.speak(sentence)
+        del sentence
 
 
     elif 'spell' in queary:
@@ -468,10 +469,12 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
     elif 'start' in queary and 'typ' in queary:
         alice.speak(f"{Client.GENDER}! You start to speak I will type that And then to quit plz say quite or close.")
         string = str()
-        while "stop" not in string.lower() or 'quit' not in queary or 'close' in queary:
+        while "stop" not in string.lower() or 'quit' not in queary or 'close' not in queary:
+
             string = alice.takeCommand()
             if string != "None":
                 keyactivities.typeWrite(string)
+        del string
 
 
     elif 'record keyboard' in queary:
