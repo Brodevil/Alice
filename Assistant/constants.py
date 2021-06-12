@@ -81,7 +81,7 @@ class Client:
     MUSIC_DIRECTORY = environ.get("MUSIC", r"C:\Users\ADMIN\Music")  # Music directory should be without space
     FAVOURITE_MUSIC = environ.get("FavMusic", None)
     APPLICATIONS_SHORTCUTS_PATH = os.getcwd().replace("\\Alice",
-                                                      "\Alice\Application")  # Application folder where all the using application shortcuts will available to the user
+                                                      "\Alice\Applications")  # Application folder where all the using application shortcuts will available to the user
     ALICE_PATH = "".join([os.getcwd().split("\\Alice")[0], "\\Alice\\"])
     USER_GITHUB = environ.get("GITHUB", "Brodevil")
 
