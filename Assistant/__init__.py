@@ -577,20 +577,15 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
     # Launching the software stuffs
 
     elif "open file explorer" in queary or "this pc" in queary:
-        try:
-            subprocess.Popen(r'explorer /select,"C:\path\of\folder\file"')
-            alice.speak("Opening File Explorer...")
-        except Exception:
-            alice.speak("Some thing went Wrong")
-
+        subprocess.Popen('explorer')
+        alice.speak("Opening File Explorer...")
+        alice.speak("Some thing went Wrong")
 
 
     elif 'open' in queary or 'launch' in queary:
         applicationName = queary.split("open" if "open" in queary else "launch")[1]
-
         # the second argument is the related path of the folder where all the used or usable software shortcuts are available by the user
         app = workWithFiles.openApplication(applicationName, Client.APPLICATIONS_SHORTCUTS_PATH)
-
         if app is not None:
             alice.speak(f"Launching {app} Application...")
         else:
