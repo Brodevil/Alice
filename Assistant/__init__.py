@@ -79,6 +79,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
 
 
 
+
     # quiting the program
     elif "bye" in queary or 'kill yourself' in queary or 'quit' in queary:
         alice.speak("That's it, I m quiting....")
@@ -239,12 +240,10 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
         else:
             alice.speak(f"{Client.GENDER}! Please run the documentation of Alice and then ")
 
-
     elif 'play' in queary:
         queary = queary.split("play ")[-1]
         alice.speak(f"Showing related results to {queary}")
         alice.edge(f"https://music.youtube.com/search?q={queary}")
-
 
 
     # working with files :
@@ -477,14 +476,14 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
         del string
 
 
-    elif 'record keyboard' in queary:
+    elif 'record' in queary and 'keyboard':
         alice.speak(
             f"Okay {Client.GENDER}! Note that, your keyboard actives will be recording till you press Escape button on your keyboard")
         globals()['keyRecorded'] = keyactivities.keyboardRecord()
 
 
 
-    elif 'play the keyboard recording' in queary:
+    elif 'play' in queary and 'keyboard' in queary and 'record':            # play my recorded keyboard/play keyboard recording/etc
         try:
             globals()["keyRecorded"]
         except NameError:
