@@ -470,7 +470,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
     elif 'start' in queary and 'typ' in queary:
         alice.speak(f"{Client.GENDER}! You start to speak I will type that And then to quit plz say quite or close.")
         string = str()
-        while "stop" not in string.lower() and 'quit' not in queary and 'close' not in queary:
+        while "stop" not in string.lower() and 'quit' not in string.lower() and 'close' not in string.lower():
             if string != "None":
                 keyactivities.typeWrite(string)
             string = alice.takeCommand()
