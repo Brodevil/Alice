@@ -86,7 +86,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
         try:
             for reminder in globals()['side_reminder']:
                 reminder.terminate()
-        except:
+        except Exception:
             pass
         sys.exit(0)
 
@@ -413,7 +413,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
 
 
     # work with git just for Abhinav :-
-    elif 'push the code' in queary:
+    elif 'push the code' in queary or "git commit" in queary:
         try:
             alice.speak("Commit and then pushing the code in github repository....")
             login.initialCommit(os.getcwd())
@@ -435,12 +435,13 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
         queary = queary.split("say" if 'say' in queary else "speak")[-1]
         alice.speak(queary)
 
-    elif 'start following my' in queary:
+    elif 'start following m' in queary:             # m as be me or my voice
         alice.speak("I will be now following your while repeating yourself, say stop to quit this")
         sentence = str()
-        while "stop" not in sentence or "quit" not in sentence or "break" not in sentence:
+        while "stop" not in sentence and "quit" not in sentence and "break" not in sentence:
+            if sentence != "None":
+                alice.speak(sentence)
             sentence = alice.takeCommand()
-            alice.speak(sentence)
         del sentence
 
 
@@ -453,7 +454,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
 
     # make Alice to type, Keyboard features
 
-    elif 'open' in queary  and "windows" in queary or "close" in queary and 'windows' in queary:
+    elif 'open' in queary and "windows" in queary or "close" in queary and 'windows' in queary:
         keyboard.press_and_release("win")
 
 
@@ -469,11 +470,10 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
     elif 'start' in queary and 'typ' in queary:
         alice.speak(f"{Client.GENDER}! You start to speak I will type that And then to quit plz say quite or close.")
         string = str()
-        while "stop" not in string.lower() or 'quit' not in queary or 'close' not in queary:
-
-            string = alice.takeCommand()
+        while "stop" not in string.lower() and 'quit' not in queary and 'close' not in queary:
             if string != "None":
                 keyactivities.typeWrite(string)
+            string = alice.takeCommand()
         del string
 
 
