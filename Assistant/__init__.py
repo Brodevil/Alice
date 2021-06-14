@@ -9,7 +9,6 @@ import webbrowser
 import psutil
 from playsound import playsound
 import multiprocessing as mp
-import subprocess
 import pywhatkit
 
 from Assistant.exts import alarm  # noqa
@@ -579,12 +578,6 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
 
 
     # Launching the software stuffs
-
-    elif "open file explorer" in queary or "this pc" in queary:
-        subprocess.Popen('explorer')
-        alice.speak("Opening File Explorer...")
-        alice.speak("Some thing went Wrong")
-
 
     elif 'open' in queary or 'launch' in queary:
         applicationName = queary.split("open" if "open" in queary else "launch")[1]
