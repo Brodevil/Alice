@@ -134,6 +134,11 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
         alice.edge("https://www.instagram.com")
 
 
+    elif 'open facebook' in queary:
+        alice.speak("Opening FaceBook...")
+        alice.edge("https://www.facebook.com")
+
+
     elif 'open whatsapp' in queary:
         alice.speak("Opening Whatsapp.....")
         alice.edge("https://web.whatsapp.com/")
