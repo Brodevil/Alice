@@ -17,4 +17,4 @@ def readWhatsappMessage():
 
 if __name__ == '__main__':
     print("here!")
-    sendWhatsappMessage("+918975057675", "Test 0, by Alice")
+    sendWhatsappMessage("+918975057675", "Test 1,\n by Alice, with backslash n")
