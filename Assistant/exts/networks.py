@@ -6,11 +6,12 @@ import speedtest
 from os import environ
 from dotenv import load_dotenv
 from typing import Union
+from bs4 import BeautifulSoup
 
 from requests.exceptions import ConnectionError
 from Assistant.utils.exceptions import EnvFileValueError
 
-__all__ = ["internetConnection", "internet_speed", "localInfo", "weather", "wiki"]
+__all__ = ["internetConnection", "internet_speed", "localInfo", "weather", "temperature", "wiki"]
 
 load_dotenv()
 
@@ -53,21 +54,30 @@ def weather(location=None, apikey=(environ.get("OpenWeatherMapApi"))) -> Union[s
     """
 
     if location is None:
-        local_info = localInfo()
-        if local_info is not None:
-            location = localInfo()[0]
-            try:
-                response = requests.get(
-                    f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={apikey}")  # noqa
-                response = json.loads(response.text)
-                return f"It seemed to be approximately {int(response['main']['temp'] - 273.15)} degree Celsius! I guess its like {response['weather'][0]['main']} Weather outside the door, and the wind speed is feels like {int(response['wind']['speed'] * 3.6)} kilometer per hour"
-            except ConnectionError:
-                return None
-            except IndexError:
-                raise EnvFileValueError(
-                    "your api key is wrong please recheck your api key and put it in .env file as `OpenWeatherMapApi=(your api key)` go through the `Run Alice.md` file on github `https://github.com/Brodevil/Alice/blob/main/Run%20Alice.md`")
-        else:
+        location = localInfo()[0]
+        try:
+            response = requests.get(
+                f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={apikey}")  # noqa
+            response = json.loads(response.text)
+            return f"It seemed to be approximately {int(response['main']['temp'] - 273.15)} degree Celsius! I guess its like {response['weather'][0]['main']} Weather outside the door, and the wind speed is feels like {int(response['wind']['speed'] * 3.6)} kilometer per hour"
+        except ConnectionError:
             return None
+        except IndexError:
+            raise EnvFileValueError(
+                "your api key is wrong please recheck your api key and put it in .env file as `OpenWeatherMapApi=(your api key)` go through the `Run Alice.md` file on github `https://github.com/Brodevil/Alice/blob/main/Run%20Alice.md`")
+
+
+
+def temperature(place=localInfo()[0]):
+    """
+    arg : place
+    return : current temperature
+    get the temperature using google
+    """
+    url = f"https://www.google.com/search?q=current%20temperature%20of%20{place}"
+    response = requests.get(url)
+    data = BeautifulSoup(response.text, "html.parser")
+    return data.find('div', class_="BNeawe").text
 
 
 def wiki(queary) -> str:
@@ -81,5 +91,3 @@ def wiki(queary) -> str:
         return "Sorry! I didn't got that stuff in wikipedia"
 
 
-if __name__ == '__main__':
-    print(internet_speed())
