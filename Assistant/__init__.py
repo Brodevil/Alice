@@ -558,7 +558,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
 
     elif 'whatsapp' in queary and 'send' in queary:
         try:
-            alice.speak("How do you want to send the Whatsapp Message!")
+            alice.speak("To whom you want to send the Whatsapp Message!")
             userName = alice.takeCommand()
             for _ in Contacts.contactNumber.keys():
                 if userName.split()[0] in _.split():
@@ -567,9 +567,9 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
             else:
                 alice.speak(f"{Client.GENDER}! We didn't got {userName} in your contacts. Enter his phone number including  (+ and country code)")
                 contact_num = input("Enter the Contact Number including Country code  :\t")
-
-            if "+ " not in contact_num:
+            if "+" not in contact_num:
                 alice.speak(f"Sorry {Client.GENDER}! The contact number is invalid, Format should be +countryCode numbers")
+                return
 
             alice.speak("What's the message, I should send!")
             content = alice.takeCommand()
@@ -578,7 +578,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
                 alice.speak("Sorry, I didn't get that!, Can you please type the message in the terminal!" if content == "None" else f"Okay {Client.GENDER}! You can ofcourse type the message on your own in the terminal!")
                 content = input(f"Enter the Message/Content of the Email {Client.GENDER}! : \t")
 
-            pywhatkit.sendwhatmsg_instantly(contact_num, content, wait_time=1)
+            pywhatkit.sendwhatmsg_instantly(contact_num, content.replace(" ", ""), wait_time=1)
             time.sleep(5)
             keyboard.press("enter")
         except Exception:
