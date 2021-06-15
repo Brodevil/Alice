@@ -5,9 +5,9 @@ import time
 __all__ = ("sendWhatsappMessage", "readWhatsappMessage")
 
 
-def sendWhatsappMessage(number, message):
-    pywhatkit.sendwhatmsg_instantly("+918975057675", "Hey", wait_time=5)
-    time.sleep(4)
+def sendWhatsappMessage(number:str, message:str) -> None:
+    pywhatkit.sendwhatmsg_instantly(number, message, wait_time=1)
+    time.sleep(3)
     pg.press("enter")
 
 
@@ -16,4 +16,5 @@ def readWhatsappMessage():
 
 
 if __name__ == '__main__':
-    sendWhatsappMessage(None, None)
+    print("here!")
+    sendWhatsappMessage("+918975057675", "Test 0, by Alice")
