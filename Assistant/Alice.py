@@ -243,7 +243,7 @@ class Alice:
 
                     winsound.Beep(frequency=2500, duration=4000)
                     self.speak(
-                        f"{Client.GENDER}! You had a task that, {work.replace('i', 'you').replace('my', 'your')}")
+                        f"{Client.GENDER}! You had a task that, {work}")
                     time.sleep(62)
 
 
