@@ -1,6 +1,5 @@
 import openpyxl
 import os
-from pprint import pprint
 
 __all__ = ["contactInfo", "deleteUnwantedFiles", "openApplication", "DailyWorksExel"]
 
