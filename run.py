@@ -25,12 +25,9 @@ if __name__ == "__main__":
         queary = alice.takeCommand().lower()
         if 'sleep' in queary or 'take a break' in queary:
             alice.speak("I am going to sleep while you don't wake up Alice")
-            while True:
+            while 'wake up' not in queary and 'back to work' not in queary:
                 queary = alice.takeCommand()
-                if 'wake up' in queary or 'back to work' in queary:
-                    alice.speak("Let's Back to work!")
-                    break
-
+                
         if queary != "none":
             if 'skip this one' not in queary or "leave this one" or "leave that one":
                 Assistant.logic(queary, DailyTasks)  # Logic for execution task based on query
