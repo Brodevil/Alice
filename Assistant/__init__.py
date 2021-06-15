@@ -305,28 +305,8 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
         alice.severalVoices(voicesId=Client.VOICES)
 
 
-    elif 'pause' in queary or "stop for" in queary or "sleep for" in queary:
-        try:
-            period = int(queary.split("for")[-1].split()[0])
-        except ValueError:
-            try:
-                alice.speak(
-                    f"Sorry {Client.GENDER}! I didn't get that, Can you type the number of minutes I should sleep for in terminal ")
-                period = int(input("Enter the number of minutes I should sleep :\t"))
-            except ValueError:
-                alice.speak("Wrong Input, I should be a number. Try again")
-                return
-
-        alice.speak(f"Okay {Client.GENDER}! I will be wake up after {period} minutes.")  # noqa
-        time.sleep(60 * period)
-
-        alice.speak(f"{alice.goodWish} {Client.GENDER}!, I wake up after {period} minutes, Lets back to work.")
-        del period
-
-
-
     elif 'thank you' in queary or 'thanks' in queary:
-        alice.speak(f"Your most welcome {Client.GENDER}!")
+        alice.speak(f"It was my pleasure {Client.GENDER}!")
 
 
     elif 'how are you' in queary:
