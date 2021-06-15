@@ -29,10 +29,11 @@ side_reminder = list()
 # load_dotenv()
 
 
-def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
+def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
     """This is the logic of the Program as it will be matching several query and do the programmed task """
 
-    # fetching info from INTERNET_CONNECTION
+
+    # ---------------------- fetching info from INTERNET ---------------------------------------
 
     if 'search' in queary and 'on wikipedia' in queary:
         try:
@@ -79,7 +80,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
 
 
 
-    # quiting the program
+    # ---------------------------------------- quiting the program -----------------------------------
     elif "bye" in queary or 'kill yourself' in queary or 'quit' in queary:
         alice.speak("That's it, I m quiting....")
         taskMultiProcessing.terminate()
@@ -92,7 +93,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
 
 
 
-    # Opening websites
+    # --------------------------------------- Opening websites -------------------------------------------
     elif 'open youtube studio' in queary:
         alice.speak("Opening youtube studio...")
         alice.edge("https://studio.youtube.com/")
@@ -165,7 +166,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
 
 
 
-    # work with GUI or windows :
+    # --------------------------------------------work with GUI or windows :-----------------------------------------
     elif 'desktop' in queary:
         keyboard.press_and_release("win+d")
 
@@ -203,26 +204,52 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
 
 
 
-    # reminder        
-    elif 'remind me after' in queary or "wake up me after" in queary:
-        queary = queary.split("remind me after " if 'remind me after' in queary else "wake up me after")[1]
-        magnitude = int(queary.split()[0])
-        unit = queary.split()[1]
-        alice.speak(f"Okay {Client.GENDER}! I will be reminding you after {magnitude} {unit}!")
+    # ----------------------- make Alice to type, Keyboard features, working with keyboards------------------------------
+    elif 'open' in queary and "windows" in queary or "close" in queary and 'windows' in queary:
+        keyboard.press_and_release("win")
+
+    elif 'close this applications' in queary:
+        keyboard.press_and_release("alt+f4")
+
+    elif "type that" in queary or "send that" in queary:
+        queary = queary.split("that")[-1]
+        keyactivities.typeWrite(queary)
+        keyboard.press("enter")
+
+
+    elif 'start' in queary and 'typ' in queary:
+        alice.speak(f"{Client.GENDER}! You start to speak I will type that And then to quit plz say quite or close.")
+        string = str()
+        while "stop" not in string.lower() and 'quit' not in string.lower() and 'close' not in string.lower():
+            if string != "None":
+                keyactivities.typeWrite(string)
+            string = alice.takeCommand()
+        del string
+
+
+    elif 'record' in queary and 'keyboard':
+        alice.speak(
+            f"Okay {Client.GENDER}! Note that, your keyboard actives will be recording till you press Escape button on your keyboard")
+        globals()['keyRecorded'] = keyactivities.keyboardRecord()
+
+
+
+    elif 'play' in queary and 'keyboard' in queary and 'record':  # play my recorded keyboard/play keyboard recording/etc
         try:
-            # if reason is there, then it will going to replace the sentence "I will back to my work again" to "you will back to your work again"
-            pourpose = queary.split("so that ")[1].replace("i", "you").replace('my', 'your')
-        except Exception:  # the user can give the reason as a option
-            pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
-
-        globals()['side_reminder'].append(mp.Process(target=alarm.reminderAlarm, args=(magnitude, unit, pourpose)))
-        globals()['side_reminder'][-1].start()
-
-
-
+            globals()["keyRecorded"]
+        except NameError:
+            alice.speak(f"{Client.GENDER}! there is no keyboard Activity available till now")
+        else:
+            alice.speak(
+                f"Okay {Client.GENDER}! Playing the keyboard Activity recording, Note that have to put the cursor where you want to play it.")
+            time.sleep(7)
+            keyactivities.playKeyboard(globals()["keyRecorded"])
 
 
-    # music
+
+
+
+    # -------------------------------------Music---------------------------------------------------
     elif "play" in queary and "music" in queary or "song" in queary and "music" in queary:
         music = os.listdir(Client.MUSIC_DIRECTORY)
         os.startfile(os.path.join(Client.MUSIC_DIRECTORY, random.choice(music)))
@@ -244,18 +271,23 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
         else:
             alice.speak(f"{Client.GENDER}! Please run the documentation of Alice and then ")
 
+
     elif 'play' in queary:
         queary = queary.split("play ")[-1]
         alice.speak(f"Showing related results to {queary}")
         alice.edge(f"https://music.youtube.com/search?q={queary}")
 
 
-    # working with files :
+
+
+    # ---------------------------------------  working with files : ---------------------------------------
     elif 'delete unwanted files' in queary:
         alice.speak("Deleting unwanted files...")
         workWithFiles.deleteUnwantedFiles()
 
-        # Natural Talks/ Fun commands :
+
+
+        # --------------------------------------- Natural Talks/ Fun commands : ----------------------------
     elif 'is i am audio able' in queary:
         alice.speak(random.choice(POSITIVE_REPLIES))
 
@@ -321,7 +353,8 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
 
 
 
-    # System features :
+
+    # ------------------------------------- Work with System, Info, features :------------------------------------------
     elif 'cpu' in queary or 'processor' in queary or 'processing' in queary:
         alice.speak(f"CPU used : {psutil.cpu_percent()}%")
 
@@ -353,7 +386,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
     elif "internet speed" in queary or "network speed" in queary or "download" in queary and 'speed' in queary or "upload" in queary and 'speed' in queary:
         alice.speak("Wait a while sir, Internet speed test might take time")
         try:
-            speed           # noqa
+            speed  # noqa
         except NameError:
             speed = networks.internet_speed()
         finally:
@@ -400,7 +433,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
 
 
 
-    # work with git just for Abhinav :-
+    # ------------------------------------- work with git just for Abhinav :-----------------------------
     elif 'push the code' in queary or "git commit" in queary:
         try:
             alice.speak("Commit and then pushing the code in github repository....")
@@ -418,12 +451,12 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
 
 
 
-    # make Alice to speak features
+    # ---------------------------------- make Alice to speak, Test to Speech features --------------------------------
     elif 'say' in queary or 'speak' in queary:
         queary = queary.split("say" if 'say' in queary else "speak")[-1]
         alice.speak(queary)
 
-    elif 'start following m' in queary:             # m as be me or my voice
+    elif 'start following m' in queary:         # start following me or my voice both starts from m
         alice.speak("I will be now following your while repeating yourself, say stop to quit this")
         sentence = str()
         while "stop" not in sentence and "quit" not in sentence and "break" not in sentence:
@@ -439,55 +472,20 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
         alice.speak(queary)
 
 
-
-    # make Alice to type, Keyboard features
-
-    elif 'open' in queary and "windows" in queary or "close" in queary and 'windows' in queary:
-        keyboard.press_and_release("win")
-
-
-    elif 'close this applications' in queary:
-        keyboard.press_and_release("alt+f4")
-
-    elif "type that" in queary or "send that" in queary:
-        queary = queary.split("that")[-1]
-        keyactivities.typeWrite(queary)
-        keyboard.press("enter")
-
-
-    elif 'start' in queary and 'typ' in queary:
-        alice.speak(f"{Client.GENDER}! You start to speak I will type that And then to quit plz say quite or close.")
-        string = str()
-        while "stop" not in string.lower() and 'quit' not in string.lower() and 'close' not in string.lower():
-            if string != "None":
-                keyactivities.typeWrite(string)
-            string = alice.takeCommand()
-        del string
-
-
-    elif 'record' in queary and 'keyboard':
-        alice.speak(
-            f"Okay {Client.GENDER}! Note that, your keyboard actives will be recording till you press Escape button on your keyboard")
-        globals()['keyRecorded'] = keyactivities.keyboardRecord()
+    elif "read book" in queary or "audio book" in queary or "speak pdf" in queary or "read pdf" in queary:
+        alice.speak(f"{Client.GENDER} select the pdf file which you want to make read!")
+        audioFile = alice.audioBook()
+        if audioFile is not None:
+            try:
+                alice.speak(f"{Client.GENDER}! The audio file had created in that same path with same name.")
+                os.startfile(audioFile)
+            except FileNotFoundError:
+                pass
 
 
 
-    elif 'play' in queary and 'keyboard' in queary and 'record':            # play my recorded keyboard/play keyboard recording/etc
-        try:
-            globals()["keyRecorded"]
-        except NameError:
-            alice.speak(f"{Client.GENDER}! there is no keyboard Activity available till now")
-        else:
-            alice.speak(
-                f"Okay {Client.GENDER}! Playing the keyboard Activity recording, Note that have to put the cursor where you want to play it.")
-            time.sleep(7)
-            keyactivities.playKeyboard(globals()["keyRecorded"])
-
-
-
-
-    # local info work with INTERNET_CONNECTION :
-    elif "what's my location" in queary or 'where am i' in queary or 'where i am' in queary:
+    # ------------------------------------------ local info work with INTERNET and APIs -----------------------------
+    elif "my location" in queary or 'where am i' in queary or 'where i am' in queary:
         alice.speak(
             f" You are in the Country {Client.LOCATION[0]} and near by {Client.LOCATION[2]} which is in {Client.LOCATION[1]} Region {Client.GENDER}!")
 
@@ -513,14 +511,28 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
 
 
     elif "temperature" in queary or "weather report" in queary:
+        alice.speak(Client.WEATHER_INFO)
+
+
+
+    # ------------------------------------------ reminder  ----------------------------------------------
+    elif 'remind me after' in queary or "wake up me after" in queary:
+        queary = queary.split("remind me after " if 'remind me after' in queary else "wake up me after")[1]
+        magnitude = int(queary.split()[0])
+        unit = queary.split()[1]
+        alice.speak(f"Okay {Client.GENDER}! I will be reminding you after {magnitude} {unit}!")
         try:
-            alice.speak(Client.WEATHER_INFO)
-        except:
-            alice.speak(random.choice(ERROR_REPLIES))
+            # if reason is there, then it will going to replace the sentence "I will back to my work again" to "you will back to your work again"
+            pourpose = queary.split("so that ")[1].replace("i", "you").replace('my', 'your')
+        except Exception:  # the user can give the reason as a option
+            pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
+
+        globals()['side_reminder'].append(mp.Process(target=alarm.reminderAlarm, args=(magnitude, unit, pourpose)))
+        globals()['side_reminder'][-1].start()
 
 
 
-    # work with lodging file : i.e.work with E commerce websites accounts
+    # --------------------------------- work with login folder : i.e.work with E commerce websites accounts ------------
     elif 'send' in queary and "email" in queary:
         alice.speak("To whom you want to send the email")
         try:
@@ -541,7 +553,8 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
             content = alice.takeCommand()
 
             if content == "None" or "let me" in content and "typ":
-                alice.speak("Sorry, I didn't get that!, Can you please type the message in the terminal!" if content == "None" else f"Okay {Client.GENDER}! You can ofcourse type the message on your own in the terminal!")
+                alice.speak(
+                    "Sorry, I didn't get that!, Can you please type the message in the terminal!" if content == "None" else f"Okay {Client.GENDER}! You can ofcourse type the message on your own in the terminal!")
                 content = input(f"Enter the Message/Content of the Email {Client.GENDER}! : \t")
 
             result = login.sendEmail(userEmail, subject, content)
@@ -565,20 +578,23 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
                     contact_num = Contacts.contactNumber[_]
                     break
             else:
-                alice.speak(f"{Client.GENDER}! We didn't got {userName} in your contacts. Enter his phone number including  (+ and country code)")
+                alice.speak(
+                    f"{Client.GENDER}! We didn't got {userName} in your contacts. Enter his phone number including  (+ and country code)")
                 contact_num = input("Enter the Contact Number including Country code  :\t")
             if "+" not in contact_num:
-                alice.speak(f"Sorry {Client.GENDER}! The contact number is invalid, Format should be +countryCode numbers")
+                alice.speak(
+                    f"Sorry {Client.GENDER}! The contact number is invalid, Format should be +countryCode numbers")
                 return
 
             alice.speak("What's the message, I should send!")
             content = alice.takeCommand()
 
             if content == "None" or "let me" in content and "typ":
-                alice.speak("Sorry, I didn't get that!, Can you please type the message in the terminal!" if content == "None" else f"Okay {Client.GENDER}! You can ofcourse type the message on your own in the terminal!")
+                alice.speak(
+                    "Sorry, I didn't get that!, Can you please type the message in the terminal!" if content == "None" else f"Okay {Client.GENDER}! You can ofcourse type the message on your own in the terminal!")
                 content = input(f"Enter the Message/Content of the Email {Client.GENDER}! : \t")
 
-            pywhatkit.sendwhatmsg_instantly(contact_num, content.replace(" ", ""), wait_time=1)
+            pywhatkit.sendwhatmsg_instantly(contact_num.replace(" ", ""), content, wait_time=1)
             time.sleep(5)
             keyboard.press("enter")
         except Exception:
@@ -587,19 +603,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
 
 
 
-    elif "read book" in queary or "audio book" in queary or "speak pdf" in queary or "read pdf" in queary:
-        alice.speak(f"{Client.GENDER} select the pdf file which you want to make read!")
-        audioFile = alice.audioBook()
-        if audioFile is not None:
-            try:
-                alice.speak(f"{Client.GENDER}! The audio file had created in that same path with same name.")
-                os.startfile(audioFile)
-            except FileNotFoundError:
-                pass
-
-
-
-    # Launching the software stuffs
+    # ----------------------------  Launching the software stuffs --------------------------------------------------
 
     elif 'open' in queary or 'launch' in queary:
         applicationName = queary.split("open" if "open" in queary else "launch")[1]
@@ -611,9 +615,3 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
             # alice.speak(f"Sorry! {applicationName} shortcut didn't got in the Application folder. Please put the shortcuts of all the application do \
             # you use in day to day life in Application folder, Which is in this project folder.")
             pass
-
-
-if __name__ == '__main__':
-    while True:
-        command = input()
-        logic(command)
