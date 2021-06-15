@@ -533,6 +533,9 @@ def logic(queary: str, taskMultiProcessing: mp.Process = None) -> None:
             subject = alice.takeCommand()
             alice.speak("What's the content...")
             content = alice.takeCommand()
+            if 'type' in content and 'let me' in content:     # let me type the message bro
+                alice.speak(f"Okay {Client.GENDER}! You can ofcourse type the message on your own in the terminal!")
+                content = input(f"Enter the Message/Content of the Email {Client.GENDER}! : \t")
             result = login.sendEmail(userEmail, subject, content)
 
             if result is False:
