@@ -1,8 +1,4 @@
 import pywhatkit
-import time
-from pprint import pprint 
-import requests
-import asyncio
 
 
 __all__ = ("sendWhatsappMessage", "readWhatsappMessage") 
