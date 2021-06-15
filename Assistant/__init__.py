@@ -505,14 +505,18 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             alice.speak(f"{random.choice(ERROR_REPLIES)}, Check your INTERNET_CONNECTION connection {Client.GENDER}!")
 
 
-    elif 'weather report of' in queary:
+    elif 'temperature of' in queary:
         place = queary.split("of")[1]
-        alice.speak(networks.weather(place))
+        temp = networks.temperature(place)
+        alice.speak(f"{Client.GENDER}! The Current Temperature of {place} is {temp}")
 
 
-    elif "temperature" in queary or "weather report" in queary:
+
+    elif "weather report" in queary:
         alice.speak(Client.WEATHER_INFO)
 
+    elif 'temperature' in queary:
+        alice.speak(f"The Current Temperature of {Client.CITY} is {networks.temperature(Client.CITY)}")
 
 
     # ------------------------------------------ reminder  ----------------------------------------------

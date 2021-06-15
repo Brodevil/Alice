@@ -24,7 +24,7 @@ if __name__ == "__main__":
     while True:  # The program will be going to run on Infinite loop
         queary = alice.takeCommand().lower()
         if 'sleep' in queary or 'take a break' in queary:
-            alice.speak("I am going to sleep while you don't wake up Alice")
+            alice.speak("I am going to sleep while you don't wake up me")
             while 'wake up' not in queary and 'back to work' not in queary:
                 queary = alice.takeCommand()
                 
