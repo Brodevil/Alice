@@ -6,7 +6,7 @@ __all__ = ("sendWhatsappMessage", "readWhatsappMessage")
 
 
 def sendWhatsappMessage(number:str, message:str) -> None:
-    pywhatkit.sendwhatmsg_instantly(number, message, wait_time=1)
+    print(pywhatkit.sendwhatmsg_instantly(number, message, wait_time=1))
     time.sleep(3)
     pg.press("enter")
 
