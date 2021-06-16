@@ -9,25 +9,43 @@ from os import getcwd
 import Assistant
 from Assistant import alice
 from Assistant.exts.workWithFiles import DailyWorksExel
+from Assistant.constants import Client
+
 
 __all__ = ["queary", ]
 __authors__ = ("Abhinav", "Brodevil")  # Both are the same person lol
 
+
 tasks = DailyWorksExel(getcwd().replace("\\Alice", "\\Alice\\DailyWorks.xlsx"))
 DailyTasks = multiprocessing.Process(target=alice.dailyTaskReminder, args=(tasks,))
 
+
+
 # Running part of the Alice Program
 if __name__ == "__main__":
-    alice.intro()  # Introduction
-    DailyTasks.start()
+    """
+    The Alice just suppose to take the Voice from the user and convert the voice into text
+    Then by word to word matching and checking the queary 
+    The tasks, works and much more things get executed!
+    """
 
-    while True:  # The program will be going to run on Infinite loop
+       
+    alice.intro()               # Introduction of Alice
+    DailyTasks.start()          # daily task reminding will start here using Multiprocessing
+
+
+    # The program will be going to run on Infinite loop
+    while True:
         queary = alice.takeCommand().lower()
+
         if 'sleep' in queary or 'take a break' in queary:
-            alice.speak("I am going to sleep while you don't wake up me")
+            alice.speak(f"{Client.GENDER}! I am going to sleep while you don't wake up me")
+
             while 'wake up' not in queary and 'back to work' not in queary:
                 queary = alice.takeCommand()
-                
-        if queary != "none":
-            if 'skip this one' not in queary or "leave this one" or "leave that one":
-                Assistant.logic(queary, DailyTasks)  # Logic for execution task based on query
+            else:
+                alice.speak(f"{alice.goodWish} {Client.GENDER}! How May I can help you!")
+
+        # Logic of Program
+        if queary != "none" and 'skip this one' not in queary or "leave this one" or "leave that one":
+            Assistant.logic(queary, DailyTasks)
