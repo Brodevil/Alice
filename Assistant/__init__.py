@@ -35,7 +35,6 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
     # ---------------------- fetching info from INTERNET ---------------------------------------
-
     if 'search' in queary and 'on wikipedia' in queary:
         try:
             queary = queary.split("search")[-1].split("on wikipedia")[0]
@@ -242,13 +241,6 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         del string
 
 
-    elif 'record' in queary and 'keyboard':
-        alice.speak(
-            f"Okay {Client.GENDER}! Note that, your keyboard actives will be recording till you press Escape button on your keyboard")
-        globals()['keyRecorded'] = mp.Process(target=keyactivities.keyboardRecord, args=())
-        globals()['keyRecorded'].start()
-
-
 
     elif 'play' in queary and 'keyboard' in queary and 'record':  # play my recorded keyboard/play keyboard recording/etc
         try:
@@ -261,6 +253,14 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             time.sleep(7)
             recording = mp.Process(target=keyactivities.playKeyboard, args=(globals()["keyRecorded"], ))
             recording.start()
+
+
+    elif 'record' in queary and 'keyboard':
+        alice.speak(
+            f"Okay {Client.GENDER}! Note that, your keyboard actives will be recording till you press Escape button on your keyboard")
+        globals()['keyRecorded'] = mp.Process(target=keyactivities.keyboardRecord, args=())
+        globals()['keyRecorded'].start()
+
 
 
 
@@ -630,3 +630,4 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             # alice.speak(f"Sorry! {applicationName} shortcut didn't got in the Application folder. Please put the shortcuts of all the application do \
             # you use in day to day life in Application folder, Which is in this project folder.")
             pass
+
