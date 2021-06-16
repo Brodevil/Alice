@@ -11,7 +11,7 @@ from bs4 import BeautifulSoup
 from requests.exceptions import ConnectionError
 from Assistant.utils.exceptions import EnvFileValueError
 
-__all__ = ["internetConnection", "internet_speed", "localInfo", "weather", "temperature", "wiki"]
+__all__ = ["internetConnection", "internet_speed", "localInfo", "weather", "quick_google_search", "wiki"]
 
 load_dotenv()
 
@@ -90,6 +90,3 @@ def wiki(queary) -> str:
     except wikipedia.exceptions.PageError:
         return "Sorry! I didn't got that stuff in wikipedia"
 
-
-if __name__ == '__main__':
-    print(quick_google_search("California time"))
