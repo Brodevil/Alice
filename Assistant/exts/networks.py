@@ -68,13 +68,13 @@ def weather(location=None, apikey=(environ.get("OpenWeatherMapApi"))) -> Union[s
 
 
 
-def temperature(place=localInfo()[0]):
+def quick_google_search(search):
     """
     arg : place
     return : current temperature
     get the temperature using google
     """
-    url = f"https://www.google.com/search?q=current%20temperature%20of%20{place}"
+    url = f"https://www.google.com/search?q={search}"
     response = requests.get(url)
     data = BeautifulSoup(response.text, "html.parser")
     return data.find('div', class_="BNeawe").text
@@ -91,3 +91,5 @@ def wiki(queary) -> str:
         return "Sorry! I didn't got that stuff in wikipedia"
 
 
+if __name__ == '__main__':
+    print(quick_google_search("California time"))
