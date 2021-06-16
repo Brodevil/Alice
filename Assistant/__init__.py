@@ -79,6 +79,13 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
 
+    # this is just a quick google search
+    elif 'search' in queary:
+        queary = queary.replace("search ", "")
+        alice.speak(networks.quick_google_search(queary))
+
+
+
 
     # ---------------------------------------- quiting the program -----------------------------------
     elif "bye" in queary or 'kill yourself' in queary or 'quit' in queary:
@@ -288,11 +295,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
         # --------------------------------------- Natural Talks/ Fun commands : ----------------------------
-    elif 'is i am audio able' in queary:
-        alice.speak(random.choice(POSITIVE_REPLIES))
-
-
-    elif 'testing' in queary:
+    elif 'testing' in queary or 'is i am audio able' in queary:
         alice.speak(f"Hello {Client.GENDER}! {random.choice(POSITIVE_REPLIES)}")
 
 
@@ -327,10 +330,6 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
     elif "to kaise hain aap log" in queary:  # just for ha
         alice.speak("Hum thik hai bhai, Tum batao!..")
-
-
-    elif "yalghar" in queary:
-        alice.edge("https://www.youtube.com/watch?v=zzwRbKI2pn4")
 
 
     elif 'voices' in queary or "change your voice" in queary:
@@ -505,18 +504,19 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             alice.speak(f"{random.choice(ERROR_REPLIES)}, Check your INTERNET_CONNECTION connection {Client.GENDER}!")
 
 
-    elif 'temperature of' in queary:
-        place = queary.split("of")[1]
-        temp = networks.temperature(place)
-        alice.speak(f"{Client.GENDER}! The Current Temperature of {place} is {temp}")
-
-
-
     elif "weather report" in queary:
         alice.speak(Client.WEATHER_INFO)
 
+
     elif 'temperature' in queary:
-        alice.speak(f"The Current Temperature of {Client.CITY} is {networks.temperature(Client.CITY)}")
+        place = queary.split("of ")[-1].split()[0] if "of" in queary else ""
+        temp = networks.quick_google_search(f'Current temperature {place}')
+        alice.speak(f"The Current Temperature " + f"of {Client.CITY}" if not len(place) else "" + f" is {temp}")
+
+
+    elif 'time of' in queary or "time in" in queary:
+        place = queary.split("of " if "of" in queary else "in ")[-1].split()[0]
+        alice.speak(f"The Current Time Of {place} is {networks.quick_google_search(f'Current time of {place}')}")
 
 
     # ------------------------------------------ reminder  ----------------------------------------------
@@ -585,12 +585,13 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
                 alice.speak(
                     f"{Client.GENDER}! We didn't got {userName} in your contacts. Enter his phone number including  (+ and country code)")
                 contact_num = input("Enter the Contact Number including Country code  :\t")
+
             if "+" not in contact_num:
                 alice.speak(
-                    f"Sorry {Client.GENDER}! The contact number is invalid, Format should be +countryCode numbers")
+                    f"Sorry {Client.GENDER}! The contact number is invalid, Format should be like (+ countryCode numbers)")
                 return
 
-            alice.speak("What's the message, I should send!")
+            alice.speak("What's the message!")
             content = alice.takeCommand()
 
             if content == "None" or "let me" in content and "typ":
@@ -599,7 +600,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
                 content = input(f"Enter the Message/Content of the Email {Client.GENDER}! : \t")
 
             pywhatkit.sendwhatmsg_instantly(contact_num.replace(" ", ""), content, wait_time=1)
-            time.sleep(5)
+            time.sleep(8)
             keyboard.press("enter")
         except Exception:
             alice.speak(f"{random.choice(ERROR_REPLIES)}, Some thing went Wrong")
@@ -611,6 +612,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
     elif 'open' in queary or 'launch' in queary:
         applicationName = queary.split("open" if "open" in queary else "launch")[1]
+
         # the second argument is the related path of the folder where all the used or usable software shortcuts are available by the user
         app = workWithFiles.openApplication(applicationName, Client.APPLICATIONS_SHORTCUTS_PATH)
         if app is not None:
