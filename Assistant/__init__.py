@@ -72,10 +72,10 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         try:
             queary = queary.split("search")[-1].split("on youtube")[0]
             alice.speak("Fetching results...")
-            alice.edge(f"https://www.youtube.com/results?search_query={queary}")
         except Exception:
-            alice.speak("Sir, I didn't get that can you type that in the interminal.")
+            alice.speak("Sir, I didn't get that can you type that in the Terminal!.")
             queary = input(f"Enter the your YouTube Search {Client.GENDER}: \t")
+        finally:
             alice.edge(f"https://www.youtube.com/results?search_query={queary}")
 
 
@@ -89,7 +89,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         queary = queary.split("how to ")[-1]
         steps = search_wikihow(queary, max_results=1)
         steps[0].print()
-
+        alice.speak(steps[0].summary, _print=False)
 
 
 
@@ -185,7 +185,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
     elif 'lock pc' in queary or "lock the pc" in queary:
-        os.system("rundll32.exe user32.dll, LockWorkStation")
+        os.system("rundll32.exe user32.dll, LockWorkStation")               # noqa
         sys.exit(0)
 
 
@@ -221,8 +221,10 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
     elif 'open' in queary and "windows" in queary or "close" in queary and 'windows' in queary:
         keyboard.press_and_release("win")
 
+
     elif 'close this applications' in queary:
         keyboard.press_and_release("alt+f4")
+
 
     elif "type that" in queary or "send that" in queary:
         queary = queary.split("that")[-1]
