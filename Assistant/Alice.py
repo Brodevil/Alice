@@ -1,7 +1,6 @@
 import datetime
 import time
 from os import environ, getcwd
-import logging
 
 import PyPDF2
 import webbrowser
@@ -118,7 +117,7 @@ class Alice:
             print(f"{self.AssistantName} : Recognizing....")
             query = r.recognize_google(audio, language="en-in")
             print(f"{self.name} : {query.replace('Alice', '')}\n")
-        except Exception as error:
+        except Exception:
             print(f"{self.AssistantName} : Sorry! I didn't get that...\n")
             return "None"
         else:
@@ -159,7 +158,7 @@ class Alice:
             f"You are in the Country {Client.LOCATION[0]} and near by {Client.LOCATION[2]} which is in {Client.LOCATION[1]} Region {Client.GENDER}!. ")
 
         try:
-            self.speak(f"Battery is {Client.BATTERY_STATUS}% Charged!, " + "And its still in charging." if Client.BATTERY_PLUGGED else "", f"{Client.GENDER}! I guess you should plug out the charger now!" if Client.BATTERY_STATUS >= 95 and Client.BATTERY_PLUGGED else "", f"{Client.GENDER}! Its very low battery, Please plug in to charge" if Client.BATTERY_STATUS >= 30 and not Client.BATTERY_PLUGGED else "")
+            self.speak(f"Battery is {Client.BATTERY_STATUS}% Charged!, " + "And its still in charging. " if Client.BATTERY_PLUGGED else " " + f"{Client.GENDER}! I guess you should plug out the charger now!" if Client.BATTERY_STATUS >= 95 and Client.BATTERY_PLUGGED else "" + f"{Client.GENDER}! Its very low battery, Please plug in to charge" if Client.BATTERY_STATUS >= 30 and not Client.BATTERY_PLUGGED else "")
         except NameError:
             pass
 
