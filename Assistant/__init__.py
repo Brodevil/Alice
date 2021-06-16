@@ -352,7 +352,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         alice.speak(
             f"I am written in Python by {Client.AUTHOR}Sir!. To CONTACT him you can email at ({Client.CONTACT}), Check out his GitHub Profile You will know more about my sir")
         print(
-            f"Alice : Mr. Abhinav's  Email:{Client.CONTACT}. Github Profile :{Client.ALICE_GITHUB_REPOSITORY}. Discord Id : {Client.DISCORD_ID}")
+            f"Alice : Mr. Abhinav's  Email:{Client.CONTACT}. GitHub Profile :{Client.ALICE_GITHUB_REPOSITORY}. Discord Id : {Client.DISCORD_ID}")
 
 
 
