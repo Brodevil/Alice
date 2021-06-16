@@ -29,7 +29,6 @@ if __name__ == "__main__":
     The tasks, works and much more things get executed!
     """
 
-       
     alice.intro()               # Introduction of Alice
     DailyTasks.start()          # daily task reminding will start here using Multiprocessing
 
