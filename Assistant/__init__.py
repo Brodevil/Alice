@@ -10,6 +10,7 @@ import psutil
 from playsound import playsound
 import multiprocessing as mp
 import pywhatkit
+from pywikihow import search_wikihow
 
 from Assistant.exts import alarm  # noqa
 from Assistant.exts import networks  # noqa
@@ -82,6 +83,12 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
     elif 'search' in queary:        # this is just a quick google search, return the result
         queary = queary.replace("search ", "")
         alice.speak(networks.quick_google_search(queary))
+
+
+    elif 'how to ' in queary:
+        queary = queary.split("how to ")[-1]
+        steps = search_wikihow(queary, max_results=1)
+        steps[0].print()
 
 
 
@@ -389,7 +396,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
     elif "internet speed" in queary or "network speed" in queary or "download" in queary and 'speed' in queary or "upload" in queary and 'speed' in queary:
         alice.speak("Wait a while sir, Internet speed test might take time")
         try:
-            speed  # noqa
+            speed = speed   # noqa
         except NameError:
             speed = networks.internet_speed()
         finally:
@@ -469,7 +476,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         del sentence
 
 
-    elif 'spell' in queary:
+    elif 'spell' in queary and 'text' in queary or 'speak' in queary and 'text' in queary:
         alice.speak(f"Enter what I should spell in terminal {Client.GENDER}!")
         queary = input("Enter what I should spell :\t")
         alice.speak(queary)

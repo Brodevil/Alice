@@ -1,6 +1,7 @@
 atomicwrites==1.4.0
 attrs==21.2.0
 beautifulsoup4==4.9.3
+bs4==0.0.1
 certifi==2020.12.5
 cffi==1.14.5
 chardet==4.0.0
@@ -28,7 +29,6 @@ pluggy==0.13.1
 plyer==2.0.0
 psutil==5.8.0
 py==1.10.0
-PyAudio @ file:///M:/ADMIN/Critical%20Data/VS-Code/Alice/PyAudio-0.2.11-cp38-cp38-win_amd64.whl
 PyAutoGUI==0.9.52
 pycparser==2.20
 PyGetWindow==0.0.9
@@ -44,9 +44,11 @@ python-dotenv==0.17.1
 pyttsx3==2.90
 PyTweening==1.0.3
 pywhatkit==4.7
+pywikihow==0.5.7
 pywin32==300
 PyYAML==5.4.1
 requests==2.25.1
+requests-cache==0.6.4
 selenium==3.141.0
 six==1.16.0
 soupsieve==2.2.1
@@ -55,6 +57,7 @@ speedtest-cli==2.1.3
 tabulate==0.8.9
 toml==0.10.2
 typelib==0.0.10
+url-normalize==1.4.3
 urllib3==1.26.4
 Werkzeug==1.0.1
 wikipedia==1.4.0
