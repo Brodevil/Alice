@@ -245,7 +245,8 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
     elif 'record' in queary and 'keyboard':
         alice.speak(
             f"Okay {Client.GENDER}! Note that, your keyboard actives will be recording till you press Escape button on your keyboard")
-        globals()['keyRecorded'] = keyactivities.keyboardRecord()
+        globals()['keyRecorded'] = mp.Process(target=keyactivities.keyboardRecord, args=())
+        globals()['keyRecorded'].start()
 
 
 
@@ -258,9 +259,8 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             alice.speak(
                 f"Okay {Client.GENDER}! Playing the keyboard Activity recording, Note that have to put the cursor where you want to play it.")
             time.sleep(7)
-            keyactivities.playKeyboard(globals()["keyRecorded"])
-
-
+            recording = mp.Process(target=keyactivities.playKeyboard, args=(globals()["keyRecorded"], ))
+            recording.start()
 
 
 
