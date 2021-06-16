@@ -310,6 +310,11 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             alice.speak(f"{Client.GENDER}! Its {wish.split()[1]} Right now!")
 
 
+    elif 'time of' in queary or "time in" in queary:
+        place = queary.split("of " if "of" in queary else "in ")[-1].split()[0]
+        alice.speak(f"The Current Time Of {place} is {networks.quick_google_search(f'Current time of {place}')}")
+
+
     elif "time" in queary:
         alice.speak(f"Its {datetime.datetime.now().strftime('%I:%M %p')} {Client.GENDER}!")
 
@@ -512,10 +517,6 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         temp = networks.quick_google_search(f'Current temperature {place}')
         alice.speak(f"The Current Temperature " + f"of {Client.CITY}" if not len(place) else "" + f" is {temp}")
 
-
-    elif 'time of' in queary or "time in" in queary:
-        place = queary.split("of " if "of" in queary else "in ")[-1].split()[0]
-        alice.speak(f"The Current Time Of {place} is {networks.quick_google_search(f'Current time of {place}')}")
 
 
     # ------------------------------------------ reminder  ----------------------------------------------
