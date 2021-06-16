@@ -79,8 +79,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
 
-    # this is just a quick google search
-    elif 'search' in queary:
+    elif 'search' in queary:        # this is just a quick google search, return the result
         queary = queary.replace("search ", "")
         alice.speak(networks.quick_google_search(queary))
 
