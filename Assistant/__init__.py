@@ -215,6 +215,14 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         keyboard.press_and_release("ctrl+w")
 
 
+    elif 'volume' in queary:
+        pass
+
+
+    elif 'mute' in queary:
+        pass
+
+
 
     # ----------------------- make Alice to type, Keyboard features, working with keyboards------------------------------
     elif 'open' in queary and "windows" in queary or "close" in queary and 'windows' in queary:
@@ -464,19 +472,12 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
     # ------------------------------------- work with git just for Abhinav :-----------------------------
     elif 'push the code' in queary or "git commit" in queary:
-        try:
-            alice.speak("Commit and then pushing the code in github repository....")
-            login.initialCommit(os.getcwd())
-        except Exception:
-            alice.speak(f"Something went wrong! {random.choice(ERROR_REPLIES)}")
+        alice.speak("Commit and then pushing the code in github repository....")
+        login.initialCommit(os.getcwd())
 
 
     elif 'git status' in queary:
-        try:
-            os.system("git status")
-        except Exception:
-            alice.speak(f"Something went wrong! {random.choice(ERROR_REPLIES)}")
-
+        os.system("git status")
 
 
 
