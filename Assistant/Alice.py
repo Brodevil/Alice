@@ -35,7 +35,6 @@ class Alice:
         self.AssistantName = Client.ASSISTANT_NAME
 
         self.city = environ.get("LOCATION", localInfo())  # Data From (.env)
-        self.voice = Client.VOICE
         self.voiceSpeed = Client.VOICE_RATE
 
     @staticmethod
@@ -87,7 +86,7 @@ class Alice:
          """
 
         engine = pyttsx3.init('sapi5')
-        engine.setProperty("voice", Client.VOICES[self.voice - 1])
+        engine.setProperty("voice", Client.VOICES[Client.VOICE - 1])
         engine.setProperty("rate", self.voiceSpeed)
         if _print:
             print("{0} : {1:}\n".format(self.AssistantName, *args))
