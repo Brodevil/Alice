@@ -224,7 +224,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         if 'up' in queary or 'increase' in queary:
             keyactivities.volume_control(how_much=rate, increase=True)
 
-        elif 'down' in queary and 'decrease' in queary:
+        elif 'down' in queary or 'decrease' in queary:
             keyactivities.volume_control(how_much=rate, decrease=True)
 
 

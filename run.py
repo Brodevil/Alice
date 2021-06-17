@@ -5,7 +5,7 @@ if internetConnection() is False:
     raise InternetException("Alice works with INTERNET, Please get connected with INTERNET.")
 
 import multiprocessing
-from os import getcwd
+from os import getcwd, startfile
 import Assistant
 from Assistant import alice
 from Assistant.exts.workWithFiles import DailyWorksExel
