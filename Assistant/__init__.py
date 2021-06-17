@@ -357,8 +357,11 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
     elif 'change' in queary and "voice" in queary:
-        Client.VOICE += 1 if Client.VOICE <= len(Client.VOICES) else -1
-        alice.speak(f"Hey {Client.GENDER}! How did you like this voice, Is is okay.")
+        if Client.VOICE <= len(Client.VOICES)-1:
+            Client.VOICE += 1
+        else:
+            Client.VOICE = 1
+        alice.speak(f"Hey {Client.GENDER}! How did you like this voice, Is this okay.")
 
 
     elif 'thank you' in queary or 'thanks' in queary:
