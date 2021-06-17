@@ -29,6 +29,7 @@ pluggy==0.13.1
 plyer==2.0.0
 psutil==5.8.0
 py==1.10.0
+PyAudio @ file:///M:/ADMIN/Critical%20Data/VS-Code/Alice/PyAudio-0.2.11-cp38-cp38-win_amd64.whl
 PyAutoGUI==0.9.52
 pycparser==2.20
 PyGetWindow==0.0.9
@@ -49,6 +50,7 @@ pywin32==300
 PyYAML==5.4.1
 requests==2.25.1
 requests-cache==0.6.4
+screen-brightness-control==0.8.6
 selenium==3.141.0
 six==1.16.0
 soupsieve==2.2.1
@@ -61,4 +63,5 @@ url-normalize==1.4.3
 urllib3==1.26.4
 Werkzeug==1.0.1
 wikipedia==1.4.0
+WMI==1.5.1
 xlwt==1.3.0
