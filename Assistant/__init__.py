@@ -242,25 +242,25 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
 
-    elif 'play' in queary and 'keyboard' in queary and 'record':  # play my recorded keyboard/play keyboard recording/etc
+    elif 'play' in queary and 'keyboard' in queary and 'record':    # play my recorded keyboard/play keyboard recording/etc
         try:
-            globals()["keyRecorded"]
+            globals()['keyRecorded'] = globals()['keyRecorded']   # noqa
         except NameError:
             alice.speak(f"{Client.GENDER}! there is no keyboard Activity available till now")
         else:
             alice.speak(
                 f"Okay {Client.GENDER}! Playing the keyboard Activity recording, Note that have to put the cursor where you want to play it.")
             time.sleep(3)
-            globals()['keyRecorded'] = mp.Process(target=keyactivities.playKeyboard, args=(globals()["keyRecorded"], ))
-            globals()['keyRecorded'].start()
-            del globals()['keyRecorded']
+            keyactivities.playKeyboard(globals()['keyRecorded'])
+
+
 
 
     elif 'record' in queary and 'keyboard':
         alice.speak(
             f"Okay {Client.GENDER}! Note that, your keyboard activities will be recording till you press Escape button on your keyboard")
-        globals()['keyRecorded'] = mp.Process(target=keyactivities.keyboardRecord, args=())
-        globals()['keyRecorded'].start()
+        globals()['keyRecorded'] = keyactivities.keyboardRecord()
+
 
 
 
@@ -315,7 +315,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
     elif 'hello' in queary or queary == "alice":
-        alice.speak(f"Hello {Client.GENDER}! how may I can help you.")
+        alice.speak(f"{'Hello' if random.randint(1, 2) == 1 else alice.goodWish} {Client.GENDER}! I am Alice, how may I can help you.")
 
 
     elif 'good' in queary and 'afternoon' in queary or 'evening' in queary or 'morning' in queary:
@@ -418,19 +418,17 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
 
-    elif "internet info" in queary or "network info" in queary:
+    elif "internet" in queary or "network" in queary:
         try:
-            alice.speak("Internet is connected! with", Client.NETWORK)
+            if Client.INTERNET_CONNECTION:
+                alice.speak(f"Yes {Client.GENDER}! Internet is connected")
+                alice.speak("Internet is connected! with", Client.NETWORK)
+            else:
+                alice.speak(
+                    f"No {Client.GENDER}! Internet is not connected, But I don't know How I am working without INTERNET CONNECTION, lol\nActive INTERNET CONNECTION is needed to run Alice")
         except NameError:
             alice.speak(random.choice(ERROR_REPLIES), "Some thing went wrong!")
 
-
-    elif 'internet' in queary:
-        if Client.INTERNET_CONNECTION:
-            alice.speak(f"Yes {Client.GENDER}! Internet is connected")
-        else:
-            alice.speak(
-                f"No {Client.GENDER}! Internet is not connected, But I don't know How I am working without INTERNET CONNECTION, lol\nActive INTERNET CONNECTION is needed to run Alice")
 
 
     elif 'ip' in queary and 'address' in queary:
@@ -622,13 +620,15 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             if content == "None" or "let me" in content and "typ":
                 alice.speak(
                     "Sorry, I didn't get that!, Can you please type the message in the terminal!" if content == "None" else f"Okay {Client.GENDER}! You can ofcourse type the message on your own in the terminal!")
-                content = input(f"Enter the Message/Content of the Email {Client.GENDER}! : \t")
+                contact_num = input(f"Enter the Message/Content of the Email {Client.GENDER}! : \t")
 
             pywhatkit.sendwhatmsg_instantly(contact_num.replace(" ", ""), content, wait_time=1)
             time.sleep(8)
             keyboard.press("enter")
         except Exception:
             alice.speak(f"{random.choice(ERROR_REPLIES)}, Some thing went Wrong")
+        else:
+            alice.speak(f"Whatsapp Messages SuccessFully Send to {contact_num}")
 
 
 
