@@ -253,6 +253,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             time.sleep(3)
             globals()['keyRecorded'] = mp.Process(target=keyactivities.playKeyboard, args=(globals()["keyRecorded"], ))
             globals()['keyRecorded'].start()
+            del globals()['keyRecorded']
 
 
     elif 'record' in queary and 'keyboard':
@@ -307,6 +308,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         os.startfile("")
 
 
+
         # --------------------------------------- Natural Talks/ Fun commands : ----------------------------
     elif 'testing' in queary or 'is i am audio able' in queary:
         alice.speak(f"Hello {Client.GENDER}! {random.choice(POSITIVE_REPLIES)}")
@@ -350,8 +352,13 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         alice.speak("Hum thik hai bhai, Tum batao!..")
 
 
-    elif 'voices' in queary or "change your voice" in queary:
+    elif "how many voices" in queary:
         alice.severalVoices(voicesId=Client.VOICES)
+
+
+    elif 'change' in queary and "voice" in queary:
+        Client.VOICE += 1 if Client.VOICE <= len(Client.VOICES) else -1
+        alice.speak(f"Hey {Client.GENDER}! How did you like this voice, Is is okay.")
 
 
     elif 'thank you' in queary or 'thanks' in queary:
