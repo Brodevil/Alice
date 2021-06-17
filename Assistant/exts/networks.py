@@ -67,7 +67,6 @@ def weather(location=None, apikey=(environ.get("OpenWeatherMapApi"))) -> Union[s
                 "your api key is wrong please recheck your api key and put it in .env file as `OpenWeatherMapApi=(your api key)` go through the `Run Alice.md` file on github `https://github.com/Brodevil/Alice/blob/main/Run%20Alice.md`")
 
 
-
 def quick_google_search(search):
     """
     arg : place
@@ -90,3 +89,6 @@ def wiki(queary) -> str:
     except wikipedia.exceptions.PageError:
         return "Sorry! I didn't got that stuff in wikipedia"
 
+
+def ip_address():
+    return requests.get("https://api.ipify.org").text
