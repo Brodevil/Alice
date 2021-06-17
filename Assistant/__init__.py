@@ -267,8 +267,10 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
     # -------------------------------------Music---------------------------------------------------
     elif "play" in queary and "music" in queary or "song" in queary and "music" in queary:
         music = os.listdir(Client.MUSIC_DIRECTORY)
-        os.startfile(os.path.join(Client.MUSIC_DIRECTORY, random.choice(music)))
-        alice.speak("Playing Music...")
+        music = os.path.join(Client.MUSIC_DIRECTORY, random.choice(music))
+        if music.endswith(".mp3"):
+            os.startfile(music)
+            alice.speak("Playing Music...")
 
 
     elif 'brown munde' in queary:  # this function is just for my self i.e. For Abhinav personal songs
@@ -300,6 +302,9 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         alice.speak("Deleting unwanted files...")
         workWithFiles.deleteUnwantedFiles()
 
+
+    elif 'alice path' in queary:
+        os.startfile("")
 
 
         # --------------------------------------- Natural Talks/ Fun commands : ----------------------------
@@ -419,6 +424,11 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         else:
             alice.speak(
                 f"No {Client.GENDER}! Internet is not connected, But I don't know How I am working without INTERNET CONNECTION, lol\nActive INTERNET CONNECTION is needed to run Alice")
+
+
+    elif 'ip' in queary and 'address' in queary:
+        alice.speak(f"{Client.GENDER}! You Current IP Address is : {networks.ip_address()}")
+
 
 
     elif 'system' in queary or 'computer info' in queary:
