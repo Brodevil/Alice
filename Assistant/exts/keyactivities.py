@@ -26,7 +26,7 @@ def playKeyboard(record) -> None:
     keyboard.play(record, speed_factor=5)
 
 
-def volume_control(how_much=10, increase=False, decrease=False, mute=False):
+def volume_control(how_much, increase=False, decrease=False, mute=False) -> None:
     for _ in range(how_much//2):
         if increase:
             pyautogui.press("volumeup")
