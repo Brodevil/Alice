@@ -11,6 +11,7 @@ from playsound import playsound
 import multiprocessing as mp
 import pywhatkit
 from pywikihow import search_wikihow
+import screen_brightness_control as sbc
 
 from Assistant.exts import alarm  # noqa
 from Assistant.exts import networks  # noqa
@@ -32,7 +33,6 @@ side_reminder = list()
 
 def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
     """This is the logic of the Program as it will be matching several query and do the programmed task """
-
 
     # ---------------------- fetching info from INTERNET ---------------------------------------
     if 'search' in queary and 'on wikipedia' in queary:
@@ -79,7 +79,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
 
-    elif 'search' in queary:        # this is just a quick google search, return the result
+    elif 'search' in queary:  # this is just a quick google search, return the result
         queary = queary.replace("search ", "")
         alice.speak(networks.quick_google_search(queary))
 
@@ -184,7 +184,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
     elif 'lock pc' in queary or "lock the pc" in queary:
-        os.system("rundll32.exe user32.dll, LockWorkStation")               # noqa
+        os.system("rundll32.exe user32.dll, LockWorkStation")  # noqa
         sys.exit(0)
 
 
@@ -216,11 +216,39 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
     elif 'volume' in queary:
-        pass
+        if queary.isalnum():
+            rate = [_ for _ in queary.split() if _.isnumeric()][0]
+        else:
+            rate = 10
+
+        if 'up' in queary or 'increase' in queary:
+            keyactivities.volume_control(how_much=rate, increase=True)
+
+        elif 'down' in queary and 'decrease' in queary:
+            keyactivities.volume_control(how_much=rate, decrease=True)
 
 
     elif 'mute' in queary:
-        pass
+        keyactivities.volume_control(how_much=0, mute=True)
+
+
+    elif 'screen' in queary and 'bright' in queary:
+        try:
+            if queary.isalnum():
+                rate = [_ for _ in queary.split() if _.isnumeric()][0]
+            else:
+                rate = 10
+
+            current_brightness = sbc.get_brightness()
+
+            if 'increase' in queary or 'more' in queary:
+                sbc.set_brightness(current_brightness + rate)
+
+            elif 'decrease' in queary or 'less' in queary:
+                sbc.set_brightness(current_brightness - rate)
+
+        except Exception:
+            alice.speak(random.choice(ERROR_REPLIES), "Something went Wrong!")
 
 
 
@@ -250,9 +278,9 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
 
-    elif 'play' in queary and 'keyboard' in queary and 'record':    # play my recorded keyboard/play keyboard recording/etc
+    elif 'play' in queary and 'keyboard' in queary and 'record':  # play my recorded keyboard/play keyboard recording/etc
         try:
-            globals()['keyRecorded'] = globals()['keyRecorded']   # noqa
+            globals()['keyRecorded'] = globals()['keyRecorded']  # noqa
         except NameError:
             alice.speak(f"{Client.GENDER}! there is no keyboard Activity available till now")
         else:
@@ -315,15 +343,14 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
     elif 'alice path' in queary:
         os.startfile("")
 
-
-
         # --------------------------------------- Natural Talks/ Fun commands : ----------------------------
     elif 'testing' in queary or 'is i am audio able' in queary:
         alice.speak(f"Hello {Client.GENDER}! {random.choice(POSITIVE_REPLIES)}")
 
 
     elif 'hello' in queary or queary == "alice":
-        alice.speak(f"{'Hello' if random.randint(1, 2) == 1 else alice.goodWish} {Client.GENDER}! I am Alice, how may I can help you.")
+        alice.speak(
+            f"{'Hello' if random.randint(1, 2) == 1 else alice.goodWish} {Client.GENDER}! I am Alice, how may I can help you.")
 
 
     elif 'good' in queary and 'afternoon' in queary or 'evening' in queary or 'morning' in queary:
@@ -365,7 +392,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
     elif 'change' in queary and "voice" in queary:
-        if Client.VOICE <= len(Client.VOICES)-1:
+        if Client.VOICE <= len(Client.VOICES) - 1:
             Client.VOICE += 1
         else:
             Client.VOICE = 1
@@ -421,7 +448,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
     elif "internet speed" in queary or "network speed" in queary or "download" in queary and 'speed' in queary or "upload" in queary and 'speed' in queary:
         alice.speak("Wait a while sir, Internet speed test might take time")
         try:
-            speed = speed   # noqa
+            speed = speed  # noqa
         except NameError:
             speed = networks.internet_speed()
         finally:
@@ -486,7 +513,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         queary = queary.split("say" if 'say' in queary else "speak")[-1]
         alice.speak(queary)
 
-    elif 'start following m' in queary:         # start following me or my voice both starts from m
+    elif 'start following m' in queary:  # start following me or my voice both starts from m
         alice.speak("I will be now following your while repeating yourself, say stop to quit this")
         sentence = str()
         while "stop" not in sentence and "quit" not in sentence and "break" not in sentence:
@@ -650,4 +677,3 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             # alice.speak(f"Sorry! {applicationName} shortcut didn't got in the Application folder. Please put the shortcuts of all the application do \
             # you use in day to day life in Application folder, Which is in this project folder.")
             pass
-
