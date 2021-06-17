@@ -250,14 +250,14 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         else:
             alice.speak(
                 f"Okay {Client.GENDER}! Playing the keyboard Activity recording, Note that have to put the cursor where you want to play it.")
-            time.sleep(7)
-            recording = mp.Process(target=keyactivities.playKeyboard, args=(globals()["keyRecorded"], ))
-            recording.start()
+            time.sleep(3)
+            globals()['keyRecorded'] = mp.Process(target=keyactivities.playKeyboard, args=(globals()["keyRecorded"], ))
+            globals()['keyRecorded'].start()
 
 
     elif 'record' in queary and 'keyboard':
         alice.speak(
-            f"Okay {Client.GENDER}! Note that, your keyboard actives will be recording till you press Escape button on your keyboard")
+            f"Okay {Client.GENDER}! Note that, your keyboard activities will be recording till you press Escape button on your keyboard")
         globals()['keyRecorded'] = mp.Process(target=keyactivities.keyboardRecord, args=())
         globals()['keyRecorded'].start()
 
@@ -428,7 +428,6 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
     elif 'ip' in queary and 'address' in queary:
         alice.speak(f"{Client.GENDER}! You Current IP Address is : {networks.ip_address()}")
-
 
 
     elif 'system' in queary or 'computer info' in queary:
