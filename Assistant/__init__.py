@@ -414,7 +414,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
     elif 'idle mood' in queary:
-        os.startfile(os.path.join(Client.ALICE_PATH, "Assistant//resources//images//Ribbons.scr"))
+        os.startfile(os.path.join(Client.ALICE_PATH, "Assistant\\resources\\images\\Ribbons.scr"))
 
 
 
