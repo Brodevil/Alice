@@ -1,6 +1,7 @@
 import datetime
 import time
-from os import environ, getcwd
+from os import environ, getcwd, system
+from tkinter import Tk
 
 import PyPDF2
 import webbrowser
@@ -10,7 +11,7 @@ import winsound
 import speech_recognition as sr
 import pyttsx3
 from dotenv import load_dotenv
-from tkinter.filedialog import askopenfilename 
+from tkinter.filedialog import askopenfilename
 
 from Assistant.exts.networks import localInfo  # noqa
 from Assistant.exts.alarm import notifier  # noqa
@@ -157,7 +158,7 @@ class Alice:
             f"You are in the Country {Client.LOCATION[0]} and near by {Client.LOCATION[2]} which is in {Client.LOCATION[1]} Region {Client.GENDER}!. ")
 
         try:
-            self.speak(f"Battery is {Client.BATTERY_STATUS}% Charged! ",  "And its still in charging. " if Client.BATTERY_PLUGGED else " ")
+            self.speak(f"Battery is {Client.BATTERY_STATUS}% Charged! " + "And its still in charging. " if Client.BATTERY_PLUGGED else " ")
             if Client.BATTERY_STATUS >= 95 and Client.BATTERY_PLUGGED:
                 self.speak(f"{Client.GENDER}! I guess you should plug out the charger now!") 
             
@@ -200,7 +201,11 @@ class Alice:
     @staticmethod
     def audioBook(fromPageNo=0):
         """ Function to read the pdf and save the audio in a mp3 file at the same directory where the pdf located """
+        root = Tk()
+        root.withdraw()
+        root.update()
         pdfPath = askopenfilename(mode='r', defaultextension=".pdf")
+        root.destroy()
         full_Text = str()
         if pdfPath is None:  # this condition happened when the user will click cancel
             return None
@@ -251,6 +256,14 @@ class Alice:
                     self.speak(
                         f"{Client.GENDER}! Your Current task : {work}")
                     time.sleep(62)
+
+
+    # @staticmethod
+    # def closeApps(application):
+    #     elif 'discord' in application:
+    #         system()
+
+
 
 
 # Object for the Alice class
