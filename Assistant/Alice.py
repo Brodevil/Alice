@@ -89,7 +89,7 @@ class Alice:
         engine.setProperty("voice", Client.VOICES[Client.VOICE - 1])
         engine.setProperty("rate", self.voiceSpeed)
         if _print:
-            print("{0} : {1:}\n".format(self.AssistantName, *args))
+            print("{0} : {1}\n".format(self.AssistantName, *args))
         engine.say(" ".join(args))
         engine.runAndWait()
 
@@ -157,7 +157,13 @@ class Alice:
             f"You are in the Country {Client.LOCATION[0]} and near by {Client.LOCATION[2]} which is in {Client.LOCATION[1]} Region {Client.GENDER}!. ")
 
         try:
-            self.speak(f"Battery is {Client.BATTERY_STATUS}% Charged!, " + "And its still in charging. " if Client.BATTERY_PLUGGED else " " + f"{Client.GENDER}! I guess you should plug out the charger now!" if Client.BATTERY_STATUS >= 95 and Client.BATTERY_PLUGGED else "" + f"{Client.GENDER}! Its very low battery, Please plug in to charge" if Client.BATTERY_STATUS >= 30 and not Client.BATTERY_PLUGGED else "")
+            self.speak(f"Battery is {Client.BATTERY_STATUS}% Charged! ",  "And its still in charging. " if Client.BATTERY_PLUGGED else " ")
+            if Client.BATTERY_STATUS >= 95 and Client.BATTERY_PLUGGED:
+                self.speak(f"{Client.GENDER}! I guess you should plug out the charger now!") 
+            
+            elif Client.BATTERY_STATUS <= 35 and not Client.BATTERY_PLUGGED:
+                self.speak(f"{Client.GENDER}! You should Plug in the changer because Currently its very low battery!")
+
         except NameError:
             pass
 
