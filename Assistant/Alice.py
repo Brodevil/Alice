@@ -158,7 +158,7 @@ class Alice:
             f"You are in the Country {Client.LOCATION[0]} and near by {Client.LOCATION[2]} which is in {Client.LOCATION[1]} Region {Client.GENDER}!. ")
 
         try:
-            self.speak(f"Battery is {Client.BATTERY_STATUS}% Charged! " + "And its still in charging. " if Client.BATTERY_PLUGGED else " ")
+            self.speak(f"Battery is {Client.BATTERY_STATUS}% Charged!", "And its still in charging. " if Client.BATTERY_PLUGGED else " ")
             if Client.BATTERY_STATUS >= 95 and Client.BATTERY_PLUGGED:
                 self.speak(f"{Client.GENDER}! I guess you should plug out the charger now!") 
             

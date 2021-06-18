@@ -113,22 +113,22 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
     elif 'open youtube' in queary:
         alice.speak("Opening youtube...")
-        webbrowser.open("youtube.com")
+        alice.edge("https://www.youtube.com")
 
 
     elif 'open google' in queary:
         alice.speak("Opening google...")
-        alice.edge("google.com")
+        alice.edge("https://www.google.com")
 
 
     elif 'open stack overflow' in queary:
         alice.speak("Opening stackoverflow...")
-        alice.edge("stackoverflow.com")
+        alice.edge("https://stackoverflow.com")
 
 
     elif 'your code' in queary:
         alice.speak("Opening Github repository.....")
-        alice.edge("github.com/Brodevil/Alice")
+        alice.edge("https://github.com/Brodevil/Alice")
 
 
     elif 'open github' in queary:
@@ -346,13 +346,12 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
     elif 'testing' in queary or 'is i am audio able' in queary:
         alice.speak(f"Hello {Client.GENDER}! {random.choice(POSITIVE_REPLIES)}")
 
-
-    elif 'hello' in queary or queary == "alice":
+    elif 'hello' in queary or queary == "alice" or "your" in queary and "name" in queary:
         alice.speak(
             f"{'Hello' if random.randint(1, 2) == 1 else alice.goodWish} {Client.GENDER}! I am Alice, how may I can help you.")
 
 
-    elif 'good' in queary and 'afternoon' in queary or 'evening' in queary or 'morning' in queary:
+    elif 'good afternoon' in queary or 'good evening' in queary or 'good morning' in queary:
         wish = alice.goodWish
         if wish.lower() in queary:
             alice.speak(f"{wish} {Client.GENDER}!")
@@ -430,7 +429,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             battery = None
 
         if battery is not None:
-            alice.speak(f"Battery is {Client.BATTERY_STATUS}% Charged! " + "And its still in charging. " if Client.BATTERY_PLUGGED else " ")
+            alice.speak(f"Battery is {Client.BATTERY_STATUS}% Charged! ", "And its still in charging. " if Client.BATTERY_PLUGGED else " ")
             if Client.BATTERY_STATUS >= 95 and Client.BATTERY_PLUGGED:
                 alice.speak(f"{Client.GENDER}! I guess you should plug out the charger now!")
 
