@@ -290,8 +290,6 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             keyactivities.playKeyboard(globals()['keyRecorded'])
 
 
-
-
     elif 'record' in queary and 'keyboard':
         alice.speak(
             f"Okay {Client.GENDER}! Note that, your keyboard activities will be recording till you press Escape button on your keyboard")
@@ -415,8 +413,8 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             f"Alice : Mr. Abhinav's  Email:{Client.CONTACT}. GitHub Profile :{Client.ALICE_GITHUB_REPOSITORY}. Discord Id : {Client.DISCORD_ID}")
 
 
-    elif 'idle mod' in queary:
-        os.startfile("Media//Ribbons.scr")
+    elif 'idle mood' in queary:
+        os.startfile(os.path.join(Client.ALICE_PATH, "Media//Ribbons.scr"))
 
 
 
