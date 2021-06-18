@@ -15,7 +15,7 @@ class VisualMedia:
     @staticmethod
     def screen_shorts(name=None) -> None:
         if name is None:
-            name = f"Alice Screenshot ({datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S')})"
+            name = f"Screenshot ({datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S')})"
 
         image = screenshot()
         file_path = join(Client.ALICE_PATH, f"Media\\Images\\{name}.png")
