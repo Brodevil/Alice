@@ -5,7 +5,7 @@ if internetConnection() is False:
     raise InternetException("Alice works with INTERNET, Please get connected with INTERNET.")
 
 import multiprocessing
-from os import getcwd, startfile
+from os import getcwd, startfile, path
 import Assistant
 from Assistant import alice
 from Assistant.exts.workWithFiles import DailyWorksExel
@@ -39,7 +39,8 @@ if __name__ == "__main__":
 
         if 'sleep' in queary or 'take a break' in queary:
             alice.speak(f"{Client.GENDER}! I am going to sleep while you don't wake up me")
-            startfile("Media//Ribbons.scr")
+            startfile(path.join(Client.ALICE_PATH, "Media//Ribbons.scr"))
+
             while 'wake up' not in queary and 'back to work' not in queary:
                 queary = alice.takeCommand()
             else:
