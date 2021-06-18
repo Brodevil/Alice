@@ -414,7 +414,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
     elif 'idle mood' in queary:
-        os.startfile(os.path.join(Client.ALICE_PATH, "Media//Ribbons.scr"))
+        os.startfile(os.path.join(Client.ALICE_PATH, "Assistant//resources//images//Ribbons.scr"))
 
 
 
@@ -430,10 +430,12 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             battery = None
 
         if battery is not None:
-            alice.speak(
-                f"Battery is {Client.BATTERY_STATUS}% Charged!, " + "And its still in charging." if Client.BATTERY_PLUGGED else "",
-                f"{Client.GENDER}! I guess you should plug out the charger now!" if Client.BATTERY_STATUS >= 95 and Client.BATTERY_PLUGGED else "",
-                f"{Client.GENDER}! Its very low battery, Please plug in to charge" if Client.BATTERY_STATUS >= 30 and not Client.BATTERY_PLUGGED else "")
+            alice.speak(f"Battery is {Client.BATTERY_STATUS}% Charged! " + "And its still in charging. " if Client.BATTERY_PLUGGED else " ")
+            if Client.BATTERY_STATUS >= 95 and Client.BATTERY_PLUGGED:
+                alice.speak(f"{Client.GENDER}! I guess you should plug out the charger now!")
+
+            elif Client.BATTERY_STATUS <= 35 and not Client.BATTERY_PLUGGED:
+                alice.speak(f"{Client.GENDER}! You should Plug in the changer because Currently its very low battery!")
         else:
             alice.speak(f"Something went wrong {random.choice(ERROR_REPLIES)}. I think you are in desktop")
 
@@ -461,8 +463,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
     elif "internet" in queary or "network" in queary:
         try:
             if Client.INTERNET_CONNECTION:
-                alice.speak(f"Yes {Client.GENDER}! Internet is connected")
-                alice.speak("Internet is connected! with", Client.NETWORK)
+                alice.speak(f"Internet is connected! with  {Client.NETWORK}")
             else:
                 alice.speak(
                     f"No {Client.GENDER}! Internet is not connected, But I don't know How I am working without INTERNET CONNECTION, lol\nActive INTERNET CONNECTION is needed to run Alice")
@@ -472,7 +473,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
     elif 'ip' in queary and 'address' in queary:
-        alice.speak(f"{Client.GENDER}! You Current IP Address is : {networks.ip_address()}")
+        alice.speak(f"{Client.GENDER}! You Current IPv4 Address is : {networks.ip_address()}")
 
 
     elif 'system' in queary or 'computer info' in queary:
@@ -644,7 +645,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
             if "+" not in contact_num:
                 alice.speak(
-                    f"Sorry {Client.GENDER}! The contact number is invalid, Format should be like (+ countryCode numbers)")
+                    f"Sorry {Client.GENDER}! The contact number is invalid, Format should be like (+ and country Code and numbers)")
                 return
 
             alice.speak("What's the message!")
