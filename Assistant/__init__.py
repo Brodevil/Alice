@@ -343,7 +343,8 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
     elif 'alice path' in queary:
         os.startfile("")
 
-        # --------------------------------------- Natural Talks/ Fun commands : ----------------------------
+
+    # --------------------------------------- Natural Talks/ Fun commands : ----------------------------
     elif 'testing' in queary or 'is i am audio able' in queary:
         alice.speak(f"Hello {Client.GENDER}! {random.choice(POSITIVE_REPLIES)}")
 
@@ -413,6 +414,9 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         print(
             f"Alice : Mr. Abhinav's  Email:{Client.CONTACT}. GitHub Profile :{Client.ALICE_GITHUB_REPOSITORY}. Discord Id : {Client.DISCORD_ID}")
 
+
+    elif 'idle mod' in queary:
+        os.startfile("Media//Ribbons.scr")
 
 
 
