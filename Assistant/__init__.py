@@ -221,10 +221,6 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         keyboard.press_and_release("ctrl+win+left")
 
 
-    elif 'close this website' in queary or 'close the webpage' in queary:
-        keyboard.press_and_release("ctrl+w")
-
-
     elif 'volume' in queary:
         if queary.isalnum():
             rate = sum([_ for _ in queary.split() if _.isnumeric()])
@@ -265,16 +261,18 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
     # ----------------------- make Alice to type, Keyboard features, working with keyboards------------------------------
 
+    elif 'close this website' in queary or 'close the webpage' in queary:
+        keyboard.press_and_release("ctrl+w")
+
     elif 'open' in queary and "windows" in queary or "close" in queary and 'windows' in queary:
         keyboard.press_and_release("win")
-
 
     elif 'close this applications' in queary:
         keyboard.press_and_release("alt+f4")
 
 
-    elif "type that" in queary or "send that" in queary:
-        queary = queary.split("that")[-1]
+    elif "type" in queary:
+        queary = queary.split("type")[-1]
         keyactivities.typeWrite(queary)
         keyboard.press("enter")
 
@@ -474,7 +472,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
     elif "internet" in queary or "network" in queary:
         try:
             if Client.INTERNET_CONNECTION:
-                alice.speak(f"Internet is connected! with  {Client.NETWORK}")
+                alice.speak(f"Internet is connected! with {Client.NETWORK}")
             else:
                 alice.speak(
                     f"No {Client.GENDER}! Internet is not connected, But I don't know How I am working without INTERNET CONNECTION, lol\nActive INTERNET CONNECTION is needed to run Alice")
@@ -688,6 +686,12 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             pass
 
 
+    elif 'close' in queary:
+        queary = queary.split("close ")[-1]
+        alice.closeApps(application=queary)
+
+
+
 
 
     # --------------------------------------------- Media -------------------------------------------------------------
@@ -697,5 +701,6 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         if 'default' in name:
             name = None
         VisualMedia.screen_shorts(name=name)
+        alice.speak("ScreenShot Saved! In Media folder of Alice Project.")
 
 
