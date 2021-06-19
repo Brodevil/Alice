@@ -20,7 +20,7 @@ class VisualMedia:
         image = screenshot()
         file_path = join(Client.ALICE_PATH, f"Media\\Images\\{name}.png")
         image.save(file_path)
-        Popen(f'explorer , "{file_path}"')
+        Popen(f'explorer  /select, "{file_path}"')
 
 
 
