@@ -25,9 +25,9 @@
 rough.py
 
 
-
 # personal contact info
 contactinfo.xlsx
+
 
 # Cached python files extensions
 *.pyc 
@@ -50,6 +50,16 @@ Applications/Rapid Typing.lnk
 ~$contactinfo.xlsx
 ~$DailyWorks.xlsx
 pywhatkit_dbs.txt
+
+
+
+# Media created by Alice
+*.png
+*.jpg
+*.mp3
+*.mp4
+*.jpeg
+
 
 
 
