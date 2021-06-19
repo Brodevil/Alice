@@ -1,6 +1,6 @@
 from pyautogui import screenshot
 from os.path import join
-from subprocess import Popen
+from os import system
 from Assistant.constants import Client
 import datetime
 
@@ -20,7 +20,7 @@ class VisualMedia:
         image = screenshot()
         file_path = join(Client.ALICE_PATH, f"Media\\Images\\{name}.png")
         image.save(file_path)
-        Popen(f'explorer  /select, "{file_path}"')
+        system(f'explorer  /select, "{file_path}"')
 
 
 
