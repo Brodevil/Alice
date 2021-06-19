@@ -159,3 +159,14 @@ POSITIVE_REPLIES = [
     "Aye aye, cap'n!",
     "I'll allow it.",
 ]
+
+
+WELCOME = [
+    "Your're most welcome anything else you did like me to do",
+    "I am to please", 
+    "My pleasure {Client.GENDER}!",
+    "You're very welcome",
+    "I'm just doing my job, But again Your most Welcome",
+    "I'm here to help please let me know if you need anything else",
+    "Thank you for the thank you, nice to be acknowledged"
+]
