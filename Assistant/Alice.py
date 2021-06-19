@@ -94,7 +94,7 @@ class Alice:
         engine.say(" ".join(args))
         engine.runAndWait()
 
-    def takeCommand(self, string):
+    def takeCommand(self, string=None):
         """
         The not having any parameter but it taking the input form the microphone of the user
         and return the string object that the user says
@@ -105,7 +105,9 @@ class Alice:
         behind the seen the function takes google's api to recognize the audio,
         so indirectly Alice will needed to be online for working properly.
         """
-        self.speak(string)
+        if string is not None:
+            self.speak(string)
+        
         r = sr.Recognizer()
         with sr.Microphone() as source:
             print(f"{self.AssistantName}: Listening....")
