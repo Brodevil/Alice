@@ -189,10 +189,16 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
     elif 'shutdown pc' in queary:
-        os.startfile(r"C:\Windows\System32\SlideToShutDown.exe")
-        alice.speak("Shutting down pc....")
-        time.sleep(1)
-        keyboard.press_and_release("enter")
+        try:
+            os.startfile(r"C:\Windows\System32\SlideToShutDown.exe")
+        except FileNotFoundError:
+            os.system("shutdown /s /t 1")
+
+        finally:
+            alice.speak("Shutting down pc....")
+            time.sleep(1)
+            keyboard.press_and_release("enter")
+
 
 
     elif 'restart pc' in queary:
@@ -252,7 +258,9 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
 
+
     # ----------------------- make Alice to type, Keyboard features, working with keyboards------------------------------
+
     elif 'open' in queary and "windows" in queary or "close" in queary and 'windows' in queary:
         keyboard.press_and_release("win")
 
