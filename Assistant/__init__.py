@@ -4,7 +4,7 @@ import time
 import keyboard
 import random
 import sys
-import webbrowser
+
 
 import psutil
 from playsound import playsound
@@ -13,14 +13,15 @@ import pywhatkit
 from pywikihow import search_wikihow
 import screen_brightness_control as sbc
 
-from Assistant.exts import alarm  # noqa
-from Assistant.exts import networks  # noqa
-from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client  # noqa
+from Assistant.exts import alarm
+from Assistant.exts import networks
+from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client
+from Assistant.exts.visual_media import VisualMedia
 
-from Assistant.utils import login  # noqa
-from Assistant.Alice import alice  # noqa
-from Assistant.exts import keyactivities  # noqa
-from Assistant.exts import workWithFiles  # noqa
+from Assistant.utils import login
+from Assistant.Alice import alice
+from Assistant.exts import keyactivities
+from Assistant.exts import workWithFiles
 
 __all__ = ["logic"]
 
@@ -125,6 +126,9 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         alice.speak("Opening stackoverflow...")
         alice.edge("https://stackoverflow.com")
 
+    elif 'open krunker' in queary:
+        alice.speak("Opening Krunker...")
+        alice.edge("https://https://krunker.io/")
 
     elif 'your code' in queary:
         alice.speak("Opening Github repository.....")
@@ -223,7 +227,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
     elif 'volume' in queary:
         if queary.isalnum():
-            rate = [_ for _ in queary.split() if _.isnumeric()][0]
+            rate = sum([_ for _ in queary.split() if _.isnumeric()])
         else:
             rate = 10
 
@@ -585,26 +589,25 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
     # ------------------------------------------ reminder  ----------------------------------------------
     elif 'remind me after' in queary or "wake up me after" in queary:
-        queary = queary.split("remind me after " if 'remind me after' in queary else "wake up me after")[1]
-        magnitude = int(queary.split()[0])
-        unit = queary.split()[1]
-        alice.speak(f"Okay {Client.GENDER}! I will be reminding you after {magnitude} {unit}!")
-        try:
-            # if reason is there, then it will going to replace the sentence "I will back to my work again" to "you will back to your work again"
-            pourpose = queary.split("so that ")[1].replace("i", "you").replace('my', 'your')
-        except Exception:  # the user can give the reason as a option
-            pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
+            queary = queary.split("remind me after " if 'remind me after' in queary else "wake up me after")[1]
+            magnitude = int(queary.split()[0])
+            unit = queary.split()[1]
+            alice.speak(f"Okay {Client.GENDER}! I will be reminding you after {magnitude} {unit}!")
+            try:
+                # if reason is there, then it will going to replace the sentence "I will back to my work again" to "you will back to your work again"
+                pourpose = queary.split("so that ")[1].replace("i", "you").replace('my', 'your')
+            except Exception:  # the user can give the reason as a option
+                pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
 
-        globals()['side_reminder'].append(mp.Process(target=alarm.reminderAlarm, args=(magnitude, unit, pourpose)))
-        globals()['side_reminder'][-1].start()
+            globals()['side_reminder'].append(mp.Process(target=alarm.reminderAlarm, args=(magnitude, unit, pourpose)))
+            globals()['side_reminder'][-1].start()
 
 
 
     # --------------------------------- work with login folder : i.e.work with E commerce websites accounts ------------
     elif 'send' in queary and "email" in queary:
-        alice.speak("To whom you want to send the email")
         try:
-            userName = alice.takeCommand().lower()  # here taking the name as a input and featuring it in our contacts
+            userName = alice.takeCommand("To whom you want to send the email").lower()  # here taking the name as a input and featuring it in our contacts
             for i in Contacts.emails.keys():
                 if userName.split()[0] in i.lower().split():
                     userEmail = Contacts.emails[i]
@@ -614,11 +617,9 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
                     f"Sorry {Client.GENDER}! I didn't got {userName} in your contacts. Please type the email Address in the terminal!")
                 userEmail = input("Enter the Email Address :\t")
 
-            alice.speak("What's the subject...")
-            subject = alice.takeCommand()
+            subject = alice.takeCommand("What's the subject...")
 
-            alice.speak("What's the content...")
-            content = alice.takeCommand()
+            content = alice.takeCommand("What's the content...")
 
             if content == "None" or "let me" in content and "typ":
                 alice.speak(
@@ -639,8 +640,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
     elif 'whatsapp' in queary and 'send' in queary:
         try:
-            alice.speak("To whom you want to send the Whatsapp Message!")
-            userName = alice.takeCommand()
+            userName = alice.takeCommand("To whom you want to send the Whatsapp Message!")
             for _ in Contacts.contactNumber.keys():
                 if userName.split()[0] in _.split():
                     contact_num = Contacts.contactNumber[_]
@@ -655,8 +655,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
                     f"Sorry {Client.GENDER}! The contact number is invalid, Format should be like (+ and country Code and numbers)")
                 return
 
-            alice.speak("What's the message!")
-            content = alice.takeCommand()
+            content = alice.takeCommand("What's the message!")
 
             if content == "None" or "let me" in content and "typ":
                 alice.speak(
@@ -687,3 +686,16 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             # alice.speak(f"Sorry! {applicationName} shortcut didn't got in the Application folder. Please put the shortcuts of all the application do \
             # you use in day to day life in Application folder, Which is in this project folder.")
             pass
+
+
+
+
+    # --------------------------------------------- Media -------------------------------------------------------------
+
+    elif "screenshot" in queary:
+        name = alice.takeCommand("By which name I should save the file!")
+        if 'default' in name:
+            name = None
+        VisualMedia.screen_shorts(name=name)
+
+
