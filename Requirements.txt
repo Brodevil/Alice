@@ -33,7 +33,7 @@ PyAudio @ file:///M:/ADMIN/Critical%20Data/VS-Code/Alice/PyAudio-0.2.11-cp38-cp3
 PyAutoGUI==0.9.52
 pycparser==2.20
 PyGetWindow==0.0.9
-PyJoke==0.1.2
+pyjokes==0.6.0
 PyMsgBox==1.0.9
 pyparsing==2.4.7
 PyPDF2==1.26.0

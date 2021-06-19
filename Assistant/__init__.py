@@ -4,7 +4,7 @@ import time
 import keyboard
 import random
 import sys
-import pyjoke
+import pyjokes
 
 import psutil
 from playsound import playsound
@@ -591,7 +591,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
     elif 'joke' in queary:
         alice.speak("Alrigh, I will make a joke that definitely make you laugh!")
-        alice.speak(f"{pyjoke.get_joke()}\n Ha Ha Ha lol")
+        alice.speak(f"{pyjokes.get_joke()}\n Ha Ha Ha lol")
     
     
 
