@@ -15,7 +15,7 @@ import screen_brightness_control as sbc
 
 from Assistant.exts import alarm
 from Assistant.exts import networks
-from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client
+from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, WELCOME, Client
 from Assistant.exts.visual_media import VisualMedia
 
 from Assistant.utils import login
@@ -408,7 +408,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
     elif 'thank you' in queary or 'thanks' in queary:
-        alice.speak(f"It was my pleasure {Client.GENDER}!")
+        alice.speak(random.choice(WELCOME))
 
 
     elif 'how are you' in queary:
@@ -521,11 +521,12 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
     # ---------------------------------- make Alice to speak, Test to Speech features --------------------------------
-    elif 'say' in queary or 'speak' in queary:
+    elif 'speak' in queary:
         queary = queary.split("say" if 'say' in queary else "speak")[-1]
         alice.speak(queary)
 
-    elif 'start following m' in queary:  # start following me or my voice both starts from m
+
+    elif 'start following m' in queary or "repeat my self" in queary:  # start following me or my voice both starts from m
         alice.speak("I will be now following your while repeating yourself, say stop to quit this")
         sentence = str()
         while "stop" not in sentence and "quit" not in sentence and "break" not in sentence:
@@ -560,7 +561,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
     elif 'exact location' in queary:
-        alice.speak(f"Showing your Exact loactions {Client.GENDER}!")
+        alice.speak(f"Showing your Exact location {Client.GENDER}!")
         alice.edge("https://www.google.com/maps/search/my+locations/")
         
 
@@ -591,7 +592,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
     elif 'joke' in queary:
         alice.speak("Alrigh, I will make a joke that definitely make you laugh!")
-        alice.speak(f"{pyjokes.get_joke()}\n Ha Ha Ha lol")
+        alice.speak(f"{pyjokes.get_joke()}\n Ha Ha Ha")
     
     
 
