@@ -260,11 +260,30 @@ class Alice:
                     time.sleep(62)
 
 
-    # @staticmethod
-    # def closeApps(application):
-    #     elif 'discord' in application:
-    #         system()
-
+    @staticmethod
+    def closeApps(application):
+        if 'discord' in application:
+            system("TASKKILL /F /IM discord.exe")
+        elif 'edge' in application:
+            system("TASKKILL /F /IM msedge.exe")
+        elif 'code' in application:
+            system("TASKKILL /F /IM code.exe")
+        elif 'pycharm' in application:
+            system("TASKKILL /F /IM pycharm64.exe")
+        elif 'chrome' in application:
+            system("TASKKILL /F /IM chrome.exe")
+        elif 'rapid' in application:
+            system("TASKKILL /F /IM RapidTyping.exe")
+        elif 'cmd' in application:
+            system("TASKKILL /F /IM cmd.exe")
+        elif 'sublime' in application:
+            system("TASKKILL /F /IM sublime_text.exe")
+        elif 'powershell' in application:
+            system("TASKKILL /F /IM powershell.exe")
+        elif 'droid cam' in application:
+            system("TASKKILL /F /IM DroidCamApp.exe")
+        else:
+            system(f"TASKKILL /F /IM {application}.exe")
 
 
 
