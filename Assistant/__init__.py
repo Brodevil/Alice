@@ -4,7 +4,7 @@ import time
 import keyboard
 import random
 import sys
-
+import pyjoke
 
 import psutil
 from playsound import playsound
@@ -559,6 +559,11 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             f" You are in the Country {Client.LOCATION[0]} and near by {Client.LOCATION[2]} which is in {Client.LOCATION[1]} Region {Client.GENDER}!")
 
 
+    elif 'exact location' in queary:
+        alice.speak(f"Showing your Exact loactions {Client.GENDER}!")
+        alice.edge("https://www.google.com/maps/search/my+locations/")
+        
+
     elif 'news' in queary:
         topTen = login.news()
         if topTen is not None:
@@ -582,8 +587,13 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         place = queary.split("of ")[-1].split()[0] if "of" in queary else ""
         temp = networks.quick_google_search(f'Current temperature {place}')
         alice.speak(f"The Current Temperature " + f"of {Client.CITY}" if not len(place) else "" + f" is {temp}")
+    
 
-
+    elif 'joke' in queary:
+        alice.speak("Alrigh, I will make a joke that definitely make you laugh!")
+        alice.speak(f"{pyjoke.get_joke()}\n Ha Ha Ha lol")
+    
+    
 
     # ------------------------------------------ reminder  ----------------------------------------------
     elif 'remind me after' in queary or "wake up me after" in queary:
