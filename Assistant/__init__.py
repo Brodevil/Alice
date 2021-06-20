@@ -5,11 +5,14 @@ import keyboard
 import random
 import sys
 import pyjokes
+from tkinter import Tk
+
 
 import psutil
 from playsound import playsound
 import multiprocessing as mp
 import pywhatkit
+from tkinter.filedialog import askopenfilename
 from pywikihow import search_wikihow
 import screen_brightness_control as sbc
 
@@ -544,13 +547,20 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
     elif "read book" in queary or "audio book" in queary or "speak pdf" in queary or "read pdf" in queary:
         alice.speak(f"{Client.GENDER} select the pdf file which you want to make read!")
-        audioFile = alice.audioBook()
-        if audioFile is not None:
-            try:
-                alice.speak(f"{Client.GENDER}! The audio file had created in that same path with same name.")
-                os.startfile(audioFile)
-            except FileNotFoundError:
-                pass
+
+        root = Tk()
+        root.withdraw()
+        root.update()
+        pdfPath = askopenfilename(mode='r', defaultextension=".pdf")
+        root.destroy()
+
+        alice.speak(f"{Client.GENDER}! Totally {reader.numPages} Pages are there in this pdf book. Please Enter the page number in terminal I should read for you!")
+        page = input("Please Enter the page number I should read for you! : \t")
+
+        audioFile = alice.audioBook(pdfPath, page)
+        if audioFile is None:
+            alice.speak("Something Went Wrong!")
+    
 
 
 
