@@ -558,6 +558,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
     elif "my location" in queary or 'where am i' in queary or 'where i am' in queary:
         alice.speak(
             f" You are in the Country {Client.LOCATION[0]} and near by {Client.LOCATION[2]} which is in {Client.LOCATION[1]} Region {Client.GENDER}!")
+        alice.speak(f"{Client.GENDER}! You can also ask for exact location")
 
 
     elif 'exact location' in queary:

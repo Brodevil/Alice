@@ -62,3 +62,4 @@ if __name__ == "__main__":
         if queary != "none" and 'skip this one' not in queary or "leave this one" or "leave that one":
             Assistant.logic(queary, DailyTasks)
 
+
