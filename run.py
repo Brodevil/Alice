@@ -37,7 +37,7 @@ if __name__ == "__main__":
 
         alice.speak("Alice is password Protected, Kindly Please type the Password To Access Alice!")
         while password != Client.ALICE_PASSWORD:
-            alice.speak("Incorrent Password, Access not Granted! Please Try Again.")  if password != "" else None
+            alice.speak("Incorrect Password, Access not Granted! Please Try Again.")  if password != "" else None
             password = input("Enter the password of Alice : \t")
         else:
             alice.speak("Access Granted.")
