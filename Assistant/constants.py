@@ -178,3 +178,4 @@ WELCOME = [
     "I'm here to help please let me know if you need anything else!",
     "Thank you for the thank you, nice to be acknowledged!"
 ]
+

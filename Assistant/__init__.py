@@ -545,7 +545,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         alice.speak(queary)
 
 
-    elif "read book" in queary or "audio book" in queary or "speak pdf" in queary or "read pdf" in queary:
+    elif "read book" in queary or "audiobook" in queary or "speak pdf" in queary or "read pdf" in queary:
         alice.speak(f"{Client.GENDER} select the pdf file which you want to make read!")
 
         root = Tk()
