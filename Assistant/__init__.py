@@ -553,11 +553,8 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         root.update()
         pdfPath = askopenfilename(mode='r', defaultextension=".pdf")
         root.destroy()
-
-        alice.speak(f"{Client.GENDER}! Totally {reader.numPages} Pages are there in this pdf book. Please Enter the page number in terminal I should read for you!")
-        page = input("Please Enter the page number I should read for you! : \t")
-
-        audioFile = alice.audioBook(pdfPath, page)
+        
+        audioFile = alice.audioBook(pdfPath)
         if audioFile is None:
             alice.speak("Something Went Wrong!")
     

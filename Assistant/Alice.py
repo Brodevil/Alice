@@ -199,7 +199,7 @@ class Alice:
                 pyautogui.press("shift")
 
 
-    def audioBook(self, pdfPath, page_num):
+    def audioBook(self, pdfPath):
         """ Function to read the pdf and save the audio in a mp3 file at the same directory where the pdf located """
         if pdfPath is None:  # this condition happened when the user will click cancel
             return None
@@ -207,6 +207,10 @@ class Alice:
         with open(pdfPath, "rb") as book:
             try:
                 reader = PyPDF2.PdfFileReader(book)
+                
+                alice.speak(f"{Client.GENDER}! Totally {reader.numPages} Pages are there in this pdf book. Please Enter the page number in terminal I should read for you!")
+                page = input("Please Enter the page number I should read for you! : \t")
+        
                 page = reader.getPage(page_num)
                 self.speak(page.extractText())
             except Exception:
