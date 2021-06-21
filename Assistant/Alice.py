@@ -15,7 +15,7 @@ from Assistant.exts.networks import localInfo  # noqa
 from Assistant.exts.alarm import notifier  # noqa
 from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client  # noqa
 
-__all__ = ("Alice", "alice")
+__all__ = ["Alice", "alice"]
 
 load_dotenv()
 
@@ -105,7 +105,7 @@ class Alice:
         """
         if string is not None:
             self.speak(string)
-        
+
         r = sr.Recognizer()
         with sr.Microphone() as source:
             print(f"{self.AssistantName}: Listening....")
@@ -158,10 +158,11 @@ class Alice:
             f"You are in the Country {Client.LOCATION[0]} and near by {Client.LOCATION[2]} which is in {Client.LOCATION[1]} Region {Client.GENDER}!. ")
 
         try:
-            self.speak(f"Battery is {Client.BATTERY_STATUS}% Charged!", "And its still in charging. " if Client.BATTERY_PLUGGED else " ")
+            self.speak(f"Battery is {Client.BATTERY_STATUS}% Charged!",
+                       "And its still in charging. " if Client.BATTERY_PLUGGED else " ")
             if Client.BATTERY_STATUS >= 95 and Client.BATTERY_PLUGGED:
-                self.speak(f"{Client.GENDER}! I guess you should plug out the charger now!") 
-            
+                self.speak(f"{Client.GENDER}! I guess you should plug out the charger now!")
+
             elif Client.BATTERY_STATUS <= 35 and not Client.BATTERY_PLUGGED:
                 self.speak(f"{Client.GENDER}! You should Plug in the changer because Currently its very low battery!")
 
@@ -185,7 +186,7 @@ class Alice:
     @staticmethod
     def activePC(minutes):
         """
-        The function to keep pc active while it will just do some activities like moving mouse and click shif
+        The function to keep pc active while it will just do some activities like moving mouse and click shift
         so that your pc will active for number of minutes
         """
 
@@ -198,7 +199,6 @@ class Alice:
             for i in range(0, 5):
                 pyautogui.press("shift")
 
-
     def audioBook(self, pdfPath):
         """ Function to read the pdf and save the audio in a mp3 file at the same directory where the pdf located """
         if pdfPath is None:  # this condition happened when the user will click cancel
@@ -208,14 +208,14 @@ class Alice:
             try:
                 reader = PyPDF2.PdfFileReader(book)
 
-                alice.speak(f"{Client.GENDER}! Totally {reader.numPages} Pages are there in this pdf book. Please Enter the page number in terminal I should read for you!")
-                page = input("Please Enter the page number I should read for you! : \t")
-        
+                alice.speak(
+                    f"{Client.GENDER}! Totally {reader.numPages} Pages are there in this pdf book. Please Enter the page number in terminal I should read for you!")
+                page = int(input("Please Enter the page number I should read for you! : \t"))
+
                 page = reader.getPage(page)
                 self.speak(page.extractText())
             except Exception:
                 return None
-
 
     def dailyTaskReminder(self, task: dict):
         """
@@ -236,7 +236,6 @@ class Alice:
                     self.speak(
                         f"{Client.GENDER}! Your Current task : {work}")
                     time.sleep(62)
-
 
     @staticmethod
     def closeApps(application):
@@ -264,8 +263,5 @@ class Alice:
             system(f"TASKKILL /F /IM {application}.exe")
 
 
-
 # Object for the Alice class
 alice = Alice()
-
-
