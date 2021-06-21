@@ -7,7 +7,6 @@ import sys
 import pyjokes
 from tkinter import Tk
 
-
 import psutil
 from playsound import playsound
 import multiprocessing as mp
@@ -51,14 +50,13 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
     elif 'search' in queary and 'on google' in queary:
-        try:
-            queary = queary.split("search ")[-1].split("on google")[0]
-        except:
-            alice.speak("Sir, I didn't get that can you type that in the terminal.")
+        queary = queary.split("search ")[-1].split("on google")[0]
+        if "type" in queary:
+            alice.speak(f"{Client.GENDER}! You can ofcourse type the message on your own in the terminal!")
             queary = input(f"Enter the your Google Search {Client.GENDER}: \t")
-        finally:
-            alice.speak(f"Fetching the related queary in Google...")
-            pywhatkit.search(queary)
+
+        alice.speak(f"Fetching the related queary in Google...")
+        pywhatkit.search(queary)
 
 
 
@@ -72,14 +70,13 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
     elif "search" in queary and "on youtube" in queary:
-        try:
-            queary = queary.split("search")[-1].split("on youtube")[0]
-            alice.speak("Fetching results...")
-        except Exception:
-            alice.speak("Sir, I didn't get that can you type that in the Terminal!.")
+        queary = queary.split("search")[-1].split("on youtube")[0]
+        if "type" in queary:
+            alice.speak(f"{Client.GENDER}! You can ofcourse type the message on your own in the terminal!")
             queary = input(f"Enter the your YouTube Search {Client.GENDER}: \t")
-        finally:
-            alice.edge(f"https://www.youtube.com/results?search_query={queary}")
+
+        alice.speak("Fetching results...")
+        alice.edge(f"https://www.youtube.com/results?search_query={queary}")
 
 
 
@@ -442,7 +439,8 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             battery = None
 
         if battery is not None:
-            alice.speak(f"Battery is {Client.BATTERY_STATUS}% Charged! ", "And its still in charging. " if Client.BATTERY_PLUGGED else " ")
+            alice.speak(f"Battery is {Client.BATTERY_STATUS}% Charged! ",
+                        "And its still in charging. " if Client.BATTERY_PLUGGED else " ")
             if Client.BATTERY_STATUS >= 95 and Client.BATTERY_PLUGGED:
                 alice.speak(f"{Client.GENDER}! I guess you should plug out the charger now!")
 
@@ -553,11 +551,11 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         root.update()
         pdfPath = askopenfilename(mode='r', defaultextension=".pdf")
         root.destroy()
-        
+
         audioFile = alice.audioBook(pdfPath)
         if audioFile is None:
             alice.speak("Something Went Wrong!")
-    
+
 
 
 
@@ -571,7 +569,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
     elif 'exact location' in queary:
         alice.speak(f"Showing your Exact location {Client.GENDER}!")
         alice.edge("https://www.google.com/maps/search/my+locations/")
-        
+
 
     elif 'news' in queary:
         topTen = login.news()
@@ -596,35 +594,35 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         place = queary.split("of ")[-1].split()[0] if "of" in queary else ""
         temp = networks.quick_google_search(f'Current temperature {place}')
         alice.speak(f"The Current Temperature " + f"of {Client.CITY}" if not len(place) else "" + f" is {temp}")
-    
+
 
     elif 'joke' in queary:
-        alice.speak("Alrigh, I will make a joke that definitely make you laugh!")
+        alice.speak("Alright, I will make a joke that definitely make you laugh!")
         alice.speak(f"{pyjokes.get_joke()}\n Ha Ha Ha")
-    
-    
+
+
 
     # ------------------------------------------ reminder  ----------------------------------------------
     elif 'remind me after' in queary or "wake up me after" in queary:
-            queary = queary.split("remind me after " if 'remind me after' in queary else "wake up me after")[1]
-            magnitude = int(queary.split()[0])
-            unit = queary.split()[1]
-            alice.speak(f"Okay {Client.GENDER}! I will be reminding you after {magnitude} {unit}!")
-            try:
-                # if reason is there, then it will going to replace the sentence "I will back to my work again" to "you will back to your work again"
-                pourpose = queary.split("so that ")[1].replace("i", "you").replace('my', 'your')
-            except Exception:  # the user can give the reason as a option
-                pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
+        queary = queary.split("remind me after " if 'remind me after' in queary else "wake up me after")[1]
+        magnitude = int(queary.split()[0])
+        unit = queary.split()[1]
+        alice.speak(f"Okay {Client.GENDER}! I will be reminding you after {magnitude} {unit}!")
+        try:
+            # if reason is there, then it will going to replace the sentence "I will back to my work again" to "you will back to your work again"
+            pourpose = queary.split("so that ")[1].replace("i", "you").replace('my', 'your')
+        except Exception:  # the user can give the reason as a option
+            pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
 
-            globals()['side_reminder'].append(mp.Process(target=alarm.reminderAlarm, args=(magnitude, unit, pourpose)))
-            globals()['side_reminder'][-1].start()
+        globals()['side_reminder'].append(mp.Process(target=alarm.reminderAlarm, args=(magnitude, unit, pourpose)))
+        globals()['side_reminder'][-1].start()
 
 
 
     # --------------------------------- work with login folder : i.e.work with E commerce websites accounts ------------
     elif 'send' in queary and "email" in queary:
         try:
-            userName = alice.takeCommand("To whom you want to send the email").lower()  # here taking the name as a input and featuring it in our contacts
+            userName = alice.takeCommand("To whom you want to send the email").lower()
             for i in Contacts.emails.keys():
                 if userName.split()[0] in i.lower().split():
                     userEmail = Contacts.emails[i]
@@ -721,5 +719,3 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             name = None
         VisualMedia.screen_shorts(name=name)
         alice.speak("ScreenShot Saved! In Media folder of Alice Project.")
-
-
