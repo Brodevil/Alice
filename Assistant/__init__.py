@@ -601,6 +601,10 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         alice.speak(f"{pyjokes.get_joke()}\n Ha Ha Ha")
 
 
+    elif 'corona' in queary:
+        country = alice.takeCommand("Please tell the country name which you want to get the corona cases")
+        result = networks.corona_virus(country)
+        alice.speak(f"The Total cases in {country} is {result[0]}, Total {result[1]} death cases and {result[2]} recovered cases")
 
     # ------------------------------------------ reminder  ----------------------------------------------
     elif 'remind me after' in queary or "wake up me after" in queary:
