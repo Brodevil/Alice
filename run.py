@@ -11,15 +11,10 @@ from Assistant import alice
 from Assistant.exts.workWithFiles import DailyWorksExel
 from Assistant.constants import Client
 
-
-__all__ = ["queary", ]
 __authors__ = ("Abhinav", "Brodevil")  # Both are the same person lol
-
 
 tasks = DailyWorksExel(getcwd().replace("\\Alice", "\\Alice\\DailyWorks.xlsx"))
 DailyTasks = multiprocessing.Process(target=alice.dailyTaskReminder, args=(tasks,))
-
-
 
 # Running part of the Alice Program
 if __name__ == "__main__":
@@ -27,23 +22,20 @@ if __name__ == "__main__":
     The Alice just suppose to take the Voice from the user and convert the voice into text
     Then by word to word matching and checking the queary 
     Then the tasks or works get executed as per the queary!
-    """      
-
-    alice.intro()               # Introduction of Alice
-
+    """
 
     if Client.ALICE_PASSWORD is not None:
         password = str()
 
         alice.speak("Alice is password Protected, Kindly Please type the Password To Access Alice!")
         while password != Client.ALICE_PASSWORD:
-            alice.speak("Incorrect Password, Access not Granted! Please Try Again.")  if password != "" else None
+            alice.speak("Incorrect Password, Access not Granted! Please Try Again.") if password != "" else None
             password = input("Enter the password of Alice : \t")
         else:
             alice.speak("Access Granted.")
 
-
-    DailyTasks.start()          # daily task reminding will start here using Multiprocessing
+    alice.intro()  # Introduction of Alice
+    DailyTasks.start()  # daily task reminding will start here using Multiprocessing
 
     # The program will be going to run on Infinite loop
     while True:
@@ -61,5 +53,3 @@ if __name__ == "__main__":
         # Logic of Program
         if queary != "none" and 'skip this one' not in queary or "leave this one" or "leave that one":
             Assistant.logic(queary, DailyTasks)
-
-
