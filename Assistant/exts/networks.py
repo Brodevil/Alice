@@ -11,7 +11,8 @@ from bs4 import BeautifulSoup
 from requests.exceptions import ConnectionError
 from Assistant.utils.exceptions import EnvFileValueError
 
-__all__ = ["internetConnection", "internet_speed", "localInfo", "weather", "quick_google_search", "wiki"]
+__all__ = ["internetConnection", "internet_speed", "localInfo", "weather", "quick_google_search",
+           "wiki", "corona_virus"]
 
 load_dotenv()
 
@@ -90,5 +91,27 @@ def wiki(queary) -> str:
         return "Sorry! I didn't got that stuff in wikipedia"
 
 
-def ip_address():
+def ip_address() -> str:
+    """
+    return the ip address of the client
+    """
     return requests.get("https://api.ipify.org").text
+
+
+def corona_virus(country: str) -> list:
+    """
+    Return the corona cases of any country
+    total cases, recovered cases, death cases
+    """
+    country = country.replace(" ", "")
+    response = requests.get(f"https://www.worldometers.info/coronavirus/country/{country.lower()}")
+    corona = BeautifulSoup(response.text, "lxml")
+    corona = corona.findAll("div", class_="maincounter-number")
+
+    data = list()
+    for case in corona:
+        span = case.find("span")
+        data.append(span.string)
+
+    return data
+
