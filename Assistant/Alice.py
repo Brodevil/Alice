@@ -125,6 +125,9 @@ class Alice:
 
     @property
     def goodWish(self):
+        """
+        return the Good morning, evening and all such wish as per the time
+        """
         presentHour = int(datetime.datetime.now().hour)
         if presentHour == 0 or presentHour < 12:
             return "Good Morning"
