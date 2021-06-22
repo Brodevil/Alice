@@ -27,8 +27,9 @@ from Assistant.exts import workWithFiles
 
 __all__ = ["logic"]
 
-# reminder list, contain the multiprocessing object of reminding tasks
+# reminder & Alarm list, contain the multiprocessing object of reminding tasks
 side_reminder = list()
+side_alarm = list()
 
 
 # load_dotenv()
@@ -100,8 +101,10 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         try:
             for reminder in globals()['side_reminder']:
                 reminder.terminate()
+                
         except Exception:
             pass
+
         sys.exit(0)
 
 
@@ -604,9 +607,12 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
     elif 'corona' in queary:
         country = alice.takeCommand("Please tell the country name which you want to get the corona cases")
         result = networks.corona_virus(country)
-        alice.speak(f"The Total cases in {country} is {result[0]}, Total {result[1]} death cases and {result[2]} recovered cases")
+        alice.speak(
+            f"The Total cases in {country} is {result[0]}, Total {result[1]} death cases and {result[2]} recovered cases")
 
-    # ------------------------------------------ reminder  ----------------------------------------------
+
+
+    # ------------------------------------------ reminders & Alarms ----------------------------------------------
     elif 'remind me after' in queary or "wake up me after" in queary:
         queary = queary.split("remind me after " if 'remind me after' in queary else "wake up me after")[1]
         magnitude = int(queary.split()[0])
@@ -620,6 +626,10 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
         globals()['side_reminder'].append(mp.Process(target=alarm.reminderAlarm, args=(magnitude, unit, pourpose)))
         globals()['side_reminder'][-1].start()
+
+
+    elif 'alarm' in queary:
+        pass
 
 
 
