@@ -7,7 +7,7 @@ if internetConnection() is False:
 import multiprocessing as mp
 from os import startfile, path
 import Assistant
-from Assistant import alice
+from Assistant import alice            # noqa
 from Assistant.exts.workWithFiles import DailyWorksExel
 from Assistant.constants import Client
 

@@ -84,13 +84,17 @@ class Alice:
          return : None
 
          """
+        try:
+            self.engine.setProperty("rate", Client.VOICE_RATE)
+            self.engine.setProperty("voice", Client.VOICES[Client.VOICE - 1])
+            if _print:
+                print(f"{self.AssistantName} :  {''.join(args)}\n")
 
-        self.engine.setProperty("rate", Client.VOICE_RATE)
-        self.engine.setProperty("voice", Client.VOICES[Client.VOICE - 1])
-        if _print:
-            print(f"{self.AssistantName} :  {''.join(args)}\n")
-        self.engine.say(" ".join(args))
-        self.engine.runAndWait()
+            self.engine.say(" ".join(args))
+            self.engine.runAndWait()
+        except Exception:
+            self.engine = pyttsx3.init()
+    
 
     def takeCommand(self, string=None) -> str:
         """
@@ -119,7 +123,7 @@ class Alice:
             print(f"{self.AssistantName} : Sorry! I didn't get that...\n")
             return "None"
         else:
-
+            print(f"{self.name}  :  {query}\n")
             return query
 
     @property
