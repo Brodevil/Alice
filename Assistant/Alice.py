@@ -5,7 +5,7 @@ from os import environ, getcwd, system
 import PyPDF2
 import webbrowser
 import pyautogui
-import winsound
+import winsound                 # noqa
 
 import speech_recognition as sr
 import pyttsx3
@@ -37,13 +37,8 @@ class Alice:
         self.engine = pyttsx3.init('sapi5')
         self.r = sr.Recognizer()
 
-        
-
-
-
-
     @staticmethod
-    def severalVoices(voicesId=Client.VOICES):
+    def severalVoices(voicesId=Client.VOICES) -> None:
         """ This is the function to show the user how many VOICES are available in his/her system
         So that the user will able to choose his own liked VOICE
         """
@@ -81,7 +76,7 @@ class Alice:
                     f"Hey there! I am {index + 1}th VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file")
                 engine.runAndWait()
 
-    def speak(self, *args, _print=True):
+    def speak(self, *args, _print=True) -> None:
         """ Speak function as per the selected VOICE by the user in .env file
 
          argument : string
@@ -93,11 +88,11 @@ class Alice:
         self.engine.setProperty("rate", Client.VOICE_RATE)
         self.engine.setProperty("voice", Client.VOICES[Client.VOICE - 1])
         if _print:
-            print("{0} : {1}\n".format(self.AssistantName, *args))
+            print(f"{self.AssistantName} :  {''.join(args)}\n")
         self.engine.say(" ".join(args))
         self.engine.runAndWait()
 
-    def takeCommand(self, string=None):
+    def takeCommand(self, string=None) -> str:
         """
         The not having any parameter but it taking the input form the microphone of the user
         and return the string object that the user says
@@ -111,7 +106,6 @@ class Alice:
         if string is not None:
             self.speak(string)
 
-        
         with sr.Microphone() as source:
             print(f"{self.AssistantName}: Listening....")
             self.r.pause_threshold = 1
@@ -125,11 +119,11 @@ class Alice:
             print(f"{self.AssistantName} : Sorry! I didn't get that...\n")
             return "None"
         else:
-            
+
             return query
 
     @property
-    def goodWish(self):
+    def goodWish(self) -> str:
         """
         return the Good morning, evening and all such wish as per the time
         """
@@ -143,7 +137,7 @@ class Alice:
         else:
             return "Good Evening"
 
-    def intro(self):
+    def intro(self) -> None:
         """
         the function will run at the startup of the program, after the Alice get initialized
 
@@ -182,7 +176,7 @@ class Alice:
             f"{self.goodWish} {self.name} {Client.GENDER}!, System is now fully Operational. How Can I help you {Client.GENDER}")
 
     @staticmethod
-    def edge(url):
+    def edge(url: str) -> None:
         """Edge is my Favorite Browser so this function initialize the edge browser
         Argument: url of the website
         process : opine that url or website in the edge browser
@@ -192,7 +186,7 @@ class Alice:
         webbrowser.get('edge').open(url)
 
     @staticmethod
-    def activePC(minutes):
+    def activePC(minutes: int) -> None:
         """
         The function to keep pc active while it will just do some activities like moving mouse and click shift
         so that your pc will active for number of minutes
@@ -207,7 +201,7 @@ class Alice:
             for i in range(0, 5):
                 pyautogui.press("shift")
 
-    def audioBook(self, pdfPath):
+    def audioBook(self, pdfPath: str) -> None:
         """ Function to read the pdf and save the audio in a mp3 file at the same directory where the pdf located """
         if pdfPath is None:  # this condition happened when the user will click cancel
             return None
@@ -225,7 +219,7 @@ class Alice:
             except Exception:
                 return None
 
-    def dailyTaskReminder(self, task: dict):
+    def dailyTaskReminder(self, task: dict) -> None:
         """
         Function using multi processing runs in the background while program to remind the user
         the user can able to write his time and task in the exel file so that the program will be going
@@ -246,7 +240,10 @@ class Alice:
                     time.sleep(62)
 
     @staticmethod
-    def closeApps(application):
+    def closeApps(application: str) -> None:
+        """
+        Close few selected applications from windows `taskkill` commands
+        """
         if 'discord' in application:
             system("TASKKILL /F /IM discord.exe")
         elif 'edge' in application:
@@ -267,6 +264,10 @@ class Alice:
             system("TASKKILL /F /IM powershell.exe")
         elif 'droid cam' in application:
             system("TASKKILL /F /IM DroidCamApp.exe")
+        elif 'brave' in application:
+            system("TASKKILL /F /IM brave.exe")
+        elif "opera" in application:
+            system("TASKKILL /F /IM opera.exe")
         else:
             system(f"TASKKILL /F /IM {application}.exe")
 
