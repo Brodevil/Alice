@@ -36,7 +36,7 @@ class Alice:
 
         self.engine = pyttsx3.init('sapi5')
         self.r = sr.Recognizer()
-self.
+
         
 
 
@@ -125,7 +125,7 @@ self.
             print(f"{self.AssistantName} : Sorry! I didn't get that...\n")
             return "None"
         else:
-            print(f"{self.name} : {query}\n")
+            
             return query
 
     @property

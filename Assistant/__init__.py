@@ -577,8 +577,9 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         
         if not rate.isalnum():
             alice.speak(f"{Client.GENDER}! You should just speak number for Voice Rate for changes")
+            return
         
-        rate = sum([_ for _ in queary.split() if _.isnumeric()])
+        rate = sum([_ for _ in rate.split() if _.isnumeric()])
         Client.VOICE_RATE += rate
 
         alice.speak("How did you like this speed!")               
