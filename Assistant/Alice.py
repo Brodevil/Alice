@@ -82,7 +82,6 @@ class Alice:
          argument : string
          work : spoke the string in the user's selected VOICE by default speaker
          return : None
-
          """
         try:
             self.engine.setProperty("rate", Client.VOICE_RATE)
@@ -94,7 +93,7 @@ class Alice:
             self.engine.runAndWait()
         except Exception:
             self.engine = pyttsx3.init()
-    
+
 
     def takeCommand(self, string=None) -> str:
         """
@@ -121,6 +120,7 @@ class Alice:
             query = self.r.recognize_google(audio, language="en-in")
         except Exception:
             print(f"{self.AssistantName} : Sorry! I didn't get that...\n")
+            self.r = sr.Recognizer()
             return "None"
         else:
             print(f"{self.name}  :  {query}\n")

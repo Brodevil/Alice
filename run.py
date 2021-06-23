@@ -4,7 +4,7 @@ from Assistant.utils.exceptions import InternetException
 if internetConnection() is False:
     raise InternetException("Alice works with INTERNET, Please get connected with INTERNET.")
 
-import multiprocessing as mp
+import threading
 from os import startfile, path
 import Assistant
 from Assistant import alice            # noqa
@@ -14,7 +14,7 @@ from Assistant.constants import Client
 __authors__ = ("Abhinav", "Brodevil")  # Both are the same person lol
 
 tasks = DailyWorksExel(path.join(Client.ALICE_PATH,  "DailyWorks.xlsx"))
-DailyTasks = mp.Process(target=alice.dailyTaskReminder, args=(tasks,))
+DailyTasks = threading.Thread(target=alice.dailyTaskReminder, args=(tasks,))
 
 # Running part of the Alice Program
 if __name__ == "__main__":
