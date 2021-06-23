@@ -32,7 +32,6 @@ side_reminder = list()
 side_alarm = list()
 
 
-# load_dotenv()
 
 
 def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
@@ -99,9 +98,13 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         alice.speak("That's it, I m quiting....")
         taskMultiProcessing.terminate()
         try:
+            # terminating all the side alarms while closing alice
             for reminder in globals()['side_reminder']:
                 reminder.terminate()
                 
+            # terminalting all the side alarms while closing alice
+            for reminder in globals()["side_alarm"]:
+                reminder.terminate()
         except Exception:
             pass
 
@@ -398,18 +401,6 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         alice.speak("Hum thik hai bhai, Tum batao!..")
 
 
-    elif "how many voices" in queary:
-        alice.severalVoices(voicesId=Client.VOICES)
-
-
-    elif 'change' in queary and "voice" in queary:
-        if Client.VOICE <= len(Client.VOICES) - 1:
-            Client.VOICE += 1
-        else:
-            Client.VOICE = 1
-        alice.speak(f"Hey {Client.GENDER}! How did you like this voice, Is this okay.")
-
-
     elif 'thank you' in queary or 'thanks' in queary:
         alice.speak(random.choice(WELCOME))
 
@@ -560,7 +551,37 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             alice.speak("Something Went Wrong!")
 
 
+    elif "how many voices" in queary:
+        alice.severalVoices(voicesId=Client.VOICES)
 
+
+    elif 'change' in queary and "voice" in queary:
+        if Client.VOICE <= len(Client.VOICES) - 1:
+            Client.VOICE += 1
+        else:
+            Client.VOICE = 1
+        alice.speak(f"Hey {Client.GENDER}! How did you like this voice, Is this okay.")
+
+
+    elif 'voice' in queary and 'speed' in queary:
+        alice.takeCommand(f"Current speed is {Client.VOICE_RATE}")
+
+        if 'increase' in queary or 'more' in queary or "add" in queary:
+            rate = alice.takeCommand("Please tell How much should I increase the Voice Rate!")
+        
+        elif 'decrease' in queary or "less" in queary and "slow":
+            rate = alice.takeCommand("Please tell How much should I decrease my Voice Rate!")
+
+        else:
+            return 
+        
+        if not rate.isalnum():
+            alice.speak(f"{Client.GENDER}! You should just speak number for Voice Rate for changes")
+        
+        rate = sum([_ for _ in queary.split() if _.isnumeric()])
+        Client.VOICE_RATE += rate
+
+        alice.speak("How did you like this speed!")               
 
     # ------------------------------------------ local info work with INTERNET and APIs -----------------------------
     elif "my location" in queary or 'where am i' in queary or 'where i am' in queary:
@@ -629,7 +650,13 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
 
 
     elif 'alarm' in queary:
-        pass
+        alice.speak(f"{Client.GENDER}! Please enter the alarm time in 24 hour format in terminal!")
+        alarm_time = input("Enter the Alarm time in 24 hour Format : \t")
+        if ":" not in alarm_time:
+            alice.speak(f"")
+        alice.speak(f"Successfully set the Alarm of {alarm_time}, remind you soon {Client.GENDER}")
+        globals()["side_alarm"].append(mp.Process(target=alarm.alarm, args=(alarm_time)))
+        globals()["side_alarm"][-1].start()
 
 
 
@@ -720,9 +747,6 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
     elif 'close' in queary:
         queary = queary.split("close ")[-1]
         alice.closeApps(application=queary)
-
-
-
 
 
     # --------------------------------------------- Media -------------------------------------------------------------
