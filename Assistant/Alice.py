@@ -32,9 +32,15 @@ class Alice:
         self.name = environ.get("UserName",
                                 "Abhinav")  # this is the user name of the person who suppose to use this program : Data From (.env)
         self.AssistantName = Client.ASSISTANT_NAME
-
         self.city = environ.get("LOCATION", localInfo())  # Data From (.env)
-        self.voiceSpeed = Client.VOICE_RATE
+
+        self.engine = pyttsx3.init('sapi5')
+        self.r = sr.Recognizer()
+self.
+        
+
+
+
 
     @staticmethod
     def severalVoices(voicesId=Client.VOICES):
@@ -84,13 +90,12 @@ class Alice:
 
          """
 
-        engine = pyttsx3.init('sapi5')
-        engine.setProperty("voice", Client.VOICES[Client.VOICE - 1])
-        engine.setProperty("rate", self.voiceSpeed)
+        self.engine.setProperty("rate", Client.VOICE_RATE)
+        self.engine.setProperty("voice", Client.VOICES[Client.VOICE - 1])
         if _print:
             print("{0} : {1}\n".format(self.AssistantName, *args))
-        engine.say(" ".join(args))
-        engine.runAndWait()
+        self.engine.say(" ".join(args))
+        self.engine.runAndWait()
 
     def takeCommand(self, string=None):
         """
@@ -106,21 +111,21 @@ class Alice:
         if string is not None:
             self.speak(string)
 
-        r = sr.Recognizer()
+        
         with sr.Microphone() as source:
             print(f"{self.AssistantName}: Listening....")
-            r.pause_threshold = 1
-            r.energy_threshold = 300
-            audio = r.listen(source)
+            self.r.pause_threshold = 1
+            self.r.energy_threshold = 300
+            audio = self.r.listen(source)
 
         try:
             print(f"{self.AssistantName} : Recognizing....")
-            query = r.recognize_google(audio, language="en-in")
-            print(f"{self.name} : {query.replace('Alice', '')}\n")
+            query = self.r.recognize_google(audio, language="en-in")
         except Exception:
             print(f"{self.AssistantName} : Sorry! I didn't get that...\n")
             return "None"
         else:
+            print(f"{self.name} : {query}\n")
             return query
 
     @property
