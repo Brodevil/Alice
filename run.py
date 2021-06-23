@@ -4,8 +4,8 @@ from Assistant.utils.exceptions import InternetException
 if internetConnection() is False:
     raise InternetException("Alice works with INTERNET, Please get connected with INTERNET.")
 
-import multiprocessing
-from os import getcwd, startfile, path
+import multiprocessing as mp
+from os import startfile, path
 import Assistant
 from Assistant import alice
 from Assistant.exts.workWithFiles import DailyWorksExel
@@ -13,8 +13,8 @@ from Assistant.constants import Client
 
 __authors__ = ("Abhinav", "Brodevil")  # Both are the same person lol
 
-tasks = DailyWorksExel(getcwd().replace("\\Alice", "\\Alice\\DailyWorks.xlsx"))
-DailyTasks = multiprocessing.Process(target=alice.dailyTaskReminder, args=(tasks,))
+tasks = DailyWorksExel(path.join(Client.ALICE_PATH,  "DailyWorks.xlsx"))
+DailyTasks = mp.Process(target=alice.dailyTaskReminder, args=(tasks,))
 
 # Running part of the Alice Program
 if __name__ == "__main__":
@@ -34,7 +34,7 @@ if __name__ == "__main__":
         else:
             alice.speak("Access Granted.")
 
-    alice.intro()  # Introduction of Alice
+    # alice.intro()  # Introduction of Alice
     DailyTasks.start()  # daily task reminding will start here using Multiprocessing
 
     # The program will be going to run on Infinite loop
