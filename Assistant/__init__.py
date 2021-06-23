@@ -102,7 +102,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             for reminder in globals()['side_reminder']:
                 reminder.terminate()
                 
-            # terminalting all the side alarms while closing alice
+            # terminating all the side alarms while closing alice
             for reminder in globals()["side_alarm"]:
                 reminder.terminate()
         except Exception:
@@ -656,7 +656,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
         if ":" not in alarm_time:
             alice.speak(f"")
         alice.speak(f"Successfully set the Alarm of {alarm_time}, remind you soon {Client.GENDER}")
-        globals()["side_alarm"].append(mp.Process(target=alarm.alarm, args=(alarm_time)))
+        globals()["side_alarm"].append(mp.Process(target=alarm.alarm, args=(alarm_time, )))
         globals()["side_alarm"][-1].start()
 
 
@@ -668,6 +668,10 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             for i in Contacts.emails.keys():
                 if userName.split()[0] in i.lower().split():
                     userEmail = Contacts.emails[i]
+                    if userEmail is None:
+                        alice.speak(
+                            f"{Client.GENDER}! {i}'s Email Address had not been there in your contact Exel file!")
+                        return
                     break
             else:
                 alice.speak(
@@ -701,10 +705,14 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
             for _ in Contacts.contactNumber.keys():
                 if userName.split()[0] in _.split():
                     contact_num = Contacts.contactNumber[_]
+                    if contact_num is None:
+                        alice.speak(f"{Client.GENDER}! {_}'s Phone number had not been there in your contact Exel file!")
+                        return
                     break
+
             else:
                 alice.speak(
-                    f"{Client.GENDER}! We didn't got {userName} in your contacts. Enter his phone number including  (+ and country code)")
+                    f"{Client.GENDER}! We didn't got {userName} in your contacts Exel file. Enter his phone number including  (+ and country code)")
                 contact_num = input("Enter the Contact Number including Country code  :\t")
 
             if "+" not in contact_num:
