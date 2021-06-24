@@ -96,12 +96,8 @@ def logic(queary: str) -> None:
     # ---------------------------------------- quiting the program -----------------------------------
     elif "bye" in queary or 'kill yourself' in queary or 'quit' in queary:
         alice.speak("That's it, I m quiting....")
-<<<<<<< HEAD
-        alice.remind_task = False
-=======
-
         alice.remind_daily_task = False         # terminate the daily task reminder thread
->>>>>>> mulithreading
+
         try:
             # terminating all the side alarms while closing alice
             for reminder in globals()['side_reminder']:
@@ -658,10 +654,11 @@ def logic(queary: str) -> None:
     elif 'alarm' in queary:
         alarm_time = alice.takeCommand(f"{Client.GENDER}! Please tell or enter the alarm time in 24 hour format!")
 
-        if 'type' in queary:
+        if 'type' in alarm_time:
             alice.speak(f"Okay! {Client.GENDER}! Please enter the alarm time in terminal with 24 hour format!")
-
-        alarm_time = input("Enter the Alarm time in 24 hour Format : \t")
+            alarm_time = input("Enter the Alarm time in 24 hour Format : \t")
+        else:
+            alarm_time = [_ for _ in alarm_time if _.isnumeric()]
 
         if ":" not in alarm_time:
             alice.speak(f"Alarm Time format is wrong, Expected in 24 hour format, Please try again!")
