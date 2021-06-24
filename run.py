@@ -15,10 +15,8 @@ __authors__ = ("Abhinav", "Brodevil")  # Both are the same person lol
 
 tasks = DailyWorksExel(path.join(Client.ALICE_PATH,  "DailyWorks.xlsx"))
 DailyTasks = threading.Thread(target=alice.dailyTaskReminder, args=(tasks,))
-<<<<<<< HEAD
-=======
 
->>>>>>> mulithreading
+
 
 # Running part of the Alice Program
 if __name__ == "__main__":
@@ -38,10 +36,6 @@ if __name__ == "__main__":
         else:
             alice.speak("Access Granted.")
 
-<<<<<<< HEAD
-=======
-
->>>>>>> mulithreading
     alice.intro()           # Introduction of Alice
     DailyTasks.start()      # daily task reminding will start here using Multiprocessing
 
