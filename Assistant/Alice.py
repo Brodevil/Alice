@@ -37,7 +37,11 @@ class Alice:
         self.engine = pyttsx3.init('sapi5')
         self.r = sr.Recognizer()
 
+<<<<<<< HEAD
         self.remind_task = True
+=======
+        self.remind_daily_task = True
+>>>>>>> mulithreading
 
     @staticmethod
     def severalVoices(voicesId=Client.VOICES) -> None:
@@ -84,15 +88,18 @@ class Alice:
          argument : string
          work : spoke the string in the user's selected VOICE by default speaker
          return : None
-
          """
+        try:
+            self.engine.setProperty("rate", Client.VOICE_RATE)
+            self.engine.setProperty("voice", Client.VOICES[Client.VOICE - 1])
+            if _print:
+                print(f"{self.AssistantName} :  {''.join(args)}\n")
 
-        self.engine.setProperty("rate", Client.VOICE_RATE)
-        self.engine.setProperty("voice", Client.VOICES[Client.VOICE - 1])
-        if _print:
-            print(f"{self.AssistantName} :  {''.join(args)}\n")
-        self.engine.say(" ".join(args))
-        self.engine.runAndWait()
+            self.engine.say(" ".join(args))
+            self.engine.runAndWait()
+        except Exception:
+            self.engine = pyttsx3.init()
+
 
     def takeCommand(self, string=None) -> str:
         """
@@ -119,9 +126,10 @@ class Alice:
             query = self.r.recognize_google(audio, language="en-in")
         except Exception:
             print(f"{self.AssistantName} : Sorry! I didn't get that...\n")
+            self.r = sr.Recognizer()
             return "None"
         else:
-
+            print(f"{self.name}  :  {query}\n")
             return query
 
     @property
@@ -227,7 +235,11 @@ class Alice:
         the user can able to write his time and task in the exel file so that the program will be going
         to remind user whole day
         """
+<<<<<<< HEAD
         while self.remind_task:
+=======
+        while self.remind_daily_task:
+>>>>>>> mulithreading
             for exelTime, work in task.items():
                 currentTime = datetime.time(int(datetime.datetime.now().strftime("%H")),
                                             int(datetime.datetime.now().strftime("%M")))
