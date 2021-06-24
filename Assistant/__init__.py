@@ -659,6 +659,9 @@ def logic(queary: str) -> None:
             alarm_time = input("Enter the Alarm time in 24 hour Format : \t")
         else:
             alarm_time = [_ for _ in alarm_time if _.isnumeric()]
+            alarm_time = f"{alarm_time[0]}:{alarm_time[1]}"
+            alarm_time = datetime.datetime.strftime(alarm_time, "%H %M")            # noqa
+
 
         if ":" not in alarm_time:
             alice.speak(f"Alarm Time format is wrong, Expected in 24 hour format, Please try again!")
