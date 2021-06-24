@@ -114,4 +114,3 @@ def corona_virus(country: str) -> list:
         data.append(span.string)
 
     return data
-

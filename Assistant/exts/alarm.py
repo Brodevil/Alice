@@ -3,7 +3,7 @@ import winsound  # noqa
 import pyttsx3
 import datetime
 
-from os import environ, getcwd, path
+from os import environ, path
 from dotenv import load_dotenv
 from plyer import notification
 
