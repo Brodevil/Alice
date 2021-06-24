@@ -37,6 +37,8 @@ class Alice:
         self.engine = pyttsx3.init('sapi5')
         self.r = sr.Recognizer()
 
+        self.remind_daily_task = True
+
     @staticmethod
     def severalVoices(voicesId=Client.VOICES) -> None:
         """ This is the function to show the user how many VOICES are available in his/her system
@@ -229,7 +231,7 @@ class Alice:
         the user can able to write his time and task in the exel file so that the program will be going
         to remind user whole day
         """
-        while True:
+        while self.remind_daily_task:
             for exelTime, work in task.items():
                 currentTime = datetime.time(int(datetime.datetime.now().strftime("%H")),
                                             int(datetime.datetime.now().strftime("%M")))

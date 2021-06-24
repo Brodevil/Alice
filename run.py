@@ -16,6 +16,7 @@ __authors__ = ("Abhinav", "Brodevil")  # Both are the same person lol
 tasks = DailyWorksExel(path.join(Client.ALICE_PATH,  "DailyWorks.xlsx"))
 DailyTasks = threading.Thread(target=alice.dailyTaskReminder, args=(tasks,))
 
+
 # Running part of the Alice Program
 if __name__ == "__main__":
     """
@@ -34,8 +35,9 @@ if __name__ == "__main__":
         else:
             alice.speak("Access Granted.")
 
-    # alice.intro()  # Introduction of Alice
-    DailyTasks.start()  # daily task reminding will start here using Multiprocessing
+
+    alice.intro()           # Introduction of Alice
+    DailyTasks.start()      # daily task reminding will start here using Multiprocessing
 
     # The program will be going to run on Infinite loop
     while True:
@@ -52,4 +54,4 @@ if __name__ == "__main__":
 
         # Logic of Program
         if queary != "none" and 'skip this one' not in queary or "leave this one" or "leave that one":
-            Assistant.logic(queary, DailyTasks)
+            Assistant.logic(queary)
