@@ -63,8 +63,8 @@ def logic(queary: str) -> None:
     elif "on youtube" in queary and "play" in queary:
         try:
             queary = queary.split("play ")[-1].split("on youtube")[0]
-            alice.speak("Fetching Data...")
             pywhatkit.playonyt(queary)
+            alice.speak("Fetching Data...")
         except Exception:
             alice.speak(f"No results found on {queary} on youtube")  # noqa
 
@@ -75,8 +75,8 @@ def logic(queary: str) -> None:
             alice.speak(f"{Client.GENDER}! You can ofcourse type the message on your own in the terminal!")
             queary = input(f"Enter the your YouTube Search {Client.GENDER}: \t")
 
-        alice.speak("Fetching results...")
         alice.edge(f"https://www.youtube.com/results?search_query={queary}")
+        alice.speak("Fetching results...")
 
 
 
@@ -115,67 +115,67 @@ def logic(queary: str) -> None:
 
     # --------------------------------------- Opening websites -------------------------------------------
     elif 'open youtube studio' in queary:
-        alice.speak("Opening youtube studio...")
         alice.edge("https://studio.youtube.com/")
+        alice.speak("Opening youtube studio...")
 
 
     elif 'open youtube' in queary:
-        alice.speak("Opening youtube...")
         alice.edge("https://www.youtube.com")
+        alice.speak("Opening youtube...")
 
 
     elif 'open google' in queary:
-        alice.speak("Opening google...")
         alice.edge("https://www.google.com")
+        alice.speak("Opening google...")
 
 
     elif 'open stack overflow' in queary:
-        alice.speak("Opening stackoverflow...")
         alice.edge("https://stackoverflow.com")
+        alice.speak("Opening stackoverflow...")
 
     elif 'open krunker' in queary:
-        alice.speak("Opening Krunker...")
         alice.edge("https://https://krunker.io/")
+        alice.speak("Opening Krunker...")
 
     elif 'your code' in queary:
-        alice.speak("Opening Github repository.....")
         alice.edge("https://github.com/Brodevil/Alice")
+        alice.speak("Opening Github repository.....")
 
 
     elif 'open github' in queary:
-        alice.speak("Opening Github.....")
         alice.edge(f"https://github.com/{Client.USER_GITHUB}")
+        alice.speak("Opening Github.....")
 
 
     elif 'open discord' in queary:
-        alice.speak("Opening Discord in Browser.....")
         alice.edge("https://discord.com/channels/@me")
+        alice.speak("Opening Discord in Browser.....")
 
 
     elif 'open instagram' in queary:
-        alice.speak("Opening Instagram.....")
         alice.edge("https://www.instagram.com")
+        alice.speak("Opening Instagram.....")
 
 
     elif 'open facebook' in queary:
-        alice.speak("Opening FaceBook...")
         alice.edge("https://www.facebook.com")
+        alice.speak("Opening FaceBook...")
 
 
     elif 'open whatsapp' in queary:
-        alice.speak("Opening Whatsapp.....")
         alice.edge("https://web.whatsapp.com/")
+        alice.speak("Opening Whatsapp.....")
 
 
 
     elif 'open spotify' in queary:
-        alice.speak("Opening Spotify.....")
         alice.edge('https://open.spotify.com/')
+        alice.speak("Opening Spotify.....")
 
 
     elif 'open twitter' in queary:
-        alice.speak("Opening Twitter...")
         alice.edge("https://twitter.com/")
+        alice.speak("Opening Twitter...")
 
 
     elif 'pep8' in queary:
@@ -183,8 +183,8 @@ def logic(queary: str) -> None:
 
 
     elif 'open gmail' in queary or 'show' in queary and 'inbox' in queary:
-        alice.speak("Opening Gmail...")
         alice.edge("https://gmail.com")
+        alice.speak("Opening Gmail...")
 
 
 
@@ -343,16 +343,16 @@ def logic(queary: str) -> None:
 
     elif 'play' in queary:
         queary = queary.split("play ")[-1]
-        alice.speak(f"Showing related results to {queary}")
         alice.edge(f"https://music.youtube.com/search?q={queary}")
+        alice.speak(f"Showing related results to {queary}")
 
 
 
 
     # ---------------------------------------  working with files : ---------------------------------------
     elif 'delete unwanted files' in queary:
-        alice.speak("Deleting unwanted files...")
         workWithFiles.deleteUnwantedFiles()
+        alice.speak("Deleting unwanted files...")
 
 
     elif 'alice path' in queary:
@@ -586,15 +586,15 @@ def logic(queary: str) -> None:
         alice.speak("How did you like this speed!")               
 
     # ------------------------------------------ local info work with INTERNET and APIs -----------------------------
-    elif "my location" in queary or 'where am i' in queary or 'where i am' in queary:
+    elif "my location" in queary or 'current location' in queary or 'where i am' in queary:
         alice.speak(
             f" You are in the Country {Client.LOCATION[0]} and near by {Client.LOCATION[2]} which is in {Client.LOCATION[1]} Region {Client.GENDER}!")
         alice.speak(f"{Client.GENDER}! You can also ask for exact location")
 
 
     elif 'exact location' in queary:
-        alice.speak(f"Showing your Exact location {Client.GENDER}!")
         alice.edge("https://www.google.com/maps/search/my+locations/")
+        alice.speak(f"Showing your Exact location {Client.GENDER}!")
 
 
     elif 'news' in queary:
@@ -652,10 +652,17 @@ def logic(queary: str) -> None:
 
 
     elif 'alarm' in queary:
-        alice.speak(f"{Client.GENDER}! Please enter the alarm time in 24 hour format in terminal!")
+        alarm_time = alice.takeCommand(f"{Client.GENDER}! Please tell or enter the alarm time in 24 hour format!")
+
+        if 'type' in queary:
+            alice.speak(f"Okay! {Client.GENDER}! Please enter the alarm time in terminal with 24 hour format!")
+
         alarm_time = input("Enter the Alarm time in 24 hour Format : \t")
+
         if ":" not in alarm_time:
-            alice.speak(f"")
+            alice.speak(f"Alarm Time format is wrong, Expected in 24 hour format, Please try again!")
+            return
+
         alice.speak(f"Successfully set the Alarm of {alarm_time}, remind you soon {Client.GENDER}")
         globals()["side_alarm"].append(mp.Process(target=alarm.alarm, args=(alarm_time, )))
         globals()["side_alarm"][-1].start()
