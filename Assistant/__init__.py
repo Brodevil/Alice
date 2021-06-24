@@ -34,7 +34,7 @@ side_alarm = list()
 
 
 
-def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
+def logic(queary: str) -> None:
     """This is the logic of the Program as it will be matching several query and do the programmed task """
 
     # ---------------------- fetching info from INTERNET ---------------------------------------
@@ -96,7 +96,7 @@ def logic(queary: str, taskMultiProcessing: mp.Process) -> None:
     # ---------------------------------------- quiting the program -----------------------------------
     elif "bye" in queary or 'kill yourself' in queary or 'quit' in queary:
         alice.speak("That's it, I m quiting....")
-        taskMultiProcessing.terminate()
+        alice.remind_task = False
         try:
             # terminating all the side alarms while closing alice
             for reminder in globals()['side_reminder']:
