@@ -245,7 +245,7 @@ def logic(queary: str) -> None:
         keyactivities.volume_control(how_much=0, mute=True)
 
 
-    elif 'screen' in queary and 'bright' in queary:
+    elif 'screen' in queary and 'bright' in queary or "display" in queary and "bright" in queary:
         try:
             if queary.isalnum():
                 rate = [_ for _ in queary.split() if _.isnumeric()][0]
@@ -653,20 +653,25 @@ def logic(queary: str) -> None:
 
 
     elif 'alarm' in queary:
-        alarm_time = alice.takeCommand(f"{Client.GENDER}! Please tell or enter the alarm time in 24 hour format!")
+        alarm_time = alice.takeCommand(f"{Client.GENDER}! Please tell the alarm time in 24 hour format!")
 
         if alarm_time == "None":
             alice.speak("I didn't get that please try again!")
             return
-
 
         if 'type' in alarm_time:
             alice.speak(f"Okay! {Client.GENDER}! Please enter the alarm time in terminal with 24 hour format!")
             alarm_time = input("Enter the Alarm time in 24 hour Format : \t")
         else:
             alarm_time = [_ for _ in alarm_time if _.isnumeric()]
+            if len(alarm_time) == 1:
+                if len(alarm_time[0]) == 1:
+                    alarm_time = f"{alarm_time[0]}:00"
+                elif len(alarm_time[0]) == 2:
+                    pass
+
             alarm_time = f"{alarm_time[0]}:{alarm_time[1]}"
-            alarm_time = datetime.datetime.strftime(alarm_time, "%H %M")            # noqa
+            alarm_time = str(datetime.datetime.strftime(alarm_time, "%H:%M"))[11:16]            # noqa
 
 
         if ":" not in alarm_time:

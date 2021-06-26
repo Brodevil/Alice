@@ -86,7 +86,7 @@ def alarm(time_unit: str):
                 string="Time has arrived!",
                 ico=path.join(Client.ALICE_PATH, "Assistant\\resources\\Images\\time-out.ico")
             )
-            winsound.Beep(frequency=2500, duration=4000)
+            winsound.Beep(frequency=2500, duration=8000)
             speak(f"The Alarm of {time_unit} had Been Arrived!")
             break
 

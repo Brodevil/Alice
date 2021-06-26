@@ -275,7 +275,7 @@ class Alice:
         elif "opera" in application:
             system("TASKKILL /F /IM opera.exe")
         else:
-            system(f"TASKKILL /F /IM {application}.exe")
+            system(f"TASKKILL /F /IM {'_'.join(application.split())}.exe")
 
 
 # Object for the Alice class
