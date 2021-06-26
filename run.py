@@ -43,7 +43,7 @@ if __name__ == "__main__":
     while True:
         queary = alice.takeCommand().lower()
 
-        if 'sleep' in queary or 'take a break' in queary:
+        if 'sleep' in queary or 'break' in queary or "rest" in queary:
             alice.speak(f"Okay {Client.GENDER}! I am going for sleep, Call me any time for any help!")
             startfile(path.join(Client.ALICE_PATH, "Assistant//resources//images//Ribbons.scr"))
 

@@ -576,14 +576,15 @@ def logic(queary: str) -> None:
         else:
             return 
         
-        if not rate.isalnum():
-            alice.speak(f"{Client.GENDER}! You should just speak number for Voice Rate for changes")
+        if not rate.isalnum() or rate == "None":
+            alice.speak(f"{Client.GENDER}! You should just speak number for Voice Rate for changes, Please try again")
             return
         
         rate = sum([_ for _ in rate.split() if _.isnumeric()])
         Client.VOICE_RATE += rate
 
         alice.speak("How did you like this speed!")               
+
 
     # ------------------------------------------ local info work with INTERNET and APIs -----------------------------
     elif "my location" in queary or 'current location' in queary or 'where i am' in queary:
@@ -654,6 +655,11 @@ def logic(queary: str) -> None:
     elif 'alarm' in queary:
         alarm_time = alice.takeCommand(f"{Client.GENDER}! Please tell or enter the alarm time in 24 hour format!")
 
+        if alarm_time == "None":
+            alice.speak("I didn't get that please try again!")
+            return
+
+
         if 'type' in alarm_time:
             alice.speak(f"Okay! {Client.GENDER}! Please enter the alarm time in terminal with 24 hour format!")
             alarm_time = input("Enter the Alarm time in 24 hour Format : \t")
@@ -671,6 +677,11 @@ def logic(queary: str) -> None:
         globals()["side_alarm"].append(mp.Process(target=alarm.alarm, args=(alarm_time, )))
         globals()["side_alarm"][-1].start()
 
+
+
+    elif 'stop' in queary and 'remind' in queary:
+        alice.speak(f"Okay {Client.GENDER}! I will not remind you for you daily task further")
+        alice.remind_daily_task = False
 
 
     # --------------------------------- work with login folder : i.e.work with E commerce websites accounts ------------
@@ -774,7 +785,7 @@ def logic(queary: str) -> None:
 
     elif "screenshot" in queary:
         name = alice.takeCommand("By which name I should save the file!")
-        if 'default' in name:
+        if 'default' in name or name == "None":
             name = None
         VisualMedia.screen_shorts(name=name)
         alice.speak("ScreenShot Saved! In Media folder of Alice Project.")
