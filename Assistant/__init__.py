@@ -102,7 +102,7 @@ def logic(queary: str) -> None:
             # terminating all the side alarms while closing alice
             for reminder in globals()['side_reminder']:
                 reminder.terminate()
-                
+
             # terminating all the side alarms while closing alice
             for reminder in globals()["side_alarm"]:
                 reminder.terminate()
@@ -569,21 +569,21 @@ def logic(queary: str) -> None:
 
         if 'increase' in queary or 'more' in queary or "add" in queary:
             rate = alice.takeCommand("Please tell How much should I increase the Voice Rate!")
-        
+
         elif 'decrease' in queary or "less" in queary and "slow":
             rate = alice.takeCommand("Please tell How much should I decrease my Voice Rate!")
 
         else:
-            return 
-        
+            return
+
         if not rate.isalnum() or rate == "None":
             alice.speak(f"{Client.GENDER}! You should just speak number for Voice Rate for changes, Please try again")
             return
-        
+
         rate = sum([_ for _ in rate.split() if _.isnumeric()])
         Client.VOICE_RATE += rate
 
-        alice.speak("How did you like this speed!")               
+        alice.speak("How did you like this speed!")
 
 
     # ------------------------------------------ local info work with INTERNET and APIs -----------------------------
@@ -653,32 +653,14 @@ def logic(queary: str) -> None:
 
 
     elif 'alarm' in queary:
-        alarm_time = alice.takeCommand(f"{Client.GENDER}! Please tell the alarm time in 24 hour format!")
-
-        if alarm_time == "None":
-            alice.speak("I didn't get that please try again!")
-            return
-
-        if 'type' in alarm_time:
-            alice.speak(f"Okay! {Client.GENDER}! Please enter the alarm time in terminal with 24 hour format!")
-            alarm_time = input("Enter the Alarm time in 24 hour Format : \t")
-        else:
-            alarm_time = [_ for _ in alarm_time if _.isnumeric()]
-            if len(alarm_time) == 1 or len(alarm_time) == 2:
-                if len(alarm_time[0]) == 1:
-                    alarm_time = f"{alarm_time[0]}:00"
-                elif len(alarm_time[0]) == 3:
-                    alice.speak("I didn't got that please enter the time in 24 hour format, in the terminal!")
-                elif len(alarm_time[0]) == 4:
-                    alarm_time = f"{alarm_time[0][0:2]}:{alarm_time[0][2:]}"
-
-            alarm_time = str(datetime.datetime.strftime(alarm_time, "%H:%M"))[11:16]            # noqa
-
+        alice.speak(f"{Client.GENDER}! Please type the alarm time in 24 hour format, in the terminal!")
+        alarm_time = input("Enter the Alarm time in 24 hour Format : \t")
 
         if ":" not in alarm_time:
             alice.speak(f"Alarm Time format is wrong, Expected in 24 hour format, Please try again!")
             return
 
+        alarm_time = str(datetime.datetime.strftime(alarm_time, "%H:%M"))           # noqa
         alice.speak(f"Successfully set the Alarm of {alarm_time}, remind you soon {Client.GENDER}")
         globals()["side_alarm"].append(mp.Process(target=alarm.alarm, args=(alarm_time, )))
         globals()["side_alarm"][-1].start()
@@ -795,3 +777,9 @@ def logic(queary: str) -> None:
             name = None
         VisualMedia.screen_shorts(name=name)
         alice.speak("ScreenShot Saved! In Media folder of Alice Project.")
+
+
+if __name__ == '__main__':
+    while True:
+        command = input("Type the command : \t")
+        logic(command)
