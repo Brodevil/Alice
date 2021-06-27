@@ -648,7 +648,7 @@ def logic(queary: str) -> None:
         except Exception:  # the user can give the reason as a option
             pourpose = "You didn't told the pourpose for reminding, Its might be some thing secret \U0001F923"
 
-        globals()['side_reminder'].append(mp.Process(target=alarm.reminderAlarm, args=(magnitude, unit, pourpose)))
+            globals()['side_reminder'].append(mp.Process(target=alarm.reminderAlarm, args=(magnitude, unit, pourpose)))
         globals()['side_reminder'][-1].start()
 
 
@@ -660,7 +660,7 @@ def logic(queary: str) -> None:
             alice.speak(f"Alarm Time format is wrong, Expected in 24 hour format, Please try again!")
             return
 
-        alarm_time = str(datetime.datetime.strftime(alarm_time, "%H:%M"))           # noqa
+        alarm_time = str(datetime.datetime.strptime(alarm_time, "%H:%M"))[11:16]
         alice.speak(f"Successfully set the Alarm of {alarm_time}, remind you soon {Client.GENDER}")
         globals()["side_alarm"].append(mp.Process(target=alarm.alarm, args=(alarm_time, )))
         globals()["side_alarm"][-1].start()
