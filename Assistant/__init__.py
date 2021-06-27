@@ -625,14 +625,14 @@ def logic(queary: str) -> None:
 
     elif 'joke' in queary:
         alice.speak("Alright, I will make a joke that definitely make you laugh!")
-        alice.speak(f"{pyjokes.get_joke()}\n Ha Ha Ha")
+        alice.speak(f"{pyjokes.get_joke()}")
 
 
     elif 'corona' in queary:
         country = alice.takeCommand("Please tell the country name which you want to get the corona cases")
         result = networks.corona_virus(country)
         alice.speak(
-            f"The Total cases in {country} is {result[0]}, Total {result[1]} death cases and {result[2]} recovered cases")
+            f"The Total Corona cases in {country} is {result[0]}! {result[1]} Total death cases! {result[2]} people are recovered from Corona")
 
 
 
@@ -664,13 +664,14 @@ def logic(queary: str) -> None:
             alarm_time = input("Enter the Alarm time in 24 hour Format : \t")
         else:
             alarm_time = [_ for _ in alarm_time if _.isnumeric()]
-            if len(alarm_time) == 1:
+            if len(alarm_time) == 1 or len(alarm_time) == 2:
                 if len(alarm_time[0]) == 1:
                     alarm_time = f"{alarm_time[0]}:00"
-                elif len(alarm_time[0]) == 2:
-                    pass
+                elif len(alarm_time[0]) == 3:
+                    alice.speak("I didn't got that please enter the time in 24 hour format, in the terminal!")
+                elif len(alarm_time[0]) == 4:
+                    alarm_time = f"{alarm_time[0][0:2]}:{alarm_time[0][2:]}"
 
-            alarm_time = f"{alarm_time[0]}:{alarm_time[1]}"
             alarm_time = str(datetime.datetime.strftime(alarm_time, "%H:%M"))[11:16]            # noqa
 
 

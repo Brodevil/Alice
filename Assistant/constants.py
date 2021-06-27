@@ -170,7 +170,7 @@ POSITIVE_REPLIES = [
 
 
 WELCOME = [
-    "Your're most welcome anything else you did like me to do!",
+    "Your're most welcome, anything else you did like me to do!",
     "I am to please!", 
     "My pleasure {Client.GENDER}!",
     "You're very welcome!",
