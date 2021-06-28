@@ -778,8 +778,3 @@ def logic(queary: str) -> None:
         VisualMedia.screen_shorts(name=name)
         alice.speak("ScreenShot Saved! In Media folder of Alice Project.")
 
-
-if __name__ == '__main__':
-    while True:
-        command = input("Type the command : \t")
-        logic(command)
