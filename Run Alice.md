@@ -5,11 +5,12 @@
 **So basically Alice will need few requirements to run it, Please Go thorugh the following steps and nothing:**
 <br><br>
 1. First a fall, You will defiantly need to Clone the Project or Download the zip file<br>
-2. Install the required modules by just running following commands in the same directory's terminal :<br>
+2. Install python stable version for your machine from [python.org](https://www.python.org/downloads/release/python-387/)<br>
+3. Install the required modules by just running following commands in the same directory's terminal :<br>
    i.`pip install PyAudio-0.2.11-cp38-cp38-win_amd64.whl`    
    ii.`pip install -r Requirements.txt`
 <br><br>
-3. Then create .env file in that main directory and put the following info :<br>
+4. Then create .env file in that main directory and put the following info :<br>
     1. `AssistantName=Alice`  **(You can change the name of Assistant)**
     2. `UserName=Abhinav`     **(Your name)**
     3. `GENDER=male`		  **(Your Gender)**
@@ -37,20 +38,17 @@
         
 
 <br><br>
-4. In the [Application Folder](https://github.com/Brodevil/Alice/tree/main/Applications), There are several inbuile windows 10 Applicatinos, add more applications 
+5. In the [Application Folder](https://github.com/Brodevil/Alice/tree/main/Applications), There are several inbuile windows 10 Applicatinos, add more applications 
    shortcuts, which you use in day to day life just like VS Code, PyCharm, Discord or which you have. So then we will be able to launch 
    this software easily by just voice command :}
    
 <br>
-5. Now, You have to open the [DailyWorks.xlsx](DailyWorks.xlsx) which is an Exel file, there are some present examples there, but you can delete those, and write the time and the work you had, so that the Alice will be reminding you when ever it will be running, it will remind you at time to time. <br><br>
+6. Now, You have to open the [DailyWorks.xlsx](DailyWorks.xlsx) which is an Exel file, there are some present examples there, but you can delete those, and write the time and the work you had, so that the Alice will be reminding you when ever it will be running, it will remind you at time to time. <br><br>
    <img src="https://raw.githubusercontent.com/Brodevil/Alice/main/Assistant/resources/Images/DailyWorksExel.gif", alt='Dailyworks'><br>
 
-6. Now, you had to open the [Contacts.xlsx](Contacts.xlsx) which is also a execl file, there are some example of contacts, you delete them and put your contacts there,<br> `|Name | Email| Phone Number|`, You can also leave email or phone any one of them if you not have then.
-   <imag src="
+7. Now, you had to open the [Contacts.xlsx](Contacts.xlsx) which is also a execl file, there are some example of contacts, you delete them and put your contacts there,`|Name | Email| Phone Number|`, You can also leave email or phone any one of them if you not have then, Note : Put `'` before putting phone number, example : `'+91 9034982425`.<br><br>
+   ![Contacts Exel](https://raw.githubusercontent.com/Brodevil/Alice/main/Assistant/resources/Images/contacts.gif)<br><br>
 
+8. Now, you can run the [run.py](run.py) file or just use `python run.py` command in terminal to run the file.
 
-
-
-
-
-
+## That's it
