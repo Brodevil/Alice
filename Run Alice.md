@@ -20,10 +20,10 @@
     8. `MUSIC=C:\Users\ADMIN\Music`  **(your music directory path, where all your music are available)**
     9. `FavMusic=C;\Users\ADMIN\Music\cj.mp3` **(Your favorite  music path)**
        <br><br>
-    9. `emailID=`   **(your Email Id eg. youremail@gmail.com)**
-    10. `emailPassword=`   **(password of Email id)**<br>
-    _Actually this just totally save we are not playing with your privacy, just for sending emails and all it's needed and
-    Firstly Enable [Less Secure apps](https://myaccount.google.com/lesssecureapps?pli=1&rapt=AEjHL4NqK_w8itXLmU61XOIaNEY6NxvbMEyJtfB_MinE6JyU4Z7IGUwfQ-tKUq4zs5_0AcJMxDWiGoEUyw1Eet__Q3mVr322wA) of that Google Account so that you will be able to email using Alice by just voice commands :}_<br><br>
+    10. `emailID=`   **(your Email Id eg. youremail@gmail.com)**
+    11. `emailPassword=`   **(password of Email id)**<br>
+    Actually this just totally save we are not playing with your privacy, just for sending emails and all it's needed and
+    Firstly Enable [Less Secure apps](https://myaccount.google.com/lesssecureapps?pli=1&rapt=AEjHL4NqK_w8itXLmU61XOIaNEY6NxvbMEyJtfB_MinE6JyU4Z7IGUwfQ-tKUq4zs5_0AcJMxDWiGoEUyw1Eet__Q3mVr322wA) of that Google Account so that you will be able to email using Alice by just voice commands :}<br><br>
     11. `OpenWeatherMapApi=` **(Your API key of Open Weather)**<br>
          Get your api key by creating a free account [here](https://home.openweathermap.org/users/sign_up), 
          and then you just log in by that account and copy your api key [here](https://home.openweathermap.org/api_keys), and paste it there.
@@ -31,22 +31,26 @@
    12. `NewsApiKey=`  **(Your API key of NewsAPI)**<br>
        Get your api key by creating a free account in [NewsAPI](https://newsapi.org/register), and then log in with your id and password afterwards you will be able to copy your api key from [here](https://newsapi.org/account), 
          and then paste your api key here.<br><br>
+   
        ### For Example:
-    ![envFile](https://raw.githubusercontent.com/Brodevil/Alice/main/Media/env_file.png)
+    ![envFile](https://raw.githubusercontent.com/Brodevil/Alice/main/Assistant/resources/Images/env_file.png)
         
 
 <br><br>
-4. In the [Application Folder](https://github.com/Brodevil/Alice/tree/main/Applications), Add the more applications 
+4. In the [Application Folder](https://github.com/Brodevil/Alice/tree/main/Applications), There are several inbuile windows 10 Applicatinos, add more applications 
    shortcuts, which you use in day to day life just like VS Code, PyCharm, Discord or which you have. So then we will be able to launch 
    this software easily by just voice command :}
    
-<br><br>
-5. Now, You have to open the [DailyWorks.xlsx](DailyWorks.xlsx) which is an Exel file and by the given example inside the Exel file, 
-   you can understand who to write the data. You just have to Write the time in this format `13:09` or you can simply use `01:09 PM`
-   and then in another column put the work which you have, so that Alice will be reminding you whole day for your every task, So that you will 
-   not forget those all.
-   
-For Example :
-    ![DailyWorks]()
+<br>
+5. Now, You have to open the [DailyWorks.xlsx](DailyWorks.xlsx) which is an Exel file, there are some present examples there, but you can delete those, and write the time and the work you had, so that the Alice will be reminding you when ever it will be running, it will remind you at time to time. <br><br>
+   <img src="https://raw.githubusercontent.com/Brodevil/Alice/main/Assistant/resources/Images/DailyWorksExel.gif", alt='Dailyworks'><br>
+
+6. Now, you had to open the [Contacts.xlsx](Contacts.xlsx) which is also a execl file, there are some example of contacts, you delete them and put your contacts there,<br> `|Name | Email| Phone Number|`, You can also leave email or phone any one of them if you not have then.
+   <imag src="
+
+
+
+
+
 
 
