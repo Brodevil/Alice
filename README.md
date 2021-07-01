@@ -6,11 +6,11 @@ The Project Alice had something different from other desktop assistant like Jarv
 Usually the motivation for Alice was that, I had several features Idea for this kind of Project, but I not want to just copy like other,<br>
 So I got self motive to make Alice, Unique can better than others<br>
 
-
 ## Program works
  - First a fall this is not a AI, In the program alice just matching the word by word of the user told<br>
  - And as per the matching the word, its attempt the several tasks<br>
  - Many things are there automated in the program Alice<br>
+ - **Note: Alice will work only no Windows, No idea or guarantee for other OS**<br>
 
 ## More feature :
 As soon as I got more time, we will also work on its GUI part which will definatly attract the Client<br>
