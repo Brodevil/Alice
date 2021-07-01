@@ -21,7 +21,7 @@ More features can be added like home automation, installing program, transaction
 - To use Alice, you need to first a fall setup if and this will be happend success fully by reading and follow [this file](https://github.com/Brodevil/Alice/blob/main/Run%20Alice.md).<br>
 
 ## Alice Commmand :
-- There are the several commands for Alice, all the coomands and its uses are available in [this file](https://github.com/Brodevil/Alice/blob/main/commands.md)<br>
+- There are the several commands for Alice, all the coomands and its uses are available in [this file](https://github.com/Brodevil/Alice/blob/main/commands.md)<br><br>
 
-**If you like the project, if you value the my had work please atlest star this Project**<br>
-## Thank you!
+**If you like the project or if you value the my hard work please atlest star this Project!<br><br>Thank you!**
+
