@@ -17,7 +17,7 @@ load_dotenv()
 emailID = environ.get("emailID")
 emailPassword = environ.get("emailPassword")
 
-if not re.match(r"\w+@gmail.com", emailID) or not len(emailPassword):
+if not re.match(r"[a-zA-Z0-9_.-]+@[a-zA-Z0-9_.-]+\.[a-zA-Z]+", emailID) or not len(emailPassword):
     raise EnvironmentError("Please ensure that you had written your correct email Id or Email password in .env file. Make sure that it should be a gmail account Go through the `Run Alice.md` file on github `https://github.com/Brodevil/Alice/blob/main/Run%20Alice.md` ")
 
 
@@ -37,9 +37,9 @@ def sendEmail(to, subject, content):
         server.close()                                                      # noqa
 
 
-
-
+  
 def initialCommit(path):
+    """ commiting the fime changes """
     chdir(path)
     system("git add .")
     system('git commit -m "Initial Commit by Alice"')
