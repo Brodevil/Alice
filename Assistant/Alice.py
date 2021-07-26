@@ -186,10 +186,11 @@ class Alice:
         Argument: url of the website
         process : opine that url or website in the edge browser
          """
-        edgePath = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-        webbrowser.register('edge', None, webbrowser.BackgroundBrowser(edgePath))
-        webbrowser.get('edge').open(url)
-
+        # edgePath = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+        # webbrowser.register('edge', None, webbrowser.BackgroundBrowser(edgePath))
+        # webbrowser.get('edge').open(url)
+        webbrowser.open(url)
+       
     @staticmethod
     def activePC(minutes: int) -> None:
         """
