@@ -46,7 +46,7 @@
 6. Now, You have to open the [DailyWorks.xlsx](DailyWorks.xlsx) which is an Exel file, there are some present examples there, but you can delete those, and write the time and the work you had, so that the Alice will be reminding you when ever it will be running, it will remind you at time to time. <br><br>
    <img src="https://raw.githubusercontent.com/Brodevil/Alice/main/Assistant/resources/Images/DailyWorksExel.gif", alt='Dailyworks'><br>
 
-7. Now, you had to open the [Contacts.xlsx](Contacts.xlsx) which is also a execl file, there are some example of contacts, you delete them and put your contacts there,`|Name | Email| Phone Number|`, You can also leave email or phone any one of them if you not have then, Note : Put `'` before putting phone number, example : `'+91 9034982425`.<br><br>
+7. Now, you had to open the [Contact.xlsx](Contact.xlsx) which is also a execl file, there are some example of contacts, you delete them and put your contacts there,`|Name | Email| Phone Number|`, You can also leave email or phone any one of them if you not have then, Note : Put `'` before putting phone number, example : `'+91 9034982425`.<br><br>
    ![Contacts Exel](https://raw.githubusercontent.com/Brodevil/Alice/main/Assistant/resources/Images/contacts.gif)<br><br>
 
 8. Now, you can run the [run.py](run.py) file or just use `python run.py` command in terminal to run the file.
