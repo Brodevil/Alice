@@ -355,7 +355,7 @@ def logic(queary: str) -> None:
         alice.speak("Deleting unwanted files...")
 
 
-    elif 'alice path' in queary:
+    elif 'alice path' in queary or "open alice" in queary:
         os.startfile("")
 
 
