@@ -456,13 +456,8 @@ def logic(queary: str) -> None:
 
     elif "internet speed" in queary or "network speed" in queary or "download" in queary and 'speed' in queary or "upload" in queary and 'speed' in queary:
         alice.speak("Wait a while sir, Internet speed test might take time")
-        try:
-            speed = speed  # noqa
-        except NameError:
-            speed = networks.internet_speed()
-        finally:
-            alice.speak(f"Internet speed from nearest Server : {speed}")
-
+        speed = networks.internet_speed()
+        alice.speak(f"Internet speed from nearest Server : {speed}")
 
 
     elif "internet" in queary or "network" in queary:
