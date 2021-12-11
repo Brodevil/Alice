@@ -5,7 +5,7 @@ from os import environ, getcwd, system
 import PyPDF2
 import webbrowser
 import pyautogui
-import winsound         # noqa
+import winsound  # noqa
 
 import speech_recognition as sr
 import pyttsx3
@@ -13,7 +13,13 @@ from dotenv import load_dotenv
 
 from Assistant.exts.networks import localInfo  # noqa
 from Assistant.exts.alarm import notifier  # noqa
-from Assistant.constants import Contacts, ERROR_REPLIES, NEGATIVE_REPLIES, POSITIVE_REPLIES, Client  # noqa
+from Assistant.constants import (
+    Contacts,
+    ERROR_REPLIES,
+    NEGATIVE_REPLIES,
+    POSITIVE_REPLIES,
+    Client,
+)  # noqa
 
 __all__ = ["Alice", "alice"]
 
@@ -21,7 +27,7 @@ load_dotenv()
 
 
 class Alice:
-    """ 
+    """
     Alice Assistant:
 
     This class contain the Function of the Alice program and also with the Assistant Data
@@ -29,19 +35,20 @@ class Alice:
 
     def __init__(self):
         super().__init__()
-        self.name = environ.get("UserName",
-                                "Abhinav")  # this is the user name of the person who suppose to use this program : Data From (.env)
+        self.name = environ.get(
+            "UserName", "Abhinav"
+        )  # this is the user name of the person who suppose to use this program : Data From (.env)
         self.AssistantName = Client.ASSISTANT_NAME
         self.city = environ.get("LOCATION", localInfo())  # Data From (.env)
 
-        self.engine = pyttsx3.init('sapi5')
+        self.engine = pyttsx3.init("sapi5")
         self.r = sr.Recognizer()
 
         self.remind_daily_task = True
 
     @staticmethod
     def severalVoices(voicesId=Client.VOICES) -> None:
-        """ This is the function to show the user how many VOICES are available in his/her system
+        """This is the function to show the user how many VOICES are available in his/her system
         So that the user will able to choose his own liked VOICE
         """
 
@@ -52,39 +59,47 @@ class Alice:
 
             if index == 0:
                 print(
-                    f"{Client.ASSISTANT_NAME} : Hey there! I am {index + 1}st VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file\n")
+                    f"{Client.ASSISTANT_NAME} : Hey there! I am {index + 1}st VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file\n"
+                )
                 engine.say(
-                    f"Hey there! I am {index + 1}st VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file")
+                    f"Hey there! I am {index + 1}st VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file"
+                )
                 engine.runAndWait()
 
             elif index == 1:
                 print(
-                    f"{Client.ASSISTANT_NAME} : Hey there! I am {index + 1}nd VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file\n")
+                    f"{Client.ASSISTANT_NAME} : Hey there! I am {index + 1}nd VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file\n"
+                )
                 engine.say(
-                    f"Hey there! I am {index + 1}nd VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file")
+                    f"Hey there! I am {index + 1}nd VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file"
+                )
                 engine.runAndWait()
 
             elif index == 2:
                 print(
-                    f"{Client.ASSISTANT_NAME} : Hey there! I am {index + 1}rd VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file\n")
+                    f"{Client.ASSISTANT_NAME} : Hey there! I am {index + 1}rd VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file\n"
+                )
                 engine.say(
-                    f"Hey there! I m {index + 1}rd VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file")
+                    f"Hey there! I m {index + 1}rd VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file"
+                )
                 engine.runAndWait()
 
             else:
                 print(
-                    f"{Client.ASSISTANT_NAME} : Hey there! I am {index + 1}th VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file\n")
+                    f"{Client.ASSISTANT_NAME} : Hey there! I am {index + 1}th VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file\n"
+                )
                 engine.say(
-                    f"Hey there! I am {index + 1}th VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file")
+                    f"Hey there! I am {index + 1}th VOICE of your system {Client.GENDER}! You can select VOICE as a default by putting my VoiceNumber={index + 1} in .env file"
+                )
                 engine.runAndWait()
 
     def speak(self, *args, _print=True) -> None:
-        """ Speak function as per the selected VOICE by the user in .env file
+        """Speak function as per the selected VOICE by the user in .env file
 
-         argument : string
-         work : spoke the string in the user's selected VOICE by default speaker
-         return : None
-         """
+        argument : string
+        work : spoke the string in the user's selected VOICE by default speaker
+        return : None
+        """
         try:
             self.engine.setProperty("rate", Client.VOICE_RATE)
             self.engine.setProperty("voice", Client.VOICES[Client.VOICE - 1])
@@ -158,39 +173,51 @@ class Alice:
 
         self.speak(Client.INTRO)
         self.speak(
-            f"Its {datetime.datetime.now().strftime('%I:%M %p')}, and today's date is {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year} ")
+            f"Its {datetime.datetime.now().strftime('%I:%M %p')}, and today's date is {datetime.datetime.now().day} of {datetime.date(1900, datetime.datetime.now().month, 1).strftime('%B')} {datetime.datetime.now().year} "
+        )
         self.speak(
-            f"Usable Storage : {Client.STORAGE['Total']} GB, Memory Used : {Client.MEMORY_STATUS}%,  CPU Used : {Client.CPU_STATUS}%")
+            f"Usable Storage : {Client.STORAGE['Total']} GB, Memory Used : {Client.MEMORY_STATUS}%,  CPU Used : {Client.CPU_STATUS}%"
+        )
         self.speak(
-            f"You are in the Country {Client.LOCATION[0]} and near by {Client.LOCATION[2]} which is in {Client.LOCATION[1]} Region {Client.GENDER}!. ")
+            f"You are in the Country {Client.LOCATION[0]} and near by {Client.LOCATION[2]} which is in {Client.LOCATION[1]} Region {Client.GENDER}!. "
+        )
 
         try:
-            self.speak(f"Battery is {Client.BATTERY_STATUS}% Charged!",
-                       "And its still in charging. " if Client.BATTERY_PLUGGED else " ")
+            self.speak(
+                f"Battery is {Client.BATTERY_STATUS}% Charged!",
+                "And its still in charging. " if Client.BATTERY_PLUGGED else " ",
+            )
             if Client.BATTERY_STATUS >= 95 and Client.BATTERY_PLUGGED:
-                self.speak(f"{Client.GENDER}! I guess you should plug out the charger now!")
+                self.speak(
+                    f"{Client.GENDER}! I guess you should plug out the charger now!"
+                )
 
             elif Client.BATTERY_STATUS <= 35 and not Client.BATTERY_PLUGGED:
-                self.speak(f"{Client.GENDER}! You should Plug in the changer because Currently its very low battery!")
+                self.speak(
+                    f"{Client.GENDER}! You should Plug in the changer because Currently its very low battery!"
+                )
 
         except NameError:
             pass
 
-        self.speak(Client.WEATHER_INFO)  # Trying to say the weather report ond the client local area'
         self.speak(
-            f"{self.goodWish} {self.name} {Client.GENDER}!, System is now fully Operational. How Can I help you {Client.GENDER}")
+            Client.WEATHER_INFO
+        )  # Trying to say the weather report ond the client local area'
+        self.speak(
+            f"{self.goodWish} {self.name} {Client.GENDER}!, System is now fully Operational. How Can I help you {Client.GENDER}"
+        )
 
     @staticmethod
     def edge(url: str) -> None:
         """Edge is my Favorite Browser so this function initialize the edge browser
         Argument: url of the website
         process : opine that url or website in the edge browser
-         """
+        """
         # edgePath = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
         # webbrowser.register('edge', None, webbrowser.BackgroundBrowser(edgePath))
         # webbrowser.get('edge').open(url)
         webbrowser.open(url)
-       
+
     @staticmethod
     def activePC(minutes: int) -> None:
         """
@@ -208,7 +235,7 @@ class Alice:
                 pyautogui.press("shift")
 
     def audioBook(self, pdfPath: str) -> None:
-        """ Function to read the pdf and save the audio in a mp3 file at the same directory where the pdf located """
+        """Function to read the pdf and save the audio in a mp3 file at the same directory where the pdf located"""
         if pdfPath is None:  # this condition happened when the user will click cancel
             return None
 
@@ -217,8 +244,11 @@ class Alice:
                 reader = PyPDF2.PdfFileReader(book)
 
                 alice.speak(
-                    f"{Client.GENDER}! Totally {reader.numPages} Pages are there in this pdf book. Please Enter the page number in terminal I should read for you!")
-                page = int(input("Please Enter the page number I should read for you! : \t"))
+                    f"{Client.GENDER}! Totally {reader.numPages} Pages are there in this pdf book. Please Enter the page number in terminal I should read for you!"
+                )
+                page = int(
+                    input("Please Enter the page number I should read for you! : \t")
+                )
 
                 page = reader.getPage(page)
                 self.speak(page.extractText())
@@ -234,16 +264,22 @@ class Alice:
         while self.remind_daily_task:
 
             for exelTime, work in task.items():
-                currentTime = datetime.time(int(datetime.datetime.now().strftime("%H")),
-                                            int(datetime.datetime.now().strftime("%M")))
+                currentTime = datetime.time(
+                    int(datetime.datetime.now().strftime("%H")),
+                    int(datetime.datetime.now().strftime("%M")),
+                )
                 if exelTime == currentTime:
-                    notifier(work,
-                             f"{Client.ASSISTANT_NAME} :  I am reminding you {Client.GENDER} for your Following task",
-                             getcwd().replace("\\Alice", "\\Alice\\Assistant\\resources\\Images\\time-out.ico"))
+                    notifier(
+                        work,
+                        f"{Client.ASSISTANT_NAME} :  I am reminding you {Client.GENDER} for your Following task",
+                        getcwd().replace(
+                            "\\Alice",
+                            "\\Alice\\Assistant\\resources\\Images\\time-out.ico",
+                        ),
+                    )
 
                     winsound.Beep(frequency=2500, duration=4000)
-                    self.speak(
-                        f"{Client.GENDER}! Your Current task : {work}")
+                    self.speak(f"{Client.GENDER}! Your Current task : {work}")
                     time.sleep(62)
 
     @staticmethod
@@ -251,27 +287,27 @@ class Alice:
         """
         Close few selected applications from windows `taskkill` commands
         """
-        if 'discord' in application:
+        if "discord" in application:
             system("TASKKILL /F /IM discord.exe")
-        elif 'edge' in application:
+        elif "edge" in application:
             system("TASKKILL /F /IM msedge.exe")
-        elif 'code' in application:
+        elif "code" in application:
             system("TASKKILL /F /IM code.exe")
-        elif 'pycharm' in application:
+        elif "pycharm" in application:
             system("TASKKILL /F /IM pycharm64.exe")
-        elif 'chrome' in application:
+        elif "chrome" in application:
             system("TASKKILL /F /IM chrome.exe")
-        elif 'rapid' in application:
+        elif "rapid" in application:
             system("TASKKILL /F /IM RapidTyping.exe")
-        elif 'cmd' in application:
+        elif "cmd" in application:
             system("TASKKILL /F /IM cmd.exe")
-        elif 'sublime' in application:
+        elif "sublime" in application:
             system("TASKKILL /F /IM sublime_text.exe")
-        elif 'powershell' in application:
+        elif "powershell" in application:
             system("TASKKILL /F /IM powershell.exe")
-        elif 'droid cam' in application:
+        elif "droid cam" in application:
             system("TASKKILL /F /IM DroidCamApp.exe")
-        elif 'brave' in application:
+        elif "brave" in application:
             system("TASKKILL /F /IM brave.exe")
         elif "opera" in application:
             system("TASKKILL /F /IM opera.exe")

@@ -11,14 +11,21 @@ from bs4 import BeautifulSoup
 from requests.exceptions import ConnectionError
 from Assistant.utils.exceptions import EnvFileValueError
 
-__all__ = ["internetConnection", "internet_speed", "localInfo", "weather", "quick_google_search",
-           "wiki", "corona_virus"]
+__all__ = [
+    "internetConnection",
+    "internet_speed",
+    "localInfo",
+    "weather",
+    "quick_google_search",
+    "wiki",
+    "corona_virus",
+]
 
 load_dotenv()
 
 
 def internetConnection() -> bool:
-    """ Function to check the INTERNET_CONNECTION is connected or not """
+    """Function to check the INTERNET_CONNECTION is connected or not"""
     try:
         requests.get("https://www.google.com/", timeout=5)
         return True
@@ -42,13 +49,15 @@ def localInfo() -> Union[list, None]:
     try:
         response = requests.get(url)
         response = json.loads(response.text)
-        del response['status'], response['countryCode'], response['region']
-        return [response['city'], response]
+        del response["status"], response["countryCode"], response["region"]
+        return [response["city"], response]
     except ConnectionError:
         return None
 
 
-def weather(location=None, apikey=(environ.get("OpenWeatherMapApi"))) -> Union[str, None]:
+def weather(
+    location=None, apikey=(environ.get("OpenWeatherMapApi"))
+) -> Union[str, None]:
     """
     Function to return the most of the information about current LOCATION using ip address
     From openwethermap.org apis
@@ -58,14 +67,16 @@ def weather(location=None, apikey=(environ.get("OpenWeatherMapApi"))) -> Union[s
         location = localInfo()[0]
         try:
             response = requests.get(
-                f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={apikey}")  # noqa
+                f"http://api.openweathermap.org/data/2.5/weather?q={location}&appid={apikey}"
+            )  # noqa
             response = json.loads(response.text)
             return f"It seemed to be approximately {int(response['main']['temp'] - 273.15)} degree Celsius! I guess its like {response['weather'][0]['main']} Weather outside the door, and the wind speed is feels like {int(response['wind']['speed'] * 3.6)} kilometer per hour"
         except ConnectionError:
             return None
         except IndexError:
             raise EnvFileValueError(
-                "your api key is wrong please recheck your api key and put it in .env file as `OpenWeatherMapApi=(your api key)` go through the `Run Alice.md` file on github `https://github.com/Brodevil/Alice/blob/main/Run%20Alice.md`")
+                "your api key is wrong please recheck your api key and put it in .env file as `OpenWeatherMapApi=(your api key)` go through the `Run Alice.md` file on github `https://github.com/Brodevil/Alice/blob/main/Run%20Alice.md`"
+            )
 
 
 def quick_google_search(search):
@@ -77,7 +88,7 @@ def quick_google_search(search):
     url = f"https://www.google.com/search?q={search}"
     response = requests.get(url)
     data = BeautifulSoup(response.text, "html.parser")
-    return data.find('div', class_="BNeawe").text
+    return data.find("div", class_="BNeawe").text
 
 
 def wiki(queary) -> str:
@@ -104,7 +115,9 @@ def corona_virus(country: str) -> list:
     total cases, recovered cases, death cases
     """
     country = country.replace(" ", "")
-    response = requests.get(f"https://www.worldometers.info/coronavirus/country/{country.lower()}")
+    response = requests.get(
+        f"https://www.worldometers.info/coronavirus/country/{country.lower()}"
+    )
     corona = BeautifulSoup(response.text, "lxml")
     corona = corona.findAll("div", class_="maincounter-number")
 

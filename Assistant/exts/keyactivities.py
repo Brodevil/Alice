@@ -16,7 +16,7 @@ def typeWrite(string) -> None:
 
 def keyboardRecord() -> object:
     """The functions records the keyboard activity and can be just written by using another recordedKeyboardType() functions"""
-    record = keyboard.record(until='Esc')
+    record = keyboard.record(until="Esc")
     # keyboard.play(record, speed_factor=5)
     return record
 
@@ -27,7 +27,7 @@ def playKeyboard(record) -> None:
 
 
 def volume_control(how_much, increase=False, decrease=False, mute=False) -> None:
-    for _ in range(how_much//2):
+    for _ in range(how_much // 2):
         if increase:
             pyautogui.press("volumeup")
         elif decrease:
@@ -35,5 +35,3 @@ def volume_control(how_much, increase=False, decrease=False, mute=False) -> None
 
     if mute:
         pyautogui.press("volumemute")
-
-

@@ -19,9 +19,11 @@ def speak(*args) -> None:
     speak function for reminding the user from voice also
     """
     engine = pyttsx3.init("sapi5")
-    engine.setProperty("voice", engine.getProperty("voices")[int(environ.get("VoiceNumber", 1)) - 1].id)
+    engine.setProperty(
+        "voice", engine.getProperty("voices")[int(environ.get("VoiceNumber", 1)) - 1].id
+    )
     print(f"{Client.ASSISTANT_NAME} : {' '.join(args)}", "\n")
-    engine.say(' '.join(args))
+    engine.say(" ".join(args))
     engine.runAndWait()
 
 
@@ -31,12 +33,7 @@ def notifier(reason: str, string: str, ico: str) -> None:
     and make a notification in windows 10 for reminding the user in any task or work
     """
     try:
-        notification.notify(
-            title=string,
-            message=reason,
-            app_icon=ico,
-            timeout=12
-        )
+        notification.notify(title=string, message=reason, app_icon=ico, timeout=12)
     except Exception:
         pass
 
@@ -63,11 +60,16 @@ def reminderAlarm(magnitude: int, unit: str, pourpose: str) -> None:
             notifier(
                 reason=f"Here's your reminder : {pourpose}",
                 string="Alice : Time Out Sir!",
-                ico=path.join(Client.ALICE_PATH, "Assistant\\resources\\Images\\time-out.ico")
+                ico=path.join(
+                    Client.ALICE_PATH, "Assistant\\resources\\Images\\time-out.ico"
+                ),
             )
             winsound.Beep(frequency=2500, duration=4000)
             speak(
-                f"Time Up, You had told me to remind you after {magnitude}", " hours " if is_hour else " minutes", "Now its time to remind you, Wake up.")
+                f"Time Up, You had told me to remind you after {magnitude}",
+                " hours " if is_hour else " minutes",
+                "Now its time to remind you, Wake up.",
+            )
 
             break
 
@@ -83,10 +85,10 @@ def alarm(time_unit: str):
             notifier(
                 reason=f"Alarm of {time_unit}",
                 string="Time has arrived!",
-                ico=path.join(Client.ALICE_PATH, "Assistant\\resources\\Images\\time-out.ico")
+                ico=path.join(
+                    Client.ALICE_PATH, "Assistant\\resources\\Images\\time-out.ico"
+                ),
             )
             winsound.Beep(frequency=2500, duration=8000)
             speak(f"The Alarm of {time_unit} had Been Arrived!")
             break
-
-

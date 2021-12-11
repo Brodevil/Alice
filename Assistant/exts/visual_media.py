@@ -15,14 +15,14 @@ class VisualMedia:
     @staticmethod
     def screen_shorts(name=None) -> None:
         if name is None:
-            name = f"Screenshot ({datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S')})"
+            name = (
+                f"Screenshot ({datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S')})"
+            )
 
         image = screenshot()
         file_path = join(Client.ALICE_PATH, f"Media\\Images\\{name}.png")
         image.save(file_path)
         system(f'explorer  /select, "{file_path}"')
-
-
 
     def photos(self):
         pass
@@ -40,5 +40,5 @@ class VisualMedia:
         pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     VisualMedia.screen_shorts()
