@@ -3,6 +3,7 @@
     "GitHub repository" : "https://github.com/Brodevil/Alice",   
     "intoductions" : "Hey There! Now me to introduce myself, I am {AssistantName}. A virtual desktop assistant and I'm here to assist you with a verity of tasks as best as I can. 24 Hours a day, seven days a week, Importing all preferences from home interface.",
     "birth date" : "29 April 2021",
+    "work_flow": "Hey, I am written in Python by my master Abhinav, I born on 29th of April 2021. I am a virtual desktop assistant program, so my program work as follow. First I take the voice from the mic of the user and recognise it by adjusting aplitude & frequency of the voice, then I send the voice to API. Which returns me the text or String format of the voice. Now the main flow of the program starts here, I match across the text word to word, by matching the keyword in the sentance I performe more then 50 tasks. Still I am not an AI, I am just Preprogrammed and going to help you to automate your daily task by just voice commands. Thank you!",
 
     "Author" : 
         {

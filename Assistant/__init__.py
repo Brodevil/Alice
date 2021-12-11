@@ -3,6 +3,7 @@ import os
 import time
 import keyboard
 import random
+from json import load, loads
 import sys
 import pyjokes
 from tkinter import Tk
@@ -410,6 +411,14 @@ def logic(queary: str) -> None:
         print(
             f"Alice : Mr. Abhinav's  Email:{Client.CONTACT}. GitHub Profile :{Client.ALICE_GITHUB_REPOSITORY}. Discord Id : {Client.DISCORD_ID}"
         )
+
+    elif ("program" in queary and "workflow" in queary) or ("you work" in queary):
+        with open("Assistant\\resources\\about\Assistant.json", 'rb') as source:
+            source = loads(source)
+            source = source["work_flow"]
+            alice.speak(source)
+            alice.speak("Thank you!")
+
 
     elif "idle mood" in queary:
         os.startfile(
